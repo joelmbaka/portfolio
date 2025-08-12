@@ -14,7 +14,7 @@ export default function Hero() {
       {/* Photo Container - centered on mobile */}
       <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full border-4 border-blue-500/30 overflow-hidden shrink-0 self-center md:self-center">
         <Image
-          src="/images/joel.png"
+          src="/images/joel.webp"
           alt="Joel Mbaka"
           width={224}
           height={224}
