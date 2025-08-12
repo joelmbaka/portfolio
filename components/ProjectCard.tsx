@@ -1,6 +1,7 @@
 import { Project } from '@/config/projects';
 import { ArrowUpRight, Download } from 'lucide-react';
 import { Suspense } from 'react';
+import ImageCarousel from '@/components/ImageCarousel';
 
 function ProjectCardContent({ project }: { project: Project }) {
   return (
@@ -32,6 +33,12 @@ function ProjectCardContent({ project }: { project: Project }) {
       </div>
       </div>
       <p className="text-gray-400 mt-2">{project.description}</p>
+
+      {project.screenshots && project.screenshots.length > 0 && (
+        <div className="mt-4">
+          <ImageCarousel images={project.screenshots} />
+        </div>
+      )}
       <div className="flex flex-wrap gap-2 mt-4">
         {project.tech.map((tech) => (
           <span 
@@ -48,7 +55,7 @@ function ProjectCardContent({ project }: { project: Project }) {
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <Suspense fallback={<div className="animate-pulse h-48 bg-gray-800 rounded-xl" />}>
+    <Suspense fallback={<div className="animate-pulse h-[640px] bg-gray-800 rounded-xl" />}>
       <ProjectCardContent project={project} />
     </Suspense>
   );

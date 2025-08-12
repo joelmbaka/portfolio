@@ -4,6 +4,7 @@ export interface Project {
   tech: string[];
   url?: string;
   artifact?: string;
+  screenshots?: string[];
 }
 
 export const projects: Project[] = [
@@ -49,5 +50,19 @@ export const projects: Project[] = [
     ],
     url: "https://rentals.joelmbaka.site",
     artifact: "https://expo.dev/artifacts/eas/taAS15n6khE5A2dQPactuH.aab"
+  },
+  
+  {
+    title: "FitnessCoach",
+    description: "A modern fitness tracking application built with TypeScript and Firebase for tracking workout sessions, progress, and goals with personalized recommendations.",
+    tech: [
+      "TypeScript",
+      "Firebase",
+      "Firestore",
+      "Authentication"
+    ],
+    url: "https://fitness.joelmbaka.site",
+    artifact: "https://expo.dev/artifacts/eas/uq7EpfPR7C9dSXgW1gCZmg.aab",
+    screenshots: []
   }
 ];
