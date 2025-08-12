@@ -8,7 +8,7 @@ export default function Home() {
       <Hero />
 
       <section className="max-w-5xl mx-auto px-4 sm:px-8 md:px-6">
-        <h2 className="text-3xl font-bold mb-8 text-center md:text-left">Side Projects</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center md:text-left">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
             <ProjectCard key={project.title} project={project} />
