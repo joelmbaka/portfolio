@@ -9,6 +9,19 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "Portfolio Website",
+    description: "Clean, responsive portfolio built with typed React components on Next.js to showcase my skills, projects, and professional profile.",
+    tech: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Lucide-React"
+    ],
+    url: "https://joelmbaka.site"
+  },
+  {
     title: "Health Care",
     description: "Cross-platform virtual-care platform connecting patients to licensed doctors for real-time video consultations, booking, and payments. 12,000 monthly users.",
     tech: [
