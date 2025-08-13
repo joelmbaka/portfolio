@@ -21,20 +21,7 @@ export const projects: Project[] = [
     ],
     url: "https://joelmbaka.site"
   },
-  {
-    title: "Health Care",
-    description: "Cross-platform virtual-care platform connecting patients to licensed doctors for real-time video consultations, booking, and payments. 12,000 monthly users.",
-    tech: [
-      "React Native (Expo)",
-      "TypeScript",
-      "Supabase",
-      "Stripe",
-      "WebRTC",
-      "EAS CI/CD"
-    ],
-    url: "https://healthcare.joelmbaka.site",
-    artifact: "https://expo.dev/artifacts/eas/mE6g54tAXQLNh3TTe4XJn6.aab"
-  },
+  
   {
     title: "Hotel Management",
     description: "Hospitality app enabling resort discovery, bookings, dining orders, and payments. 11,800 monthly users.",
@@ -64,7 +51,20 @@ export const projects: Project[] = [
     url: "https://rentals.joelmbaka.site",
     artifact: "https://expo.dev/artifacts/eas/taAS15n6khE5A2dQPactuH.aab"
   },
-  
+  {
+    title: "Health Care",
+    description: "Cross-platform virtual-care platform connecting patients to licensed doctors for real-time video consultations, booking, and payments. 12,000 monthly users.",
+    tech: [
+      "React Native (Expo)",
+      "TypeScript",
+      "Supabase",
+      "Stripe",
+      "WebRTC",
+      "EAS CI/CD"
+    ],
+    url: "https://healthcare.joelmbaka.site",
+    artifact: "https://expo.dev/artifacts/eas/mE6g54tAXQLNh3TTe4XJn6.aab"
+  },
   {
     title: "FitnessCoach",
     description: "A modern fitness tracking application built with TypeScript and Firebase for tracking workout sessions, progress, and goals with personalized recommendations.",
