@@ -39,9 +39,6 @@ export default function Hero() {
             className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed"
           />
         </div>
-        <p className="text-sm sm:text-base text-gray-400">
-          <span className="text-gray-100 font-medium">$5–12 USD/hr</span> • UTC+3 (Nairobi)
-        </p>
       </div>
     </section>
   );
