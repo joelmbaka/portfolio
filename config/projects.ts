@@ -3,79 +3,77 @@ export interface Project {
   description: string;
   tech: string[];
   url?: string;
-  artifact?: string;
+
   screenshots?: string[];
 }
 
 export const projects: Project[] = [
   {
-    title: "Portfolio Website",
-    description: "Clean, responsive portfolio built with typed React components on Next.js to showcase my skills, projects, and professional profile.",
+    title: "My Personal Blog",
+    description: "A clean, responsive portfolio built with typed React components and Next.js. Showcases my skills, projects, and professional profile in a fast, engaging format.",
     tech: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
+      "Next.js 15",
+      "React 19",
+      "TypeScript 5",
+      "Tailwind CSS 3",
       "Framer Motion",
       "Lucide-React"
     ],
-    url: "https://joelmbaka.site"
+    url: "https://joelmbaka.site",
+    screenshots: [
+    //  "/images/personal_blog1.webp",
+    ]
   },
-  
   {
-    title: "Hotel Management",
-    description: "Hospitality app enabling resort discovery, bookings, dining orders, and payments. 11,800 monthly users.",
+    title: "Weight Loss & Fitness App",
+    description: "A modern fitness tracking application built with TypeScript and Firebase.",
     tech: [
       "React Native (Expo)",
       "TypeScript",
-      "Supabase",
+      "Firebase",
+      "Expo Router",
+      "EAS CI/CD"
+    ],
+    url: "https://fitness.joelmbaka.site"
+  },
+  {
+    title: "Health Care Delivery App",
+    description: "Cross-platform virtual-care platform that connects patients to licensed doctors for real-time video consultations, booking, and payments.",
+    tech: [
+      "React Native (Expo)",
+      "TypeScript",
+      "Supabase (Auth/RLS/Postgres)",
+      "Stripe",
+      "WebRTC",
+      "EAS CI/CD"
+    ],
+    url: "https://healthcare.joelmbaka.site"
+  },
+  {
+    title: "Landlord Monthly Invoicing & Utilities App",
+    description: "A cross-platform React Native app that lets property owners list, book, and manage every rental’s operations—from pricing to payments—in one mobile dashboard.",
+    tech: [
+      "React Native (Expo)",
+      "TypeScript",
+      "Firebase",
+      "Stripe",
+      "Expo Router",
+      "EAS CI/CD"
+    ],
+    url: "https://rentals.joelmbaka.site"
+  },
+  {
+    title: "Hospitality & Bookings App",
+    description: "Hospitality app enabling resort discovery, bookings, dining orders, and payments.",
+    tech: [
+      "React Native (Expo)",
+      "TypeScript",
+      "Supabase (Auth/RLS/Postgres)",
       "Stripe",
       "Zustand",
       "Expo Router",
       "EAS CI/CD"
     ],
-    url: "https://hotels.joelmbaka.site",
-    artifact: "https://expo.dev/artifacts/eas/9aRCBPYmUD2Ti4pw86fy2t.aab"
-  },
-  {
-    title: "Property Management",
-    description: "Cross-platform React Native app allowing property owners to list, book, and manage rentals operations—from pricing to payments—in one mobile dashboard. 700 monthly users.",
-    tech: [
-      "React Native (Expo)",
-      "TypeScript",
-      "Firebase",
-      "Stripe",
-      "Expo Router",
-      "EAS CI/CD"
-    ],
-    url: "https://rentals.joelmbaka.site",
-    artifact: "https://expo.dev/artifacts/eas/taAS15n6khE5A2dQPactuH.aab"
-  },
-  {
-    title: "Health Care",
-    description: "Cross-platform virtual-care platform connecting patients to licensed doctors for real-time video consultations, booking, and payments. 12,000 monthly users.",
-    tech: [
-      "React Native (Expo)",
-      "TypeScript",
-      "Supabase",
-      "Stripe",
-      "WebRTC",
-      "EAS CI/CD"
-    ],
-    url: "https://healthcare.joelmbaka.site",
-    artifact: "https://expo.dev/artifacts/eas/mE6g54tAXQLNh3TTe4XJn6.aab"
-  },
-  {
-    title: "FitnessCoach",
-    description: "A modern fitness tracking application built with TypeScript and Firebase for tracking workout sessions, progress, and goals with personalized recommendations.",
-    tech: [
-      "TypeScript",
-      "Firebase",
-      "Firestore",
-      "Authentication"
-    ],
-    url: "https://fitness.joelmbaka.site",
-    artifact: "https://expo.dev/artifacts/eas/uq7EpfPR7C9dSXgW1gCZmg.aab",
-    screenshots: []
+    url: "https://hotels.joelmbaka.site"
   }
 ];
