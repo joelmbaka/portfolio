@@ -18,14 +18,14 @@ export default function Hero() {
   const [isContactOpen, setContactOpen] = useState(false);
 
   return (<>
-    <section className="flex flex-col md:flex-row-reverse items-center md:items-start gap-6 md:gap-8 lg:gap-12 px-4 sm:px-6 mb-8 md:mb-12">
+    <section className="container mx-auto flex flex-col md:flex-row-reverse items-center md:items-start gap-6 md:gap-8 lg:gap-12 px-4 sm:px-6 md:px-8 lg:px-12 mb-8 md:mb-12">
       {/* Photo Container - centered on mobile */}
-      <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full border-4 border-blue-500/30 overflow-hidden shrink-0 self-center md:self-center">
+      <div className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full border-4 border-blue-500/30 overflow-hidden shrink-0 self-center md:self-center">
         <Image
           src="/images/joel.webp"
           alt="Joel Mbaka"
-          width={224}
-          height={224}
+          width={288}
+          height={288}
           priority
           className="object-cover w-full h-full"
         />

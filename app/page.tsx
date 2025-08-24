@@ -8,7 +8,7 @@ export default function Home() {
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <Hero />
 
-      <section className="max-w-5xl mx-auto px-4 sm:px-8 md:px-6">
+      <section className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-2 text-center md:text-left">
           <h2 className="text-3xl font-bold">Projects</h2>
           <p className="text-sm sm:text-base text-gray-400 md:ml-4">
