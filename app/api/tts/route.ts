@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * POST /api/tts – ElevenLabs Text-to-Speech proxy
  * Body: { text: string, voice_id?: string, model_id?: string }

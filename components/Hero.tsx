@@ -9,8 +9,7 @@ import { ContactModal } from './ContactModal';
 
 export default function Hero() {
   const phrases = [
-    "Let's build something extraordinary together",
-    "Favorite Quote: You Only Live Once",
+    "Let's build something amazing together",
     "A.I is the new electricity - Andrew Ng",
     "Let's make the world a better place",
   ];
@@ -18,7 +17,7 @@ export default function Hero() {
   const [isContactOpen, setContactOpen] = useState(false);
 
   return (<>
-    <section className="container mx-auto flex flex-col md:flex-row-reverse items-center md:items-start gap-6 md:gap-8 lg:gap-12 px-4 sm:px-6 md:px-8 lg:px-12 mb-8 md:mb-12">
+    <section id="hero" className="container mx-auto flex flex-col md:flex-row-reverse items-center md:items-start gap-6 md:gap-8 lg:gap-12 px-4 sm:px-6 md:px-8 lg:px-12 mb-8 md:mb-12">
       {/* Photo Container - centered on mobile */}
       <div className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full border-4 border-blue-500/30 overflow-hidden shrink-0 self-center md:self-center">
         <Image
@@ -38,9 +37,9 @@ export default function Hero() {
         </h1>
         
         <h2 className="text-xl sm:text-2xl md:text-3xl text-blue-400 font-medium">
-          Senior React Native Engineer
+          Senior Software Engineer
         </h2>
-        <p className="text-sm sm:text-base text-gray-400">2020&nbsp;–&nbsp;2025</p>
+        <p className="text-sm sm:text-base text-gray-400">React Native</p>
 
         <div className="min-h-[40px] sm:min-h-[60px] md:min-h-[80px]">
           <Typewriter 

@@ -2,12 +2,17 @@ import { Project } from '@/config/projects';
 import { ArrowUpRight } from 'lucide-react';
 import { Suspense } from 'react';
 import ImageCarousel from '@/components/ImageCarousel';
+import Link from 'next/link';
 
 function ProjectCardContent({ project }: { project: Project }) {
   return (
     <div className="border border-gray-200 dark:border-gray-800 rounded-xl p-6 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors">
       <div className="flex justify-between items-start gap-3">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{project.title}</h3>
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <Link href={`/${project.id}`} className="hover:underline">
+            {project.title}
+          </Link>
+        </h3>
         <div className="flex items-center gap-3">
         {project.url && (
           <a 

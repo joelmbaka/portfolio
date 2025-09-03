@@ -24,13 +24,16 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
   };
 
   return (
-    <div className="relative w-full h-[640px] rounded-xl overflow-hidden bg-gray-800">
+    <div
+      className="relative w-full max-w-md mx-auto rounded-xl overflow-hidden bg-gray-800"
+      style={{ aspectRatio: '9 / 19.5' }}
+    >
       <Image
         src={images[current]}
         alt={`Screenshot ${current + 1}`}
         fill
-        sizes="(max-width: 768px) 100vw, 50vw"
-        className="object-contain"
+        sizes="(max-width: 768px) 100vw, 448px"
+        className="object-cover"
         unoptimized
         priority
       />
