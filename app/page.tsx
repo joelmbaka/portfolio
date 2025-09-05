@@ -55,7 +55,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full gap-4 text-center md:text-left">
             <h2 className="text-3xl font-bold">Projects</h2>
             <p className="text-sm sm:text-base text-gray-400">
-              <span className="text-gray-900 dark:text-gray-100 font-medium">$100 USD/hr</span>
+              <span className="text-gray-900 dark:text-gray-100 font-medium">$30 USD/hr</span>
               <span className="hidden md:inline"> • </span>
               <span> UTC+3 (Nairobi)</span>
             </p>
