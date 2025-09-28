@@ -3,6 +3,9 @@
 import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import type { Session, AuthChangeEvent } from '@supabase/supabase-js'
+import { AuthButton } from '@/components/AuthButton'
+import Link from 'next/link'
+import { Loader2 } from 'lucide-react'
 
 interface ProductForm {
   name: string
@@ -37,6 +40,7 @@ export default function WarrantyItPage() {
   const [error, setError] = useState<string | null>(null)
   const [saving, setSaving] = useState(false)
   const [items, setItems] = useState<ProductRow[]>([])
+  const [loadingItems, setLoadingItems] = useState(false)
 
   const getAccessToken = useCallback(async (): Promise<string | undefined> => {
     const { data } = await supabase.auth.getSession()
@@ -45,9 +49,13 @@ export default function WarrantyItPage() {
 
   const fetchItems = useCallback(async () => {
     setError(null)
+    setLoadingItems(true)
     try {
       const token = await getAccessToken()
-      if (!token) return
+      if (!token) {
+        setLoadingItems(false)
+        return
+      }
       const backendUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000').replace(/\/$/, '')
       const res = await fetch(`${backendUrl}/products`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -58,6 +66,8 @@ export default function WarrantyItPage() {
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : 'Failed to load'
       setError(msg)
+    } finally {
+      setLoadingItems(false)
     }
   }, [getAccessToken])
 
@@ -132,16 +142,34 @@ export default function WarrantyItPage() {
 
   return (
     <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-24">
+      <div className="mb-6">
+        <Link href="/" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">← Home</Link>
+      </div>
       <h1 className="text-2xl font-semibold mb-2">WarrantyIT</h1>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">WarrantyIT take-home: product manager</p>
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold mb-3 text-center">Tech stack</h2>
+        <div className="flex flex-wrap gap-2 justify-center">
+          {['Node', 'npm', 'PostgreSQL', 'Supabase Auth', 'FastAPI', 'JWT'].map((t) => (
+            <span
+              key={t}
+              className="px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
 
       {!signedIn ? (
-        <div className="rounded-lg border border-zinc-300 dark:border-zinc-800 p-6">
-          <h2 className="text-lg font-medium mb-2">Please sign in</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Use the Sign in button in the top right to authenticate via email password. Once signed in, you&apos;ll see the form here.
-          </p>
-        </div>
+        <>
+          <div className="rounded-lg border border-zinc-300 dark:border-zinc-800 p-6">
+            <h2 className="text-lg font-medium mb-2">Please sign in</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400">Sign in to add and view your products.</p>
+            <div className="mt-4">
+              <AuthButton />
+            </div>
+          </div>
+        </>
       ) : (
         <div className="rounded-lg border border-zinc-300 dark:border-zinc-800 p-6">
           <h2 className="text-lg font-medium mb-4">Add a Product</h2>
@@ -228,7 +256,12 @@ export default function WarrantyItPage() {
       {signedIn && (
         <div className="mt-8">
           <h3 className="text-md font-medium mb-2">Your Products</h3>
-          {items.length === 0 ? (
+          {loadingItems ? (
+            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Loading products…
+            </div>
+          ) : items.length === 0 ? (
             <p className="text-sm text-gray-600 dark:text-gray-400">No products yet.</p>
           ) : (
             <ul className="divide-y divide-zinc-200 dark:divide-zinc-800 rounded-md border border-zinc-200 dark:border-zinc-800">
@@ -247,10 +280,12 @@ export default function WarrantyItPage() {
       )}
 
       <section className="mt-10">
-        <h3 className="text-md font-medium mb-2">Future challenges</h3>
+        <h3 className="text-md font-medium mb-2">Real-world applications</h3>
         <ul className="list-disc pl-5 text-sm text-gray-600 dark:text-gray-400">
-          <li>Create dynamic routes like /challenges/task1, /challenges/task2 for future assignments</li>
-          <li>Add products list with retrieval endpoint</li>
+          <li>Consumer electronics warranty tracking with email reminders before expiry.</li>
+          <li>IT asset management: assign devices to employees and track warranty status.</li>
+          <li>Retail receipts vault linking purchases to warranty terms and service centers.</li>
+          <li>Field equipment maintenance scheduling based on start date and warranty period.</li>
         </ul>
       </section>
     </main>

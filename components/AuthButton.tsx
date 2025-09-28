@@ -57,7 +57,7 @@ export function AuthButton() {
         title="Sign in"
       >
         <LogIn className="w-4 h-4" />
-        <span className="hidden sm:inline">Sign in</span>
+        <span className="hidden sm:inline">Log in</span>
       </button>
 
       {showModal && (

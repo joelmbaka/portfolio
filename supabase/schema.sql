@@ -20,28 +20,8 @@ create index if not exists idx_products_created on public.products(created_at de
 create index if not exists idx_products_user_created on public.products(user_id, created_at desc);
 -- Optional: if you later query by start_date per user (e.g., upcoming expiries)
 create index if not exists idx_products_user_start_date on public.products(user_id, start_date);
+-- Index for ordering by expiry date per user (for upcoming expiries)
+create index if not exists idx_products_user_expiry on public.products(user_id, expiry_date asc);
 
 -- Enable RLS
 alter table public.products enable row level security;
-
--- Policies: users can read and insert only their rows
-drop policy if exists "Users can read own products" on public.products;
-create policy "Users can read own products"
-  on public.products for select
-  using (auth.uid() = user_id);
-
-drop policy if exists "Users can insert own products" on public.products;
-create policy "Users can insert own products"
-  on public.products for insert
-  with check (auth.uid() = user_id);
-
--- (Optional) allow deletion and updates of own rows
-drop policy if exists "Users can update own products" on public.products;
-create policy "Users can update own products"
-  on public.products for update
-  using (auth.uid() = user_id);
-
-drop policy if exists "Users can delete own products" on public.products;
-create policy "Users can delete own products"
-  on public.products for delete
-  using (auth.uid() = user_id);
