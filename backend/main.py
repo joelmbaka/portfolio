@@ -33,9 +33,10 @@ app = FastAPI(title="Portfolio Backend", version="0.1.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_allowed_origins_from_env(),
+    allow_origin_regex=os.environ.get("CORS_ORIGIN_REGEX", r"https://.*\\.vercel\\.app"),
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
-    allow_headers=["*"]
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 

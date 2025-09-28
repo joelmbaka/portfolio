@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 interface SlideInProps {
   direction?: "auto" | "left" | "right"; // auto = random 50/50
   distance?: number; // px
-  duration?: number; // seconds (used for non-spring)
   className?: string;
 }
 
@@ -13,7 +12,6 @@ export default function SlideIn({
   children,
   direction = "auto",
   distance = 64,
-  duration = 0.45,
   className,
 }: PropsWithChildren<SlideInProps>) {
   const dx = useMemo(() => {

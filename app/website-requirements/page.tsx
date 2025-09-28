@@ -291,10 +291,12 @@ export default function WebsiteRequirementsPage() {
     try {
       const saved = localStorage.getItem('website_requirements_form')
       if (saved) {
-        const parsed = JSON.parse(saved)
-        // Remove legacy fields that no longer exist in the form
-        const { cms, blogFeatures, ...cleanParsed } = parsed
-        setForm((current) => ({ ...current, ...cleanParsed }))
+        const parsed = JSON.parse(saved) as Partial<typeof form> & Record<string, unknown>
+        // Remove legacy fields that no longer exist in the form (without creating unused vars)
+        const cleaned: Partial<typeof form> & Record<string, unknown> = { ...parsed }
+        delete cleaned['cms']
+        delete cleaned['blogFeatures']
+        setForm((current) => ({ ...current, ...(cleaned as Partial<typeof form>) }))
       }
     } catch (e) {
       console.warn('Failed to load saved form data:', e)
@@ -338,23 +340,17 @@ export default function WebsiteRequirementsPage() {
 
   const requiredOk = useMemo(() => !!form.websiteName?.trim() && (form.pages?.length ?? 0) > 0, [form.websiteName, form.pages])
 
-  const toggleArrayVal = (key: keyof typeof form, val: string) => {
-    setForm((f) => {
-      const arr = new Set<string>((f[key] as any as string[]) || [])
-      if (arr.has(val)) arr.delete(val)
-      else arr.add(val)
-      return { ...f, [key]: Array.from(arr) }
-    })
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting(true)
     setError(null)
     try {
-      // Clean payload - remove any legacy fields that may have been cached
-      const { cms, blogFeatures, ...cleanForm } = form as any
-      const payload = { ...cleanForm, submittedAt: new Date().toISOString(), pageUrl: typeof window !== 'undefined' ? window.location.href : '' }
+      // Clean payload - remove any legacy fields that may have been cached (without introducing unused vars)
+      const payload: Record<string, unknown> = { ...form } as unknown as Record<string, unknown>
+      delete payload['cms']
+      delete payload['blogFeatures']
+      payload['submittedAt'] = new Date().toISOString()
+      payload['pageUrl'] = typeof window !== 'undefined' ? window.location.href : ''
       const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
       const token = session?.access_token
       const res = await fetch(`${backendUrl}/website-requirements`, {
@@ -367,8 +363,9 @@ export default function WebsiteRequirementsPage() {
       })
       if (!res.ok) throw new Error('Failed to submit')
       setSubmitted(true)
-    } catch (err: any) {
-      setError(err?.message || 'Something went wrong. Please try again.')
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.'
+      setError(message)
     } finally {
       setSubmitting(false)
     }
