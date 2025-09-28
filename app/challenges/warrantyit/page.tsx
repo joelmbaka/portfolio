@@ -23,7 +23,7 @@ interface ProductRow {
   created_at: string
 }
 
-export default function TasksPage() {
+export default function WarrantyItPage() {
   const [ready, setReady] = useState(false)
   const [signedIn, setSignedIn] = useState(false)
   const [form, setForm] = useState<ProductForm>({
@@ -35,6 +35,7 @@ export default function TasksPage() {
   })
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [saving, setSaving] = useState(false)
   const [items, setItems] = useState<ProductRow[]>([])
 
   const getAccessToken = useCallback(async (): Promise<string | undefined> => {
@@ -47,7 +48,8 @@ export default function TasksPage() {
     try {
       const token = await getAccessToken()
       if (!token) return
-      const res = await fetch('/api/tasks', {
+      const backendUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000').replace(/\/$/, '')
+      const res = await fetch(`${backendUrl}/products`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (!res.ok) throw new Error('Failed to load items')
@@ -92,10 +94,12 @@ export default function TasksPage() {
     e.preventDefault()
     setMessage(null)
     setError(null)
+    setSaving(true)
     try {
       const token = await getAccessToken()
       if (!token) throw new Error('Not authenticated')
-      const res = await fetch('/api/tasks', {
+      const backendUrl = (process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000').replace(/\/$/, '')
+      const res = await fetch(`${backendUrl}/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,6 +123,8 @@ export default function TasksPage() {
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : 'Failed to submit'
       setError(msg)
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -126,7 +132,7 @@ export default function TasksPage() {
 
   return (
     <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-24">
-      <h1 className="text-2xl font-semibold mb-2">Tasks</h1>
+      <h1 className="text-2xl font-semibold mb-2">WarrantyIT</h1>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">WarrantyIT take-home: product manager</p>
 
       {!signedIn ? (
@@ -203,9 +209,10 @@ export default function TasksPage() {
 
             <button
               type="submit"
-              className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+              disabled={saving}
+              className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Confirm
+              {saving ? 'Saving…' : 'Confirm'}
             </button>
           </form>
 
@@ -240,10 +247,9 @@ export default function TasksPage() {
       )}
 
       <section className="mt-10">
-        <h3 className="text-md font-medium mb-2">Future tasks</h3>
+        <h3 className="text-md font-medium mb-2">Future challenges</h3>
         <ul className="list-disc pl-5 text-sm text-gray-600 dark:text-gray-400">
-          <li>Implement backend API with Supabase (Postgres) and Row Level Security</li>
-          <li>Create dynamic routes like /tasks/task1, /tasks/task2 for future assignments</li>
+          <li>Create dynamic routes like /challenges/task1, /challenges/task2 for future assignments</li>
           <li>Add products list with retrieval endpoint</li>
         </ul>
       </section>
