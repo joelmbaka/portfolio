@@ -89,7 +89,16 @@ export const projects: Project[] = [
     url: `${BASE_URL}/python-tutor`,
     screenshots: [
       "/images/projects/python-tutor/welcome.jpeg",
-      "/images/projects/python-tutor/run-code.jpeg"
+      "/images/projects/python-tutor/run-code.jpeg",
+      "/images/projects/python-tutor/age.jpeg",
+      "/images/projects/python-tutor/generating.jpeg",
+      "/images/projects/python-tutor/lesson.jpeg",
+      "/images/projects/python-tutor/reveal.jpeg",
+      "/images/projects/python-tutor/soln-revealed.jpeg",
+      "/images/projects/python-tutor/exercises.jpeg",
+      "/images/projects/python-tutor/new-challenge.jpeg"
+
+
     ],
     appStore: {
       url: "https://apps.apple.com/app/id1234567890",
@@ -148,6 +157,18 @@ export const projects: Project[] = [
     type: "SaaS",
     url: `${BASE_URL}/fitness`,
     screenshots: [
+      "/images/projects/fitness/1.jpeg",
+      "/images/projects/fitness/2.jpeg",
+      "/images/projects/fitness/3.jpeg",
+      "/images/projects/fitness/4.jpeg",
+      "/images/projects/fitness/5.jpeg",
+      "/images/projects/fitness/7.jpeg",
+      "/images/projects/fitness/step8.jpeg",
+      "/images/projects/fitness/generating.jpeg",
+      "/images/projects/fitness/home.jpeg",
+      "/images/projects/fitness/planks.jpeg",
+      "/images/projects/fitness/tricep.jpeg",
+      "/images/projects/fitness/rest.jpeg",
       "/images/projects/fitness/completed.jpeg",
       "/images/projects/fitness/week-2.jpeg",
       "/images/projects/fitness/profile.jpeg",
@@ -165,7 +186,7 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "healthcare",
+    id: "remocare",
     title: "Remote Physicists Consultation App",
     description: "Cross-platform virtual-care platform that connects patients to licensed doctors for real-time video consultations, booking, and payments.",
     tech: [
@@ -177,8 +198,16 @@ export const projects: Project[] = [
       "EAS CI/CD"
     ],
     type: "SaaS",
-    url: `${BASE_URL}/healthcare`,
+    url: `${BASE_URL}/remocare`,
     screenshots: [
+      "/images/projects/remocare/gigs.jpeg",
+      "/images/projects/remocare/skill-card.jpeg",
+      "/images/projects/remocare/doctor.jpeg",
+      "/images/projects/remocare/book-appointment.jpeg",
+      "/images/projects/remocare/stripe.jpeg",
+      "/images/projects/remocare/redirecting-to-stripe.jpeg",
+      "/images/projects/remocare/appointments.jpeg",
+
     ],
     appStore: {
       url: "#",

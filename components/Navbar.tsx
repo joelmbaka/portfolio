@@ -1,6 +1,7 @@
 'use client';
 import { ThemeToggle } from './ThemeToggle';
 import { useEffect, useState } from 'react';
+import { AuthButton } from './AuthButton';
 
 export function Navbar() {
   const [showHeader, setShowHeader] = useState(true);
@@ -44,7 +45,12 @@ export function Navbar() {
             ))}
           </div>
         </div>
-      <div className="absolute right-4"><ThemeToggle /></div>
+      <div className="absolute right-4">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <AuthButton />
+        </div>
+      </div>
           </div>
     </header>
   );
