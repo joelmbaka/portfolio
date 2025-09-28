@@ -7,6 +7,7 @@ import { projects, ProjectType } from '@/config/projects';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
 import Chatbot from '@/components/Chatbot';
 import SegmentedControl from '@/components/SegmentedControl';
+import SlideIn from '@/components/SlideIn';
 
 export default function Home() {
   const [selectedType, setSelectedType] = useState<ProjectType>('SaaS');
@@ -47,13 +48,14 @@ export default function Home() {
   ];
 
   return (
+    <SlideIn>
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <Hero />
 
       <section className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="flex flex-col items-center md:items-start mb-8 gap-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full gap-4 text-center md:text-left">
-            <h2 className="text-3xl font-bold">Projects</h2>
+            <h2 className="text-3xl font-bold text-palm-green">Projects</h2>
             <p className="text-sm sm:text-base text-gray-400">
               <span className="text-gray-900 dark:text-gray-100 font-medium">$30 USD/hr</span>
               <span className="hidden md:inline"> • </span>
@@ -67,7 +69,7 @@ export default function Home() {
       
       <section className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 mt-16">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full gap-4 mb-8 text-center md:text-left">
-          <h2 className="text-3xl font-bold">Reviews</h2>
+          <h2 className="text-3xl font-bold text-palm-green">Reviews</h2>
           <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">What clients say about working together</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -117,5 +119,6 @@ export default function Home() {
       <CTA />
       <Chatbot />
     </main>
+    </SlideIn>
   );
 }

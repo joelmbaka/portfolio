@@ -6,6 +6,7 @@ import ImageCarousel from '@/components/ImageCarousel';
 import StoreReviews from '@/components/StoreReviews';
 import RelatedProjects from '@/components/RelatedProjects';
 import CTA from '@/components/CTA';
+import SlideIn from '@/components/SlideIn';
 
 interface PageProps {
   params: Promise<{ projectId: string }>;
@@ -43,14 +44,15 @@ export default async function ProjectPage({ params }: PageProps) {
   if (!project) return notFound();
 
   return (
+    <SlideIn>
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="mb-6">
-        <Link href="/" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">← Home</Link>
+        <Link href="/" className="text-sm text-ocean-blue dark:text-ocean-blue hover:underline">← Home</Link>
       </div>
 
       <header className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100">{project.title}</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-palm-green">{project.title}</h1>
           <div className="mt-2 flex items-center gap-2">
             <span className="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 text-xs">
               {project.type}
@@ -84,5 +86,6 @@ export default async function ProjectPage({ params }: PageProps) {
       <RelatedProjects project={project} />
       <CTA />
     </main>
+    </SlideIn>
   );
 }

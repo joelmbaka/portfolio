@@ -58,13 +58,13 @@ export function AuthModal({ isOpen, onClose, mode, onModeChange, onSignedIn }: A
           <div className="mb-4 flex items-center gap-4">
             <button
               onClick={() => onModeChange('signin')}
-              className={`px-3 py-1.5 rounded-full text-sm ${mode === 'signin' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800'}`}
+              className={`px-3 py-1.5 rounded-full text-sm ${mode === 'signin' ? 'bg-transparent border border-palm-green text-palm-green' : 'bg-zinc-100 dark:bg-zinc-800 text-gray-800 dark:text-gray-100'}`}
             >
               Sign in
             </button>
             <button
               onClick={() => onModeChange('signup')}
-              className={`px-3 py-1.5 rounded-full text-sm ${mode === 'signup' ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800'}`}
+              className={`px-3 py-1.5 rounded-full text-sm ${mode === 'signup' ? 'bg-transparent border border-palm-green text-palm-green' : 'bg-zinc-100 dark:bg-zinc-800 text-gray-800 dark:text-gray-100'}`}
             >
               Create account
             </button>

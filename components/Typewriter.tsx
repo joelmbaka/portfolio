@@ -37,7 +37,7 @@ export function Typewriter({ words, className }: { words: string[], className?: 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="whitespace-pre-wrap break-words text-balance relative text-gray-800 dark:text-gray-300"
+        className="whitespace-pre-wrap break-words text-balance relative"
       >
         {currentText}
         <motion.span

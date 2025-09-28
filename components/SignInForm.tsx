@@ -39,7 +39,7 @@ export function SignInForm({ onSuccess }: SignInFormProps) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="w-full rounded-xl bg-zinc-100 dark:bg-zinc-800 p-2.5 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className="w-full rounded-xl bg-zinc-100 dark:bg-zinc-800 p-2.5 border-none focus:outline-none focus:ring-2 focus:ring-palm-green/60 caret-palm-green text-black dark:text-white"
         />
       </div>
       <div>
@@ -50,7 +50,7 @@ export function SignInForm({ onSuccess }: SignInFormProps) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="••••••••"
-          className="w-full rounded-xl bg-zinc-100 dark:bg-zinc-800 p-2.5 border border-zinc-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className="w-full rounded-xl bg-zinc-100 dark:bg-zinc-800 p-2.5 border-none focus:outline-none focus:ring-2 focus:ring-palm-green/60 caret-palm-green text-black dark:text-white"
         />
       </div>
 
@@ -59,7 +59,7 @@ export function SignInForm({ onSuccess }: SignInFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-xl bg-blue-600 py-2.5 font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-500"
+        className="w-full rounded-xl bg-transparent border border-palm-green text-black dark:text-white py-2.5 font-medium transition hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-palm-green/60 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {loading ? 'Signing in…' : 'Sign in'}
       </button>

@@ -143,7 +143,7 @@ export default function Chatbot() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Open chat"
-        className="fixed bottom-6 right-6 z-40 rounded-full bg-blue-600 p-4 text-white shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="fixed bottom-6 right-6 z-40 rounded-full bg-transparent border border-palm-green p-4 text-palm-green shadow-lg hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-palm-green/60"
       >
         <Bot size={24} />
       </button>
@@ -185,7 +185,7 @@ export default function Chatbot() {
                     key={idx}
                     className={`rounded-lg px-3 py-2 text-sm whitespace-pre-wrap break-words ${
                       msg.role === 'user'
-                        ? 'ml-auto max-w-[75%] bg-blue-600 text-white'
+                        ? 'ml-auto max-w-[75%] bg-palm-green text-white'
                         : 'mr-auto max-w-[90%] bg-gray-100 dark:bg-gray-800/60 text-gray-600 dark:text-gray-400'
                     }`}
                   >
@@ -199,7 +199,7 @@ export default function Chatbot() {
                           className="text-gray-500 hover:text-gray-700 disabled:opacity-50"
                         >
                           {msg.loadingAudio ? (
-                            <Loader2 className="animate-spin" size={14} />
+                            <Loader2 className="animate-spin text-palm-green" size={14} />
                           ) : (
                             <Play size={14} />
                           )}
@@ -283,11 +283,11 @@ export default function Chatbot() {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask me anything about joel.."
                   disabled={isLoading}
-                  className="flex-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 font-medium text-base disabled:opacity-50 cursor-text"
+                  className="flex-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-palm-green/60 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 font-medium text-base disabled:opacity-50 cursor-text"
                 />
                 <button
                   type="submit"
-                  className="rounded-md bg-blue-600 text-white px-4 py-2 text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
+                  className="rounded-md bg-palm-green text-white px-4 py-2 text-sm font-medium hover:bg-palm-green-dark focus:outline-none focus:ring-2 focus:ring-palm-green/60 disabled:opacity-50"
                   disabled={isLoading}
                 >
                   {isLoading ? '...' : 'Send'}

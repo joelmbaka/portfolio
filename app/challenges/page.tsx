@@ -28,7 +28,7 @@ export default function ChallengesPage() {
   return (
     <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-24">
       <div className="mb-6">
-        <Link href="/" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">← Home</Link>
+        <Link href="/" className="text-sm text-ocean-blue dark:text-ocean-blue hover:underline">← Home</Link>
       </div>
       <h1 className="text-2xl font-semibold mb-2">Challenges</h1>
       <p className="text-sm text-gray-500 dark:text-gray-400">Welcome! Explore and try the challenges below.</p>

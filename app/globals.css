@@ -10,13 +10,31 @@ html {
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Joel's Beach Sunset Brand Colors */
+  --ocean-blue: #0ea5e9;
+  --ocean-blue-dark: #0284c7;
+  --palm-green: #059669;
+  --palm-green-dark: #047857;
+  --sunset-yellow: #f59e0b;
+  --sunset-yellow-dark: #d97706;
+  --sandy-beach: #fef3c7;
+  --sandy-beach-overlay: #fef3c7cc;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  /* Dark mode variants */
+  --ocean-blue: #38bdf8;
+  --ocean-blue-dark: #0ea5e9;
+  --palm-green: #10b981;
+  --palm-green-dark: #059669;
+  --sunset-yellow: #fbbf24;
+  --sunset-yellow-dark: #f59e0b;
+  --sandy-beach: #fde68a; /* yellowish sandy tone for dark mode */
+  --sandy-beach-overlay: #fde68acc;
 }
 
 body {
