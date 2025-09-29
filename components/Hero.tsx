@@ -39,7 +39,7 @@ export default function Hero() {
         <h2 className="text-xl sm:text-2xl md:text-3xl text-palm-green font-medium">
           Senior Software Engineer
         </h2>
-        <p className="text-sm sm:text-base text-gray-400">React Native, SwiftUI, Kotlin, Python, SQL</p>
+        <p className="text-sm sm:text-base text-gray-400">React Native, SwiftUI, Kotlin, <span className="text-sandy-beach">Python</span>, SQL</p>
 
         <div className="min-h-[40px] sm:min-h-[60px] md:min-h-[80px]">
           <Typewriter 

@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Joel Mbaka - React Native Developer',
-  description: 'Lets build something extraordinary together',
-  keywords: ['Joel Mbaka', 'Software Developer', 'Software Engineer', 'AI Engineer', 'ML Engineer','Web & Mobile Programmer', 'Full Stack Web & Mobile Application Developer', 'AI Developer', 'Machine Learning Developer', 'Data Scientist', 'Data Analyst', 'Data Engineer', 'Blockchain Developer'],
+  title: 'Joel Mbaka - Senior Software Engineer',
+  description: 'Web and Mobile App Engineer',
+  keywords: ['Joel Mbaka', 'Senior Software Engineer', 'Software Engineer', 'AI Engineer','Web & Mobile', 'Full Stack Web & Mobile engineer', 'AI App engineer'],
 };
 
 export default function RootLayout({

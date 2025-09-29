@@ -5,6 +5,7 @@ import { X } from 'lucide-react'
 import { SignInForm } from '@/components/SignInForm'
 import { SignUpForm } from '@/components/SignUpForm'
 import { createPortal } from 'react-dom'
+import { SocialAuthButtons } from '@/components/SocialAuthButtons'
 
 export type AuthMode = 'signin' | 'signup'
 
@@ -69,11 +70,24 @@ export function AuthModal({ isOpen, onClose, mode, onModeChange, onSignedIn }: A
               Create account
             </button>
           </div>
-          {mode === 'signin' ? (
-            <SignInForm onSuccess={onSignedIn} />
-          ) : (
-            <SignUpForm />
-          )}
+          <div className="space-y-4">
+            {mode === 'signin' ? (
+              <SignInForm onSuccess={onSignedIn} />
+            ) : (
+              <SignUpForm />
+            )}
+
+            <div className="relative my-2">
+              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <span className="w-full border-t border-zinc-200 dark:border-zinc-800" />
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-white dark:bg-zinc-900 px-2 text-xs text-zinc-500">or continue with</span>
+              </div>
+            </div>
+
+            <SocialAuthButtons />
+          </div>
         </div>
       </div>
     </>
