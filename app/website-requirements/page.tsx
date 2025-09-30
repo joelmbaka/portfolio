@@ -317,7 +317,7 @@ export default function WebsiteRequirementsPage() {
       if (!mounted) return
       setSession(data.session)
       setAuthLoading(false)
-      if (!data.session) setShowAuthModal(true)
+      // Do not auto-open auth modal; user can click Sign in
     })
     const { data: listener } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, _session: Session | null) => {
       setSession(_session)
