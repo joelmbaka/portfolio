@@ -31,7 +31,7 @@ function useScrollState(
       el.removeEventListener('scroll', onScroll as EventListener);
       window.removeEventListener('resize', onResize);
     };
-  }, [update]);
+  }, [update, ref]);
 
   return { canPrev, canNext, update };
 }

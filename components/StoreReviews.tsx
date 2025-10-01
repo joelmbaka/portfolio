@@ -1,4 +1,5 @@
 import { Project } from '@/config/projects';
+import Image from 'next/image';
 
 function StarRow({ rating = 0 }: { rating?: number }) {
   const full = Math.floor(rating);
@@ -44,9 +45,11 @@ export default function StoreReviews({ project }: { project: Project }) {
             className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/60 backdrop-blur p-5 hover:shadow-md transition-shadow text-center"
           >
             <div className="flex items-center justify-center">
-              <img
+              <Image
                 src="/images/app-store.png"
                 alt="Download on the App Store"
+                width={160}
+                height={40}
                 className="h-10 w-auto"
                 loading="lazy"
               />
@@ -65,9 +68,11 @@ export default function StoreReviews({ project }: { project: Project }) {
             className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/60 backdrop-blur p-5 hover:shadow-md transition-shadow text-center"
           >
             <div className="flex items-center justify-center">
-              <img
+              <Image
                 src="/images/play-store.png"
                 alt="Get it on Google Play"
+                width={160}
+                height={40}
                 className="h-10 w-auto"
                 loading="lazy"
               />

@@ -22,7 +22,7 @@ export interface Project {
 
 // Base site URL for building project links. Use NEXT_PUBLIC_SITE_URL for flexibility across envs.
 // Trailing slash is trimmed to avoid double slashes when concatenating paths.
-const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.site').replace(/\/$/, '');
+const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
 
 export const projects: Project[] = [
   {

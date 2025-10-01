@@ -20,21 +20,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { projectId } = await params;
   const project = projects.find((p) => p.id === projectId);
   if (!project) return { title: 'Project Not Found' };
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.site').replace(/\/$/, '');
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+  const canonical = `${base}/${project.id}`;
+  const ogImage = project.screenshots?.[0] || '/images/og-default.jpg';
   return {
     title: `${project.title} – Joel Mbaka`,
     description: project.description,
+    alternates: { canonical },
     openGraph: {
       title: project.title,
       description: project.description,
-      url: `${base}/${project.id}`,
-      type: 'website'
+      url: canonical,
+      type: 'website',
+      images: [ogImage],
     },
     twitter: {
       card: 'summary_large_image',
       title: project.title,
       description: project.description,
+      images: [ogImage],
     },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -42,10 +48,53 @@ export default async function ProjectPage({ params }: PageProps) {
   const { projectId } = await params;
   const project = projects.find((p) => p.id === projectId);
   if (!project) return notFound();
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+  const ogImage = project.screenshots?.[0] || '/images/og-default.jpg';
+  const imageAbs = ogImage.startsWith('http') ? ogImage : `${base}${ogImage}`;
+  const canonical = `${base}/${project.id}`;
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: project.title,
+      description: project.description,
+      url: canonical,
+      image: imageAbs,
+      author: {
+        '@type': 'Person',
+        name: 'Joel Mbaka',
+        url: base,
+        sameAs: [
+          'https://github.com/joelmbaka',
+          'https://linkedin.com/in/joelmbaka',
+          'https://x.com/mbaka_joe',
+        ],
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${base}/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: project.title,
+          item: canonical,
+        },
+      ],
+    },
+  ];
 
   return (
     <SlideIn>
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="mb-6">
         <Link href="/" className="text-sm text-ocean-blue dark:text-ocean-blue hover:underline">← Home</Link>
       </div>

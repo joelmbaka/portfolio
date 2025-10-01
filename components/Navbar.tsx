@@ -41,7 +41,8 @@ export function Navbar() {
         <div className="overflow-hidden w-full mr-10">
           <div className="inline-flex w-max items-center gap-6 logo-marquee">
             {allLogos.map((logo, idx) => (
-              <img key={idx} src={logo.src} alt={logo.alt} className="h-6 w-auto" />
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={idx} src={logo.src} alt={logo.alt || ''} className="h-6 w-auto" />
             ))}
           </div>
         </div>

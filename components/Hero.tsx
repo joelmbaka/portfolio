@@ -22,7 +22,7 @@ export default function Hero() {
       <div className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full border-4 border-palm-green overflow-hidden shrink-0 self-center md:self-center">
         <Image
           src="/images/joel.webp"
-          alt="Joel Mbaka"
+          alt="Joel Mbaka, Senior Software Engineer"
           width={288}
           height={288}
           priority
@@ -39,7 +39,7 @@ export default function Hero() {
         <h2 className="text-xl sm:text-2xl md:text-3xl text-palm-green font-medium">
           Senior Software Engineer
         </h2>
-        <p className="text-sm sm:text-base text-gray-400">React Native, SwiftUI, Kotlin, Python, SQL</p>
+        <p className="text-sm sm:text-base text-gray-400">React, React Native, SwiftUI, Kotlin, Python, SQL</p>
 
         <div className="min-h-[40px] sm:min-h-[60px] md:min-h-[80px]">
           <Typewriter 

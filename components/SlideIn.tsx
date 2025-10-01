@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, PropsWithChildren } from "react";
+import React, { useMemo, PropsWithChildren, useId } from "react";
 import { motion } from "framer-motion";
 
 interface SlideInProps {
@@ -14,11 +14,18 @@ export default function SlideIn({
   distance = 64,
   className,
 }: PropsWithChildren<SlideInProps>) {
+  const id = useId();
   const dx = useMemo(() => {
     if (direction === "left") return -distance;
     if (direction === "right") return distance;
-    return Math.random() < 0.5 ? -distance : distance;
-  }, [direction, distance]);
+    // Deterministic left/right based on stable id to avoid SSR/CSR mismatch
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) {
+      hash = (hash << 5) - hash + id.charCodeAt(i);
+      hash |= 0; // to 32-bit int
+    }
+    return (hash & 1) === 0 ? -distance : distance;
+  }, [direction, distance, id]);
 
   return (
     <motion.div

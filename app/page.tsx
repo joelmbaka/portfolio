@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Hero from '@/components/Hero';
 import CTA from '@/components/CTA';
 import { projects, ProjectType } from '@/config/projects';
@@ -47,10 +48,36 @@ export default function Home() {
     },
   ];
 
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Joel Mbaka',
+      jobTitle: 'Senior Software Engineer',
+      url: base,
+      sameAs: [
+        'https://github.com/joelmbaka',
+        'https://linkedin.com/in/joelmbaka',
+        'https://x.com/mbaka_joe',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Joel Mbaka',
+      url: base,
+    },
+  ];
+
   return (
     <SlideIn>
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <Hero />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       <section className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="flex flex-col items-center md:items-start mb-8 gap-4">
@@ -79,14 +106,17 @@ export default function Home() {
               className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/60 backdrop-blur p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-center gap-4">
-                <img
+                <Image
                   src={r.avatar}
                   alt={`${r.name} avatar`}
+                  width={48}
+                  height={48}
                   className="h-12 w-12 rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-800"
                 />
                 <div className="flex flex-col">
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">{r.name}</span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`https://flagcdn.com/${r.country.toLowerCase()}.svg`}
                       alt={`${r.country} flag`}
