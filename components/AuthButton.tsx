@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
-import { LogIn, LogOut } from 'lucide-react'
+import { User } from 'lucide-react'
 import type { Session, AuthChangeEvent } from '@supabase/supabase-js'
 import { AuthModal, type AuthMode } from './AuthModal'
 
@@ -40,7 +40,7 @@ export function AuthButton() {
         className="inline-flex items-center gap-2 rounded-md border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
         title={session.user.email ?? 'Log out'}
       >
-        <LogOut className="w-4 h-4" />
+        <User className="w-4 h-4" />
         <span className="hidden sm:inline">Log out</span>
       </button>
     )
@@ -56,7 +56,7 @@ export function AuthButton() {
         className="inline-flex items-center gap-2 rounded-md border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
         title="Sign in"
       >
-        <LogIn className="w-4 h-4" />
+        <User className="w-4 h-4" />
         <span className="hidden sm:inline">Log in</span>
       </button>
 

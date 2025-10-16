@@ -41,7 +41,7 @@ export default function Home() {
       country: 'US',
       role: 'Founder',
       company: 'EduLabs',
-      avatar: 'https://randomuser.me/api/portraits/men/24.jpg',
+      avatar: '/images/handsome-african-american-businessman-checkered-600nw-2475665815.webp',
       text:
         'Rock-solid TypeScript, great attention to detail, and proactive problem-solving. Would definitely work with Joel again.',
       rating: 5,
@@ -72,7 +72,7 @@ export default function Home() {
 
   return (
     <SlideIn>
-    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 md:pb-10 lg:pb-12">
       <Hero />
       <script
         type="application/ld+json"
