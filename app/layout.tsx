@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL((process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '')),
   title: 'Senior React Native & Full-Stack Software Engineer – Joel Mbaka',
-  description: 'Senior mobile and full-stack engineer specializing in React Native, SwiftUI, Kotlin, Next.js, Node.js/TypeScript, Python, and AI integrations (LangChain, CrewAI).',
+  description: 'Senior mobile and full-stack engineer specializing in React Native, Swift, Kotlin, Next.js, Node.js/TypeScript, Python, and AI integrations (LangChain, CrewAI).',
   keywords: [
     'Joel Mbaka',
     'senior software engineer',
@@ -63,13 +63,13 @@ export const metadata: Metadata = {
     url: '/',
     siteName: 'Joel Mbaka',
     title: 'Senior React Native & Full-Stack Software Engineer – Joel Mbaka',
-    description: 'Senior mobile and full-stack engineer specializing in React Native, SwiftUI, Kotlin, Next.js, Node.js/TypeScript, Python, and AI integrations (LangChain, CrewAI).',
+    description: 'Senior mobile and full-stack engineer specializing in React Native, Swift, Kotlin, Next.js, Node.js/TypeScript, Python, and AI integrations (LangChain, CrewAI).',
     images: ['/images/og-default.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Senior React Native & Full-Stack Software Engineer – Joel Mbaka',
-    description: 'Senior mobile and full-stack engineer specializing in React Native, SwiftUI, Kotlin, Next.js, Node.js/TypeScript, Python, and AI integrations (LangChain, CrewAI).',
+    description: 'Senior mobile and full-stack engineer specializing in React Native, Swift, Kotlin, Next.js, Node.js/TypeScript, Python, and AI integrations (LangChain, CrewAI).',
     images: ['/images/og-default.jpg'],
   },
 };
