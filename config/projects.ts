@@ -57,7 +57,7 @@ export const projects: Project[] = [
       reviewsCount: 502
     }
   },
-  {
+ /** {
     id: "python-tutor",
     title: "AI Python Tutor App",
     description: "An interactive mobile application that teaches Python programming to kids using AI-powered tutoring with CrewAI. Features age-appropriate interfaces, adaptive learning paths, and real-time code execution.",
@@ -273,4 +273,5 @@ export const projects: Project[] = [
       reviewsCount: 95
     }
   }
+  **/
 ];
