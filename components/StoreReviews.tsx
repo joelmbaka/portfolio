@@ -35,7 +35,7 @@ export default function StoreReviews({ project }: { project: Project }) {
 
   return (
     <section className="mt-10">
-      <h2 className="text-xl font-semibold mb-4 text-center">What users say</h2>
+      <h2 className="text-xl font-semibold mb-4 text-center">App Store & Play Store ratings</h2>
       <div className={`grid ${gridCols} gap-4 place-items-center`}>
         {appStore && (
           <a

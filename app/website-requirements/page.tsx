@@ -3,9 +3,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, Loader2, ArrowUpRight } from 'lucide-react'
-import { supabase } from '@/lib/supabaseClient'
-import type { Session, AuthChangeEvent } from '@supabase/supabase-js'
-import { AuthModal, type AuthMode } from '@/components/AuthModal'
 import Link from 'next/link'
 
 // Small building blocks to keep typing minimal and UX smooth
@@ -234,10 +231,6 @@ export default function WebsiteRequirementsPage() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [session, setSession] = useState<Session | null>(null)
-  const [authLoading, setAuthLoading] = useState(true)
-  const [showAuthModal, setShowAuthModal] = useState(false)
-  const [authMode, setAuthMode] = useState<AuthMode>('signin')
 
   const [form, setForm] = useState({
     // Basics
@@ -310,24 +303,6 @@ export default function WebsiteRequirementsPage() {
     } catch {}
   }, [])
 
-  // Session gate
-  useEffect(() => {
-    let mounted = true
-    supabase.auth.getSession().then(({ data }) => {
-      if (!mounted) return
-      setSession(data.session)
-      setAuthLoading(false)
-      // Do not auto-open auth modal; user can click Sign in
-    })
-    const { data: listener } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, _session: Session | null) => {
-      setSession(_session)
-      if (_session) setShowAuthModal(false)
-    })
-    return () => {
-      mounted = false
-      listener.subscription.unsubscribe()
-    }
-  }, [])
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -345,23 +320,6 @@ export default function WebsiteRequirementsPage() {
     setSubmitting(true)
     setError(null)
     try {
-      // Clean payload - remove any legacy fields that may have been cached (without introducing unused vars)
-      const payload: Record<string, unknown> = { ...form } as unknown as Record<string, unknown>
-      delete payload['cms']
-      delete payload['blogFeatures']
-      payload['submittedAt'] = new Date().toISOString()
-      payload['pageUrl'] = typeof window !== 'undefined' ? window.location.href : ''
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'
-      const token = session?.access_token
-      const res = await fetch(`${backendUrl}/website-requirements`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify(payload),
-      })
-      if (!res.ok) throw new Error('Failed to submit')
       setSubmitted(true)
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Something went wrong. Please try again.'
@@ -384,41 +342,7 @@ export default function WebsiteRequirementsPage() {
       </motion.div>
 
       <AnimatePresence mode="wait">
-        {authLoading ? (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="space-y-4"
-          >
-            <div className="h-8 w-2/3 rounded-lg bg-gray-200 dark:bg-gray-800 animate-pulse" />
-            <div className="h-40 w-full rounded-xl bg-gray-200 dark:bg-gray-800 animate-pulse" />
-            <div className="h-40 w-full rounded-xl bg-gray-200 dark:bg-gray-800 animate-pulse" />
-          </motion.div>
-        ) : !session ? (
-          <motion.div
-            key="signin"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            className="mx-auto max-w-lg text-center"
-          >
-            <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} mode={authMode} onModeChange={setAuthMode} onSignedIn={() => setShowAuthModal(false)} />
-            <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white/70 dark:bg-gray-900/60 backdrop-blur p-8">
-              <h2 className="text-2xl font-semibold">Sign in to continue</h2>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">You need an account to submit your website requirements.</p>
-              <div className="mt-6">
-                <button
-                  onClick={() => { setAuthMode('signin'); setShowAuthModal(true); }}
-                  className="inline-flex items-center justify-center rounded-full bg-transparent text-black border border-palm-green px-6 py-3 font-medium hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-ocean-blue/70 dark:bg-transparent dark:text-white dark:border-palm-green dark:hover:bg-transparent"
-                >
-                  Sign in
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        ) : submitted ? (
+        {submitted ? (
           <motion.div
             key="success"
             initial={{ opacity: 0, scale: 0.98 }}

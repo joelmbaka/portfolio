@@ -68,7 +68,8 @@ export default function RelatedProjects({ project }: { project: Project }) {
           aria-label="Related projects"
         >
           {related.map((p) => {
-            const img = p.screenshots?.[0] ?? '/globe.svg';
+            const img = p.icon ?? '/images/placeholder-app.svg';
+            const iconStyle = p.iconBackground ? { backgroundColor: p.iconBackground } : undefined;
             return (
               <Link
                 key={p.id}
@@ -78,13 +79,16 @@ export default function RelatedProjects({ project }: { project: Project }) {
                 className="group snap-start flex-shrink-0 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow bg-white/60 dark:bg-gray-900/60 backdrop-blur min-w-[240px] sm:min-w-[280px] md:min-w-[320px] max-w-[320px]"
                 prefetch={false}
               >
-                <div className="relative w-full bg-gray-800" style={{ aspectRatio: '9 / 19.5' }}>
+                <div
+                  className="relative w-full bg-gray-100 dark:bg-gray-800"
+                  style={{ aspectRatio: '1 / 1', ...iconStyle }}
+                >
                   <Image
                     src={img}
-                    alt={`${p.title} featured screenshot`}
+                    alt={`${p.title} app icon`}
                     fill
                     sizes="(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 320px"
-                    className="object-contain"
+                    className="object-contain p-8"
                     unoptimized
                   />
                 </div>

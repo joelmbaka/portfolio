@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'i.pravatar.cc' },
       { protocol: 'https', hostname: 'randomuser.me' },
+      { protocol: 'https', hostname: '**.public.blob.vercel-storage.com' },
     ],
   },
   // Core performance optimizations
@@ -13,14 +14,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   async headers() {
     return [
-      {
-        source: '/challenges',
-        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
-      },
-      {
-        source: '/challenges/:path*',
-        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
-      },
       {
         source: '/website-requirements',
         headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],

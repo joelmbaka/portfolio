@@ -1,19 +1,16 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Hero from '@/components/Hero';
 import CTA from '@/components/CTA';
-import { projects, ProjectType } from '@/config/projects';
+import { projects } from '@/config/projects';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
 import Chatbot from '@/components/Chatbot';
-import SegmentedControl from '@/components/SegmentedControl';
+// import SegmentedControl from '@/components/SegmentedControl';
 import SlideIn from '@/components/SlideIn';
 
 export default function Home() {
-  const [selectedType, setSelectedType] = useState<ProjectType>('SaaS');
-  
-  const filteredProjects = projects.filter(project => project.type === selectedType);
+  const featuredProjects = projects;
   
   const reviews = [
     {
@@ -89,9 +86,12 @@ export default function Home() {
               <span> UTC+3 (Nairobi)</span>
             </p>
           </div>
-          <SegmentedControl value={selectedType} onChange={setSelectedType} />
+          {/**
+           * The homepage now surfaces the strongest portfolio projects directly.
+           */}
+          {/** <SegmentedControl value={selectedType} onChange={setSelectedType} /> */}
         </div>
-        <ProjectsCarousel projects={filteredProjects} />
+        <ProjectsCarousel projects={featuredProjects} />
       </section>
       
       <section className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 mt-16">

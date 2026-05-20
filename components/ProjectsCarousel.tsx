@@ -110,7 +110,8 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
         aria-label="Projects"
       >
         {projects.map((p) => {
-          const img = p.screenshots?.[0] ?? '/globe.svg';
+          const img = p.icon ?? '/images/placeholder-app.svg';
+          const iconStyle = p.iconBackground ? { backgroundColor: p.iconBackground } : undefined;
           return (
             <div
               key={p.id}
@@ -140,13 +141,16 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-300 line-clamp-3">{p.description}</p>
               </div>
               <Link href={`/${p.id}`} className="block">
-                <div className="relative w-full bg-gray-800" style={{ aspectRatio: '9 / 19.5' }}>
+                <div
+                  className="relative w-full bg-gray-100 dark:bg-gray-800"
+                  style={{ aspectRatio: '1 / 1', ...iconStyle }}
+                >
                   <Image
                     src={img}
-                    alt={`${p.title} featured screenshot`}
+                    alt={`${p.title} app icon`}
                     fill
                     sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 380px"
-                    className="object-contain"
+                    className="object-contain p-8"
                     unoptimized
                   />
                 </div>

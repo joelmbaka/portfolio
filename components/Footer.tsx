@@ -1,16 +1,16 @@
- import { Mail, MessageCircle, MapPin } from 'lucide-react';
- export function Footer() {
+import { Mail, MessageCircle } from 'lucide-react';
+export function Footer() {
   return (
     <footer className="bg-transparent text-ocean-blue">
       <div className="max-w-5xl mx-auto w-full px-4 py-3 flex flex-col xl:flex-row xl:flex-nowrap items-center justify-center gap-2 xl:gap-6 text-sm text-center">
         <div className="flex items-center gap-2 whitespace-nowrap">
           <Mail className="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden />
           <a
-            href="mailto:info@joelmbaka.com"
+            href="mailto:mbakajoe26@gmail.com"
             className="hover:underline font-medium"
-            aria-label="Email info@joelmbaka.com"
+            aria-label="Email mbakajoe26@gmail.com"
           >
-            info@joelmbaka.com
+            mbakajoe26@gmail.com
           </a>
         </div>
 
@@ -26,11 +26,6 @@
             Chat on WhatsApp
           </a>
         </div>
-
-        <address className="not-italic flex items-center gap-2 whitespace-nowrap">
-          <MapPin className="h-4 w-4 text-red-500" aria-hidden />
-          C12, Broadwalk mall, Ojijo Rd, Nairobi
-        </address>
       </div>
     </footer>
   );

@@ -2,7 +2,7 @@ import { projects } from '@/config/projects';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import ImageCarousel from '@/components/ImageCarousel';
+import ImageGallery from '@/components/ImageGallery';
 import StoreReviews from '@/components/StoreReviews';
 import RelatedProjects from '@/components/RelatedProjects';
 import CTA from '@/components/CTA';
@@ -10,6 +10,15 @@ import SlideIn from '@/components/SlideIn';
 
 interface PageProps {
   params: Promise<{ projectId: string }>;
+}
+
+function getPrimaryProjectImage(project: (typeof projects)[number]) {
+  return (
+    project.icon ||
+    project.screenshots?.ios?.[0] ||
+    project.screenshots?.android?.[0] ||
+    '/images/og-default.jpg'
+  );
 }
 
 export function generateStaticParams() {
@@ -22,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return { title: 'Project Not Found' };
   const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
   const canonical = `${base}/${project.id}`;
-  const ogImage = project.screenshots?.[0] || '/images/og-default.jpg';
+  const ogImage = getPrimaryProjectImage(project);
   return {
     title: `${project.title} – Joel Mbaka`,
     description: project.description,
@@ -49,7 +58,7 @@ export default async function ProjectPage({ params }: PageProps) {
   const project = projects.find((p) => p.id === projectId);
   if (!project) return notFound();
   const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
-  const ogImage = project.screenshots?.[0] || '/images/og-default.jpg';
+  const ogImage = getPrimaryProjectImage(project);
   const imageAbs = ogImage.startsWith('http') ? ogImage : `${base}${ogImage}`;
   const canonical = `${base}/${project.id}`;
   const jsonLd = [
@@ -112,10 +121,18 @@ export default async function ProjectPage({ params }: PageProps) {
 
       <p className="text-gray-700 dark:text-gray-300 text-base leading-7">{project.description}</p>
 
-      {project.screenshots && project.screenshots.length > 0 && (
-        <div className="mt-8">
-          <ImageCarousel images={project.screenshots} />
-        </div>
+      {project.screenshots?.ios && project.screenshots.ios.length > 0 && (
+        <section className="mt-8">
+          <h2 className="text-xl font-semibold mb-4 text-center">iPhone Screenshots</h2>
+          <ImageGallery images={project.screenshots.ios} />
+        </section>
+      )}
+
+      {project.screenshots?.android && project.screenshots.android.length > 0 && (
+        <section className="mt-8">
+          <h2 className="text-xl font-semibold mb-4 text-center">Android Screenshots</h2>
+          <ImageGallery images={project.screenshots.android} />
+        </section>
       )}
 
 <section className="mt-8">

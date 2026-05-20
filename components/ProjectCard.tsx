@@ -1,10 +1,14 @@
 import { Project } from '@/config/projects';
 import { ArrowUpRight } from 'lucide-react';
 import { Suspense } from 'react';
-import ImageCarousel from '@/components/ImageCarousel';
+import ImageGallery from '@/components/ImageGallery';
 import Link from 'next/link';
 
 function ProjectCardContent({ project }: { project: Project }) {
+  const previewImages = project.screenshots?.ios?.length
+    ? project.screenshots.ios
+    : project.screenshots?.android;
+
   return (
     <div className="border border-gray-200 dark:border-gray-800 rounded-xl p-6 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors">
       <div className="flex justify-between items-start gap-3">
@@ -28,9 +32,9 @@ function ProjectCardContent({ project }: { project: Project }) {
       </div>
       <p className="text-gray-600 dark:text-gray-400 mt-2">{project.description}</p>
 
-      {project.screenshots && project.screenshots.length > 0 && (
+      {previewImages && previewImages.length > 0 && (
         <div className="mt-4">
-          <ImageCarousel images={project.screenshots} />
+          <ImageGallery images={previewImages} />
         </div>
       )}
       <div className="flex flex-wrap gap-2 mt-4">

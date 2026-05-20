@@ -1,5 +1,10 @@
 export type ProjectType = 'SaaS' | 'Enterprise';
 
+export interface ProjectScreenshots {
+  ios?: string[];
+  android?: string[];
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -7,7 +12,9 @@ export interface Project {
   tech: string[];
   type: ProjectType;
   url?: string;
-  screenshots?: string[];
+  icon?: string;
+  iconBackground?: string;
+  screenshots?: ProjectScreenshots;
   appStore?: {
     url: string;
     rating?: number; // 0-5
@@ -20,258 +27,180 @@ export interface Project {
   };
 }
 
-// Base site URL for building project links. Use NEXT_PUBLIC_SITE_URL for flexibility across envs.
-// Trailing slash is trimmed to avoid double slashes when concatenating paths.
-const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
-
 export const projects: Project[] = [
   {
-    id: "ai-journal",
-    title: "AI-Powered Journal",
-    description: "A revolutionary journaling experience combining voice interactions, intelligent insights, and semantic search. Transforms daily entries into an interactive personal knowledge base with AI-powered summaries and pattern recognition.",
+    id: 'journpad',
+    title: 'JournPad: AI Voice Journal',
+    description:
+      'JournPad is an AI-assisted voice journaling app that turns your spoken thoughts into organized, searchable entries. Record hands-free and get automatic titles, summaries, subjects, keywords, and smart categories, plus an insights dashboard that visualizes your journaling patterns over time.',
     tech: [
-      "React Native",
-      "TypeScript",
-      "CrewAI",
-      "Speech Recognition",
-      "Vector DB",
-      "Supabase"
+      'Expo',
+      'React Native',
+      'TypeScript',
+      'Google Cloud',
+      'Python',
+      'Docker',
+      'OpenAI',
     ],
-    type: "SaaS",
-    url: `${BASE_URL}/ai-journal`,
-    screenshots: [
-      "/images/projects/ai-journal/settings.jpeg",
-      "/images/projects/ai-journal/entry.jpeg",
-      "/images/projects/ai-journal/dark-mode-entry.jpeg",
-      "/images/projects/ai-journal/report.jpeg",
-      "/images/projects/ai-journal/the-report.jpeg"
-    ],
+    type: 'SaaS',
+    url: 'https://journpad.com',
+    icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/icon.png',
+    screenshots: {
+      ios: [
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-01.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-02.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-03.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-04.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-05.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-06.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-07.jpeg',
+      ],
+      android: [
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-01.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-02.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-03.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-04.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-05.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-06.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-07.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-08.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-09.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-10.jpeg',
+      ],
+    },
     appStore: {
-      url: "https://apps.apple.com/app/id9876543210",
+      url: 'https://apps.apple.com/ke/app/journpad/id6754232534',
+      // You can update these as real ratings come in
       rating: 4.9,
-      reviewsCount: 356
+      reviewsCount: 50,
     },
     playStore: {
-      url: "https://play.google.com/store/apps/details?id=com.joel.ai_journal",
-      rating: 4.8,
-      reviewsCount: 502
-    }
-  },
- /** {
-    id: "python-tutor",
-    title: "AI Python Tutor App",
-    description: "An interactive mobile application that teaches Python programming to kids using AI-powered tutoring with CrewAI. Features age-appropriate interfaces, adaptive learning paths, and real-time code execution.",
-    tech: [
-      "React Native",
-      "TypeScript",
-      "CrewAI",
-      "Python",
-      "FastAPI",
-      "Tailwind CSS"
-    ],
-    type: "SaaS",
-    url: `${BASE_URL}/python-tutor`,
-    screenshots: [
-      "/images/projects/python-tutor/welcome.jpeg",
-      "/images/projects/python-tutor/run-code.jpeg",
-      "/images/projects/python-tutor/age.jpeg",
-      "/images/projects/python-tutor/generating.jpeg",
-      "/images/projects/python-tutor/lesson.jpeg",
-      "/images/projects/python-tutor/reveal.jpeg",
-      "/images/projects/python-tutor/soln-revealed.jpeg",
-      "/images/projects/python-tutor/exercises.jpeg",
-      "/images/projects/python-tutor/new-challenge.jpeg"
-    ],
-    appStore: {
-      url: "https://apps.apple.com/app/id1234567890",
-      rating: 4.8,
-      reviewsCount: 124
+      url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.journal',
+      rating: 4.9,
+      reviewsCount: 50,
     },
-    playStore: {
-      url: "https://play.google.com/store/apps/details?id=com.joel.python_tutor",
-      rating: 4.7,
-      reviewsCount: 210
-    }
   },
   {
-    id: "fitness",
-    title: "Personalized AI Workout Plans App",
-    description: "A modern fitness tracking application built with TypeScript and Firebase.",
+    id: 'taifa-hmis',
+    title: 'Taifa HMIS',
+    description:
+      'Hospital operations platform built around real facility workflows across reception, triage, doctor review, lab, imaging, pharmacy, billing, admissions, and insurance-aware care delivery.',
     tech: [
-      "React Native",
-      "TypeScript",
-      "Firebase",
-      "Expo Router",
-      "EAS CI/CD"
+      'Next.js',
+      'TypeScript',
+      'Python',
+      'FastAPI',
+      'SQLAlchemy',
+      'Alembic',
+      'PostgreSQL',
+      'Tailwind CSS',
     ],
-    type: "SaaS",
-    url: `${BASE_URL}/fitness`,
-    screenshots: [
-      "/images/projects/fitness/1.jpeg",
-      "/images/projects/fitness/2.jpeg",
-      "/images/projects/fitness/3.jpeg",
-      "/images/projects/fitness/4.jpeg",
-      "/images/projects/fitness/5.jpeg",
-      "/images/projects/fitness/7.jpeg",
-      "/images/projects/fitness/step8.jpeg",
-      "/images/projects/fitness/generating.jpeg",
-      "/images/projects/fitness/home.jpeg",
-      "/images/projects/fitness/planks.jpeg",
-      "/images/projects/fitness/tricep.jpeg",
-      "/images/projects/fitness/rest.jpeg",
-      "/images/projects/fitness/completed.jpeg",
-      "/images/projects/fitness/week-2.jpeg",
-      "/images/projects/fitness/profile.jpeg",
-      "/images/projects/fitness/progress.jpeg"
-    ],
-    appStore: {
-      url: "#",
-      rating: 4.7,
-      reviewsCount: 98
+    type: 'Enterprise',
+    icon: '/images/projects/taifa-hmis-icon.png',
+    screenshots: {
+      ios: ['/images/projects/taifa-hmis-icon.png'],
+      android: ['/images/projects/taifa-hmis-icon.png'],
     },
-    playStore: {
-      url: "#",
-      rating: 4.6,
-      reviewsCount: 152
-    }
   },
   {
-    id: "fpl_podcast",
-    title: "Let's Talk FPL Podcast App",
-    description: "An complementary app to the 'Let's Talk FPL' YouTube channel with 500K+ subscribers. Upload your team, get AI gameweek suggestions and timely in-app notifications",
+    id: 'rentpayor',
+    title: 'RentPayor',
+    description:
+      'Rent collection and reconciliation system for landlords, designed to match messy M-Pesa, bank, and cash payments against invoices while keeping landlords in control of final approval.',
     tech: [
-      "Expo",
-      "TypeScript",
-      "Tailwind CSS",
-      "Redux Toolkit",
-      "React Native Reanimated",
-      "Expo Image Picker",
-      "React Native Web",
-      "Expo SQLite",
-      "FastAPI",
-      "CrewAI"
+      'Expo',
+      'React Native',
+      'TypeScript',
+      'Python',
+      'FastAPI',
+      'PostgreSQL',
+      'Firebase Auth',
+      'Expo Router',
+      'Jest',
     ],
-    type: "SaaS",
-    url: `${BASE_URL}/fpl-podcast`,
-    screenshots: [
-      "/images/projects/fpl-podcast/hub_dark.jpeg",
-      "/images/projects/fpl-podcast/hub_light.jpeg",
-      "/images/projects/fpl-podcast/upload_light.jpeg",
-      "/images/projects/fpl-podcast/upload.jpeg",
-      "/images/projects/fpl-podcast/screenshot_original.jpeg",
-      "/images/projects/fpl-podcast/ai_team_extraction_light.jpeg",
-      "/images/projects/fpl-podcast/aiteam1.jpeg",
-      "/images/projects/fpl-podcast/aiteam2.jpeg",
-      "/images/projects/fpl-podcast/player_dark.jpeg",
-      "/images/projects/fpl-podcast/player_light.jpeg",
-      "/images/projects/fpl-podcast/alternatives-dark.jpeg",
-      "/images/projects/fpl-podcast/alternatives-light.jpeg",
-      "/images/projects/fpl-podcast/fixtures-light.jpeg",
-      "/images/projects/fpl-podcast/fixtures-dark.jpeg",
-      "/images/projects/fpl-podcast/manager_id_instructions.jpeg",
-      "/images/projects/fpl-podcast/manager_light.jpeg",
-      "/images/projects/fpl-podcast/manager.jpeg",
-    ],
-    appStore: {
-      url: "https://apps.apple.com/app/id1234567890",
-      rating: 4.8,
-      reviewsCount: 1200
+    type: 'Enterprise',
+    icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/icon.png',
+    screenshots: {
+      ios: ['/images/projects/rentpayor-icon.png'],
+      android: ['/images/projects/rentpayor-icon.png'],
     },
-    playStore: {
-      url: "https://play.google.com/store/apps/details?id=com.joel.python_tutor",
-      rating: 4.7,
-      reviewsCount: 3210
-    }
   },
   {
-    id: "remocare",
-    title: "Remote Physicists Consultation App",
-    description: "Cross-platform virtual-care platform that connects patients to licensed doctors for real-time video consultations, booking, and payments.",
+    id: 'macsim',
+    title: 'Macsim Cargo',
+    description:
+      'Logistics and cargo operations app with live location features, booking support, document scanning, notifications, and payment-related operational tooling for transport workflows.',
     tech: [
-      "React Native",
-      "TypeScript",
-      "Supabase",
-      "Stripe",
-      "WebRTC",
-      "EAS CI/CD"
+      'Expo',
+      'React Native',
+      'TypeScript',
+      'Python',
+      'FastAPI',
+      'PostgreSQL',
+      'Firebase Auth',
+      'React Query',
     ],
-    type: "SaaS",
-    url: `${BASE_URL}/remocare`,
-    screenshots: [
-      "/images/projects/remocare/gigs.jpeg",
-      "/images/projects/remocare/skill-card.jpeg",
-      "/images/projects/remocare/doctor.jpeg",
-      "/images/projects/remocare/book-appointment.jpeg",
-      "/images/projects/remocare/stripe.jpeg",
-      "/images/projects/remocare/redirecting-to-stripe.jpeg",
-      "/images/projects/remocare/appointments.jpeg",
-
-    ],
-    appStore: {
-      url: "#",
-      rating: 4.8,
-      reviewsCount: 64
+    type: 'Enterprise',
+    icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/icon.png',
+    screenshots: {
+      ios: ['/images/projects/macsim-welcome.png'],
+      android: [
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-01.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-02.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-03.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-04.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-05.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-06.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-07.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-08.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-09.jpeg',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-10.jpeg',
+      ],
     },
-    playStore: {
-      url: "#",
-      rating: 4.7,
-      reviewsCount: 89
-    }
   },
   {
-    id: "hospitality",
-    title: "Hospitality & Bookings App",
-    description: "Hospitality app enabling resort discovery, bookings, dining orders, and payments.",
+    id: 'taxipoa',
+    title: 'TaxiPoa',
+    description:
+      'Kenya-focused ride-hailing platform with rider and driver flows, map and location support, document-based KYC, secure authentication, and payments-aware transport operations.',
     tech: [
-      "React Native",
-      "TypeScript",
-      "Supabase",
-      "Stripe",
-      "Zustand",
-      "Expo Router",
-      "EAS CI/CD"
+      'Expo',
+      'React Native',
+      'TypeScript',
+      'Python',
+      'FastAPI',
+      'PostgreSQL',
+      'Firebase Auth',
+      'Google Maps',
     ],
-    type: "Enterprise",
-    url: `${BASE_URL}/hotels`,
-    screenshots: [
-    ],
-    appStore: {
-      url: "#",
-      rating: 4.6,
-      reviewsCount: 43
+    type: 'SaaS',
+    icon: '/images/projects/taxipoa-icon.png',
+    screenshots: {
+      ios: ['/images/projects/taxipoa-icon.png'],
+      android: ['/images/projects/taxipoa-icon.png'],
     },
-    playStore: {
-      url: "#",
-      rating: 4.5,
-      reviewsCount: 57
-    }
   },
   {
-    id: "property-management",
-    title: "Landlord Monthly Invoicing & Utilities App",
-    description: "A cross-platform React Native app that lets property owners list, book, and manage every rental's operations—from pricing to payments—in one mobile dashboard.",
+    id: 'ai-stylist',
+    title: 'AI Stylist',
+    description:
+      'AI-powered wardrobe assistant that analyzes clothing items, organizes a personal closet, and generates outfit recommendations using image understanding, subscriptions, and weather-aware suggestions.',
     tech: [
-      "React Native",
-      "TypeScript",
-      "Firebase",
-      "Stripe",
-      "Expo Router",
-      "EAS CI/CD"
+      'Expo',
+      'React Native',
+      'TypeScript',
+      'Python',
+      'FastAPI',
+      'PostgreSQL',
+      'SQLite',
+      'OAuth',
     ],
-    type: "Enterprise",
-    url: `${BASE_URL}/rentals`,
-    screenshots: [
-    ],
-    appStore: {
-      url: "#",
-      rating: 4.7,
-      reviewsCount: 72
+    type: 'SaaS',
+    icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/ai-stylist/icon.png',
+    iconBackground: '#2E1A47',
+    screenshots: {
+      ios: ['/images/projects/ai-stylist-icon.png'],
+      android: ['/images/projects/ai-stylist-icon.png'],
     },
-    playStore: {
-      url: "#",
-      rating: 4.6,
-      reviewsCount: 95
-    }
-  }
-  **/
+  },
 ];

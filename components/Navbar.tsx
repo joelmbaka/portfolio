@@ -1,24 +1,13 @@
 'use client';
 import { ThemeToggle } from './ThemeToggle';
-import { useEffect, useState } from 'react';
 import { AuthButton } from './AuthButton';
+import { BookOpen, Home } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function Navbar() {
-  const [showHeader, setShowHeader] = useState(true);
-  useEffect(() => {
-    let lastY = window.scrollY;
-    function onScroll() {
-      const current = window.scrollY;
-      if (current > lastY && current > 100) {
-        setShowHeader(false); // scrolling down
-      } else {
-        setShowHeader(true); // scrolling up
-      }
-      lastY = current;
-    }
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const pathname = usePathname();
+  const isBlogPage = pathname.startsWith('/blog');
   
   // Base logos for the marquee
   const baseLogos = [
@@ -35,7 +24,7 @@ export function Navbar() {
   // Repeat logos so that one half of the track is wider than the container (seamless loop)
   const allLogos = [...baseLogos, ...baseLogos, ...baseLogos, ...baseLogos];
   return (
-    <header className={`fixed top-0 left-0 w-full px-0 sm:px-0 py-4 z-50 bg-transparent backdrop-blur-md transition-transform duration-300 ${showHeader ? 'translate-y-0' : '-translate-y-full'}`}>
+    <header className="fixed top-0 left-0 w-full px-0 sm:px-0 py-4 z-50 bg-transparent backdrop-blur-md">
       <div className="max-w-5xl mx-auto w-full relative flex items-center">
       {/* Scrolling tech logos */}
         <div className="overflow-hidden w-full mr-10">
@@ -46,10 +35,34 @@ export function Navbar() {
             ))}
           </div>
         </div>
+      {/* Navigation button on the left - Blog or Home depending on current page */}
+      <div className="absolute left-4">
+        {isBlogPage ? (
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-md border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            title="Back to Home"
+          >
+            <Home className="w-4 h-4" />
+            <span className="hidden sm:inline">Home</span>
+          </Link>
+        ) : (
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 rounded-md border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            title="Visit Blog"
+          >
+            <BookOpen className="w-4 h-4" />
+            <span className="hidden sm:inline">Blog</span>
+          </Link>
+        )}
+      </div>
+
+      {/* Auth and theme buttons on the right */}
       <div className="absolute right-4">
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <AuthButton />
+          <ThemeToggle />
         </div>
       </div>
           </div>
