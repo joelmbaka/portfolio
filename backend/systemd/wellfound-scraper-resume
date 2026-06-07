@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+USER_NAME="${WELLFOUND_SCRAPER_USER:-joel}"
+USER_ID="$(id -u "$USER_NAME")"
+
+if [[ "${1:-}" != "post" ]]; then
+  exit 0
+fi
+
+case "${2:-}" in
+  suspend|hibernate|hybrid-sleep|suspend-then-hibernate)
+    runuser -u "$USER_NAME" -- \
+      env XDG_RUNTIME_DIR="/run/user/${USER_ID}" systemctl --user start wellfound-debug-chrome.service
+    runuser -u "$USER_NAME" -- \
+      env XDG_RUNTIME_DIR="/run/user/${USER_ID}" systemctl --user start wellfound-scraper.service
+    ;;
+esac

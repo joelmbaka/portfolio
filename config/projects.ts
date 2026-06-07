@@ -1,12 +1,27 @@
 export type ProjectType = 'SaaS' | 'Enterprise';
 
 export interface ProjectScreenshots {
-  ios?: string[];
-  android?: string[];
+  web?: string[];
+  app?: string[];
+}
+
+export interface ProjectStorePreview {
+  src: string;
+  platform: 'ios' | 'android' | 'web';
+}
+
+export interface ProjectEnhancement {
+  title: string;
+  description: string;
+  tech: string[];
+  screenshots?: string[];
+  url?: string;
+  note?: string;
 }
 
 export interface Project {
   id: string;
+  aliases?: string[];
   title: string;
   description: string;
   tech: string[];
@@ -14,16 +29,18 @@ export interface Project {
   url?: string;
   icon?: string;
   iconBackground?: string;
+  storePreview?: ProjectStorePreview;
   screenshots?: ProjectScreenshots;
+  enhancements?: ProjectEnhancement[];
   appStore?: {
     url: string;
     rating?: number; // 0-5
-    reviewsCount?: number;
+    reviewsCount?: number | string;
   };
   playStore?: {
     url: string;
     rating?: number; // 0-5
-    reviewsCount?: number;
+    reviewsCount?: number | string;
   };
 }
 
@@ -45,68 +62,58 @@ export const projects: Project[] = [
     type: 'SaaS',
     url: 'https://journpad.com',
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/icon.png',
+    storePreview: {
+      platform: 'ios',
+      src: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/store/card-focused-v2.png',
+    },
     screenshots: {
-      ios: [
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-01.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-02.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-03.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-04.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-05.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-06.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/ios/iphone-07.jpeg',
-      ],
-      android: [
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-01.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-02.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-03.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-04.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-05.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-06.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-07.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-08.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-09.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/android/android-10.jpeg',
+      app: [
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/app-screenshots/01_home_weekly_entries.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/app-screenshots/02_new_entry_goal_prompt.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/app-screenshots/03_entry_detail_playback_summary.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/app-screenshots/04_goals_list.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/app-screenshots/05_career_goal_detail.png',
       ],
     },
+    enhancements: [
+      {
+        title: 'AI Blog Writing Agent',
+        description:
+          'Autonomous publishing pipeline that plans JournPad topics, drafts articles, repairs structure, improves titles and excerpts, polishes voice, quality-checks the final post, and publishes up to two articles per day.',
+        tech: [
+          'Python',
+          'CrewAI',
+          'FastAPI',
+          'SQLAlchemy',
+          'PostgreSQL',
+          'Vercel Blob',
+          'Pillow',
+          'systemd',
+        ],
+        screenshots: [
+          'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/journpad/enhancements/blog-writer/blog.png',
+        ],
+        url: 'https://journpad.com/blog',
+        note: 'Code available upon request.',
+      },
+    ],
     appStore: {
       url: 'https://apps.apple.com/ke/app/journpad/id6754232534',
       // You can update these as real ratings come in
       rating: 4.9,
-      reviewsCount: 50,
+      reviewsCount: '1K+',
     },
     playStore: {
       url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.journal',
       rating: 4.9,
-      reviewsCount: 50,
-    },
-  },
-  {
-    id: 'taifa-hmis',
-    title: 'Taifa HMIS',
-    description:
-      'Hospital operations platform built around real facility workflows across reception, triage, doctor review, lab, imaging, pharmacy, billing, admissions, and insurance-aware care delivery.',
-    tech: [
-      'Next.js',
-      'TypeScript',
-      'Python',
-      'FastAPI',
-      'SQLAlchemy',
-      'Alembic',
-      'PostgreSQL',
-      'Tailwind CSS',
-    ],
-    type: 'Enterprise',
-    icon: '/images/projects/taifa-hmis-icon.png',
-    screenshots: {
-      ios: ['/images/projects/taifa-hmis-icon.png'],
-      android: ['/images/projects/taifa-hmis-icon.png'],
+      reviewsCount: '2K+',
     },
   },
   {
     id: 'rentpayor',
     title: 'RentPayor',
     description:
-      'Rent collection and reconciliation system for landlords, designed to match messy M-Pesa, bank, and cash payments against invoices while keeping landlords in control of final approval.',
+      'Rent collection and reconciliation app for landlords, designed to match messy M-Pesa, bank, and cash payments against invoices while keeping landlords in control of final approval.',
     tech: [
       'Expo',
       'React Native',
@@ -119,10 +126,77 @@ export const projects: Project[] = [
       'Jest',
     ],
     type: 'Enterprise',
+    url: 'https://rentpayor.com',
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/icon.png',
+    storePreview: {
+      platform: 'android',
+      src: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/store/card-focused-v2.png',
+    },
     screenshots: {
-      ios: ['/images/projects/rentpayor-icon.png'],
-      android: ['/images/projects/rentpayor-icon.png'],
+      app: [
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/01_know_who_has_paid.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/02_match_rent_payments.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/03_manage_every_rental_property.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/04_track_leases_and_occupancy.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/05_tenant_payment_records.png',
+      ],
+    },
+    enhancements: [
+      {
+        title: 'CRM Dashboard',
+        description:
+          'Web CRM for inspecting property-management leads, tracking calls, due follow-ups, contact status, outreach drafts, reply reviews, competitor leads, and lead intelligence from one sales workspace.',
+        tech: [
+          'Next.js',
+          'React',
+          'TypeScript',
+          'Tailwind CSS',
+          'shadcn/ui',
+          'TanStack Table',
+          'Recharts',
+          'Playwright',
+        ],
+        screenshots: [
+          'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/enhancements/crm/dashboard.png',
+        ],
+        url: 'https://rentpayor.com/crm',
+        note: 'Code available upon request.',
+      },
+      {
+        title: 'Lead Generation and Enrichment',
+        description:
+          'Agent-assisted pipeline that discovers property-management firms, reads public website/search evidence, classifies fit, extracts contacts, detects competitor-software risk, scores priority, and prepares reliable targets for review.',
+        tech: [
+          'Python',
+          'FastAPI',
+          'SQLAlchemy',
+          'PostgreSQL',
+          'httpx',
+          'Litellm',
+          'OpenAI',
+          'Serper',
+        ],
+        note: 'Code available upon request.',
+      },
+      {
+        title: 'Sales Automation',
+        description:
+          'Outbound workflow that generates personalized email drafts, queues daily outreach within limits, tracks delivery/open/click/reply events, reviews replies with AI, and schedules reminders for follow-up.',
+        tech: [
+          'Python',
+          'FastAPI',
+          'PostgreSQL',
+          'SQLAlchemy',
+          'Litellm',
+          'OpenAI',
+          'SMTP/Webhooks',
+        ],
+        note: 'Code available upon request.',
+      },
+    ],
+    playStore: {
+      url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.rentpayor',
+      reviewsCount: '1K+',
     },
   },
   {
@@ -142,42 +216,45 @@ export const projects: Project[] = [
     ],
     type: 'Enterprise',
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/icon.png',
+    storePreview: {
+      platform: 'android',
+      src: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/store/card-focused-v2.png',
+    },
     screenshots: {
-      ios: ['/images/projects/macsim-welcome.png'],
-      android: [
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-01.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-02.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-03.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-04.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-05.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-06.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-07.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-08.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-09.jpeg',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/android/android-10.jpeg',
+      app: [
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/app-screenshots/01_admin_load_board.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/app-screenshots/02_active_trip_tracking.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/app-screenshots/03_assignment_detail.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/app-screenshots/04_driver_cargo_board.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/app-screenshots/05_driver_reservation_detail.png',
       ],
     },
-  },
-  {
-    id: 'taxipoa',
-    title: 'TaxiPoa',
-    description:
-      'Kenya-focused ride-hailing platform with rider and driver flows, map and location support, document-based KYC, secure authentication, and payments-aware transport operations.',
-    tech: [
-      'Expo',
-      'React Native',
-      'TypeScript',
-      'Python',
-      'FastAPI',
-      'PostgreSQL',
-      'Firebase Auth',
-      'Google Maps',
+    enhancements: [
+      {
+        title: 'Admin Dashboard',
+        description:
+          'Backoffice dashboard for cargo operations with load-board oversight, active and completed load counts, fleet and driver management, finance access, staff controls, locations, consignees, and quick operational actions.',
+        tech: [
+          'Next.js',
+          'React',
+          'TypeScript',
+          'Tailwind CSS',
+          'Python',
+          'FastAPI',
+          'PostgreSQL',
+          'Firebase Auth',
+          'Vercel Blob',
+        ],
+        screenshots: [
+          'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/enhancements/admin-dashboard/dashboard.png',
+        ],
+        url: 'https://macsim-website.vercel.app/admin',
+        note: 'Code available upon request.',
+      },
     ],
-    type: 'SaaS',
-    icon: '/images/projects/taxipoa-icon.png',
-    screenshots: {
-      ios: ['/images/projects/taxipoa-icon.png'],
-      android: ['/images/projects/taxipoa-icon.png'],
+    playStore: {
+      url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.macsim',
+      reviewsCount: '100+',
     },
   },
   {
@@ -198,9 +275,48 @@ export const projects: Project[] = [
     type: 'SaaS',
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/ai-stylist/icon.png',
     iconBackground: '#2E1A47',
+    storePreview: {
+      platform: 'android',
+      src: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/ai-stylist/store/card-focused-v2.png',
+    },
     screenshots: {
-      ios: ['/images/projects/ai-stylist-icon.png'],
-      android: ['/images/projects/ai-stylist-icon.png'],
+      app: [
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/ai-stylist/app-screenshots/01_home.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/ai-stylist/app-screenshots/02_wardrobe_items.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/ai-stylist/app-screenshots/03_burgundy_blouse_detail.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/ai-stylist/app-screenshots/04_olive_vest_detail.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/ai-stylist/app-screenshots/05_weekly_casual_outfit.png',
+      ],
+    },
+  },
+
+  {
+    id: 'clivique-hmis',
+    aliases: ['taifa-hmis'],
+    title: 'CliviQue HMIS',
+    description:
+      'Hospital operations platform built around real facility workflows across OPD, emergency, inpatient care, duty and coverage, internal referrals, theatre, mortuary, ambulance, billing, patient movement history, printable clinical documents, and facility operations summaries.',
+    tech: [
+      'Next.js',
+      'TypeScript',
+      'React',
+      'TanStack Query',
+      'Tailwind CSS',
+      'Python',
+      'FastAPI',
+      'SQLAlchemy',
+      'Alembic',
+      'PostgreSQL',
+      'Playwright',
+    ],
+    type: 'Enterprise',
+    icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/clivique-hmis/frame-16.png',
+    screenshots: {
+      web: [
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/clivique-hmis/web/doctor-encounters.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/clivique-hmis/web/admin-facility.png',
+        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/clivique-hmis/web/billing-workspace.png',
+      ],
     },
   },
 ];

@@ -1,0 +1,11 @@
+.env
+.env.local
+.venv/
+.wellfound-browser/
+.wellfound-chrome-profile/
+exports/
+systemd/*.local
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vercel

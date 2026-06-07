@@ -1,0 +1,20 @@
+[Unit]
+Description=Portfolio enrich one scraped job into CRM
+Wants=network-online.target
+Wants=wellfound-debug-chrome.service
+After=network-online.target wellfound-debug-chrome.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Dev/portfolio/backend
+EnvironmentFile=-%h/Dev/portfolio/backend/.env
+Environment=WELLFOUND_CDP_URL=http://127.0.0.1:9222
+Environment=YC_BROWSER_EXECUTABLE=/usr/bin/google-chrome
+Environment=WELLFOUND_BROWSER_EXECUTABLE=/usr/bin/google-chrome
+ExecStartPre=/usr/bin/bash -lc 'systemctl --user start wellfound-debug-chrome.service || true; for i in {1..120}; do curl -fsS http://127.0.0.1:9222/json/version >/dev/null && exit 0; if [[ "$i" == "30" ]]; then systemctl --user restart wellfound-debug-chrome.service || true; fi; sleep 1; done; exit 1'
+ExecCondition=/usr/bin/test ! -e /tmp/portfolio-job-enrich.lock
+ExecStartPre=/usr/bin/touch /tmp/portfolio-job-enrich.lock
+ExecStart=%h/.local/bin/uv run python scripts/enrich_next_scraped_job.py
+ExecStopPost=/usr/bin/rm -f /tmp/portfolio-job-enrich.lock
+TimeoutStartSec=8min
+Nice=5

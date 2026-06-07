@@ -1,0 +1,13 @@
+[Unit]
+Description=Run Portfolio Wellfound scraper every 20 seconds for testing
+
+[Timer]
+OnBootSec=10s
+OnStartupSec=10s
+OnUnitActiveSec=20s
+AccuracySec=1s
+Persistent=false
+Unit=wellfound-scraper.service
+
+[Install]
+WantedBy=timers.target

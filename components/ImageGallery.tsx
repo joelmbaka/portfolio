@@ -1,70 +1,224 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import Image from "next/image";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ImageGalleryProps {
   images: string[];
+  variant?: "mobile" | "web";
 }
 
-export default function ImageGallery({ images }: ImageGalleryProps) {
+export default function ImageGallery({
+  images,
+  variant = "mobile",
+}: ImageGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const topRef = useRef<HTMLDivElement>(null);
+  const isSyncingRef = useRef(false);
+  const [contentWidth, setContentWidth] = useState(0);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
+  const isWeb = variant === "web";
+
+  const updateScrollState = useCallback(() => {
+    const el = trackRef.current;
+    if (!el || isWeb) return;
+    const max = el.scrollWidth - el.clientWidth - 1;
+    setCanPrev(el.scrollLeft > 0);
+    setCanNext(el.scrollLeft < max);
+  }, [isWeb]);
 
   useEffect(() => {
     if (activeIndex === null) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setActiveIndex(null);
-      } else if (event.key === 'ArrowRight') {
+      } else if (event.key === "ArrowRight") {
         setActiveIndex((current) =>
-          current === null ? null : (current + 1) % images.length
+          current === null ? null : (current + 1) % images.length,
         );
-      } else if (event.key === 'ArrowLeft') {
+      } else if (event.key === "ArrowLeft") {
         setActiveIndex((current) =>
-          current === null ? null : (current - 1 + images.length) % images.length
+          current === null
+            ? null
+            : (current - 1 + images.length) % images.length,
         );
       }
     };
 
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', onKeyDown);
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [activeIndex, images.length]);
+
+  useEffect(() => {
+    if (isWeb) return;
+    const el = trackRef.current;
+    if (!el) return;
+    const measure = () => {
+      setContentWidth(el.scrollWidth);
+      updateScrollState();
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [isWeb, updateScrollState, images.length]);
+
+  useEffect(() => {
+    if (isWeb) return;
+    const top = topRef.current;
+    const bottom = trackRef.current;
+    if (!top || !bottom) return;
+    const onTopScroll = () => {
+      if (isSyncingRef.current) {
+        isSyncingRef.current = false;
+        return;
+      }
+      isSyncingRef.current = true;
+      bottom.scrollLeft = top.scrollLeft;
+      updateScrollState();
+    };
+    const onBottomScroll = () => {
+      if (isSyncingRef.current) {
+        isSyncingRef.current = false;
+        return;
+      }
+      isSyncingRef.current = true;
+      top.scrollLeft = bottom.scrollLeft;
+      updateScrollState();
+    };
+    top.addEventListener("scroll", onTopScroll, {
+      passive: true,
+    } as AddEventListenerOptions);
+    bottom.addEventListener("scroll", onBottomScroll, {
+      passive: true,
+    } as AddEventListenerOptions);
+    return () => {
+      top.removeEventListener("scroll", onTopScroll as EventListener);
+      bottom.removeEventListener("scroll", onBottomScroll as EventListener);
+    };
+  }, [isWeb, updateScrollState]);
 
   if (!images.length) return null;
 
   const activeImage = activeIndex === null ? null : images[activeIndex];
   const activeLabelIndex = activeIndex === null ? 0 : activeIndex + 1;
+  const scrollByScreenshot = (dir: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const firstCard = el.querySelector(
+      "[data-screenshot-card]",
+    ) as HTMLElement | null;
+    const gapStr =
+      getComputedStyle(el).columnGap || getComputedStyle(el).gap || "16px";
+    const gap = parseFloat(gapStr);
+    const distance =
+      (firstCard?.offsetWidth || el.clientWidth) +
+      (Number.isFinite(gap) ? gap : 16);
+    el.scrollBy({ left: dir * distance, behavior: "smooth" });
+    setTimeout(updateScrollState, 350);
+  };
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {images.map((image, index) => (
-          <button
-            key={image}
-            type="button"
-            onClick={() => setActiveIndex(index)}
-            className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
+      {isWeb ? (
+        <div className="grid gap-4 md:grid-cols-2">
+          {images.map((image, index) => (
+            <button
+              key={image}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className="group relative overflow-hidden rounded-lg border border-gray-200 bg-gray-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900"
+            >
+              <div className="relative aspect-[16/10] w-full">
+                <Image
+                  src={image}
+                  alt={`Screenshot ${index + 1}`}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition duration-300 group-hover:scale-[1.02]"
+                  unoptimized
+                />
+              </div>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="relative">
+          <div
+            ref={topRef}
+            className="overflow-x-auto pb-2"
+            aria-label="App screenshots (top scrollbar)"
           >
-            <div className="relative aspect-[9/19.5] w-full">
-              <Image
-                src={image}
-                alt={`Screenshot ${index + 1}`}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className="object-cover transition duration-300 group-hover:scale-[1.02]"
-                unoptimized
-              />
-            </div>
-          </button>
-        ))}
-      </div>
+            <div style={{ width: contentWidth, height: 1 }} />
+          </div>
+          <div
+            ref={trackRef}
+            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4"
+            role="list"
+            aria-label="App screenshots"
+          >
+            {images.map((image, index) => (
+              <button
+                key={image}
+                data-screenshot-card
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                role="listitem"
+                className="group relative w-[78vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-lg border border-gray-200 bg-gray-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg sm:w-[300px] md:w-[320px] dark:border-gray-800 dark:bg-gray-900"
+              >
+                <div className="relative aspect-[9/16] w-full">
+                  <Image
+                    src={image}
+                    alt={`Screenshot ${index + 1}`}
+                    fill
+                    priority
+                    sizes="(max-width: 640px) 78vw, 320px"
+                    className="object-contain transition duration-300 group-hover:scale-[1.02]"
+                    unoptimized
+                  />
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {images.length > 1 && (
+            <>
+              <button
+                type="button"
+                aria-label="Previous screenshot"
+                onClick={() => scrollByScreenshot(-1)}
+                className={`absolute left-2 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-gray-900/70 p-2 text-white transition hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400/70 ${canPrev ? "" : "cursor-not-allowed opacity-40"}`}
+                disabled={!canPrev}
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                type="button"
+                aria-label="Next screenshot"
+                onClick={() => scrollByScreenshot(1)}
+                className={`absolute right-2 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-gray-900/70 p-2 text-white transition hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400/70 ${canNext ? "" : "cursor-not-allowed opacity-40"}`}
+                disabled={!canNext}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </>
+          )}
+        </div>
+      )}
 
       {activeImage && (
         <div
@@ -90,7 +244,9 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
               onClick={(event) => {
                 event.stopPropagation();
                 setActiveIndex((current) =>
-                  current === null ? null : (current - 1 + images.length) % images.length
+                  current === null
+                    ? null
+                    : (current - 1 + images.length) % images.length,
                 );
               }}
               className="absolute left-4 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
@@ -121,7 +277,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
               onClick={(event) => {
                 event.stopPropagation();
                 setActiveIndex((current) =>
-                  current === null ? null : (current + 1) % images.length
+                  current === null ? null : (current + 1) % images.length,
                 );
               }}
               className="absolute right-4 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"

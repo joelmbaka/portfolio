@@ -1,0 +1,15 @@
+[Unit]
+Description=Run Portfolio enrichment worker every 2 minutes
+
+[Timer]
+OnBootSec=2min
+OnStartupSec=2min
+OnActiveSec=2min
+OnUnitInactiveSec=2min
+AccuracySec=10s
+Persistent=true
+WakeSystem=true
+Unit=job-enrich.service
+
+[Install]
+WantedBy=timers.target

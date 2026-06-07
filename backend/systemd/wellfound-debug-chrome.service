@@ -1,0 +1,14 @@
+[Unit]
+Description=Chrome CDP session for Portfolio Wellfound scraper
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/google-chrome --remote-debugging-address=127.0.0.1 --remote-debugging-port=9222 --user-data-dir=%h/.wellfound-debug-chrome --no-first-run --new-window about:blank
+Restart=on-failure
+RestartSec=5
+KillMode=process
+
+[Install]
+WantedBy=default.target

@@ -8,6 +8,11 @@ import { usePathname } from 'next/navigation';
 export function Navbar() {
   const pathname = usePathname();
   const isBlogPage = pathname.startsWith('/blog');
+  const isCrmPage = pathname.startsWith('/crm');
+
+  if (isCrmPage) {
+    return null;
+  }
   
   // Base logos for the marquee
   const baseLogos = [

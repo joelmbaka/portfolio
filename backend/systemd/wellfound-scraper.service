@@ -1,0 +1,17 @@
+[Unit]
+Description=Portfolio Wellfound scraper run once
+Wants=network-online.target
+Wants=wellfound-debug-chrome.service
+After=network-online.target wellfound-debug-chrome.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Dev/portfolio/backend
+EnvironmentFile=-%h/Dev/portfolio/backend/.env
+Environment=WELLFOUND_CDP_URL=http://127.0.0.1:9222
+ExecStartPre=/usr/bin/bash -lc 'for i in {1..30}; do curl -fsS http://127.0.0.1:9222/json/version >/dev/null && exit 0; sleep 1; done; exit 1'
+ExecStart=%h/.local/bin/uv run python scripts/run_wellfound_once.py
+ExecCondition=/usr/bin/test ! -e /tmp/portfolio-wellfound-scraper.lock
+ExecStartPre=/usr/bin/touch /tmp/portfolio-wellfound-scraper.lock
+ExecStopPost=/usr/bin/rm -f /tmp/portfolio-wellfound-scraper.lock
+Nice=5

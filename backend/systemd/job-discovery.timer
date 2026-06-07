@@ -1,0 +1,14 @@
+[Unit]
+Description=Run Portfolio production job discovery hourly
+
+[Timer]
+OnBootSec=30s
+OnStartupSec=20s
+OnUnitInactiveSec=1h
+AccuracySec=5min
+Persistent=true
+WakeSystem=true
+Unit=job-discovery.service
+
+[Install]
+WantedBy=timers.target

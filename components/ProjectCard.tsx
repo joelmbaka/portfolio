@@ -5,9 +5,10 @@ import ImageGallery from '@/components/ImageGallery';
 import Link from 'next/link';
 
 function ProjectCardContent({ project }: { project: Project }) {
-  const previewImages = project.screenshots?.ios?.length
-    ? project.screenshots.ios
-    : project.screenshots?.android;
+  const previewVariant = project.screenshots?.web?.length ? 'web' : 'mobile';
+  const previewImages = project.screenshots?.web?.length
+    ? project.screenshots.web
+    : project.screenshots?.app;
 
   return (
     <div className="border border-gray-200 dark:border-gray-800 rounded-xl p-6 hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors">
@@ -34,7 +35,7 @@ function ProjectCardContent({ project }: { project: Project }) {
 
       {previewImages && previewImages.length > 0 && (
         <div className="mt-4">
-          <ImageGallery images={previewImages} />
+          <ImageGallery images={previewImages} variant={previewVariant} />
         </div>
       )}
       <div className="flex flex-wrap gap-2 mt-4">

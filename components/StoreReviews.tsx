@@ -22,21 +22,26 @@ function StarRow({ rating = 0 }: { rating?: number }) {
   );
 }
 
-function formatCount(n?: number) {
+function formatCount(n?: number | string) {
+  if (typeof n === 'string') return n;
   if (typeof n !== 'number') return undefined;
   return new Intl.NumberFormat().format(n);
 }
 
 export default function StoreReviews({ project }: { project: Project }) {
   const { appStore, playStore } = project;
-  const hasBoth = !!appStore && !!playStore;
-  const gridCols = hasBoth ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1';
   if (!appStore && !playStore) return null;
+  const title =
+    appStore && playStore
+      ? 'App Store & Play Store ratings'
+      : appStore
+        ? 'App Store ratings'
+        : 'Play Store ratings';
 
   return (
     <section className="mt-10">
-      <h2 className="text-xl font-semibold mb-4 text-center">App Store & Play Store ratings</h2>
-      <div className={`grid ${gridCols} gap-4 place-items-center`}>
+      <h2 className="text-xl font-semibold mb-4 text-center">{title}</h2>
+      <div className="mx-auto flex max-w-md flex-wrap justify-center gap-4">
         {appStore && (
           <a
             href={appStore.url}
@@ -54,8 +59,8 @@ export default function StoreReviews({ project }: { project: Project }) {
                 loading="lazy"
               />
             </div>
-            <StarRow rating={appStore.rating} />
-            {typeof appStore.reviewsCount === 'number' && (
+            {typeof appStore.rating === 'number' && <StarRow rating={appStore.rating} />}
+            {appStore.reviewsCount !== undefined && (
               <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">{formatCount(appStore.reviewsCount)} ratings</div>
             )}
           </a>
@@ -77,8 +82,8 @@ export default function StoreReviews({ project }: { project: Project }) {
                 loading="lazy"
               />
             </div>
-            <StarRow rating={playStore.rating} />
-            {typeof playStore.reviewsCount === 'number' && (
+            {typeof playStore.rating === 'number' && <StarRow rating={playStore.rating} />}
+            {playStore.reviewsCount !== undefined && (
               <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">{formatCount(playStore.reviewsCount)} ratings</div>
             )}
           </a>

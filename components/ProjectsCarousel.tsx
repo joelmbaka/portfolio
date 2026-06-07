@@ -6,6 +6,15 @@ import Image from 'next/image';
 import { ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 import { Project } from '@/config/projects';
 
+type CardImagePresentation = 'web' | 'store' | 'icon';
+
+interface CardImage {
+  alt: string;
+  className: string;
+  presentation: CardImagePresentation;
+  src: string;
+}
+
 function useScrollState(
   ref: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>
 ) {
@@ -35,6 +44,45 @@ function useScrollState(
   }, [update, ref]);
 
   return { canPrev, canNext, update };
+}
+
+function getCardImage(project: Project): CardImage {
+  if (project.storePreview) {
+    const label =
+      project.storePreview.platform === 'ios'
+        ? 'App Store listing screenshot'
+        : project.storePreview.platform === 'android'
+          ? 'Play Store listing screenshot'
+          : 'web app screenshot';
+    return {
+      alt: `${project.title} ${label}`,
+      className: 'object-cover',
+      presentation: 'store' as const,
+      src: project.storePreview.src,
+    };
+  }
+
+  if (project.screenshots?.web?.length) {
+    return {
+      alt: `${project.title} web app screenshot`,
+      className: 'object-cover',
+      presentation: 'web' as const,
+      src: project.screenshots.web[0],
+    };
+  }
+
+  return {
+    alt: `${project.title} app icon`,
+    className: 'object-contain p-8',
+    presentation: 'icon' as const,
+    src: project.icon ?? '/images/placeholder-app.svg',
+  };
+}
+
+function getMediaAspectClass(presentation: CardImagePresentation) {
+  if (presentation === 'store') return 'aspect-[4/3]';
+  if (presentation === 'web') return 'aspect-[16/10]';
+  return 'aspect-square';
 }
 
 export default function ProjectsCarousel({ projects }: { projects: Project[] }) {
@@ -110,14 +158,15 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
         aria-label="Projects"
       >
         {projects.map((p) => {
-          const img = p.icon ?? '/images/placeholder-app.svg';
+          const cardImage = getCardImage(p);
           const iconStyle = p.iconBackground ? { backgroundColor: p.iconBackground } : undefined;
+          const mediaAspectClass = getMediaAspectClass(cardImage.presentation);
           return (
             <div
               key={p.id}
               data-card
               role="listitem"
-              className="group snap-start flex-shrink-0 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow bg-white/60 dark:bg-gray-900/60 backdrop-blur min-w-[260px] sm:min-w-[320px] md:min-w-[360px] max-w-[380px]"
+              className="group snap-start flex-shrink-0 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow bg-white/60 dark:bg-gray-900/60 backdrop-blur w-[calc(100vw-3rem)] min-w-[260px] sm:w-[320px] md:w-[360px] md:max-w-[380px]"
             >
               <div className="p-4 pb-3 h-[120px] overflow-hidden">
                 <div className="flex items-start justify-between gap-3">
@@ -142,15 +191,15 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
               </div>
               <Link href={`/${p.id}`} className="block">
                 <div
-                  className="relative w-full bg-gray-100 dark:bg-gray-800"
-                  style={{ aspectRatio: '1 / 1', ...iconStyle }}
+                  className={`relative w-full bg-gray-100 dark:bg-gray-800 ${mediaAspectClass}`}
+                  style={iconStyle}
                 >
                   <Image
-                    src={img}
-                    alt={`${p.title} app icon`}
+                    src={cardImage.src}
+                    alt={cardImage.alt}
                     fill
                     sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 380px"
-                    className="object-contain p-8"
+                    className={cardImage.className}
                     unoptimized
                   />
                 </div>
