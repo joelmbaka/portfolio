@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { updateDbRow } from '@/app/crm/db';
+import { readDbRows, updateDbRow, upsertDbRow } from '@/app/crm/db';
+import type { JobRow } from '@/app/crm/CrmDashboardClient';
 
 const FOLLOW_UP_GRACE_BUSINESS_DAYS = 3;
 
@@ -39,7 +40,39 @@ export async function POST(req: Request) {
       };
     });
     if (dbUpdated) {
-      return NextResponse.json({ ok: true, application: dbUpdated });
+      const relatedApplications: JobRow[] = [];
+      const company = String(dbUpdated.company || dbUpdated.employer_name || '').trim();
+      const title = String(dbUpdated.title || '').trim();
+      if (company && title) {
+        const duplicateReady = await readDbRows(
+          `where source = $1
+            and job_id != $2
+            and lower(coalesce(company, employer_name, raw->>'company', raw->>'employer_name', '')) = lower($3)
+            and lower(coalesce(title, raw->>'title', '')) = lower($4)
+            and (
+              application_status = 'ready_to_apply'
+              or (application_status is null and status = 'accepted')
+            )`,
+          [dbUpdated.source, dbUpdated.job_id, company, title]
+        );
+        const now = new Date().toISOString();
+        for (const row of duplicateReady || []) {
+          const related = {
+            ...row,
+            application_id: row.application_id || `${row.source}:${row.job_id}`,
+            application_status: 'rejected_by_ai',
+            ai_status: 'rejected',
+            ai_reason: `Duplicate of applied lead ${dbUpdated.application_id || `${dbUpdated.source}:${dbUpdated.job_id}`}.`,
+            ai_rejected_criteria: row.ai_rejected_criteria?.length ? row.ai_rejected_criteria : ['duplicate applied lead'],
+            reviewed_at: now,
+            review_decision: 'dropped',
+          };
+          await upsertDbRow(related);
+          relatedApplications.push(related);
+        }
+      }
+
+      return NextResponse.json({ ok: true, application: dbUpdated, related_applications: relatedApplications });
     }
 
     return NextResponse.json({ ok: false, error: 'application not found' }, { status: 404 });

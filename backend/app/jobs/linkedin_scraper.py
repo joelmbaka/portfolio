@@ -94,6 +94,9 @@ def parse_card_fields(text: str, fallback_title: str | None = None) -> dict[str,
     for line in lines:
         if not deduped or deduped[-1] != line:
             deduped.append(line)
+    if fallback_title:
+        fallback_lines = [line.strip() for line in fallback_title.splitlines() if line.strip()]
+        fallback_title = fallback_lines[0] if fallback_lines else fallback_title.strip()
     posted = None
     for line in deduped:
         match = POSTED_AGE_RE.search(line)
@@ -130,10 +133,10 @@ async def wait_for_linkedin_results(page: Page) -> None:
 async def extract_visible_jobs(page: Page, source_query: str) -> list[LinkedInJob]:
     rows = await page.evaluate(
         """
-        () => Array.from(
-          document.querySelectorAll('.job-search-card a[href*="/jobs/view/"], .base-search-card a[href*="/jobs/view/"]')
-        ).map((anchor) => {
-          let card = anchor.closest('.job-search-card, .base-search-card');
+        () => Array.from(document.querySelectorAll('a[href*="/jobs/view/"]')).map((anchor) => {
+          let card = anchor.closest(
+            '.job-card-container, .jobs-search-results__list-item, .job-search-card, .base-search-card, li'
+          );
           if (!card) {
             card = anchor;
             for (let depth = 0; depth < 8 && card; depth += 1) {

@@ -25,7 +25,7 @@ def make_parser() -> argparse.ArgumentParser:
     parser.add_argument("--yc", default="exports/yc/latest.json")
     parser.add_argument("--linkedin", default=None, help="Optional LinkedIn export path. Off by default.")
     parser.add_argument("--out-dir", default="exports/job_hunt")
-    parser.add_argument("--llm", action="store_true", help="Use Groq classification when GROQ_API_KEY is configured.")
+    parser.add_argument("--llm", action="store_true", help="Use NVIDIA NIM classification when NVIDIA_NIM_API_KEY is configured.")
     return parser
 
 

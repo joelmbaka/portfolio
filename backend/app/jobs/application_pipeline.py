@@ -6,9 +6,8 @@ import re
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-import httpx
-
 from app.core.config import settings
+from app.core.nim import post_nim_chat_completion
 from app.jobs.classifier import Classification, heuristic_classify
 from app.jobs.criteria import criteria_prompt
 from app.jobs.detail_enricher import row_to_candidate
@@ -41,6 +40,43 @@ def add_business_days(start: datetime, days: int) -> datetime:
 
 def compact_text(value: object, limit: int = 5000) -> str:
     return " ".join(str(value or "").split())[:limit]
+
+
+def company_name(row: dict[str, Any]) -> str:
+    name = str(row.get("employer_name") or row.get("company") or "your team")
+    name = re.sub(r"^Www\s+", "", name, flags=re.IGNORECASE)
+    name = re.sub(r"\s+Com$", ".com", name, flags=re.IGNORECASE)
+    name = re.sub(r"\s+\d+$", "", name).strip()
+    return name or "your team"
+
+
+def clean_employer_summary(row: dict[str, Any], limit: int = 260) -> str:
+    company = company_name(row)
+    tagline = compact_text(row.get("tagline"), limit)
+    if tagline:
+        return tagline
+    summary = compact_text(row.get("employer_summary"), limit + 300)
+    escaped_company = re.escape(company)
+    replacements = [
+        (r"^About\s+Companies\s+Library\s+Partners\s+Resources\s+Startup Jobs\s+Log in\s+Apply\s*", ""),
+        (r"^Companies\s+Library\s+Partners\s+Resources\s+Startup Jobs\s+Log in\s+Apply\s*", ""),
+        (r"^Home\s+›\s+Companies\s+›\s*", ""),
+        (rf"^{escaped_company}\s+{escaped_company}\s+", ""),
+        (rf"^{escaped_company}\s+careers\s+", ""),
+        (r"^[a-z0-9.-]+\s+careers\s+", ""),
+        (r"^careers\s+", ""),
+        (r"\bActively Hiring\b", ""),
+        (r"\bJobs\s+View all jobs\b[\s\S]*$", ""),
+        (r"\bView all jobs\b[\s\S]*$", ""),
+        (r"\b(WINTER|SPRING|SUMMER|FALL)\s+\d{4}\b", ""),
+        (r"\bACTIVE\b", ""),
+        (r"\b\d+-\d+ Employees\b", ""),
+        (r"\bCompany Jobs\s+\d+\b", ""),
+        (r"\bNews\b\s+https?://\S+", ""),
+    ]
+    for pattern, replacement in replacements:
+        summary = re.sub(pattern, replacement, summary, flags=re.IGNORECASE)
+    return compact_text(summary, limit)
 
 
 def job_analysis_text(row: dict[str, Any]) -> str:
@@ -102,18 +138,42 @@ def mark_duplicate_application(row: dict[str, Any]) -> dict[str, Any]:
 
 
 def fallback_cover_letter(row: dict[str, Any]) -> str:
-    company = row.get("employer_name") or row.get("company") or "your team"
-    title = row.get("title") or "this role"
-    signals = ", ".join(str(item) for item in (row.get("matched_criteria") or [])[:5])
-    employer_summary = row.get("employer_summary") or ""
-    return (
-        f"Hi {company} team,\n\n"
-        f"I am interested in the {title} role. My background is strongest in React Native, "
-        f"React/Next.js, TypeScript, Python-backed product systems, and practical AI integrations. "
-        f"The role stood out because it aligns with {signals or 'product engineering ownership'}.\n\n"
-        f"I would bring hands-on execution across mobile, web, backend APIs, and AI-powered workflows. "
-        f"{'I also like the company focus: ' + compact_text(employer_summary, 220) if employer_summary else ''}\n\n"
-        "Best,\nJoel"
+    company = company_name(row)
+    signals = ", ".join(
+        str(item)
+        for item in [
+            *(row.get("ai_matched_criteria") or []),
+            *(row.get("matched_criteria") or []),
+        ][:3]
+    )
+    employer_summary = clean_employer_summary(row)
+    recognition = (
+        f"I came across {company} and liked the work you are doing: {compact_text(employer_summary, 260)}."
+        if employer_summary
+        else f"I came across {company} and liked the practical product work your team is building."
+    )
+    impact = (
+        f"The role stood out because it connects with {signals}, which is exactly the kind of execution early teams need when turning product momentum into shipped software."
+        if signals
+        else "The role stood out because it seems close to the kind of practical product execution early teams need when turning product momentum into shipped software."
+    )
+    return "\n".join(
+        [
+            f"Hi {company} team,",
+            "",
+            recognition,
+            impact,
+            "",
+            "I am a Software Engineer focused on React Native, Next.js, TypeScript, Python, and AI-powered product development. I help founders and early-stage teams turn rough ideas into polished mobile and web applications, from MVP architecture to App Store/Play Store launch, backend systems, payments, analytics, and deployment.",
+            "",
+            f"I have built and shipped products including JournPad, RentPayor, Macsim Cargo, AI Stylist, and CliviQue HMIS. For {company}, I would be useful where you need someone who can understand the product, move quickly, and own delivery across mobile, web, backend APIs, and AI workflows.",
+            "",
+            "Portfolio: https://joelmbaka.com",
+            "I would be happy to talk if you are looking for someone who can move quickly and own delivery from idea to production.",
+            "",
+            "Best,",
+            "Joel",
+        ]
     )
 
 
@@ -130,29 +190,6 @@ def fallback_followup_email(row: dict[str, Any]) -> str:
     )
 
 
-async def post_groq_with_retries(payload: dict[str, Any], *, max_retries: int = 4) -> httpx.Response:
-    retryable_statuses = {408, 409, 425, 429, 500, 502, 503, 504}
-    async with httpx.AsyncClient(timeout=45) as client:
-        for attempt in range(max_retries + 1):
-            response = await client.post(
-                "https://api.groq.com/openai/v1/chat/completions",
-                headers={"Authorization": f"Bearer {settings.groq_api_key}"},
-                json=payload,
-            )
-            if response.status_code not in retryable_statuses or attempt == max_retries:
-                response.raise_for_status()
-                return response
-            retry_after = response.headers.get("retry-after")
-            try:
-                delay = float(retry_after) if retry_after else 0
-            except ValueError:
-                delay = 0
-            if delay <= 0:
-                delay = min(60, 2 ** attempt * 6)
-            await asyncio.sleep(delay)
-    raise RuntimeError("Groq request failed without returning a response")
-
-
 async def ai_application_analysis(row: dict[str, Any]) -> tuple[Classification, str, str, bool, str | None]:
     analysis_text = job_analysis_text(row)
     candidate = row_to_candidate(row, analysis_text)
@@ -161,19 +198,25 @@ async def ai_application_analysis(row: dict[str, Any]) -> tuple[Classification, 
     fallback_followup = fallback_followup_email(row)
     if fallback.status == "rejected":
         return fallback, fallback_cover, fallback_followup, False, "Rejected before AI by deterministic criteria."
-    if not settings.job_llm_enabled or not settings.groq_api_key:
-        return fallback, fallback_cover, fallback_followup, False, "GROQ_API_KEY not configured"
+    if not settings.job_llm_enabled or not settings.nvidia_nim_api_key:
+        return fallback, fallback_cover, fallback_followup, False, "NVIDIA_NIM_API_KEY not configured"
 
     payload = {
-        "model": settings.groq_model,
         "temperature": 0.2,
+        "max_tokens": 1600,
         "messages": [
             {
                 "role": "system",
                 "content": (
                     "Analyze a job for Joel and return strict JSON only. Keys: status, category, fit_score, "
                     "reason, matched_criteria, rejected_criteria, cover_letter, follow_up_email. "
-                    "status must be accepted, rejected, or needs_review. Be concise and truthful."
+                    "status must be accepted, rejected, or needs_review. Be concise and truthful. "
+                    "For cover_letter only: lead with the company, its product, users, mission, or impact before introducing Joel. "
+                    "Avoid generic praise and use concrete details from the employer summary and job description. "
+                    "Then explain why Joel fits: React Native, Next.js, TypeScript, Python, AI product development, full product ownership, App Store/Play Store launch, backend systems, payments, analytics, and deployment. "
+                    "Mention proof briefly: JournPad, RentPayor, Macsim Cargo, AI Stylist, and CliviQue HMIS. "
+                    "End with Portfolio: https://joelmbaka.com and a soft invitation to talk. "
+                    "Do not mention a CV, resume, or attachment."
                 ),
             },
             {
@@ -187,13 +230,13 @@ async def ai_application_analysis(row: dict[str, Any]) -> tuple[Classification, 
                     f"Employer summary: {compact_text(row.get('employer_summary'), 900)}\n"
                     f"Job description: {compact_text(analysis_text, 5500)}\n"
                     f"URL: {row.get('job_url')}\n"
-                    "CV version is always named One."
+                    "Cover letter should be under 220 words and should not mention a CV, resume, or attachment."
                 ),
             },
         ],
     }
     try:
-        response = await post_groq_with_retries(payload)
+        response = await post_nim_chat_completion(payload, timeout=45, max_retries=4)
         content = response.json()["choices"][0]["message"]["content"]
         parsed = json.loads(content)
         fit_score = normalize_fit_score(parsed.get("fit_score"), fallback.fit_score)

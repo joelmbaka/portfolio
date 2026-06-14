@@ -19,11 +19,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL((process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '')),
-  title: 'Senior React Native & Full-Stack Software Engineer – Joel Mbaka',
-  description: 'Senior mobile and full-stack engineer specializing in React Native, Swift, Kotlin, Next.js, Node.js/TypeScript, Python, and AI integrations (LangChain, CrewAI).',
+  title: 'Senior Software Engineer · React Native & AI Systems – Joel Mbaka',
+  description: 'Senior software engineer specializing in React Native, Next.js, TypeScript, Swift, Kotlin, Python, SQL, and AI-powered application systems.',
   keywords: [
     'Joel Mbaka',
     'senior software engineer',
+    'senior software engineer react native ai systems',
     'senior mobile software engineer',
     'senior react native engineer',
     'senior react native developer',
@@ -50,6 +51,7 @@ export const metadata: Metadata = {
     'backend engineer',
     'full stack web and mobile developer',
     'Python developer',
+    'AI systems engineer',
     'AI integration specialist',
     'langchain developer',
     'crewai specialist',
@@ -62,14 +64,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: '/',
     siteName: 'Joel Mbaka',
-    title: 'Senior React Native & Full-Stack Software Engineer – Joel Mbaka',
-    description: 'Senior mobile and full-stack engineer specializing in React Native, Swift, Kotlin, Next.js, Node.js/TypeScript, Python, and AI integrations (LangChain, CrewAI).',
+    title: 'Senior Software Engineer · React Native & AI Systems – Joel Mbaka',
+    description: 'Senior software engineer specializing in React Native, Next.js, TypeScript, Swift, Kotlin, Python, SQL, and AI-powered application systems.',
     images: ['/images/og-default.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Senior React Native & Full-Stack Software Engineer – Joel Mbaka',
-    description: 'Senior mobile and full-stack engineer specializing in React Native, Swift, Kotlin, Next.js, Node.js/TypeScript, Python, and AI integrations (LangChain, CrewAI).',
+    title: 'Senior Software Engineer · React Native & AI Systems – Joel Mbaka',
+    description: 'Senior software engineer specializing in React Native, Next.js, TypeScript, Swift, Kotlin, Python, SQL, and AI-powered application systems.',
     images: ['/images/og-default.jpg'],
   },
 };

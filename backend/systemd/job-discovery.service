@@ -3,6 +3,7 @@ Description=Portfolio production job discovery run once
 Wants=network-online.target
 Wants=wellfound-debug-chrome.service
 After=network-online.target wellfound-debug-chrome.service
+ConditionPathExists=/nonexistent/portfolio-systemd-disabled
 
 [Service]
 Type=oneshot
@@ -15,10 +16,13 @@ Environment=WELLFOUND_CDP_URL=http://127.0.0.1:9222
 Environment=WELLFOUND_OLDEST_DAYS=14
 Environment=WELLFOUND_MAX_STALE_SCROLLS=4
 Environment=WELLFOUND_SCROLL_PAUSE_MS=1600
+Environment=LINKEDIN_OLDEST_DAYS=1
+Environment=LINKEDIN_MAX_STALE_SCROLLS=4
+Environment=LINKEDIN_SCROLL_PAUSE_MS=1400
 ExecStartPre=/usr/bin/bash -lc 'systemctl --user start wellfound-debug-chrome.service || true; for i in {1..120}; do curl -fsS http://127.0.0.1:9222/json/version >/dev/null && exit 0; if [[ "$i" == "30" ]]; then systemctl --user restart wellfound-debug-chrome.service || true; fi; sleep 1; done; exit 1'
 ExecCondition=/usr/bin/test ! -e /tmp/portfolio-job-discovery.lock
 ExecStartPre=/usr/bin/touch /tmp/portfolio-job-discovery.lock
-ExecStart=%h/.local/bin/uv run python scripts/run_job_discovery_once.py --enrich-accepted-limit 200 --enrich-review-limit 200 --enrich-total-limit 1 --enrich-pause-ms 1200 --review-refine-limit 1 --review-refine-model openai/gpt-oss-120b --review-refine-sleep-ms 8000 --prepare-accepted-limit 1 --prepare-pause-ms 1000
+ExecStart=%h/.local/bin/uv run python scripts/run_job_discovery_once.py --include-linkedin --enrich-accepted-limit 200 --enrich-review-limit 200 --enrich-total-limit 3 --enrich-pause-ms 1200 --review-refine-limit 1 --review-refine-model nvidia/llama-3.3-nemotron-super-49b-v1 --review-refine-sleep-ms 8000 --prepare-accepted-limit 1 --prepare-pause-ms 1000
 ExecStopPost=/usr/bin/rm -f /tmp/portfolio-job-discovery.lock
 TimeoutStartSec=30min
 Nice=5

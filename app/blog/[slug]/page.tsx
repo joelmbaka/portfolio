@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react'
@@ -73,10 +74,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Featured Image */}
           {post.featuredImage && (
             <div className="aspect-video relative overflow-hidden rounded-lg mb-6">
-              <img
+              <Image
                 src={post.featuredImage}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(min-width: 1024px) 896px, 100vw"
+                className="object-cover"
               />
             </div>
           )}

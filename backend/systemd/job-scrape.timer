@@ -1,5 +1,6 @@
 [Unit]
 Description=Run Portfolio raw job scraper hourly
+ConditionPathExists=/nonexistent/portfolio-systemd-disabled
 
 [Timer]
 OnBootSec=5min

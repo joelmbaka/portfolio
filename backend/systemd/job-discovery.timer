@@ -1,11 +1,12 @@
 [Unit]
-Description=Run Portfolio production job discovery hourly
+Description=Run Portfolio production job discovery every 5 minutes
+ConditionPathExists=/nonexistent/portfolio-systemd-disabled
 
 [Timer]
 OnBootSec=30s
 OnStartupSec=20s
-OnUnitInactiveSec=1h
-AccuracySec=5min
+OnUnitInactiveSec=5min
+AccuracySec=30s
 Persistent=true
 WakeSystem=true
 Unit=job-discovery.service

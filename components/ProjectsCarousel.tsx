@@ -1,49 +1,17 @@
-"use client";
-
-import { useRef, useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
-import { Project } from '@/config/projects';
+import { ArrowUpRight } from 'lucide-react';
+import { Project, ProjectStorePreview } from '@/config/projects';
 
 type CardImagePresentation = 'web' | 'store' | 'icon';
 
 interface CardImage {
   alt: string;
   className: string;
+  crop?: ProjectStorePreview['crop'];
   presentation: CardImagePresentation;
   src: string;
-}
-
-function useScrollState(
-  ref: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>
-) {
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(false);
-
-  const update = useCallback(() => {
-    const el = ref.current;
-    if (!el) return;
-    const max = el.scrollWidth - el.clientWidth - 1;
-    setCanPrev(el.scrollLeft > 0);
-    setCanNext(el.scrollLeft < max);
-  }, [ref]);
-
-  useEffect(() => {
-    update();
-    const el = ref.current;
-    if (!el) return;
-    const onScroll = () => update();
-    el.addEventListener('scroll', onScroll, { passive: true } as AddEventListenerOptions);
-    const onResize = () => update();
-    window.addEventListener('resize', onResize);
-    return () => {
-      el.removeEventListener('scroll', onScroll as EventListener);
-      window.removeEventListener('resize', onResize);
-    };
-  }, [update, ref]);
-
-  return { canPrev, canNext, update };
+  platform?: ProjectStorePreview['platform'];
 }
 
 function getCardImage(project: Project): CardImage {
@@ -56,8 +24,10 @@ function getCardImage(project: Project): CardImage {
           : 'web app screenshot';
     return {
       alt: `${project.title} ${label}`,
-      className: 'object-cover',
+      className: project.storePreview.platform === 'android' ? 'object-cover object-top' : 'object-cover',
+      crop: project.storePreview.crop,
       presentation: 'store' as const,
+      platform: project.storePreview.platform,
       src: project.storePreview.src,
     };
   }
@@ -79,94 +49,27 @@ function getCardImage(project: Project): CardImage {
   };
 }
 
-function getMediaAspectClass(presentation: CardImagePresentation) {
-  if (presentation === 'store') return 'aspect-[4/3]';
-  if (presentation === 'web') return 'aspect-[16/10]';
+function getMediaAspectClass(image: CardImage) {
+  if (image.presentation === 'store') {
+    if (image.platform === 'android' && image.crop === 'title') return 'aspect-[2/1]';
+    return image.platform === 'android' ? 'aspect-[3/2]' : 'aspect-[4/3]';
+  }
+  if (image.presentation === 'web') return 'aspect-[16/10]';
   return 'aspect-square';
 }
 
 export default function ProjectsCarousel({ projects }: { projects: Project[] }) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const { canPrev, canNext, update } = useScrollState(trackRef);
-  const topRef = useRef<HTMLDivElement>(null);
-  const isSyncingRef = useRef(false);
-  const [contentWidth, setContentWidth] = useState(0);
-
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const measure = () => setContentWidth(el.scrollWidth);
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    window.addEventListener('resize', measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener('resize', measure);
-    };
-  }, []);
-
-  useEffect(() => {
-    const top = topRef.current;
-    const bottom = trackRef.current;
-    if (!top || !bottom) return;
-    const onTopScroll = () => {
-      if (!trackRef.current || !topRef.current) return;
-      if (isSyncingRef.current) { isSyncingRef.current = false; return; }
-      isSyncingRef.current = true;
-      bottom.scrollLeft = top.scrollLeft;
-      update();
-    };
-    const onBottomScroll = () => {
-      if (!trackRef.current || !topRef.current) return;
-      if (isSyncingRef.current) { isSyncingRef.current = false; return; }
-      isSyncingRef.current = true;
-      top.scrollLeft = bottom.scrollLeft;
-    };
-    top.addEventListener('scroll', onTopScroll, { passive: true } as AddEventListenerOptions);
-    bottom.addEventListener('scroll', onBottomScroll, { passive: true } as AddEventListenerOptions);
-    return () => {
-      top.removeEventListener('scroll', onTopScroll as EventListener);
-      bottom.removeEventListener('scroll', onBottomScroll as EventListener);
-    };
-  }, [update]);
-
-  const scrollByCard = (dir: number) => {
-    const el = trackRef.current;
-    if (!el) return;
-    const firstCard = el.querySelector('[data-card]') as HTMLElement | null;
-    const gapStr = getComputedStyle(el).columnGap || getComputedStyle(el).gap || '16px';
-    const gap = parseFloat(gapStr);
-    const distance = (firstCard?.offsetWidth || el.clientWidth) + (Number.isFinite(gap) ? gap : 16);
-    el.scrollBy({ left: dir * distance, behavior: 'smooth' });
-    setTimeout(update, 350);
-  };
-
   return (
-    <div className="relative">
-      <div
-        ref={topRef}
-        className="overflow-x-auto px-6 md:px-8 pb-2"
-        aria-label="Projects (top scrollbar)"
-      >
-        <div style={{ width: contentWidth, height: 1 }} />
-      </div>
-      <div
-        ref={trackRef}
-        className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-6 md:pb-8 px-6 md:px-8"
-        role="list"
-        aria-label="Projects"
-      >
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5" role="list" aria-label="Projects">
         {projects.map((p) => {
           const cardImage = getCardImage(p);
           const iconStyle = p.iconBackground ? { backgroundColor: p.iconBackground } : undefined;
-          const mediaAspectClass = getMediaAspectClass(cardImage.presentation);
+          const mediaAspectClass = getMediaAspectClass(cardImage);
           return (
             <div
               key={p.id}
-              data-card
               role="listitem"
-              className="group snap-start flex-shrink-0 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow bg-white/60 dark:bg-gray-900/60 backdrop-blur w-[calc(100vw-3rem)] min-w-[260px] sm:w-[320px] md:w-[360px] md:max-w-[380px]"
+              className="group rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow bg-white/60 dark:bg-gray-900/60 backdrop-blur"
             >
               <div className="p-4 pb-3 h-[120px] overflow-hidden">
                 <div className="flex items-start justify-between gap-3">
@@ -207,30 +110,6 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
             </div>
           );
         })}
-      </div>
-
-      {projects.length > 1 && (
-        <>
-          <button
-            type="button"
-            aria-label="Previous project"
-            onClick={() => scrollByCard(-1)}
-            className={`flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 rounded-full p-2 bg-gray-900/70 text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400/70 ${canPrev ? '' : 'opacity-40 cursor-not-allowed'}`}
-            disabled={!canPrev}
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <button
-            type="button"
-            aria-label="Next project"
-            onClick={() => scrollByCard(1)}
-            className={`flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-2 bg-gray-900/70 text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400/70 ${canNext ? '' : 'opacity-40 cursor-not-allowed'}`}
-            disabled={!canNext}
-          >
-            <ChevronRight size={20} />
-          </button>
-        </>
-      )}
     </div>
   );
 }

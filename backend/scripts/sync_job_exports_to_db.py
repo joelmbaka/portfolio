@@ -68,13 +68,16 @@ def values_for(row: dict[str, Any], bucket: str) -> dict[str, Any]:
     job_id = str(row.get("job_id") or row.get("job_url") or row.get("title") or "")
     if not job_id:
         raise ValueError("row has no job_id/job_url/title")
-    raw = {**row, "sync_bucket": bucket}
+    application_status = row.get("application_status")
+    if bucket in {"rejected", "raw_rejected"} and not application_status:
+        application_status = "rejected_by_ai"
+    raw = {**row, "sync_bucket": bucket, "application_status": application_status}
     return {
         "source": source,
         "job_id": job_id,
         "application_id": row.get("application_id") or f"{source}:{job_id}",
         "status": row.get("status"),
-        "application_status": row.get("application_status"),
+        "application_status": application_status,
         "title": row.get("title"),
         "company": row.get("company") or row.get("employer_name"),
         "location": row.get("location"),
@@ -204,6 +207,7 @@ def main() -> None:
             stmt = insert(JobLead).values(**value)
             excluded = stmt.excluded
             update_values = {key: getattr(excluded, key) for key in value if key not in {"source", "job_id"}}
+            update_values["updated_at"] = func.now()
             stmt = stmt.on_conflict_do_update(
                 constraint="uq_job_leads_source_job_id",
                 set_=update_values,

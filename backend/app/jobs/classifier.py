@@ -6,9 +6,8 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import Protocol
 
-import httpx
-
 from app.core.config import settings
+from app.core.nim import post_nim_chat_completion
 from app.jobs.criteria import KEYWORD_EXCLUDE, KEYWORD_INCLUDE, criteria_prompt
 
 
@@ -728,12 +727,12 @@ async def llm_classify(candidate: JobLike) -> Classification:
     fallback = heuristic_classify(candidate)
     if fallback.status == "rejected":
         return fallback
-    if not settings.job_llm_enabled or not settings.groq_api_key:
+    if not settings.job_llm_enabled or not settings.nvidia_nim_api_key:
         return fallback
 
     payload = {
-        "model": settings.groq_model,
         "temperature": 0,
+        "max_tokens": 700,
         "messages": [
             {
                 "role": "system",
@@ -760,13 +759,7 @@ async def llm_classify(candidate: JobLike) -> Classification:
         ],
     }
     try:
-        async with httpx.AsyncClient(timeout=30) as client:
-            response = await client.post(
-                "https://api.groq.com/openai/v1/chat/completions",
-                headers={"Authorization": f"Bearer {settings.groq_api_key}"},
-                json=payload,
-            )
-            response.raise_for_status()
+        response = await post_nim_chat_completion(payload, timeout=30)
         content = response.json()["choices"][0]["message"]["content"]
         parsed = json.loads(content)
         return Classification(

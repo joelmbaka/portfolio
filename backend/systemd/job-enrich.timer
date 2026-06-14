@@ -1,5 +1,6 @@
 [Unit]
 Description=Run Portfolio enrichment worker every 2 minutes
+ConditionPathExists=/nonexistent/portfolio-systemd-disabled
 
 [Timer]
 OnBootSec=2min

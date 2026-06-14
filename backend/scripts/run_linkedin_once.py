@@ -6,13 +6,18 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
+from sqlalchemy import select
+
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.core.config import settings
+from app.core.database import session_scope
 from app.jobs.exporter import write_csv, write_json
 from app.jobs.linkedin_scraper import SEARCH_QUERIES, scrape_linkedin_searches
+from app.jobs.models import ScrapedJob
+from app.jobs.suppression import SUPPRESSED_JOB_KEYS
 
 
 def timestamp_slug() -> str:
@@ -20,6 +25,17 @@ def timestamp_slug() -> str:
 
 
 def read_previous_job_ids(path: Path) -> set[str]:
+    try:
+        with session_scope() as session:
+            return {
+                str(job_id)
+                for job_id in session.scalars(
+                    select(ScrapedJob.job_id).where(ScrapedJob.source == "linkedin")
+                )
+                if job_id
+            }
+    except Exception:
+        pass
     if not path.exists():
         return set()
     try:
@@ -39,7 +55,9 @@ async def main() -> None:
     previous_job_ids = read_previous_job_ids(latest_json)
 
     jobs = await scrape_linkedin_searches(SEARCH_QUERIES)
-    rows = [job.to_dict() for job in jobs]
+    rows = [job.to_dict() for job in jobs if ("linkedin", job.job_id) not in SUPPRESSED_JOB_KEYS]
+    if not rows:
+        raise RuntimeError("LinkedIn scrape produced zero jobs. The page may be blocked or the result selector changed.")
     current_job_ids = {str(row["job_id"]) for row in rows if row.get("job_id")}
     new_job_ids = current_job_ids - previous_job_ids
 

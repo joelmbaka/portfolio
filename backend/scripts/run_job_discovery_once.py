@@ -106,10 +106,11 @@ def make_parser() -> argparse.ArgumentParser:
     parser.add_argument("--enrich-total-limit", type=int, default=1)
     parser.add_argument("--enrich-pause-ms", type=int, default=1200)
     parser.add_argument("--review-refine-limit", type=int, default=50)
-    parser.add_argument("--review-refine-model", default="openai/gpt-oss-120b")
+    parser.add_argument("--review-refine-model", default="nvidia/llama-3.3-nemotron-super-49b-v1")
     parser.add_argument("--review-refine-sleep-ms", type=int, default=8000)
     parser.add_argument("--prepare-accepted-limit", type=int, default=50)
     parser.add_argument("--prepare-pause-ms", type=int, default=2500)
+    parser.add_argument("--include-linkedin", action="store_true")
     parser.add_argument("--continue-on-source-error", action="store_true", default=True)
     parser.add_argument("--no-continue-on-source-error", dest="continue_on_source_error", action="store_false")
     return parser
@@ -137,10 +138,35 @@ def main() -> None:
             continue_on_error=args.continue_on_source_error,
             attempts=1,
             retry_delay_seconds=20,
-            timeout_seconds=180,
+            timeout_seconds=420,
         )
     )
-    stages.append(run_stage("shortlist", ["scripts/build_job_hunt_shortlist.py"], continue_on_error=False))
+    if args.include_linkedin:
+        stages.append(
+            run_stage(
+                "linkedin",
+                ["scripts/run_linkedin_once.py"],
+                continue_on_error=args.continue_on_source_error,
+                attempts=1,
+                retry_delay_seconds=20,
+                timeout_seconds=420,
+            )
+        )
+    stages.append(
+        run_stage(
+            "sync_scraped_db",
+            ["scripts/sync_scraped_jobs_to_db.py"],
+            continue_on_error=False,
+            attempts=5,
+            retry_delay_seconds=30,
+            timeout_seconds=120,
+        )
+    )
+    shortlist_args = ["scripts/build_job_hunt_shortlist.py"]
+    linkedin_stage = next((stage for stage in stages if stage["name"] == "linkedin"), None)
+    if linkedin_stage and linkedin_stage["ok"]:
+        shortlist_args.extend(["--linkedin", "exports/linkedin/latest.json"])
+    stages.append(run_stage("shortlist", shortlist_args, continue_on_error=False))
     stages.append(
         run_stage(
             "enrich",
@@ -201,8 +227,10 @@ def main() -> None:
     )
     stages.append({"name": "cleanup_exports", "summary": cleanup_exports(), "ok": True, "returncode": 0})
 
-    source_stages = [stage for stage in stages if stage["name"] in {"yc", "wellfound"}]
-    ok = any(stage["ok"] for stage in source_stages) and all(stage["ok"] for stage in stages if stage["name"] not in {"yc", "wellfound"})
+    source_names = {"yc", "wellfound", "linkedin"}
+    required_source_names = {"yc", "wellfound"}
+    required_source_stages = [stage for stage in stages if stage["name"] in required_source_names]
+    ok = any(stage["ok"] for stage in required_source_stages) and all(stage["ok"] for stage in stages if stage["name"] not in source_names)
     print(json.dumps({"ok": ok, "started_at": started_at, "finished_at": timestamp(), "stages": stages}, indent=2))
     if not ok:
         raise SystemExit(1)

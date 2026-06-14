@@ -51,7 +51,7 @@ export default function Home() {
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Joel Mbaka',
-      jobTitle: 'Senior Software Engineer',
+      jobTitle: 'Senior Software Engineer, React Native and AI Systems',
       url: base,
       sameAs: [
         'https://github.com/joelmbaka',

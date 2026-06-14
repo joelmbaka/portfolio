@@ -8,7 +8,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-import httpx
 from sqlalchemy import select
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,6 +16,7 @@ if str(ROOT) not in sys.path:
 
 from app.core.config import settings
 from app.core.database import session_scope
+from app.core.nim import post_nim_chat_completion
 from app.jobs.classifier import Classification, heuristic_classify
 from app.jobs.criteria import criteria_prompt
 from app.jobs.job_hunt import JobCandidate, final_score
@@ -64,12 +64,13 @@ async def classify_with_llm(candidate: JobCandidate, *, model: str) -> Classific
     fallback = heuristic_classify(candidate)
     if fallback.status == "rejected":
         return fallback
-    if not settings.groq_api_key:
-        raise RuntimeError("GROQ_API_KEY is not configured")
+    if not settings.nvidia_nim_api_key:
+        raise RuntimeError("NVIDIA_NIM_API_KEY is not configured")
 
     payload = {
         "model": model,
         "temperature": 0,
+        "max_tokens": 700,
         "messages": [
             {
                 "role": "system",
@@ -105,27 +106,7 @@ async def classify_with_llm(candidate: JobCandidate, *, model: str) -> Classific
             },
         ],
     }
-    retryable_statuses = {408, 409, 425, 429, 500, 502, 503, 504}
-    async with httpx.AsyncClient(timeout=90) as client:
-        for attempt in range(6):
-            response = await client.post(
-                "https://api.groq.com/openai/v1/chat/completions",
-                headers={"Authorization": f"Bearer {settings.groq_api_key}"},
-                json=payload,
-            )
-            if response.status_code not in retryable_statuses:
-                response.raise_for_status()
-                break
-            if attempt == 5:
-                response.raise_for_status()
-            retry_after = response.headers.get("retry-after")
-            try:
-                delay = float(retry_after) if retry_after else 0
-            except ValueError:
-                delay = 0
-            if delay <= 0:
-                delay = min(90, 8 * (2**attempt))
-            await asyncio.sleep(delay)
+    response = await post_nim_chat_completion(payload, model=model, timeout=90, max_retries=5)
     content = response.json()["choices"][0]["message"]["content"]
     parsed = json.loads(content)
     try:
@@ -148,11 +129,11 @@ async def classify_with_llm(candidate: JobCandidate, *, model: str) -> Classific
 
 
 def make_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Backfill DB job leads with Groq LLM classification.")
+    parser = argparse.ArgumentParser(description="Backfill DB job leads with NVIDIA NIM classification.")
     parser.add_argument("--apply", action="store_true", help="Persist changes. Without this, dry-run only.")
     parser.add_argument("--limit", type=int, default=20)
     parser.add_argument("--offset", type=int, default=0)
-    parser.add_argument("--model", default=settings.groq_model)
+    parser.add_argument("--model", default=settings.nvidia_nim_model)
     parser.add_argument(
         "--statuses",
         default="accepted,needs_review,rejected",

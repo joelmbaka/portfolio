@@ -8,6 +8,7 @@ export interface ProjectScreenshots {
 export interface ProjectStorePreview {
   src: string;
   platform: 'ios' | 'android' | 'web';
+  crop?: 'details' | 'title';
 }
 
 export interface ProjectEnhancement {
@@ -159,7 +160,6 @@ export const projects: Project[] = [
         screenshots: [
           'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/enhancements/crm/dashboard.png',
         ],
-        url: 'https://rentpayor.com/crm',
         note: 'Code available upon request.',
       },
       {
@@ -278,6 +278,7 @@ export const projects: Project[] = [
     storePreview: {
       platform: 'android',
       src: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/ai-stylist/store/card-focused-v2.png',
+      crop: 'title',
     },
     screenshots: {
       app: [

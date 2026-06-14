@@ -1,5 +1,6 @@
 [Unit]
 Description=Run Portfolio Wellfound scraper every 20 seconds for testing
+ConditionPathExists=/nonexistent/portfolio-systemd-disabled
 
 [Timer]
 OnBootSec=10s

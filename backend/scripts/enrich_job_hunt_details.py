@@ -16,7 +16,7 @@ from app.jobs.exporter import write_csv, write_json
 from app.jobs.job_hunt import read_export
 from app.core.database import session_scope
 from app.jobs.models import JobLead
-from sqlalchemy import select
+from sqlalchemy import or_, select
 
 
 def timestamp_slug() -> str:
@@ -37,12 +37,28 @@ def make_parser() -> argparse.ArgumentParser:
     return parser
 
 
+SKIPPED_EXISTING_APPLICATION_STATUSES = {
+    "ready_to_apply",
+    "applied",
+    "followup_sent",
+    "expired",
+    "rejected_by_ai",
+}
+
+
 def existing_job_keys() -> set[tuple[str, str]]:
     try:
         with session_scope() as session:
             return {
                 (str(source), str(job_id))
-                for source, job_id in session.execute(select(JobLead.source, JobLead.job_id))
+                for source, job_id in session.execute(
+                    select(JobLead.source, JobLead.job_id).where(
+                        or_(
+                            JobLead.application_status.in_(SKIPPED_EXISTING_APPLICATION_STATUSES),
+                            JobLead.status == "rejected",
+                        )
+                    )
+                )
             }
     except Exception:
         return set()
@@ -55,6 +71,7 @@ async def main() -> None:
     accepted_rows = read_export(Path(args.accepted))[: max(0, args.accepted_limit)]
     review_rows = read_export(Path(args.needs_review))[: max(0, args.review_limit)]
     input_rows = accepted_rows + review_rows
+    candidate_count = len(input_rows)
     skipped_existing_count = 0
     if not args.include_existing_db:
         existing = existing_job_keys()
@@ -65,6 +82,7 @@ async def main() -> None:
             if (str(row.get("source")), str(row.get("job_id"))) not in existing
         ]
         skipped_existing_count = before - len(input_rows)
+    eligible_count = len(input_rows)
     if args.total_limit is not None:
         input_rows = input_rows[: max(0, args.total_limit)]
 
@@ -95,6 +113,8 @@ async def main() -> None:
                 "ok": True,
                 "started_at": started_at.isoformat(),
                 "finished_at": finished_at.isoformat(),
+                "candidate_count": candidate_count,
+                "eligible_count": eligible_count,
                 "input_count": len(input_rows),
                 "skipped_existing_count": skipped_existing_count,
                 "accepted_count": len(accepted),

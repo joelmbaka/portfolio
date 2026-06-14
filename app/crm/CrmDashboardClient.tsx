@@ -3,7 +3,6 @@
 import * as React from 'react';
 import Link from 'next/link';
 import {
-  AlarmClock,
   ArrowUpRight,
   BriefcaseBusiness,
   CheckCircle2,
@@ -12,8 +11,6 @@ import {
   Loader2,
   Mail,
   RefreshCcw,
-  Sparkles,
-  Target,
   XCircle,
 } from 'lucide-react';
 
@@ -91,6 +88,46 @@ type CrmDashboardClientProps = {
   applications: JobRow[];
 };
 
+type RunStatus = {
+  ok?: boolean;
+  run_ok?: boolean;
+  finished_at?: string;
+  scrape_finished_at?: string;
+  enrichment_finished_at?: string;
+  scraped_count?: number;
+  new_scraped_count?: number;
+  shortlist_candidate_count?: number;
+  sources?: {
+    yc?: { ok?: boolean; count?: number; new_count?: number };
+    wellfound?: { ok?: boolean; count?: number; new_count?: number };
+    linkedin?: { ok?: boolean; count?: number; new_count?: number; enabled?: boolean };
+  };
+  shortlist?: {
+    accepted_count?: number;
+    needs_review_count?: number;
+    rejected_count?: number;
+  };
+  enrichment?: {
+    candidate_count?: number;
+    eligible_count?: number;
+    input_count?: number;
+    skipped_existing_count?: number;
+    accepted_count?: number;
+    needs_review_count?: number;
+    rejected_count?: number;
+    failed_enrichments?: number;
+  };
+  prepared?: {
+    ready_to_apply?: number;
+    ai_used?: number;
+    ai_missing_or_failed?: number;
+  };
+  synced?: {
+    upserted?: number;
+    total?: number;
+  };
+};
+
 function sourceLabel(source?: string) {
   if (source === 'wellfound') return 'Wellfound';
   if (source === 'yc') return 'YC';
@@ -154,14 +191,6 @@ function postedAgeLabel(job: JobRow) {
   return job.posted_age || 'Age unknown';
 }
 
-function countBy(rows: JobRow[], key: keyof JobRow) {
-  return rows.reduce<Record<string, number>>((acc, row) => {
-    const value = String(row[key] || 'unknown');
-    acc[value] = (acc[value] || 0) + 1;
-    return acc;
-  }, {});
-}
-
 function isDueNow(value?: string | null) {
   if (!value) return false;
   const dueAt = new Date(value).getTime();
@@ -191,6 +220,13 @@ function formatDateTime(value?: string | null) {
   });
 }
 
+function formatRunTime(value?: string | null) {
+  if (!value) return '-';
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return '-';
+  return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+}
+
 const POST_APPLY_STATUS_OPTIONS = [
   { value: 'applied', label: 'Applied' },
   { value: 'interview_scheduled', label: 'Interview scheduled' },
@@ -209,30 +245,68 @@ function applicationStatusLabel(status?: string) {
   return POST_APPLY_STATUS_OPTIONS.find((option) => option.value === status)?.label || titleCaseLabel(status);
 }
 
-function HeaderMetric({
-  icon: Icon,
-  label,
-  value,
-  detail,
-}: {
-  icon: typeof Target;
-  label: string;
-  value: string | number;
-  detail: string;
-}) {
+function RunStatusStrip({ status }: { status: RunStatus | null }) {
+  const enrichment = status?.enrichment;
+  const prepared = status?.prepared;
+  const yc = status?.sources?.yc;
+  const wellfound = status?.sources?.wellfound;
+  const linkedin = status?.sources?.linkedin;
+  const blocked = (enrichment?.failed_enrichments ?? 0) + (prepared?.ai_missing_or_failed ?? 0);
+  const ready = prepared?.ready_to_apply ?? enrichment?.accepted_count ?? 0;
+  const shortlistAccepted = status?.shortlist?.accepted_count ?? 0;
+  const shortlistReview = status?.shortlist?.needs_review_count ?? 0;
+  const shortlistCandidates = status?.shortlist_candidate_count ?? shortlistAccepted + shortlistReview;
+  const eligibleToEnrich = enrichment?.eligible_count ?? enrichment?.input_count ?? 0;
+  const linkedinScrapeDetail = linkedin?.enabled ? ` · LI ${linkedin.ok ? linkedin.count ?? 0 : 'blocked'}` : '';
+  const linkedinNewDetail = linkedin?.enabled ? ` · LI ${linkedin.ok ? linkedin.new_count ?? 0 : 'blocked'}` : '';
+  const scrapeDetail = `YC ${yc?.count ?? 0} · WF ${wellfound?.count ?? 0}${linkedinScrapeDetail}`;
+  const newScrapeDetail = `YC ${yc?.new_count ?? 0} · WF ${wellfound?.new_count ?? 0}${linkedinNewDetail}`;
+
+  const items = [
+    {
+      label: 'Last scrape',
+      value: status ? formatRunTime(status.scrape_finished_at || status.finished_at) : 'Loading',
+      detail: status?.run_ok === false ? 'Issue' : scrapeDetail,
+    },
+    {
+      label: 'New scraped',
+      value: status?.new_scraped_count ?? '-',
+      detail: newScrapeDetail,
+    },
+    {
+      label: 'Shortlisted',
+      value: status ? shortlistCandidates : '-',
+      detail: `${shortlistAccepted} accepted · ${shortlistReview} review`,
+    },
+    {
+      label: 'To enrich',
+      value: status ? eligibleToEnrich : '-',
+      detail: `${enrichment?.skipped_existing_count ?? 0} already known`,
+    },
+    {
+      label: 'Last enrichment',
+      value: status ? formatRunTime(status.enrichment_finished_at || status.finished_at) : 'Loading',
+      detail: `${ready} ready · ${enrichment?.input_count ?? 0} processed`,
+    },
+    {
+      label: 'Blocked',
+      value: blocked,
+      detail: `${enrichment?.failed_enrichments ?? 0} enrich · ${prepared?.ai_missing_or_failed ?? 0} draft`,
+    },
+  ];
+
   return (
-    <div className="flex min-w-[8.5rem] items-center gap-2 rounded-md border border-[var(--neutral-border)] bg-background px-3 py-2 shadow-sm">
-      <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-[var(--brand-soft)] text-[var(--brand-strong)]">
-        <Icon className="size-4" aria-hidden />
-      </span>
-      <div className="min-w-0">
-        <div className="flex items-baseline gap-2">
-          <span className="text-xs font-medium text-muted-foreground">{label}</span>
-          <span className="text-base font-semibold leading-none">{value}</span>
+    <section className="grid shrink-0 grid-cols-2 gap-2 border-b border-[var(--neutral-border)] bg-background px-4 py-2 sm:grid-cols-3 xl:grid-cols-6 lg:px-8">
+      {items.map((item) => (
+        <div key={item.label} className="flex min-w-0 items-center justify-between gap-3 rounded-md border border-[var(--neutral-border)] bg-muted/40 px-3 py-2">
+          <div className="min-w-0">
+            <div className="text-[11px] font-medium uppercase tracking-normal text-muted-foreground">{item.label}</div>
+            <div className="mt-0.5 truncate text-sm font-semibold">{item.value}</div>
+          </div>
+          <div className="max-w-[9rem] truncate text-right text-[11px] leading-4 text-muted-foreground">{item.detail}</div>
         </div>
-        <div className="mt-1 max-w-[11rem] truncate text-[11px] leading-none text-muted-foreground">{detail}</div>
-      </div>
-    </div>
+      ))}
+    </section>
   );
 }
 
@@ -636,7 +710,6 @@ function LeadWorkspace({
             <div className="flex flex-wrap items-center gap-2">
               <Badge tone="brand">{sourceLabel(job.source)}</Badge>
               <Badge tone={statusTone}>{statusLabel}</Badge>
-              {!needsReview && !rejected ? <Badge tone="info">CV {job.cv_version || 'One'}</Badge> : null}
               {!needsReview && !rejected && hasOutreachDrafts ? <Badge tone="brand">drafts ready</Badge> : null}
             </div>
             <h3 className="mt-3 text-base font-semibold">{job.title}</h3>
@@ -645,16 +718,18 @@ function LeadWorkspace({
             ) : null}
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            <button
-              type="button"
-              onClick={() => onReenrich(job)}
-              disabled={isReenriching}
-              className="inline-flex h-8 items-center gap-1 rounded-md border border-[var(--neutral-border)] px-2.5 text-sm font-medium hover:bg-muted disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              <RefreshCcw className={`size-4 ${isReenriching ? 'animate-spin' : ''}`} aria-hidden />
-              {isReenriching ? 'Re-enriching' : 'Re-enrich'}
-            </button>
-            {!rejected && job.application_status === 'ready_to_apply' ? (
+            {mode === 'intel' ? (
+              <button
+                type="button"
+                onClick={() => onReenrich(job)}
+                disabled={isReenriching}
+                className="inline-flex h-8 items-center gap-1 rounded-md border border-[var(--neutral-border)] px-2.5 text-sm font-medium hover:bg-muted disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <RefreshCcw className={`size-4 ${isReenriching ? 'animate-spin' : ''}`} aria-hidden />
+                {isReenriching ? 'Re-enriching' : 'Re-enrich'}
+              </button>
+            ) : null}
+            {mode === 'draft' && !rejected && job.application_status === 'ready_to_apply' ? (
               <button
                 type="button"
                 onClick={() => onMarkApplied(job)}
@@ -687,6 +762,17 @@ function LeadWorkspace({
                 </button>
               </>
             ) : null}
+            {mode === 'intel' && !needsReview && !rejected && job.application_status === 'ready_to_apply' ? (
+              <button
+                type="button"
+                onClick={() => onDropReview(job)}
+                disabled={isReviewActionPending}
+                className="inline-flex h-8 items-center gap-1 rounded-md border border-[var(--danger-border)] px-2.5 text-sm font-medium text-[var(--danger)] hover:bg-[var(--danger-soft)] disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <XCircle className="size-4" aria-hidden />
+                {isReviewActionPending ? 'Dropping' : 'Drop'}
+              </button>
+            ) : null}
             {!rejected && job.application_status === 'applied' && isDueNow(job.follow_up_due_at) ? (
               <button
                 type="button"
@@ -698,7 +784,7 @@ function LeadWorkspace({
                 {isMarkingFollowUpSent ? 'Saving' : 'Mark follow-up sent'}
               </button>
             ) : null}
-            {mode === 'intel' && externalUrl(job) ? (
+            {mode === 'draft' && externalUrl(job) ? (
               <Link href={externalUrl(job) || '#'} target="_blank" rel="noopener noreferrer" className="inline-flex h-8 items-center gap-1 rounded-md border border-[var(--neutral-border)] px-2.5 text-sm font-medium hover:bg-muted">
                 <ArrowUpRight className="size-4" aria-hidden />
                 Open
@@ -828,7 +914,6 @@ function LeadWorkspace({
             <div className="flex items-center justify-between gap-3">
               <div className="font-medium">Cover letter</div>
               <div className="flex items-center gap-2">
-                <Badge tone="neutral">{job.cv_version || 'One'}</Badge>
                 <button
                   type="button"
                   onClick={() => onCopyDraft('cover', job.cover_letter)}
@@ -901,6 +986,7 @@ export function CrmDashboardClient({
   const [draftingReviewKey, setDraftingReviewKey] = React.useState<string | null>(null);
   const [reenrichingKey, setReenrichingKey] = React.useState<string | null>(null);
   const [copiedDraft, setCopiedDraft] = React.useState<'cover' | 'followup' | null>(null);
+  const [runStatus, setRunStatus] = React.useState<RunStatus | null>(null);
   React.useEffect(() => {
     const previousHtmlOverflow = document.documentElement.style.overflow;
     const previousBodyOverflow = document.body.style.overflow;
@@ -909,6 +995,24 @@ export function CrmDashboardClient({
     return () => {
       document.documentElement.style.overflow = previousHtmlOverflow;
       document.body.style.overflow = previousBodyOverflow;
+    };
+  }, []);
+  React.useEffect(() => {
+    let cancelled = false;
+    async function loadRunStatus() {
+      try {
+        const response = await fetch('/api/crm/run-status', { cache: 'no-store' });
+        const payload = (await response.json()) as RunStatus;
+        if (!cancelled && response.ok && payload.ok) setRunStatus(payload);
+      } catch (error) {
+        console.error('[CRM_RUN_STATUS_LOAD]', error);
+      }
+    }
+    loadRunStatus();
+    const timer = window.setInterval(loadRunStatus, 60_000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
     };
   }, []);
   const activeStatuses = new Set(['ready_to_apply', ...POST_APPLY_STATUS_OPTIONS.map((option) => option.value)]);
@@ -936,8 +1040,6 @@ export function CrmDashboardClient({
     selectedJob.follow_up_status !== 'sent' &&
     isDueNow(selectedJob.follow_up_due_at);
 
-  const sourceCounts = countBy(workingAccepted, 'source');
-  const readyBySource = Object.entries(sourceCounts).map(([source, count]) => `${sourceLabel(source)} ${count}`).join(' · ');
   const totalScraped = wellfound.length + yc.length;
   const appliedJobs = workingAccepted.filter((job) => POST_APPLY_STATUS_VALUES.has(job.application_status || ''));
   const followUpSentJobs = applicationRows.filter((job) => (job.application_status === 'followup_sent' || job.follow_up_status === 'sent') && !isExpired(job));
@@ -949,7 +1051,6 @@ export function CrmDashboardClient({
       job.follow_up_status !== 'sent' &&
       isDueNow(job.follow_up_due_at)
   );
-  const highPriority = workingAccepted.filter((job) => (job.employer_priority_score || 0) >= 0.8).length;
   const pipelineRowsByMode: Record<PipelineMode, JobRow[]> = {
     approved: workingAccepted.filter(
       (job) => !job.application_status || job.application_status === 'ready_to_apply'
@@ -964,8 +1065,15 @@ export function CrmDashboardClient({
     followups: 'follow-ups',
   };
 
+  function openPipelineMode(mode: PipelineMode) {
+    setPipelineMode(mode);
+    setWorkspaceMode('draft');
+  }
+
   async function markApplied(job: JobRow) {
     const key = jobKey(job);
+    const readyQueue = pipelineRowsByMode.approved;
+    const currentIndex = readyQueue.findIndex((row) => jobKey(row) === key);
     setMarkingAppliedKey(key);
     try {
       const response = await fetch('/api/crm/applications/mark-applied', {
@@ -977,15 +1085,26 @@ export function CrmDashboardClient({
           job_id: job.job_id,
         }),
       });
-      const payload = (await response.json()) as { ok?: boolean; application?: JobRow; error?: string };
+      const payload = (await response.json()) as { ok?: boolean; application?: JobRow; related_applications?: JobRow[]; error?: string };
       if (!response.ok || !payload.ok || !payload.application) {
         throw new Error(payload.error || 'Could not mark applied');
       }
+      const changedRows = [payload.application, ...(payload.related_applications || [])];
       setApplicationRows((current) =>
-        current.map((row) => (jobKey(row) === key ? { ...row, ...payload.application } : row))
+        changedRows.reduce((rows, changedRow) => upsertRow(rows, changedRow), current)
       );
-      setSelectedKey(jobKey(payload.application));
-      setPipelineMode('sent');
+      if (payload.related_applications?.length) {
+        setRejectedRows((current) => payload.related_applications!.reduce((rows, changedRow) => upsertRow(rows, changedRow), current));
+      }
+      const changedKeys = new Set(changedRows.map((changedRow) => jobKey(changedRow)));
+      const nextReady =
+        readyQueue.slice(currentIndex + 1).find((row) => !changedKeys.has(jobKey(row))) ||
+        readyQueue.find((row) => !changedKeys.has(jobKey(row)));
+      if (nextReady) {
+        setSelectedKey(jobKey(nextReady));
+      }
+      setPipelineMode('approved');
+      setWorkspaceMode('draft');
     } catch (error) {
       console.error('[CRM_MARK_APPLIED]', error);
     } finally {
@@ -1103,16 +1222,15 @@ export function CrmDashboardClient({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(job),
       });
-      const payload = (await response.json()) as { ok?: boolean; application?: JobRow; error?: string };
+      const payload = (await response.json()) as { ok?: boolean; application?: JobRow; related_applications?: JobRow[]; error?: string };
       if (!response.ok || !payload.ok || !payload.application) {
         throw new Error(payload.error || 'Could not drop review job');
       }
+      const droppedRows = [payload.application, ...(payload.related_applications || [])];
       setApplicationRows((current) => {
-        const exists = current.some((row) => jobKey(row) === key);
-        return exists
-          ? current.map((row) => (jobKey(row) === key ? { ...row, ...payload.application } : row))
-          : [payload.application as JobRow, ...current];
+        return droppedRows.reduce((rows, droppedRow) => upsertRow(rows, droppedRow), current);
       });
+      setRejectedRows((current) => droppedRows.reduce((rows, droppedRow) => upsertRow(rows, droppedRow), current));
       setSelectedKey(jobKey(payload.application));
       setEnrichmentMode('dropped');
     } catch (error) {
@@ -1216,12 +1334,7 @@ export function CrmDashboardClient({
             <h1 className="text-base font-semibold">Outreach CRM</h1>
             <p className="text-xs text-muted-foreground">Email-first workflow for job applications and employer follow-up</p>
           </div>
-          <div className="ml-4 hidden min-w-0 flex-1 items-center justify-center gap-2 xl:flex">
-            <HeaderMetric icon={Target} label="Ready" value={workingAccepted.length} detail={readyBySource || 'No accepted rows yet'} />
-            <HeaderMetric icon={Mail} label="Ready" value={pipelineRowsByMode.approved.length} detail={`${appliedJobs.length} marked applied · CV One`} />
-            <HeaderMetric icon={AlarmClock} label="Follow-ups" value={dueFollowUpJobs.length} detail="Applied jobs due" />
-            <HeaderMetric icon={Sparkles} label="Intel" value={highPriority || '-'} detail={`${allRejected.length} rejected`} />
-          </div>
+          <div className="min-w-0 flex-1" />
           <div className="ml-auto flex items-center gap-2">
             <Link href="/" className="hidden h-9 items-center gap-2 rounded-md border border-[var(--neutral-border)] bg-background px-3 text-sm font-medium hover:bg-muted sm:inline-flex">
               Portfolio
@@ -1232,6 +1345,7 @@ export function CrmDashboardClient({
             </button>
           </div>
         </header>
+        <RunStatusStrip status={runStatus} />
 
         <main className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden p-4 lg:gap-5 lg:p-6">
           <section className="grid min-h-0 flex-1 gap-5 xl:grid-cols-[minmax(22rem,0.95fr)_minmax(22rem,0.85fr)_minmax(20rem,0.7fr)]">
@@ -1254,19 +1368,18 @@ export function CrmDashboardClient({
                   </button>
                 </div>
                 <div className="mt-4 grid grid-cols-3 rounded-lg bg-muted p-1">
-                  <ToolbarTab active={pipelineMode === 'approved'} onClick={() => setPipelineMode('approved')}>
+                  <ToolbarTab active={pipelineMode === 'approved'} onClick={() => openPipelineMode('approved')}>
                     Ready ({pipelineRowsByMode.approved.length})
                   </ToolbarTab>
-                  <ToolbarTab active={pipelineMode === 'sent'} onClick={() => setPipelineMode('sent')}>
+                  <ToolbarTab active={pipelineMode === 'sent'} onClick={() => openPipelineMode('sent')}>
                     Applied ({pipelineRowsByMode.sent.length})
                   </ToolbarTab>
                   <ToolbarTab
                     active={pipelineMode === 'followups'}
                     onClick={() => {
-                      setPipelineMode('followups');
+                      openPipelineMode('followups');
                       if (dueFollowUpJobs[0]) {
                         setSelectedKey(jobKey(dueFollowUpJobs[0]));
-                        setWorkspaceMode('followup');
                       }
                     }}
                   >
@@ -1290,7 +1403,7 @@ export function CrmDashboardClient({
                       active={jobKey(job) === selectedKey}
                       onSelect={() => {
                         setSelectedKey(jobKey(job));
-                        if (pipelineMode === 'followups') setWorkspaceMode('followup');
+                        setWorkspaceMode('draft');
                       }}
                     />
                   ))

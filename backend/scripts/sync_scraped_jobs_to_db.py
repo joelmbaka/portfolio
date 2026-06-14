@@ -21,6 +21,7 @@ from app.jobs.suppression import SUPPRESSED_JOB_KEYS
 EXPORTS = [
     ("wellfound", Path("exports/wellfound/latest.json")),
     ("yc", Path("exports/yc/latest.json")),
+    ("linkedin", Path("exports/linkedin/latest.json")),
 ]
 
 
@@ -36,7 +37,9 @@ def source_for(row: dict[str, Any], fallback: str) -> str:
 
 
 def source_detail_for(row: dict[str, Any]) -> str | None:
-    return str(row.get("source_role") or row.get("source_detail") or row.get("source") or "") or None
+    return str(
+        row.get("source_role") or row.get("source_query") or row.get("source_detail") or row.get("source") or ""
+    ) or None
 
 
 def values_for(row: dict[str, Any], fallback_source: str, now: datetime) -> dict[str, Any] | None:

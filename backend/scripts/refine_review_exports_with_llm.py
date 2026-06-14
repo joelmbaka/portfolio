@@ -8,13 +8,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-import httpx
-
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from app.core.config import settings
+from app.core.nim import post_nim_chat_completion
 from app.jobs.classifier import Classification, heuristic_classify
 from app.jobs.criteria import criteria_prompt
 from app.jobs.exporter import write_csv, write_json
@@ -57,11 +56,12 @@ async def classify_review(candidate: JobCandidate, *, model: str) -> Classificat
     fallback = heuristic_classify(candidate)
     if fallback.status == "rejected":
         return fallback
-    if not settings.groq_api_key:
-        raise RuntimeError("GROQ_API_KEY is not configured")
+    if not settings.nvidia_nim_api_key:
+        raise RuntimeError("NVIDIA_NIM_API_KEY is not configured")
     payload = {
         "model": model,
         "temperature": 0,
+        "max_tokens": 700,
         "messages": [
             {
                 "role": "system",
@@ -96,27 +96,7 @@ async def classify_review(candidate: JobCandidate, *, model: str) -> Classificat
             },
         ],
     }
-    retryable_statuses = {408, 409, 425, 429, 500, 502, 503, 504}
-    async with httpx.AsyncClient(timeout=90) as client:
-        for attempt in range(6):
-            response = await client.post(
-                "https://api.groq.com/openai/v1/chat/completions",
-                headers={"Authorization": f"Bearer {settings.groq_api_key}"},
-                json=payload,
-            )
-            if response.status_code not in retryable_statuses:
-                response.raise_for_status()
-                break
-            if attempt == 5:
-                response.raise_for_status()
-            retry_after = response.headers.get("retry-after")
-            try:
-                delay = float(retry_after) if retry_after else 0
-            except ValueError:
-                delay = 0
-            if delay <= 0:
-                delay = min(90, 8 * (2**attempt))
-            await asyncio.sleep(delay)
+    response = await post_nim_chat_completion(payload, model=model, timeout=90, max_retries=5)
     content = response.json()["choices"][0]["message"]["content"]
     parsed = json.loads(content)
     try:
@@ -151,9 +131,9 @@ def sort_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def make_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Run 120B second pass on enriched needs_review exports.")
+    parser = argparse.ArgumentParser(description="Run NVIDIA NIM second pass on enriched needs_review exports.")
     parser.add_argument("--out-dir", default="exports/job_hunt/enriched")
-    parser.add_argument("--model", default="openai/gpt-oss-120b")
+    parser.add_argument("--model", default=settings.nvidia_nim_model)
     parser.add_argument("--limit", type=int, default=50)
     parser.add_argument("--sleep-ms", type=int, default=8000)
     return parser

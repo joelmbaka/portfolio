@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { getAllBlogPosts } from '@/lib/blog'
 
@@ -33,10 +34,12 @@ export default async function BlogPage() {
               {/* Featured Image */}
               {post.featuredImage && (
                 <div className="aspect-video relative overflow-hidden">
-                  <img
+                  <Image
                     src={post.featuredImage}
                     alt={post.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               )}

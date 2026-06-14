@@ -11,8 +11,10 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    groq_api_key: str | None = Field(default=None, alias="GROQ_API_KEY")
-    groq_model: str = Field(default="openai/gpt-oss-20b", alias="GROQ_MODEL")
+    nvidia_nim_api_key: str | None = Field(default=None, alias="NVIDIA_NIM_API_KEY")
+    nvidia_nim_base_url: str = Field(default="https://integrate.api.nvidia.com/v1", alias="NVIDIA_NIM_BASE_URL")
+    nvidia_nim_model: str = Field(default="nvidia/llama-3.3-nemotron-super-49b-v1", alias="NVIDIA_NIM_MODEL")
+    nvidia_nim_fallback_model: str = Field(default="meta/llama-4-maverick-17b-128e-instruct", alias="NVIDIA_NIM_FALLBACK_MODEL")
     job_llm_enabled: bool = Field(default=True, alias="JOB_LLM_ENABLED")
     database_url: str | None = Field(default=None, alias="DATABASE_URL")
     wellfound_user_data_dir: str = Field(default=".wellfound-browser", alias="WELLFOUND_USER_DATA_DIR")
@@ -28,7 +30,7 @@ class Settings(BaseSettings):
     linkedin_export_dir: str = Field(default="exports/linkedin", alias="LINKEDIN_EXPORT_DIR")
     linkedin_scroll_pause_ms: int = Field(default=1400, alias="LINKEDIN_SCROLL_PAUSE_MS")
     linkedin_max_stale_scrolls: int = Field(default=4, alias="LINKEDIN_MAX_STALE_SCROLLS")
-    linkedin_oldest_days: int = Field(default=7, alias="LINKEDIN_OLDEST_DAYS")
+    linkedin_oldest_days: int = Field(default=1, alias="LINKEDIN_OLDEST_DAYS")
     yc_export_dir: str = Field(default="exports/yc", alias="YC_EXPORT_DIR")
     yc_scroll_pause_ms: int = Field(default=800, alias="YC_SCROLL_PAUSE_MS")
     yc_max_stale_scrolls: int = Field(default=2, alias="YC_MAX_STALE_SCROLLS")

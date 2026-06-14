@@ -3,6 +3,7 @@ Description=Portfolio Wellfound scraper run once
 Wants=network-online.target
 Wants=wellfound-debug-chrome.service
 After=network-online.target wellfound-debug-chrome.service
+ConditionPathExists=/nonexistent/portfolio-systemd-disabled
 
 [Service]
 Type=oneshot
