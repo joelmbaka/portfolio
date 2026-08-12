@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { ContactModal } from './ContactModal';
@@ -15,9 +16,12 @@ export default function Hero() {
         className="container mx-auto grid items-center gap-10 px-4 sm:px-6 md:grid-cols-[1fr_auto] md:px-8 lg:gap-16 lg:px-12"
       >
         <div className="max-w-3xl text-center md:text-left">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-palm-green">
+          <Link
+            href="/full-stack-web-mobile-engineer"
+            className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.18em] text-palm-green hover:underline"
+          >
             Senior Full-Stack Engineer · Web & Mobile
-          </p>
+          </Link>
 
           <h1 className="text-4xl font-bold leading-tight text-black dark:text-sandy-beach sm:text-5xl lg:text-6xl">
             I build production software across mobile, web, backend, and data.
