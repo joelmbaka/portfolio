@@ -97,7 +97,7 @@ export const projects: Project[] = [
       },
     ],
     appStore: {
-      url: 'https://apps.apple.com/ke/app/journpad/id6754232534',
+      url: 'https://apps.apple.com/ke/app/journpad-ai-voice-journal/id6754232534',
     },
     playStore: {
       url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.journal',
@@ -214,6 +214,7 @@ export const projects: Project[] = [
       'M-Pesa Daraja',
     ],
     type: 'Enterprise',
+    url: 'https://macsimcargo.com',
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/icon.png',
     storePreview: {
       platform: 'android',
@@ -247,7 +248,6 @@ export const projects: Project[] = [
         screenshots: [
           'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/enhancements/admin-dashboard/dashboard.png',
         ],
-        url: 'https://macsim-website.vercel.app/admin',
         note: 'Code available upon request.',
       },
     ],
