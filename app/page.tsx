@@ -74,8 +74,17 @@ export default function Home() {
         name: 'Joel Mbaka',
         jobTitle: 'Senior Full-Stack Product Engineer — Web & Mobile',
         description:
-          'Remote senior full-stack product engineer building 0→1 and production web/mobile products across React Native, Next.js, FastAPI, PostgreSQL, APIs, authentication, automated testing, payments, voice/LLM integrations, release engineering, and technical SEO.',
+          'Nairobi-based remote senior full-stack product engineer building 0→1 and production web/mobile products across React Native, Next.js, FastAPI, PostgreSQL, APIs, authentication, automated testing, payments, voice/LLM integrations, release engineering, and technical SEO.',
         url: base,
+        homeLocation: {
+          '@type': 'Place',
+          name: 'Nairobi, Kenya',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Nairobi',
+            addressCountry: 'KE',
+          },
+        },
         knowsAbout: [
           'React Native',
           'Expo',
