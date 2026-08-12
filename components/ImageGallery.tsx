@@ -49,11 +49,12 @@ export default function ImageGallery({
       }
     };
 
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [activeIndex, images.length]);
@@ -134,7 +135,7 @@ export default function ImageGallery({
   return (
     <>
       {isWeb ? (
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
           {images.map((image, index) => (
             <button
               key={image}
@@ -160,14 +161,14 @@ export default function ImageGallery({
         <div className="relative">
           <div
             ref={topRef}
-            className="overflow-x-auto pb-2"
+            className="hidden overflow-x-auto pb-2 sm:block"
             aria-label="App screenshots (top scrollbar)"
           >
             <div style={{ width: contentWidth, height: 1 }} />
           </div>
           <div
             ref={trackRef}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4"
+            className="flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth pb-3 sm:gap-4 sm:pb-4"
             role="list"
             aria-label="App screenshots"
           >
@@ -178,7 +179,7 @@ export default function ImageGallery({
                 type="button"
                 onClick={() => setActiveIndex(index)}
                 role="listitem"
-                className="group relative w-[78vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-lg border border-gray-200 bg-gray-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg sm:w-[300px] md:w-[320px] dark:border-gray-800 dark:bg-gray-900"
+                className="group relative w-[82vw] max-w-[300px] shrink-0 snap-start overflow-hidden rounded-lg border border-gray-200 bg-gray-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg sm:w-[300px] md:w-[320px] dark:border-gray-800 dark:bg-gray-900"
               >
                 <div className="relative aspect-[9/16] w-full">
                   <Image
@@ -186,7 +187,7 @@ export default function ImageGallery({
                     alt={`Screenshot ${index + 1}`}
                     fill
                     priority
-                    sizes="(max-width: 640px) 78vw, 320px"
+                    sizes="(max-width: 640px) 82vw, 320px"
                     className="object-contain transition duration-300 group-hover:scale-[1.02]"
                     unoptimized
                   />
@@ -197,11 +198,12 @@ export default function ImageGallery({
 
           {images.length > 1 && (
             <>
+              <p className="mt-1 text-center text-xs text-gray-500 dark:text-gray-400 sm:hidden">Swipe to browse screenshots</p>
               <button
                 type="button"
                 aria-label="Previous screenshot"
                 onClick={() => scrollByScreenshot(-1)}
-                className={`absolute left-2 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-gray-900/70 p-2 text-white transition hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400/70 ${canPrev ? "" : "cursor-not-allowed opacity-40"}`}
+                className={`absolute left-2 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-gray-900/70 p-2 text-white transition hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400/70 sm:flex ${canPrev ? "" : "cursor-not-allowed opacity-40"}`}
                 disabled={!canPrev}
               >
                 <ChevronLeft size={20} />
@@ -210,7 +212,7 @@ export default function ImageGallery({
                 type="button"
                 aria-label="Next screenshot"
                 onClick={() => scrollByScreenshot(1)}
-                className={`absolute right-2 top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-gray-900/70 p-2 text-white transition hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400/70 ${canNext ? "" : "cursor-not-allowed opacity-40"}`}
+                className={`absolute right-2 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-gray-900/70 p-2 text-white transition hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400/70 sm:flex ${canNext ? "" : "cursor-not-allowed opacity-40"}`}
                 disabled={!canNext}
               >
                 <ChevronRight size={20} />
@@ -222,7 +224,7 @@ export default function ImageGallery({
 
       {activeImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 sm:p-4"
           role="dialog"
           aria-modal="true"
           aria-label="Fullscreen screenshot viewer"
@@ -232,7 +234,7 @@ export default function ImageGallery({
             type="button"
             aria-label="Close fullscreen gallery"
             onClick={() => setActiveIndex(null)}
-            className="absolute right-4 top-4 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
+            className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:right-4 sm:top-4"
           >
             <X size={22} />
           </button>
@@ -249,14 +251,14 @@ export default function ImageGallery({
                     : (current - 1 + images.length) % images.length,
                 );
               }}
-              className="absolute left-4 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
+              className="absolute left-2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:left-4"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={22} />
             </button>
           )}
 
           <div
-            className="relative h-[88vh] w-full max-w-6xl"
+            className="relative h-[82dvh] w-full max-w-6xl sm:h-[88vh]"
             onClick={(event) => event.stopPropagation()}
           >
             <Image
@@ -280,9 +282,9 @@ export default function ImageGallery({
                   current === null ? null : (current + 1) % images.length,
                 );
               }}
-              className="absolute right-4 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20"
+              className="absolute right-2 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:right-4"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={22} />
             </button>
           )}
         </div>
