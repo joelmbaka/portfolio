@@ -37,9 +37,9 @@ const capabilityGroups = [
   {
     title: 'Production ownership',
     description:
-      'I work across architecture, implementation, payments, AI/LLM integrations, testing, GitHub workflows, Vercel deployment, Expo EAS release, app stores, technical SEO, and iteration after launch.',
-    technologies: 'GitHub · Vercel · Expo EAS · App stores · AI APIs · Search',
-    href: '/skills',
+      'I work across architecture, implementation, automated testing, payments, AI/LLM integrations, GitHub workflows, Vercel deployment, Expo EAS release, app stores, technical SEO, and iteration after launch.',
+    technologies: 'Playwright · Maestro · Pytest · Jest · GitHub · Vercel · Expo EAS',
+    href: '/expertise/automated-testing-quality-engineering',
     icon: Rocket,
   },
 ];
@@ -48,7 +48,7 @@ const productScopeSummary = [
   'Production mobile apps',
   'Complex web platforms',
   'APIs & relational data',
-  'Integrations & release',
+  'Testing, integrations & release',
 ];
 
 export default function Home() {
@@ -74,7 +74,7 @@ export default function Home() {
         name: 'Joel Mbaka',
         jobTitle: 'Senior Full-Stack Product Engineer — Web & Mobile',
         description:
-          'Remote senior full-stack product engineer building 0→1 and production web/mobile products across React Native, Next.js, FastAPI, PostgreSQL, APIs, authentication, payments, voice/LLM integrations, release engineering, and technical SEO.',
+          'Remote senior full-stack product engineer building 0→1 and production web/mobile products across React Native, Next.js, FastAPI, PostgreSQL, APIs, authentication, automated testing, payments, voice/LLM integrations, release engineering, and technical SEO.',
         url: base,
         knowsAbout: [
           'React Native',
@@ -92,6 +92,11 @@ export default function Home() {
           'Neo4j',
           'OAuth',
           'JWT authentication',
+          'End-to-end testing',
+          'Playwright',
+          'Maestro',
+          'pytest',
+          'Jest',
           'M-Pesa Daraja',
           'Payment reconciliation',
           'Voice applications',
@@ -118,7 +123,7 @@ export default function Home() {
         name: 'Joel Mbaka',
         url: base,
         description:
-          'Engineering portfolio covering production mobile, web, APIs, backend, data, payments, voice/AI integration, app release, technical SEO, and startup product work.',
+          'Engineering portfolio covering production mobile, web, APIs, backend, data, automated testing, payments, voice/AI integration, app release, technical SEO, and startup product work.',
         publisher: { '@id': `${base}/#person` },
       },
     ],
@@ -152,7 +157,7 @@ export default function Home() {
               One engineer across the product stack.
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
-              My strongest work sits at the intersection of product engineering and systems thinking: building the interface users touch while also owning the APIs, data model, authentication, integrations, and production path behind it.
+              My strongest work sits at the intersection of product engineering and systems thinking: building the interface users touch while also owning the APIs, data model, authentication, automated tests, integrations, and production path behind it.
             </p>
           </div>
 
@@ -195,7 +200,7 @@ export default function Home() {
               Products that show different sides of the stack.
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
-              These projects are selected for engineering breadth: a production voice/mobile product, a complex healthcare web platform, and a PropTech/FinTech product spanning mobile, backend, data, payments, accounting-style reconciliation, and operational tooling.
+              These projects are selected for engineering breadth: a production voice/mobile product, a complex healthcare web platform, and a PropTech/FinTech product spanning mobile, backend, data, payments, accounting-style reconciliation, testing, and operational tooling.
             </p>
           </div>
           <ProjectsCarousel projects={selectedWork} />
