@@ -12,14 +12,14 @@ const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').repla
 export const metadata: Metadata = {
   title: 'Engineering Work — Web, Mobile & Full-Stack Projects | Joel Mbaka',
   description:
-    'Explore Joel Mbaka’s engineering work across React Native mobile apps, Next.js web platforms, FastAPI backends, PostgreSQL systems, integrations, and production releases.',
+    'Explore Joel Mbaka’s engineering work across React Native mobile apps, Next.js web platforms, FastAPI backends, PostgreSQL systems, payments, AI integrations, and production releases.',
   alternates: {
     canonical: '/work',
   },
   openGraph: {
     title: 'Engineering Work — Web, Mobile & Full-Stack Projects | Joel Mbaka',
     description:
-      'Production software projects spanning mobile, web, backend, data, integrations, and release.',
+      'Production software projects spanning mobile, web, backend, data, payments, integrations, and release.',
     url: `${base}/work`,
     type: 'website',
   },
@@ -27,8 +27,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Engineering Work — Web, Mobile & Full-Stack Projects | Joel Mbaka',
     description:
-      'Production software projects spanning mobile, web, backend, data, integrations, and release.',
+      'Production software projects spanning mobile, web, backend, data, payments, integrations, and release.',
   },
+  robots: { index: true, follow: true },
 };
 
 export default function WorkPage() {
@@ -43,10 +44,13 @@ export default function WorkPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
+    '@id': `${base}/work#collection`,
     name: 'Engineering Work — Joel Mbaka',
     description:
-      'Engineering case studies and product work across mobile, web, backend, data, integrations, and production delivery.',
+      'Engineering case studies and product work across mobile, web, backend, data, payments, AI integrations, and production delivery.',
     url: `${base}/work`,
+    dateModified: '2026-08-12',
+    author: { '@id': `${base}/#person` },
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: orderedProjects.map((project, index) => ({
