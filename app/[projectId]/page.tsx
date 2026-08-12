@@ -21,58 +21,58 @@ type CaseStudyDetail = {
 
 const caseStudyDetails: Record<string, CaseStudyDetail> = {
   journpad: {
-    role: 'End-to-end product engineering across mobile, backend, AI integrations, and production release.',
+    role: 'End-to-end product engineering across the React Native app, backend services, AI processing, account safety, analytics, and mobile-store release.',
     scope:
-      'A voice-first journaling product that combines a React Native mobile experience with Python services, AI-assisted processing, cloud infrastructure, and an automated publishing system.',
+      'A voice-first journal that keeps the original recording, transcribes spoken entries, generates useful AI-assisted metadata, and helps users return to entries through playback, search, dates, goals, reminders, and prompts.',
     engineeringHighlights: [
-      'Built the cross-platform mobile product in React Native / Expo and TypeScript.',
-      'Connected voice capture to backend and AI processing for titles, summaries, subjects, keywords, and organization.',
-      'Extended the product with a Python/CrewAI publishing pipeline backed by PostgreSQL and FastAPI.',
-      'Shipped the application through public mobile-store distribution.',
+      'Built the cross-platform React Native / Expo experience for voice capture, entry playback, goal-linked journaling, reminders, prompts, and calendar-based review.',
+      'Connected recorded entries to backend transcription and AI-assisted title, summary, and category generation while preserving the original audio as part of the journal record.',
+      'Implemented account and data-safety flows including deletion behavior, authentication lifecycle handling, and optional biometric protection where supported.',
+      'Extended the product with a separate Python/CrewAI publishing pipeline backed by FastAPI, PostgreSQL, Vercel Blob, and automated quality checks.',
     ],
   },
   'clivique-hmis': {
-    role: 'Full-stack web engineering across clinical workflows, backend services, data modeling, and automated testing.',
+    role: 'Full-stack web engineering across clinical workflows, facility-scoped access, backend services, relational data, payments, security boundaries, and automated testing.',
     scope:
-      'A hospital operations platform covering patient and facility workflows across outpatient care, emergency, inpatient care, referrals, theatre, billing, transport, and operational summaries.',
+      'A hospital management information system connecting patient registration, OPD, emergency, inpatient care, orders, referrals, theatre, billing, ambulance, mortuary, duty coverage, movement history, documents, and facility operations.',
     engineeringHighlights: [
-      'Built a workflow-heavy Next.js and React web application rather than a static administrative dashboard.',
-      'Implemented backend services with FastAPI, SQLAlchemy, Alembic, and PostgreSQL.',
-      'Modeled interconnected clinical and operational workflows across multiple hospital departments.',
-      'Used Playwright alongside the application stack to support end-to-end workflow verification.',
+      'Built a workflow-heavy Next.js/React application and FastAPI/PostgreSQL backend around patient context and hand-offs between clinical, operational, and financial teams.',
+      'Designed public marketing routes and authenticated clinical workspaces as separate security surfaces, with role- and facility-scoped access to private hospital data.',
+      'Added facility-bound M-Pesa patient invoice collection with encrypted merchant credentials, request-bound payment state, callback validation, an independent Daraja status query, and idempotent receipt handling.',
+      'Used SQLAlchemy, Alembic, PostgreSQL, and Playwright-backed workflow verification to support complex state transitions across departments and billing.',
     ],
   },
   rentpayor: {
-    role: 'Product engineering across mobile, backend, data, rent-payment workflows, and internal operational tooling.',
+    role: 'Product engineering across mobile, backend, relational rent records, M-Pesa collection, automatic reconciliation, and internal go-to-market tooling.',
     scope:
-      'A rent collection and reconciliation product for landlords, supported by a React Native application, FastAPI/PostgreSQL backend, authentication, CRM tooling, lead intelligence, and sales automation.',
+      'Rent collection and reconciliation software that connects each payment to the correct tenant, property, unit, lease, invoice, and billing period while maintaining accurate balances, credits, receipts, and payment history.',
     engineeringHighlights: [
-      'Built the React Native product and FastAPI/PostgreSQL application backend as one connected system.',
-      'Designed rent records around properties, leases, invoices, payments, and reconciliation workflows.',
-      'Built a Next.js CRM for reviewing and managing property-management leads and outreach activity.',
-      'Added Python-based lead enrichment and sales automation around the product go-to-market workflow.',
+      'Built the React Native product and FastAPI/PostgreSQL backend around properties, units, tenants, leases, invoices, payments, balances, and receipts.',
+      'Implemented an invoice-linked M-Pesa collection flow where a confirmed payment can be validated and reconciled automatically against the correct rent invoice.',
+      'Modeled partial payments, outstanding balances, overpayments carried forward as tenant credit, and manual recording for rent received outside the integrated online-payment flow.',
+      'Built a Next.js CRM plus Python lead-enrichment and outbound automation systems for property-management prospecting, outreach, reply review, and follow-up operations.',
     ],
   },
   macsim: {
-    role: 'Full-stack mobile and operations engineering across field workflows and administrative tooling.',
+    role: 'Full-stack mobile and operations engineering across cargo workflows, backend services, administration, finance, and guarded M-Pesa driver payouts.',
     scope:
-      'A logistics and cargo product combining mobile operational workflows with backend services and a web-based administrative workspace.',
+      'A cargo and logistics operations platform covering loads, reservations, driver assignments, trip tracking, documents, notifications, fleet operations, finance, and back-office administration.',
     engineeringHighlights: [
-      'Built React Native workflows for cargo operations, trip activity, assignment details, and reservations.',
-      'Connected the mobile product to Python/FastAPI and PostgreSQL backend services.',
-      'Built a Next.js back-office dashboard for load, fleet, driver, staff, and operational management.',
-      'Integrated authentication, file/storage capabilities, and operational data across mobile and web surfaces.',
+      'Built React Native workflows for load boards, active trips, driver assignments, reservation details, field operations, and location-aware cargo activity.',
+      'Connected the mobile product to FastAPI/PostgreSQL services and a Next.js back-office workspace for load, fleet, driver, finance, staff, location, and consignee operations.',
+      'Added a Daraja flow where STK Push funds a tracked collection-account ledger and B2C BusinessPayment sends full or partial load installments to a driver’s Safaricom number.',
+      'Protected payout accounting with reservations, idempotency keys, callback-state guards, and an immutable ledger debit only after a successful B2C result is confirmed.',
     ],
   },
   'ai-stylist': {
-    role: 'Mobile and backend product engineering with AI-assisted image and recommendation workflows.',
+    role: 'Mobile and backend product engineering across wardrobe management, AI-assisted image understanding, recommendations, location, local persistence, and OAuth.',
     scope:
-      'A wardrobe assistant that organizes clothing, analyzes items, and generates weather-aware outfit recommendations from a mobile-first experience.',
+      'A mobile wardrobe product where users organize clothing, upload item photos for AI-assisted analysis, and generate one-time, daily, or weekly outfit recommendations that can incorporate precise local weather.',
     engineeringHighlights: [
-      'Built the React Native / Expo mobile application and TypeScript client architecture.',
-      'Connected the application to Python/FastAPI services and relational/local persistence.',
-      'Integrated image understanding and recommendation workflows into the product experience.',
-      'Implemented authentication and subscription-aware product foundations.',
+      'Built the Expo/React Native product around wardrobes, clothing-item detail, photo upload, outfit generation, and recommendation history.',
+      'Designed AI-assisted clothing analysis for category, tags, and descriptions, with recommendation workflows that can use device location and weather context.',
+      'Used SQLite for local recommendation history with a cloud-sync model backed by Python, SQLAlchemy, Alembic, and PostgreSQL.',
+      'Designed authentication around Google and Apple OAuth with secure app-managed token storage rather than password authentication.',
     ],
   },
 };
@@ -90,6 +90,11 @@ function findProjectById(projectId: string) {
   return projects.find((p) => p.id === projectId || p.aliases?.includes(projectId));
 }
 
+function getOperatingSystem(project: (typeof projects)[number]) {
+  if (project.id === 'clivique-hmis') return 'Web';
+  return ['iOS', 'Android'];
+}
+
 export function generateStaticParams() {
   return projects.flatMap((p) => [
     { projectId: p.id },
@@ -105,14 +110,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const canonical = `${base}/${project.id}`;
   const ogImage = getPrimaryProjectImage(project);
   return {
-    title: `${project.title} — Full-Stack Case Study | Joel Mbaka`,
+    title: `${project.title} — Full-Stack Engineering Case Study | Joel Mbaka`,
     description: project.description,
     alternates: { canonical },
     openGraph: {
       title: `${project.title} — Engineering Case Study`,
       description: project.description,
       url: canonical,
-      type: 'website',
+      type: 'article',
+      modifiedTime: new Date(project.updatedAt).toISOString(),
       images: [ogImage],
     },
     twitter: {
@@ -135,16 +141,39 @@ export default async function ProjectPage({ params }: PageProps) {
   const ogImage = getPrimaryProjectImage(project);
   const imageAbs = ogImage.startsWith('http') ? ogImage : `${base}${ogImage}`;
   const canonical = `${base}/${project.id}`;
-  const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'CreativeWork',
-      name: project.title,
-      description: project.description,
-      url: canonical,
-      image: imageAbs,
-      author: {
+  const externalReferences = [project.url, project.appStore?.url, project.playStore?.url].filter(
+    (value): value is string => Boolean(value),
+  );
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${canonical}#webpage`,
+        url: canonical,
+        name: `${project.title} — Engineering Case Study`,
+        description: project.description,
+        dateModified: project.updatedAt,
+        image: imageAbs,
+        isPartOf: { '@id': `${base}/work#collection` },
+        mainEntity: { '@id': `${canonical}#software` },
+        author: { '@id': `${base}/#person` },
+      },
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${canonical}#software`,
+        name: project.title,
+        description: project.description,
+        url: project.url || canonical,
+        applicationCategory: project.type === 'Enterprise' ? 'BusinessApplication' : 'SoftwareApplication',
+        operatingSystem: getOperatingSystem(project),
+        image: imageAbs,
+        creator: { '@id': `${base}/#person` },
+        sameAs: externalReferences,
+      },
+      {
         '@type': 'Person',
+        '@id': `${base}/#person`,
         name: 'Joel Mbaka',
         jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
         url: base,
@@ -154,26 +183,31 @@ export default async function ProjectPage({ params }: PageProps) {
           'https://x.com/mbaka_joe',
         ],
       },
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: `${base}/`,
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: project.title,
-          item: canonical,
-        },
-      ],
-    },
-  ];
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: `${base}/`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Work',
+            item: `${base}/work`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: project.title,
+            item: canonical,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <SlideIn>
@@ -181,8 +215,8 @@ export default async function ProjectPage({ params }: PageProps) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         <div className="mb-8">
-          <Link href="/#work" className="text-sm font-medium text-ocean-blue hover:underline">
-            ← Selected work
+          <Link href="/work" className="text-sm font-medium text-ocean-blue hover:underline">
+            ← All engineering work
           </Link>
         </div>
 
