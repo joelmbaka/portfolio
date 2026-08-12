@@ -9,13 +9,13 @@ const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').repla
 export const metadata: Metadata = {
   title: 'Technical Skills — React Native, Next.js, FastAPI, PostgreSQL, AI & APIs | Joel Mbaka',
   description:
-    'Technical skills across React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST, GraphQL, AI/LLM integrations, payments, authentication, CI/CD, cloud deployment, app stores, technical SEO, and search growth.',
+    'Technical skills across React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST, GraphQL, AI/LLM integrations, voice and audio intelligence, payments, authentication, CI/CD, cloud deployment, app stores, technical SEO, and search growth.',
   alternates: { canonical: '/skills' },
   openGraph: {
     type: 'website',
     url: '/skills',
     title: 'Technical Skills | Joel Mbaka',
-    description: 'A complete technical inventory backed by production mobile, web, backend, payment, AI, and operational product work.',
+    description: 'A complete technical inventory backed by production mobile, web, backend, payment, AI, voice/audio, and operational product work.',
   },
   twitter: {
     card: 'summary_large_image',
@@ -42,8 +42,42 @@ const groups = [
     items: ['PostgreSQL', 'SQL', 'SQLAlchemy', 'Alembic', 'SQLite', 'Neo4j', 'Graph data', 'Relational modeling', 'Document-database patterns', 'Migrations', 'Local persistence', 'Key-value / caching patterns', 'Data synchronization'],
   },
   {
-    title: 'AI, voice & automation',
-    items: ['LLM integration', 'LLM reasoning', 'Structured outputs', 'AI agents', 'Voice apps', 'Telephony / voice APIs', 'Speech-to-text', 'Whisper', 'Audio workflows', 'Image understanding', 'Open-source models', 'NVIDIA-hosted open-source inference', 'Modal.com', 'CrewAI', 'Human-reviewed automation', 'Prompt design'],
+    title: 'AI, voice & audio intelligence',
+    items: [
+      'LLM integration',
+      'LLM reasoning',
+      'Structured outputs',
+      'AI agents',
+      'Voice apps',
+      'Telephony / voice APIs',
+      'Speech-to-text',
+      'Whisper',
+      'ElevenLabs Scribe v2',
+      'Speaker diarization',
+      'Word timestamps',
+      'Audio-event tagging',
+      'Speaker-overlap detection',
+      'Long-silence detection',
+      'Gemini 3.6 Flash',
+      'Google GenAI SDK',
+      'Raw-audio LLM analysis',
+      'Semantic transcript reasoning',
+      'emotion2vec-plus-base',
+      'FunASR',
+      'ModelScope',
+      'PyTorch',
+      'torchaudio',
+      'FFmpeg',
+      'Acoustic affect analysis',
+      'Deterministic signal fusion',
+      'Open-source models',
+      'NVIDIA-hosted open-source inference',
+      'Modal.com model serving',
+      'CrewAI',
+      'Human-reviewed automation',
+      'Prompt design',
+      'Image understanding',
+    ],
   },
   {
     title: 'Payments, SaaS & financial workflows',
@@ -93,7 +127,7 @@ export default function SkillsPage() {
           A full-stack engineering stack built around shipping complete products.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-          My strongest skill is not one framework in isolation. It is moving across mobile, web, APIs, data, authentication, payments, AI integrations, deployment, app-store release, and search/distribution until the product works end to end. The project case studies remain the primary evidence; this page makes the complete technical surface explicit for recruiters, founders, search engines, and research agents.
+          My strongest skill is not one framework in isolation. It is moving across mobile, web, APIs, data, authentication, payments, AI integrations, voice/audio systems, deployment, app-store release, and search/distribution until the product works end to end. The project case studies remain the primary evidence; this page makes the complete technical surface explicit for recruiters, founders, search engines, and research agents.
         </p>
       </header>
 
