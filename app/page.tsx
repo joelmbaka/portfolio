@@ -44,6 +44,13 @@ const capabilityGroups = [
   },
 ];
 
+const productScopeSummary = [
+  'Production mobile apps',
+  'Complex web platforms',
+  'APIs & relational data',
+  'Integrations & release',
+];
+
 export default function Home() {
   const selectedWork = ['journpad', 'clivique-hmis', 'rentpayor']
     .map((id) => projects.find((project) => project.id === id))
@@ -108,11 +115,19 @@ export default function Home() {
         <Hero />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-        <section className="mx-auto mt-16 grid max-w-5xl gap-3 border-y border-gray-200 py-6 text-center text-sm font-medium text-gray-600 dark:border-gray-800 dark:text-gray-300 sm:grid-cols-2 lg:grid-cols-4">
-          <span>Production mobile apps</span>
-          <span>Complex web platforms</span>
-          <span>APIs & relational data</span>
-          <span>Integrations & release</span>
+        <section
+          className="mx-auto mt-16 grid max-w-5xl grid-cols-2 gap-2 border-y border-gray-200 py-4 text-sm font-medium text-gray-700 dark:border-gray-800 dark:text-gray-200 sm:gap-3 sm:py-5 lg:grid-cols-4 lg:gap-0 lg:py-6 lg:text-center"
+          aria-label="Product engineering scope"
+        >
+          {productScopeSummary.map((item) => (
+            <div
+              key={item}
+              className="flex min-h-16 items-center rounded-xl border border-gray-200 bg-gray-50 px-3 py-3 text-left leading-5 dark:border-gray-800 dark:bg-gray-900/60 sm:px-4 lg:min-h-0 lg:justify-center lg:rounded-none lg:border-0 lg:bg-transparent lg:px-3 lg:py-0 lg:text-center dark:lg:bg-transparent"
+            >
+              <span className="mr-2 h-1.5 w-1.5 shrink-0 rounded-full bg-palm-green lg:hidden" aria-hidden />
+              <span>{item}</span>
+            </div>
+          ))}
         </section>
 
         <section id="capabilities" className="container mx-auto mt-20 px-4 sm:px-6 md:px-8 lg:px-12">
