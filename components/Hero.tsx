@@ -1,73 +1,95 @@
 'use client';
-import Image from 'next/image';
-import { Typewriter } from './Typewriter';
 
+import Image from 'next/image';
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
-const PopupButton = dynamic(() => import('react-calendly').then((m) => m.PopupButton), { ssr: false });
+import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { ContactModal } from './ContactModal';
 
 export default function Hero() {
-  const phrases = [
-    "Let's build something amazing together",
-    "A.I is the new electricity - Andrew Ng",
-    "Let's make the world a better place",
-  ];
-
   const [isContactOpen, setContactOpen] = useState(false);
 
-  return (<>
-    <section id="hero" className="container mx-auto flex flex-col md:flex-row-reverse items-center md:items-start gap-6 md:gap-8 lg:gap-12 px-4 sm:px-6 md:px-8 lg:px-12 mb-8 md:mb-12">
-      {/* Photo Container - centered on mobile */}
-      <div className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full border-4 border-palm-green overflow-hidden shrink-0 self-center md:self-center">
-        <Image
-          src="/images/joel.webp"
-          alt="Joel Mbaka, Senior Software Engineer focused on React Native and AI systems"
-          width={288}
-          height={288}
-          priority
-          className="object-cover w-full h-full"
-        />
-      </div>
+  return (
+    <>
+      <section
+        id="hero"
+        className="container mx-auto grid items-center gap-10 px-4 sm:px-6 md:grid-cols-[1fr_auto] md:px-8 lg:gap-16 lg:px-12"
+      >
+        <div className="max-w-3xl text-center md:text-left">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-palm-green">
+            Senior Full-Stack Engineer · Web & Mobile
+          </p>
 
-      {/* Text Content - centered on mobile */}
-      <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left mt-6 md:mt-8 md:mr-8 space-y-4 max-w-2xl">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words text-black dark:text-sandy-beach">
-          Joel Mbaka
-        </h1>
-        
-        <h2 className="text-xl sm:text-2xl md:text-3xl text-palm-green font-medium">
-          Senior Software Engineer
-        </h2>
-        <p className="text-sm sm:text-base text-gray-400">React Native, Next.js, TypeScript, Python, Swift, Kotlin, SQL, AI APIs</p>
+          <h1 className="text-4xl font-bold leading-tight text-black dark:text-sandy-beach sm:text-5xl lg:text-6xl">
+            I build production software across mobile, web, backend, and data.
+          </h1>
 
-        <div className="min-h-[40px] sm:min-h-[60px] md:min-h-[80px]">
-          <Typewriter 
-            words={phrases}
-            className="text-base sm:text-lg md:text-xl text-ocean-blue leading-relaxed"
-          />
+          <p className="mt-6 max-w-2xl text-base leading-7 text-gray-600 dark:text-gray-300 sm:text-lg">
+            I take products from idea to production using React Native, Next.js, TypeScript, Python/FastAPI,
+            and PostgreSQL—covering the user experience, APIs, data model, integrations, testing, and release.
+          </p>
+
+          <div className="mt-6 flex flex-wrap justify-center gap-2 md:justify-start">
+            {['React Native', 'Next.js', 'TypeScript', 'Python / FastAPI', 'PostgreSQL'].map((skill) => (
+              <span
+                key={skill}
+                className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+            <a
+              href="#work"
+              className="inline-flex items-center gap-2 rounded-full bg-sunset-yellow px-5 py-2.5 font-medium text-black hover:bg-sunset-yellow-dark focus:outline-none focus:ring-2 focus:ring-sunset-yellow/70"
+            >
+              View selected work
+              <ArrowDown className="h-4 w-4" aria-hidden />
+            </a>
+            <button
+              onClick={() => setContactOpen(true)}
+              className="inline-flex items-center gap-2 rounded-full border border-gray-300 px-5 py-2.5 font-medium text-gray-900 transition hover:border-palm-green hover:text-palm-green dark:border-gray-700 dark:text-white"
+            >
+              <Mail className="h-4 w-4" aria-hidden />
+              Contact me
+            </button>
+          </div>
+
+          <div className="mt-6 flex items-center justify-center gap-5 text-sm text-gray-500 dark:text-gray-400 md:justify-start">
+            <a
+              href="https://github.com/joelmbaka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 hover:text-gray-900 dark:hover:text-white"
+            >
+              <Github className="h-4 w-4" aria-hidden /> GitHub
+            </a>
+            <a
+              href="https://linkedin.com/in/joelmbaka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 hover:text-gray-900 dark:hover:text-white"
+            >
+              <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn
+            </a>
+            <span>UTC+3 · Nairobi</span>
+          </div>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="mt-2 flex gap-4">
-          <button
-            onClick={() => setContactOpen(true)}
-            className="rounded-full bg-sunset-yellow text-black px-6 py-2 font-medium hover:bg-sunset-yellow-dark focus:outline-none focus:ring-2 focus:ring-sunset-yellow/70"
-          >
-            Send a Message
-          </button>
-          <PopupButton
-            url="https://calendly.com/mbakajoe26/30min"
-            rootElement={typeof window !== 'undefined' ? (document.body as HTMLElement) : (null as unknown as HTMLElement)}
-            text="Book a Call"
-            className="rounded-full bg-transparent border-2 border-sunset-yellow text-black dark:text-white px-6 py-2 font-medium hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-sunset-yellow/70"
+        <div className="relative mx-auto h-48 w-48 overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:h-56 sm:w-56 lg:h-72 lg:w-72">
+          <Image
+            src="/images/joel.webp"
+            alt="Joel Mbaka, senior full-stack web and mobile engineer"
+            fill
+            priority
+            sizes="(max-width: 768px) 224px, 288px"
+            className="object-cover"
           />
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* Contact Modal */}
-    <ContactModal isOpen={isContactOpen} onClose={() => setContactOpen(false)} />
-  </>
+      <ContactModal isOpen={isContactOpen} onClose={() => setContactOpen(false)} />
+    </>
   );
 }
