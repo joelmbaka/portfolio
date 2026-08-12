@@ -13,33 +13,33 @@ const capabilityGroups = [
   {
     title: 'Mobile engineering',
     description:
-      'React Native and Expo applications with authentication, native device capabilities, API integrations, testing, and App Store / Play Store release work.',
-    technologies: 'React Native · Expo · TypeScript · iOS · Android',
+      'React Native and Expo applications with authentication, native device capabilities, APIs, payments, audio/location workflows, testing, EAS builds, OTA updates, and App Store / Play Store release work.',
+    technologies: 'React Native · Expo · TypeScript · EAS · iOS · Android',
     href: '/expertise/react-native-mobile-engineering',
     icon: MonitorSmartphone,
   },
   {
     title: 'Web applications',
     description:
-      'Production web products and operational dashboards built around real workflows, responsive interfaces, data-heavy views, and maintainable component systems.',
+      'Production web products and operational dashboards built around real workflows, responsive interfaces, data-heavy views, public search surfaces, and maintainable component systems.',
     technologies: 'Next.js · React · TypeScript · TanStack · Tailwind',
     href: '/expertise/nextjs-web-engineering',
     icon: Braces,
   },
   {
-    title: 'Backend & data',
+    title: 'Backend, APIs & data',
     description:
-      'APIs, business logic, background workflows, relational data models, authentication, and integrations designed to support complete products rather than isolated screens.',
-    technologies: 'Python · FastAPI · PostgreSQL · SQLAlchemy · REST',
+      'REST/GraphQL APIs, business logic, webhooks, relational data models, authentication, and third-party integrations designed to support complete products rather than isolated screens.',
+    technologies: 'Python · FastAPI · PostgreSQL · SQLAlchemy · REST · GraphQL',
     href: '/expertise/fastapi-postgresql-backends',
     icon: Database,
   },
   {
     title: 'Production ownership',
     description:
-      'I work across the full delivery path: architecture, implementation, third-party integrations, testing, deployment, observability, release, and iteration after launch.',
-    technologies: 'Vercel · Docker · CI/testing · Cloud APIs · AI integrations',
-    href: '/expertise',
+      'I work across architecture, implementation, payments, AI/LLM integrations, testing, GitHub workflows, Vercel deployment, Expo EAS release, app stores, technical SEO, and iteration after launch.',
+    technologies: 'GitHub · Vercel · Expo EAS · App stores · AI APIs · Search',
+    href: '/skills',
     icon: Rocket,
   },
 ];
@@ -64,7 +64,7 @@ export default function Home() {
         '@type': 'ProfilePage',
         '@id': `${base}/#webpage`,
         url: `${base}/`,
-        name: 'Joel Mbaka — Senior Full-Stack Engineer, Web & Mobile',
+        name: 'Joel Mbaka — Senior Full-Stack Product Engineer, Web & Mobile',
         dateModified: '2026-08-12',
         mainEntity: { '@id': `${base}/#person` },
       },
@@ -72,9 +72,9 @@ export default function Home() {
         '@type': 'Person',
         '@id': `${base}/#person`,
         name: 'Joel Mbaka',
-        jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
+        jobTitle: 'Senior Full-Stack Product Engineer — Web & Mobile',
         description:
-          'Senior full-stack engineer building production web and mobile products across frontend, backend, data, payments, AI integrations, and release.',
+          'Remote senior full-stack product engineer building 0→1 and production web/mobile products across React Native, Next.js, FastAPI, PostgreSQL, APIs, authentication, payments, voice/LLM integrations, release engineering, and technical SEO.',
         url: base,
         knowsAbout: [
           'React Native',
@@ -85,16 +85,31 @@ export default function Home() {
           'Python',
           'FastAPI',
           'PostgreSQL',
+          'SQL',
           'SQLAlchemy',
-          'Mobile application development',
-          'Web application development',
-          'M-Pesa integrations',
-          'AI integrations',
+          'REST APIs',
+          'GraphQL',
+          'Neo4j',
+          'OAuth',
+          'JWT authentication',
+          'M-Pesa Daraja',
+          'Payment reconciliation',
+          'Voice applications',
+          'Speech-to-text',
+          'Whisper',
+          'LLM integrations',
+          'AI agents',
+          'Expo EAS',
+          'App Store Connect',
+          'Google Play Console',
+          'Vercel',
+          'Technical SEO',
+          'Google Search Console',
+          'Google Ads',
         ],
         sameAs: [
           'https://github.com/joelmbaka',
           'https://linkedin.com/in/joelmbaka',
-          'https://x.com/mbaka_joe',
         ],
       },
       {
@@ -103,7 +118,7 @@ export default function Home() {
         name: 'Joel Mbaka',
         url: base,
         description:
-          'Engineering portfolio covering production mobile, web, backend, data, payment, and AI integration work.',
+          'Engineering portfolio covering production mobile, web, APIs, backend, data, payments, voice/AI integration, app release, technical SEO, and startup product work.',
         publisher: { '@id': `${base}/#person` },
       },
     ],
@@ -137,7 +152,7 @@ export default function Home() {
               One engineer across the product stack.
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
-              My strongest work sits at the intersection of product engineering and systems thinking: building the interface users touch while also owning the APIs, data model, integrations, and production path behind it.
+              My strongest work sits at the intersection of product engineering and systems thinking: building the interface users touch while also owning the APIs, data model, authentication, integrations, and production path behind it.
             </p>
           </div>
 
@@ -160,9 +175,15 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-7 flex justify-center">
+          <div className="mt-7 flex flex-wrap justify-center gap-x-6 gap-y-3">
             <Link href="/expertise" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-palm-green dark:text-gray-400">
-              View all engineering expertise <ArrowRight className="h-4 w-4" aria-hidden />
+              View engineering expertise <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link href="/skills" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-palm-green dark:text-gray-400">
+              Complete technical skills <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link href="/industries" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-palm-green dark:text-gray-400">
+              Industry experience <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
         </section>
@@ -174,15 +195,12 @@ export default function Home() {
               Products that show different sides of the stack.
             </h2>
             <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
-              These projects are selected for engineering breadth: a production mobile product, a complex web platform, and a product spanning mobile, backend, data, and operational tooling.
+              These projects are selected for engineering breadth: a production voice/mobile product, a complex healthcare web platform, and a PropTech/FinTech product spanning mobile, backend, data, payments, accounting-style reconciliation, and operational tooling.
             </p>
           </div>
           <ProjectsCarousel projects={selectedWork} />
           <div className="mt-7 flex justify-center">
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-palm-green dark:text-gray-400"
-            >
+            <Link href="/work" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-palm-green dark:text-gray-400">
               View all projects
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
