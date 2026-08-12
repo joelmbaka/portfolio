@@ -35,13 +35,9 @@ export interface Project {
   enhancements?: ProjectEnhancement[];
   appStore?: {
     url: string;
-    rating?: number; // 0-5
-    reviewsCount?: number | string;
   };
   playStore?: {
     url: string;
-    rating?: number; // 0-5
-    reviewsCount?: number | string;
   };
 }
 
@@ -50,7 +46,7 @@ export const projects: Project[] = [
     id: 'journpad',
     title: 'JournPad: AI Voice Journal',
     description:
-      'JournPad is an AI-assisted voice journaling app that turns your spoken thoughts into organized, searchable entries. Record hands-free and get automatic titles, summaries, subjects, keywords, and smart categories, plus an insights dashboard that visualizes your journaling patterns over time.',
+      'JournPad is an AI-assisted voice journaling app that turns spoken thoughts into organized, searchable entries with automatic titles, summaries, subjects, keywords, categories, playback, and journaling insights.',
     tech: [
       'Expo',
       'React Native',
@@ -100,21 +96,16 @@ export const projects: Project[] = [
     ],
     appStore: {
       url: 'https://apps.apple.com/ke/app/journpad/id6754232534',
-      // You can update these as real ratings come in
-      rating: 4.9,
-      reviewsCount: '1K+',
     },
     playStore: {
       url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.journal',
-      rating: 4.9,
-      reviewsCount: '2K+',
     },
   },
   {
     id: 'rentpayor',
     title: 'RentPayor',
     description:
-      'Rent collection and reconciliation app for landlords, designed to match messy M-Pesa, bank, and cash payments against invoices while keeping landlords in control of final approval.',
+      'Rent collection and reconciliation software for landlords and property managers, designed to connect rent payments to the correct property, unit, tenant, invoice, and period while keeping a complete payment record.',
     tech: [
       'Expo',
       'React Native',
@@ -196,7 +187,6 @@ export const projects: Project[] = [
     ],
     playStore: {
       url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.rentpayor',
-      reviewsCount: '1K+',
     },
   },
   {
@@ -254,7 +244,6 @@ export const projects: Project[] = [
     ],
     playStore: {
       url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.macsim',
-      reviewsCount: '100+',
     },
   },
   {
@@ -290,7 +279,6 @@ export const projects: Project[] = [
       ],
     },
   },
-
   {
     id: 'clivique-hmis',
     aliases: ['taifa-hmis'],
