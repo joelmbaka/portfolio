@@ -6,18 +6,18 @@ const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').repla
 export const metadata: Metadata = {
   title: 'Contact Joel Mbaka — Senior Full-Stack Web & Mobile Engineer',
   description:
-    'Contact Joel Mbaka about senior full-stack, React Native, Next.js, FastAPI, web, mobile, backend, and product engineering opportunities.',
+    'Contact Joel Mbaka, a Nairobi-based remote senior full-stack product engineer, about React Native, Next.js, FastAPI, web, mobile, backend, contract, and full-time opportunities.',
   alternates: { canonical: '/contact' },
   openGraph: {
     type: 'website',
     url: '/contact',
     title: 'Contact Joel Mbaka — Senior Full-Stack Web & Mobile Engineer',
-    description: 'Get in touch about senior product engineering work across web, mobile, backend, and integrations.',
+    description: 'Nairobi-based remote product engineer on EAT (UTC+3). Get in touch about contract or full-time work across web, mobile, backend, and integrations.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Contact Joel Mbaka — Senior Full-Stack Web & Mobile Engineer',
-    description: 'Get in touch about senior product engineering work across web, mobile, backend, and integrations.',
+    description: 'Nairobi-based remote product engineer on EAT (UTC+3). Get in touch about contract or full-time product engineering work.',
   },
 };
 
@@ -67,7 +67,16 @@ export default function ContactPage() {
         name: 'Joel Mbaka',
         url: base,
         email: 'mailto:mbakajoe26@gmail.com',
-        jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
+        jobTitle: 'Senior Full-Stack Product Engineer — Web & Mobile',
+        homeLocation: {
+          '@type': 'Place',
+          name: 'Nairobi, Kenya',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Nairobi',
+            addressCountry: 'KE',
+          },
+        },
         sameAs: ['https://github.com/joelmbaka', 'https://linkedin.com/in/joelmbaka'],
       },
       {
@@ -90,7 +99,7 @@ export default function ContactPage() {
           Let’s talk about the product you need to ship.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-          I’m interested in senior product engineering work where I can own meaningful parts of the system across mobile, web, backend, data, integrations, and production delivery.
+          I’m based in Nairobi, Kenya and work remotely on East Africa Time (EAT, UTC+3). I’m interested in senior product engineering work where I can own meaningful parts of the system across mobile, web, backend, data, integrations, and production delivery. Contract work is preferred, I am open to full-time roles, and international contract payments can be made in USD or EUR.
         </p>
       </header>
 
