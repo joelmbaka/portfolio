@@ -9,15 +9,15 @@ const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').repla
 export const metadata: Metadata = {
   title: 'About Joel Mbaka — Senior Full-Stack Product Engineer for Web & Mobile',
   description:
-    'Joel Mbaka is a remote senior full-stack product engineer working across React Native, Next.js, FastAPI, PostgreSQL, APIs, payments, AI/LLM integrations, app release, technical SEO, and 0→1 startup product development.',
+    'Joel Mbaka is a Nairobi-based remote senior full-stack product engineer working across React Native, Next.js, FastAPI, PostgreSQL, APIs, payments, AI/LLM integrations, app release, technical SEO, and 0→1 startup product development.',
   alternates: { canonical: '/about' },
   openGraph: {
     type: 'profile',
     url: '/about',
     title: 'About Joel Mbaka — Senior Full-Stack Product Engineer',
-    description: 'Remote product engineering across mobile, web, APIs, data, payments, AI integrations, release, and startup delivery.',
+    description: 'Nairobi-based remote product engineering across mobile, web, APIs, data, payments, AI integrations, release, and startup delivery.',
   },
-  twitter: { card: 'summary_large_image', title: 'About Joel Mbaka — Senior Full-Stack Product Engineer', description: 'Remote product engineering across mobile, web, backend, data, integrations, release, and startup delivery.' },
+  twitter: { card: 'summary_large_image', title: 'About Joel Mbaka — Senior Full-Stack Product Engineer', description: 'Nairobi-based remote product engineering across mobile, web, backend, data, integrations, release, and startup delivery.' },
 };
 
 const ownership = [
@@ -50,9 +50,18 @@ export default function AboutPage() {
         '@id': `${base}/#person`,
         name: 'Joel Mbaka',
         url: base,
-        jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
+        jobTitle: 'Senior Full-Stack Product Engineer — Web & Mobile',
         description:
-          'Remote senior full-stack product engineer specializing in 0→1 mobile and web products, React Native, Next.js, FastAPI, PostgreSQL, APIs, payments, AI integrations, release engineering, and technical SEO.',
+          'Nairobi-based remote senior full-stack product engineer specializing in 0→1 mobile and web products, React Native, Next.js, FastAPI, PostgreSQL, APIs, payments, AI integrations, release engineering, and technical SEO.',
+        homeLocation: {
+          '@type': 'Place',
+          name: 'Nairobi, Kenya',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Nairobi',
+            addressCountry: 'KE',
+          },
+        },
         knowsAbout: [
           'React Native', 'Expo', 'Next.js', 'React', 'TypeScript', 'Python', 'FastAPI', 'PostgreSQL', 'SQL', 'REST APIs', 'GraphQL', 'Neo4j', 'M-Pesa Daraja', 'Payment reconciliation', 'Voice applications', 'Whisper', 'LLM integrations', 'AI agents', 'Authentication', 'OAuth', 'App Store Connect', 'Google Play Console', 'Expo EAS', 'Vercel', 'Technical SEO', 'Google Search Console', 'Google Ads',
         ],
@@ -76,7 +85,7 @@ export default function AboutPage() {
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-palm-green">About</p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">I build complete software products and prefer owning the path from requirement to production.</h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-          I am a senior full-stack product engineer based in Kenya and working remotely. My core stack is React Native / Expo for mobile, Next.js / React / TypeScript for web, and Python / FastAPI / PostgreSQL for backend systems. I work across APIs, authentication, data modeling, payments, AI integrations, cloud deployment, mobile release, and the operational tooling around the product.
+          I am a senior full-stack product engineer based in Nairobi, Kenya and working remotely on East Africa Time (EAT, UTC+3). My core stack is React Native / Expo for mobile, Next.js / React / TypeScript for web, and Python / FastAPI / PostgreSQL for backend systems. I work across APIs, authentication, data modeling, payments, AI integrations, cloud deployment, mobile release, and the operational tooling around the product.
         </p>
       </header>
 
@@ -123,7 +132,7 @@ export default function AboutPage() {
             My preferred work is with startups that need products shipped from scratch, features owned end to end, or an existing implementation improved quickly. I prefer scoped contract work because it makes the engineering objective and delivery measurable, but I am flexible and open to a strong full-time remote role.
           </p>
           <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
-            My launched products are currently in learning and product-market-fit stages. Most work on them is targeted UX improvement, maintenance, patches, distribution, and on-demand iteration rather than continuous full-time feature development.
+            I work internationally from Nairobi on EAT (UTC+3). For contract engagements, I receive payment in US dollars (USD) or euros (EUR). My launched products are currently in learning and product-market-fit stages, with most work limited to targeted UX improvement, maintenance, patches, distribution, and on-demand iteration rather than continuous full-time feature development.
           </p>
           <Link href="/work-with-me" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-palm-green hover:underline">How I engage with startups <ArrowRight className="h-4 w-4" aria-hidden /></Link>
         </article>
