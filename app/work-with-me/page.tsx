@@ -8,18 +8,18 @@ const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').repla
 export const metadata: Metadata = {
   title: 'Remote Contract Product Engineer for Startups | Joel Mbaka',
   description:
-    'Remote senior product engineer for startup contracts and full-time roles. Best fit: 0→1 products, React Native, Next.js, FastAPI/PostgreSQL, APIs, payments, AI integrations, and end-to-end feature ownership.',
+    'Nairobi-based remote senior product engineer for startup contracts and full-time roles. Contract preferred, remote only, paid in USD or EUR, with a focus on 0→1 products and end-to-end ownership.',
   alternates: { canonical: '/work-with-me' },
   openGraph: {
     type: 'website',
     url: '/work-with-me',
     title: 'Remote Contract Product Engineer for Startups | Joel Mbaka',
-    description: 'Contract preferred, remote only, open to full-time. Product engineering from 0→1 and through production.',
+    description: 'Based in Nairobi, Kenya (EAT / UTC+3). Contract preferred, remote only, paid in USD or EUR, and open to full-time.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Remote Contract Product Engineer for Startups | Joel Mbaka',
-    description: 'Contract preferred, remote only, open to full-time. Product engineering from 0→1 and through production.',
+    description: 'Based in Nairobi, Kenya (EAT / UTC+3). Contract preferred, remote only, paid in USD or EUR, and open to full-time.',
   },
 };
 
@@ -32,6 +32,7 @@ const bestFit = [
 
 const engagement = [
   { title: 'Contract / project work — preferred', body: 'I prefer scoped engagements where I can understand the product, estimate the implementation, agree on deliverables, and quote based on the size and complexity of the work.' },
+  { title: 'International remote work', body: 'I am based in Nairobi, Kenya and work on East Africa Time (EAT, UTC+3). I work remotely with international teams and receive contract payments in US dollars (USD) or euros (EUR).' },
   { title: '0→1 startup product development', body: 'This is my strongest fit: turning a product requirement into architecture, implementation, backend state, integrations, tests, deployment, and a usable production release.' },
   { title: 'Feature or system ownership', body: 'I am comfortable taking ownership of a complete feature area rather than waiting for every implementation decision to be decomposed into isolated tickets.' },
   { title: 'Full-time roles — open', body: 'Contract work is my preference, not a restriction. I am open to a strong full-time remote role where the product, engineering scope, and ownership are a good fit.' },
@@ -47,8 +48,17 @@ export default function WorkWithMePage() {
       '@type': 'Person',
       '@id': `${base}/#person`,
       name: 'Joel Mbaka',
-      jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
+      jobTitle: 'Senior Full-Stack Product Engineer — Web & Mobile',
       url: base,
+      homeLocation: {
+        '@type': 'Place',
+        name: 'Nairobi, Kenya',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Nairobi',
+          addressCountry: 'KE',
+        },
+      },
       knowsAbout: ['0 to 1 product development', 'startup product engineering', 'React Native', 'Next.js', 'FastAPI', 'PostgreSQL', 'API integration', 'AI integration', 'mobile app release'],
     },
   };
@@ -60,10 +70,10 @@ export default function WorkWithMePage() {
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-palm-green">Work with me</p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Remote product engineering for startups that need software shipped.</h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-          I prefer contract work and 0→1 startup environments where the engineering problem is still broad enough to benefit from end-to-end ownership. I can scope a project, estimate it, build it, release it, and iterate after real users touch it. I am remote only and also open to a strong full-time role.
+          I am based in Nairobi, Kenya and work on East Africa Time (EAT, UTC+3). I prefer contract work and 0→1 startup environments where the engineering problem is still broad enough to benefit from end-to-end ownership. I can scope a project, estimate it, build it, release it, and iterate after real users touch it. I am remote only and also open to a strong full-time role.
         </p>
         <div className="mt-7 flex flex-wrap gap-2 text-sm">
-          {['Remote only', 'Contract preferred', 'Open to full-time', '0→1 products', 'Feature ownership', 'Fast iteration'].map((item) => (
+          {['Nairobi, Kenya', 'EAT (UTC+3)', 'Remote only', 'Contract preferred', 'Open to full-time', 'Paid in USD or EUR', '0→1 products', 'Feature ownership'].map((item) => (
             <span key={item} className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">{item}</span>
           ))}
         </div>
