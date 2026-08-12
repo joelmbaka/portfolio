@@ -314,6 +314,7 @@ export const projects: Project[] = [
       'M-Pesa Daraja',
     ],
     type: 'Enterprise',
+    url: 'https://clivique.com',
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/clivique-hmis/frame-16.png',
     screenshots: {
       web: [
