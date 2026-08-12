@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import { Navbar } from '../components/Navbar';
@@ -8,55 +8,36 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
+
+const siteTitle = 'Senior Full-Stack Engineer — Web & Mobile | Joel Mbaka';
+const siteDescription =
+  'Senior full-stack engineer building production web and mobile products end-to-end with React Native, Next.js, TypeScript, Python, FastAPI, PostgreSQL, and modern cloud and AI integrations.';
 
 export const metadata: Metadata = {
   metadataBase: new URL((process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '')),
-  title: 'Senior Software Engineer · React Native & AI Systems – Joel Mbaka',
-  description: 'Senior software engineer specializing in React Native, Next.js, TypeScript, Swift, Kotlin, Python, SQL, and AI-powered application systems.',
+  title: siteTitle,
+  description: siteDescription,
   keywords: [
     'Joel Mbaka',
-    'senior software engineer',
-    'senior software engineer react native ai systems',
-    'senior mobile software engineer',
-    'senior react native engineer',
-    'senior react native developer',
-    'mobile developer',
-    'mobile engineer',
-    'cross-platform mobile application engineer',
-    'cross-platform mobile application developer',
-    'mobile application programmer',
-    'mobile application developer',
+    'senior full-stack engineer',
+    'full-stack web and mobile engineer',
+    'senior web and mobile engineer',
+    'React Native engineer',
+    'Next.js engineer',
+    'TypeScript engineer',
+    'Python FastAPI engineer',
+    'PostgreSQL engineer',
     'mobile application engineer',
-    'swift developer',
-    'kotlin developer',
-    'swiftui engineer',
-    'android app developer',
-    'web developer',
-    'web design agency',
-    'web application developer',
-    'nextjs developer',
-    'react developer',
-    'nodejs/typescript developer',
-    'javascript developer',
-    'full stack software engineer',
-    'frontend engineer',
-    'backend engineer',
-    'full stack web and mobile developer',
-    'Python developer',
-    'AI systems engineer',
-    'AI integration specialist',
-    'langchain developer',
-    'crewai specialist',
-    'AI engineer',
-    'AI developer',
+    'web application engineer',
+    'product engineer',
   ],
   applicationName: 'Joel Mbaka Portfolio',
   alternates: { canonical: '/' },
@@ -64,14 +45,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: '/',
     siteName: 'Joel Mbaka',
-    title: 'Senior Software Engineer · React Native & AI Systems – Joel Mbaka',
-    description: 'Senior software engineer specializing in React Native, Next.js, TypeScript, Swift, Kotlin, Python, SQL, and AI-powered application systems.',
+    title: siteTitle,
+    description: siteDescription,
     images: ['/images/og-default.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Senior Software Engineer · React Native & AI Systems – Joel Mbaka',
-    description: 'Senior software engineer specializing in React Native, Next.js, TypeScript, Swift, Kotlin, Python, SQL, and AI-powered application systems.',
+    title: siteTitle,
+    description: siteDescription,
     images: ['/images/og-default.jpg'],
   },
 };
@@ -91,9 +72,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="min-h-screen flex flex-col">
             <Navbar />
-            <main className="flex-1">
-              {children}
-            </main>
+            <main className="flex-1">{children}</main>
             <Footer />
           </div>
         </ThemeProvider>
