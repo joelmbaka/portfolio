@@ -7,15 +7,15 @@ import CTA from '@/components/CTA';
 const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
 
 export const metadata: Metadata = {
-  title: 'Technical Skills — React Native, Next.js, FastAPI, PostgreSQL, AI & APIs | Joel Mbaka',
+  title: 'Technical Skills — React Native, Next.js, FastAPI, Testing, AI & APIs | Joel Mbaka',
   description:
-    'Technical skills across React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST, GraphQL, AI/LLM integrations, voice and audio intelligence, payments, authentication, CI/CD, cloud deployment, app stores, technical SEO, and search growth.',
+    'Technical skills across React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST, GraphQL, Playwright, Maestro, pytest, Jest, E2E testing, AI/LLM integrations, voice and audio intelligence, payments, authentication, CI/CD, cloud deployment, app stores, technical SEO, and search growth.',
   alternates: { canonical: '/skills' },
   openGraph: {
     type: 'website',
     url: '/skills',
     title: 'Technical Skills | Joel Mbaka',
-    description: 'A complete technical inventory backed by production mobile, web, backend, payment, AI, voice/audio, and operational product work.',
+    description: 'A complete technical inventory backed by production mobile, web, backend, automated testing, payment, AI, voice/audio, and operational product work.',
   },
   twitter: {
     card: 'summary_large_image',
@@ -40,6 +40,33 @@ const groups = [
   {
     title: 'Databases & data modeling',
     items: ['PostgreSQL', 'SQL', 'SQLAlchemy', 'Alembic', 'SQLite', 'Neo4j', 'Graph data', 'Relational modeling', 'Document-database patterns', 'Migrations', 'Local persistence', 'Key-value / caching patterns', 'Data synchronization'],
+  },
+  {
+    title: 'Automated testing & quality engineering',
+    items: [
+      'End-to-end testing',
+      'Playwright',
+      'Web E2E testing',
+      'Maestro',
+      'Mobile E2E testing',
+      'pytest',
+      'Jest',
+      'Node.js tests',
+      'React Native Testing Library',
+      'Unit testing',
+      'Integration testing',
+      'API testing',
+      'Regression testing',
+      'Test fixtures',
+      'Mocks',
+      'ESLint',
+      'TypeScript type checking',
+      'Static analysis',
+      'Next.js lint/build checks',
+      'Expo lint',
+      'Pydantic/schema validation',
+      'CI test gates',
+    ],
   },
   {
     title: 'AI, voice & audio intelligence',
@@ -89,7 +116,7 @@ const groups = [
   },
   {
     title: 'Cloud, Git & CI/CD',
-    items: ['Git', 'GitHub', 'Branches', 'Pull requests', 'Merging', 'Vercel', 'Expo EAS', 'Build profiles', 'Production deployments', 'Preview deployments', 'Mobile signing', 'Store submission', 'Closed testing', 'OTA updates', 'Release iteration'],
+    items: ['Git', 'GitHub', 'Branches', 'Pull requests', 'Merging', 'Automated test gates', 'Vercel', 'Expo EAS', 'Build profiles', 'Production deployments', 'Preview deployments', 'Mobile signing', 'Store submission', 'Closed testing', 'OTA updates', 'Release iteration'],
   },
   {
     title: 'Search, SEO & distribution',
@@ -127,7 +154,7 @@ export default function SkillsPage() {
           A full-stack engineering stack built around shipping complete products.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-          My strongest skill is not one framework in isolation. It is moving across mobile, web, APIs, data, authentication, payments, AI integrations, voice/audio systems, deployment, app-store release, and search/distribution until the product works end to end. The project case studies remain the primary evidence; this page makes the complete technical surface explicit for recruiters, founders, search engines, and research agents.
+          My strongest skill is not one framework in isolation. It is moving across mobile, web, APIs, data, authentication, payments, automated testing, AI integrations, voice/audio systems, deployment, app-store release, and search/distribution until the product works end to end. The project case studies remain the primary evidence; this page makes the complete technical surface explicit for recruiters, founders, search engines, and research agents.
         </p>
       </header>
 
