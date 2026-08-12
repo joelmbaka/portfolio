@@ -6,7 +6,12 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Job Hunt CRM',
-  description: 'Open job-hunt CRM for scraped, enriched, and ranked Wellfound and YC opportunities.',
+  description: 'Private job-hunt CRM for scraped, enriched, and ranked opportunities.',
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
 };
 
 const freshFirstOrder = "order by coalesce(nullif(raw->>'posted_age_days', '')::double precision, 999999), updated_at desc";

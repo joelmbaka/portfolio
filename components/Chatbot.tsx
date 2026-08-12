@@ -11,13 +11,10 @@ export default function Chatbot() {
   const mediaRef = useRef<MediaRecorder | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [shouldSpeak, setShouldSpeak] = useState(false);
-  // shake cue for X icon
   const [shake, setShake] = useState(false);
-  // Same-origin endpoint that proxies to the external AI API
   const CHAT_ENDPOINT = '/api/chat';
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Toggle microphone recording and send to ElevenLabs STT
   const toggleRecording = async () => {
     if (isRecording) {
       mediaRef.current?.stop();
@@ -40,10 +37,8 @@ export default function Chatbot() {
           const resp = await fetch('/api/stt', { method: 'POST', body: fd });
           const { text } = await resp.json();
           if (text && typeof text === 'string') {
-            // call existing submission flow
             setInput(text);
             setShouldSpeak(true);
-            // auto-submit the form
             (document.getElementById('chat-input-form') as HTMLFormElement | null)?.requestSubmit();
           }
         } catch (err) {
@@ -58,9 +53,6 @@ export default function Chatbot() {
     }
   };
 
-  /**
-   * Copy helper
-   */
   const handleCopy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -69,9 +61,6 @@ export default function Chatbot() {
     }
   };
 
-  /**
-   * Fetch speech and play it. Caches per message.
-   */
   const handlePlay = async (index: number) => {
     const msg = messages[index];
     if (msg.role !== 'bot') return;
@@ -80,7 +69,6 @@ export default function Chatbot() {
       return;
     }
 
-    // mark loading
     setMessages((prev) => {
       const copy = [...prev];
       copy[index] = { ...copy[index], loadingAudio: true };
@@ -118,7 +106,6 @@ export default function Chatbot() {
     }
   }, [messages, open]);
 
-  // disable body scroll while modal open
   useEffect(() => {
     if (open) {
       const original = document.body.style.overflow;
@@ -129,7 +116,6 @@ export default function Chatbot() {
     }
   }, [open]);
 
-  // reset shake after animation
   useEffect(() => {
     if (shake) {
       const t = setTimeout(() => setShake(false), 600);
@@ -139,23 +125,21 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Button */}
       <button
         onClick={() => setOpen(true)}
         aria-label="Open chat"
-        className="fixed bottom-6 right-6 z-40 rounded-full bg-transparent border border-palm-green p-4 text-palm-green shadow-lg hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-palm-green/60"
+        className="fixed bottom-4 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-palm-green bg-[var(--background)] text-palm-green shadow-lg transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-palm-green/60 dark:hover:bg-gray-900 sm:bottom-6 sm:right-6 sm:h-14 sm:w-14"
       >
-        <Bot size={24} />
+        <Bot size={22} />
       </button>
 
-      {/* Modal */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-end justify-end bg-black/40 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm sm:justify-end"
             onClick={() => setShake(true)}
           >
             <motion.div
@@ -164,29 +148,30 @@ export default function Chatbot() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="w-[95%] sm:w-[22rem] md:w-[26rem] lg:w-[28rem] mr-4 mb-8 md:mr-10 md:mb-16 max-h-[80vh] bg-white dark:bg-gray-900 rounded-2xl shadow-lg flex flex-col"
+              className="flex max-h-[88dvh] w-full flex-col rounded-t-2xl bg-white shadow-lg dark:bg-gray-900 sm:mb-8 sm:mr-4 sm:w-[22rem] sm:rounded-2xl md:mb-16 md:mr-10 md:w-[26rem] lg:w-[28rem]"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Chat with Joel's personal AI agent"
             >
-              {/* Header */}
-              <div className="flex items-center justify-between px-4 py-3">
-                <h3 className="text-lg font-semibold">Chat with Joel&apos;s personal AI agent</h3>
+              <div className="flex items-center justify-between gap-3 px-4 py-3">
+                <h3 className="text-base font-semibold leading-6 sm:text-lg">Chat with Joel&apos;s personal AI agent</h3>
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close chat"
-                  className={`text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 ${shake ? 'animate-bounce' : ''}`}
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-300 ${shake ? 'animate-bounce' : ''}`}
                 >
                   <X size={20} />
                 </button>
               </div>
 
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto px-4 py-1 space-y-2 bg-gray-50 dark:bg-gray-800">
+              <div className="min-h-[160px] flex-1 space-y-2 overflow-y-auto bg-gray-50 px-3 py-2 dark:bg-gray-800 sm:px-4">
                 {messages.map((msg, idx) => (
                   <div
                     key={idx}
-                    className={`rounded-lg px-3 py-2 text-sm whitespace-pre-wrap break-words ${
+                    className={`break-words whitespace-pre-wrap rounded-lg px-3 py-2 text-sm ${
                       msg.role === 'user'
-                        ? 'ml-auto max-w-[75%] bg-palm-green text-white'
-                        : 'mr-auto max-w-[90%] bg-gray-100 dark:bg-gray-800/60 text-gray-600 dark:text-gray-400'
+                        ? 'ml-auto max-w-[82%] bg-palm-green text-white sm:max-w-[75%]'
+                        : 'mr-auto max-w-[94%] bg-white text-gray-600 shadow-sm dark:bg-gray-900/70 dark:text-gray-300 sm:max-w-[90%]'
                     }`}
                   >
                     <span>{msg.text}</span>
@@ -196,7 +181,7 @@ export default function Chatbot() {
                           onClick={() => handlePlay(idx)}
                           aria-label="Play"
                           disabled={msg.loadingAudio}
-                          className="text-gray-500 hover:text-gray-700 disabled:opacity-50"
+                          className="flex h-8 w-8 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50 dark:hover:bg-gray-800"
                         >
                           {msg.loadingAudio ? (
                             <Loader2 className="animate-spin text-palm-green" size={14} />
@@ -207,7 +192,7 @@ export default function Chatbot() {
                         <button
                           onClick={() => handleCopy(msg.text)}
                           aria-label="Copy text"
-                          className="text-gray-500 hover:text-gray-700"
+                          className="flex h-8 w-8 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800"
                         >
                           <Copy size={14} />
                         </button>
@@ -218,14 +203,13 @@ export default function Chatbot() {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Input */}
               <form
-                id="chat-input-form" onSubmit={async (e) => {
+                id="chat-input-form"
+                onSubmit={async (e) => {
                   e.preventDefault();
                   const question = input.trim();
                   if (!question) return;
 
-                  // Add user message to chat
                   setMessages((prev) => [...prev, { role: 'user', text: question }]);
                   setInput('');
                   setIsLoading(true);
@@ -244,9 +228,7 @@ export default function Chatbot() {
                     }
 
                     const data = await res.json();
-                    // Extract answer; ensure it is a string so React can render it safely
-                    const answerRaw: unknown =
-                      (data && (data.raw ?? data.answer ?? data.message)) ?? data;
+                    const answerRaw: unknown = (data && (data.raw ?? data.answer ?? data.message)) ?? data;
                     let answer: string;
                     if (typeof answerRaw === 'string') {
                       answer = answerRaw;
@@ -262,7 +244,6 @@ export default function Chatbot() {
                     setMessages((prev) => [...prev, { role: 'bot', text: answer }]);
                     if (shouldSpeak) {
                       setShouldSpeak(false);
-                      // wait a tick for state update then play
                       setTimeout(() => handlePlay(botIndex), 0);
                     }
                   } catch (error) {
@@ -275,27 +256,28 @@ export default function Chatbot() {
                     setIsLoading(false);
                   }
                 }}
-                className="px-3 pt-1 pb-6 flex gap-2"
+                className="grid grid-cols-[minmax(0,1fr)_auto_auto] gap-2 px-3 pb-4 pt-3 sm:px-4 sm:pb-5"
               >
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask me anything about joel.."
+                  placeholder="Ask about Joel’s work…"
                   disabled={isLoading}
-                  className="flex-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-palm-green/60 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 font-medium text-base disabled:opacity-50 cursor-text"
+                  className="min-h-11 min-w-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base font-medium text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-palm-green/60 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-400"
                 />
                 <button
                   type="submit"
-                  className="rounded-md bg-palm-green text-white px-4 py-2 text-sm font-medium hover:bg-palm-green-dark focus:outline-none focus:ring-2 focus:ring-palm-green/60 disabled:opacity-50"
+                  className="min-h-11 rounded-lg bg-palm-green px-3 py-2 text-sm font-medium text-white hover:bg-palm-green-dark focus:outline-none focus:ring-2 focus:ring-palm-green/60 disabled:opacity-50 sm:px-4"
                   disabled={isLoading}
                 >
-                  {isLoading ? '...' : 'Send'}
+                  {isLoading ? '…' : 'Send'}
                 </button>
                 <button
                   type="button"
                   onClick={toggleRecording}
-                  className="rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-3 py-2 flex items-center justify-center"
+                  aria-label={isRecording ? 'Stop recording' : 'Record a voice question'}
+                  className="flex h-11 w-11 items-center justify-center rounded-lg bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-100"
                   disabled={isLoading}
                 >
                   {isRecording ? <Square size={16} /> : <Mic size={16} />}

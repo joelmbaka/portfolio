@@ -60,56 +60,85 @@ function getMediaAspectClass(image: CardImage) {
 
 export default function ProjectsCarousel({ projects }: { projects: Project[] }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5" role="list" aria-label="Projects">
-        {projects.map((p) => {
-          const cardImage = getCardImage(p);
-          const iconStyle = p.iconBackground ? { backgroundColor: p.iconBackground } : undefined;
-          const mediaAspectClass = getMediaAspectClass(cardImage);
-          return (
-            <div
-              key={p.id}
-              role="listitem"
-              className="group rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md transition-shadow bg-white/60 dark:bg-gray-900/60 backdrop-blur"
-            >
-              <div className="p-4 pb-3 h-[120px] overflow-hidden">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-lg font-semibold min-w-0 flex-1">
-                    <Link href={`/${p.id}`} className="hover:underline block truncate">
-                      {p.title}
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2" role="list" aria-label="Projects">
+      {projects.map((project) => {
+        const cardImage = getCardImage(project);
+        const iconStyle = project.iconBackground ? { backgroundColor: project.iconBackground } : undefined;
+        const mediaAspectClass = getMediaAspectClass(cardImage);
+
+        return (
+          <article
+            key={project.id}
+            role="listitem"
+            className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900/70"
+          >
+            <Link href={`/${project.id}`} className="block">
+              <div
+                className={`relative w-full bg-gray-100 dark:bg-gray-800 ${mediaAspectClass}`}
+                style={iconStyle}
+              >
+                <Image
+                  src={cardImage.src}
+                  alt={cardImage.alt}
+                  fill
+                  sizes="(max-width: 640px) 92vw, (max-width: 1024px) 50vw, 520px"
+                  className={cardImage.className}
+                  unoptimized
+                />
+              </div>
+            </Link>
+
+            <div className="p-4 sm:p-6">
+              <div className="flex items-start justify-between gap-3 sm:gap-4">
+                <div className="min-w-0">
+                  <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.1em] text-gray-500 dark:text-gray-400 sm:text-xs">
+                    <span>{project.type}</span>
+                    <span aria-hidden>·</span>
+                    <span>Case study</span>
+                  </div>
+                  <h3 className="text-xl font-semibold leading-tight text-gray-900 dark:text-white">
+                    <Link href={`/${project.id}`} className="hover:text-palm-green">
+                      {project.title}
                     </Link>
                   </h3>
-                  {p.url && (
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors"
-                      aria-label="Open live project"
-                    >
-                      <ArrowUpRight size={18} />
-                    </a>
-                  )}
                 </div>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-300 line-clamp-3">{p.description}</p>
+
+                {project.url && (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-palm-green hover:text-palm-green dark:border-gray-700 dark:text-gray-400"
+                    aria-label={`Open ${project.title} live project`}
+                  >
+                    <ArrowUpRight size={17} />
+                  </a>
+                )}
               </div>
-              <Link href={`/${p.id}`} className="block">
-                <div
-                  className={`relative w-full bg-gray-100 dark:bg-gray-800 ${mediaAspectClass}`}
-                  style={iconStyle}
-                >
-                  <Image
-                    src={cardImage.src}
-                    alt={cardImage.alt}
-                    fill
-                    sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 380px"
-                    className={cardImage.className}
-                    unoptimized
-                  />
-                </div>
+
+              <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">{project.description}</p>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.tech.slice(0, 5).map((technology) => (
+                  <span
+                    key={technology}
+                    className="rounded-full bg-gray-100 px-2.5 py-1 text-[11px] text-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:text-xs"
+                  >
+                    {technology}
+                  </span>
+                ))}
+              </div>
+
+              <Link
+                href={`/${project.id}`}
+                className="mt-5 inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold text-palm-green hover:underline"
+              >
+                Read engineering case study <ArrowUpRight className="h-4 w-4" aria-hidden />
               </Link>
             </div>
-          );
-        })}
+          </article>
+        );
+      })}
     </div>
   );
 }

@@ -1,94 +1,81 @@
 import { Project } from '@/config/projects';
+import { projectContext } from '@/config/project-context';
+import { expertiseAreas } from '@/config/expertise';
 import Image from 'next/image';
-
-function StarRow({ rating = 0 }: { rating?: number }) {
-  const full = Math.floor(rating);
-  const stars = Array.from({ length: 5 }, (_, i) => i < full);
-  return (
-    <div className="mt-1 flex items-center justify-center gap-1 text-yellow-500" aria-label={`Rated ${rating} out of 5`}>
-      {stars.map((filled, i) => (
-        <svg
-          key={i}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className={`h-4 w-4 ${filled ? 'opacity-100' : 'opacity-30'}`}
-          aria-hidden
-        >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.15 3.532a1 1 0 00.95.69h3.708c.969 0 1.371 1.24.588 1.81l-3 2.18a1 1 0 00-.364 1.118l1.15 3.532c.3.921-.755 1.688-1.54 1.118l-3-2.18a1 1 0 00-1.176 0l-3 2.18c-.784.57-1.838-.197-1.539-1.118l1.15-3.532a1 1 0 00-.364-1.118l-3-2.18c-.783-.57-.38-1.81.588-1.81h3.708a1 1 0 00.95-.69l1.15-3.532z" />
-        </svg>
-      ))}
-    </div>
-  );
-}
-
-function formatCount(n?: number | string) {
-  if (typeof n === 'string') return n;
-  if (typeof n !== 'number') return undefined;
-  return new Intl.NumberFormat().format(n);
-}
+import Link from 'next/link';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 
 export default function StoreReviews({ project }: { project: Project }) {
-  const { appStore, playStore } = project;
-  if (!appStore && !playStore) return null;
-  const title =
-    appStore && playStore
-      ? 'App Store & Play Store ratings'
-      : appStore
-        ? 'App Store ratings'
-        : 'Play Store ratings';
+  const { url, appStore, playStore } = project;
+  const context = projectContext[project.id];
+  const linkCount = [url, appStore, playStore].filter(Boolean).length;
+  const relatedExpertise = (context?.expertiseSlugs ?? [])
+    .map((slug) => expertiseAreas.find((area) => area.slug === slug))
+    .filter((area): area is (typeof expertiseAreas)[number] => Boolean(area));
 
   return (
-    <section className="mt-10">
-      <h2 className="text-xl font-semibold mb-4 text-center">{title}</h2>
-      <div className="mx-auto flex max-w-md flex-wrap justify-center gap-4">
-        {appStore && (
-          <a
-            href={appStore.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/60 backdrop-blur p-5 hover:shadow-md transition-shadow text-center"
-          >
-            <div className="flex items-center justify-center">
-              <Image
-                src="/images/app-store.png"
-                alt="Download on the App Store"
-                width={160}
-                height={40}
-                className="h-10 w-auto"
-                loading="lazy"
-              />
+    <>
+      {context && (
+        <section className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6 dark:border-gray-800 dark:bg-gray-900/50">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Domain & technical context</p>
+          {context.roleLabel && (
+            <p className="mt-3 text-base font-semibold text-gray-900 dark:text-white">Role: {context.roleLabel}</p>
+          )}
+          <div className="mt-4">
+            <p className="text-sm font-semibold text-gray-900 dark:text-white">Industry / domain</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {context.domains.map((domain) => (
+                <Link key={domain} href="/industries" className="rounded-full bg-white px-3 py-1.5 text-xs text-gray-700 shadow-sm transition hover:text-palm-green dark:bg-gray-800 dark:text-gray-300">
+                  {domain}
+                </Link>
+              ))}
             </div>
-            {typeof appStore.rating === 'number' && <StarRow rating={appStore.rating} />}
-            {appStore.reviewsCount !== undefined && (
-              <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">{formatCount(appStore.reviewsCount)} ratings</div>
-            )}
-          </a>
-        )}
-        {playStore && (
-          <a
-            href={playStore.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/60 backdrop-blur p-5 hover:shadow-md transition-shadow text-center"
-          >
-            <div className="flex items-center justify-center">
-              <Image
-                src="/images/play-store.png"
-                alt="Get it on Google Play"
-                width={160}
-                height={40}
-                className="h-10 w-auto"
-                loading="lazy"
-              />
+          </div>
+
+          <div className="mt-5">
+            <p className="text-sm font-semibold text-gray-900 dark:text-white">Expertise demonstrated</p>
+            <div className="mt-2 grid gap-2 sm:grid-cols-2">
+              {relatedExpertise.map((area) => (
+                <Link key={area.slug} href={`/expertise/${area.slug}`} className="inline-flex min-h-11 items-center justify-between rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-700 transition hover:border-palm-green hover:text-palm-green dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                  {area.title}
+                  <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                </Link>
+              ))}
             </div>
-            {typeof playStore.rating === 'number' && <StarRow rating={playStore.rating} />}
-            {playStore.reviewsCount !== undefined && (
-              <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">{formatCount(playStore.reviewsCount)} ratings</div>
+          </div>
+        </section>
+      )}
+
+      {linkCount > 0 && (
+        <section className="mt-10">
+          <h2 className="mb-3 text-center text-xl font-semibold">Live product & release links</h2>
+          <p className="mx-auto mb-5 max-w-xl text-center text-sm leading-6 text-gray-600 dark:text-gray-400">
+            Public product and store links are shown as release evidence. Ratings and review counts are intentionally not displayed unless they are verified from the stores.
+          </p>
+          <div
+            className={`mx-auto grid w-full max-w-3xl grid-cols-1 gap-3 ${
+              linkCount === 2 ? 'sm:grid-cols-2' : linkCount >= 3 ? 'sm:grid-cols-3' : 'sm:max-w-sm'
+            }`}
+          >
+            {url && (
+              <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-16 w-full items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white/60 px-5 py-4 text-center text-sm font-semibold text-gray-800 backdrop-blur transition-shadow hover:shadow-md dark:border-gray-800 dark:bg-gray-900/60 dark:text-gray-100">
+                Visit product website
+                <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+              </a>
             )}
-          </a>
-        )}
-      </div>
-    </section>
+            {appStore && (
+              <a href={appStore.url} target="_blank" rel="noopener noreferrer" className="flex min-h-16 w-full items-center justify-center rounded-xl border border-gray-200 bg-white/60 px-5 py-4 text-center backdrop-blur transition-shadow hover:shadow-md dark:border-gray-800 dark:bg-gray-900/60">
+                <Image src="/images/app-store.png" alt={`View ${project.title} on the App Store`} width={160} height={40} className="h-10 w-auto max-w-full" loading="lazy" />
+              </a>
+            )}
+            {playStore && (
+              <a href={playStore.url} target="_blank" rel="noopener noreferrer" className="flex min-h-16 w-full items-center justify-center rounded-xl border border-gray-200 bg-white/60 px-5 py-4 text-center backdrop-blur transition-shadow hover:shadow-md dark:border-gray-800 dark:bg-gray-900/60">
+                <Image src="/images/play-store.png" alt={`View ${project.title} on Google Play`} width={160} height={40} className="h-10 w-auto max-w-full" loading="lazy" />
+              </a>
+            )}
+          </div>
+        </section>
+      )}
+    </>
   );
 }

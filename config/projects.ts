@@ -25,6 +25,7 @@ export interface Project {
   aliases?: string[];
   title: string;
   description: string;
+  updatedAt: string;
   tech: string[];
   type: ProjectType;
   url?: string;
@@ -35,22 +36,19 @@ export interface Project {
   enhancements?: ProjectEnhancement[];
   appStore?: {
     url: string;
-    rating?: number; // 0-5
-    reviewsCount?: number | string;
   };
   playStore?: {
     url: string;
-    rating?: number; // 0-5
-    reviewsCount?: number | string;
   };
 }
 
 export const projects: Project[] = [
   {
     id: 'journpad',
-    title: 'JournPad: AI Voice Journal',
+    title: 'JournPad: Voice Journal',
     description:
-      'JournPad is an AI-assisted voice journaling app that turns your spoken thoughts into organized, searchable entries. Record hands-free and get automatic titles, summaries, subjects, keywords, and smart categories, plus an insights dashboard that visualizes your journaling patterns over time.',
+      'Voice-first journaling app that preserves the original recording, transcribes spoken entries, and uses AI to generate useful titles, summaries, and categories. Entries can be searched and revisited by date, linked to goals, supported by reminders and prompts, and protected with account, deletion, and optional biometric controls.',
+    updatedAt: '2026-08-12',
     tech: [
       'Expo',
       'React Native',
@@ -58,7 +56,7 @@ export const projects: Project[] = [
       'Google Cloud',
       'Python',
       'Docker',
-      'OpenAI',
+      'AI APIs',
     ],
     type: 'SaaS',
     url: 'https://journpad.com',
@@ -99,22 +97,18 @@ export const projects: Project[] = [
       },
     ],
     appStore: {
-      url: 'https://apps.apple.com/ke/app/journpad/id6754232534',
-      // You can update these as real ratings come in
-      rating: 4.9,
-      reviewsCount: '1K+',
+      url: 'https://apps.apple.com/ke/app/journpad-ai-voice-journal/id6754232534',
     },
     playStore: {
       url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.journal',
-      rating: 4.9,
-      reviewsCount: '2K+',
     },
   },
   {
     id: 'rentpayor',
     title: 'RentPayor',
     description:
-      'Rent collection and reconciliation app for landlords, designed to match messy M-Pesa, bank, and cash payments against invoices while keeping landlords in control of final approval.',
+      'Rent collection and reconciliation software for landlords and property managers. RentPayor creates rent invoices, lets tenants pay KES rent through an invoice-linked M-Pesa flow, automatically reconciles confirmed payments, and keeps partial balances, carried-forward credits, receipts, leases, units, tenants, and manual payment records in one rent ledger.',
+    updatedAt: '2026-08-12',
     tech: [
       'Expo',
       'React Native',
@@ -123,6 +117,7 @@ export const projects: Project[] = [
       'FastAPI',
       'PostgreSQL',
       'Firebase Auth',
+      'M-Pesa',
       'Expo Router',
       'Jest',
     ],
@@ -194,16 +189,19 @@ export const projects: Project[] = [
         note: 'Code available upon request.',
       },
     ],
+    appStore: {
+      url: 'https://apps.apple.com/ke/app/rentpayor/id6765710822',
+    },
     playStore: {
       url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.rentpayor',
-      reviewsCount: '1K+',
     },
   },
   {
     id: 'macsim',
     title: 'Macsim Cargo',
     description:
-      'Logistics and cargo operations app with live location features, booking support, document scanning, notifications, and payment-related operational tooling for transport workflows.',
+      'Cargo and logistics operations platform spanning mobile field workflows and back-office administration. Macsim handles loads, reservations, driver assignments, trip tracking, documents, notifications, fleet operations and finance, with a guarded M-Pesa/Daraja flow for funding a collection-account ledger and paying drivers in full or partial load installments.',
+    updatedAt: '2026-07-31',
     tech: [
       'Expo',
       'React Native',
@@ -213,8 +211,10 @@ export const projects: Project[] = [
       'PostgreSQL',
       'Firebase Auth',
       'React Query',
+      'M-Pesa Daraja',
     ],
     type: 'Enterprise',
+    url: 'https://macsimcargo.com',
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/icon.png',
     storePreview: {
       platform: 'android',
@@ -248,20 +248,19 @@ export const projects: Project[] = [
         screenshots: [
           'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/enhancements/admin-dashboard/dashboard.png',
         ],
-        url: 'https://macsim-website.vercel.app/admin',
         note: 'Code available upon request.',
       },
     ],
     playStore: {
       url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.macsim',
-      reviewsCount: '100+',
     },
   },
   {
     id: 'ai-stylist',
     title: 'AI Stylist',
     description:
-      'AI-powered wardrobe assistant that analyzes clothing items, organizes a personal closet, and generates outfit recommendations using image understanding, subscriptions, and weather-aware suggestions.',
+      'Mobile wardrobe-management and outfit-recommendation product. Users create wardrobes, upload clothing photos for AI-assisted category, tag, and description analysis, and generate one-time, daily, or weekly outfit suggestions that can use precise local weather; recommendation history is stored locally in SQLite and designed to sync with the cloud.',
+    updatedAt: '2026-05-20',
     tech: [
       'Expo',
       'React Native',
@@ -269,7 +268,10 @@ export const projects: Project[] = [
       'Python',
       'FastAPI',
       'PostgreSQL',
+      'SQLAlchemy',
+      'Alembic',
       'SQLite',
+      'Expo Location',
       'OAuth',
     ],
     type: 'SaaS',
@@ -290,13 +292,13 @@ export const projects: Project[] = [
       ],
     },
   },
-
   {
     id: 'clivique-hmis',
     aliases: ['taifa-hmis'],
     title: 'CliviQue HMIS',
     description:
-      'Hospital operations platform built around real facility workflows across OPD, emergency, inpatient care, duty and coverage, internal referrals, theatre, mortuary, ambulance, billing, patient movement history, printable clinical documents, and facility operations summaries.',
+      'Hospital management information system connecting patient registration, OPD, emergency, inpatient care, orders, referrals, theatre, billing, ambulance, mortuary, duty coverage, patient movement, documents, and facility operations. Its latest public draft also adds facility-bound M-Pesa patient invoice collection with encrypted merchant credentials, callback verification, idempotent receipt handling, and invoice reconciliation.',
+    updatedAt: '2026-08-02',
     tech: [
       'Next.js',
       'TypeScript',
@@ -309,8 +311,10 @@ export const projects: Project[] = [
       'Alembic',
       'PostgreSQL',
       'Playwright',
+      'M-Pesa Daraja',
     ],
     type: 'Enterprise',
+    url: 'https://clivique.com',
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/clivique-hmis/frame-16.png',
     screenshots: {
       web: [

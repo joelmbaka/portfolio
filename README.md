@@ -1,60 +1,72 @@
-# Joel Mbaka - Software Engineer
-Welcome to my professional portfolio! I'm a Software Developer passionate about building innovative solutions with modern technologies. Let's build something extraordinary together!
+# Joel Mbaka — Senior Full-Stack Engineer, Web & Mobile
 
-## 🚀 Tech Stack
+Portfolio source for [joelmbaka.com](https://joelmbaka.com).
 
-This portfolio is built with:
-- **Next.js 15** - For server-side rendering and optimal performance
-- **React 19** - For building dynamic user interfaces
-- **TypeScript** - For type-safe code
-- **Tailwind CSS** - For responsive and modern styling
-- **Framer Motion** - For smooth animations
+I build production software products end-to-end across mobile, web, backend, data, integrations, and release. The portfolio is organized around engineering case studies rather than technology lists so the work shows what I owned, what systems were involved, and how the pieces fit together.
 
-## 🎯 Key Features
+## Core engineering scope
 
-- Responsive design that works seamlessly across all devices
-- Dark/Light mode support
-- Dynamic project showcase
-- Modern, clean UI/UX
-- Performance optimized
+- **Mobile:** React Native, Expo, TypeScript, iOS, Android, authentication, native capabilities, local persistence, store releases
+- **Web:** Next.js, React, TypeScript, responsive product interfaces, operational dashboards, public product sites
+- **Backend & data:** Python, FastAPI, PostgreSQL, SQLAlchemy, Alembic, APIs, relational and transactional data models
+- **Production:** payment integrations, AI APIs, testing, deployment, observability, cloud services, automation
 
-## Getting Started
+## Selected work
 
-First, run the development server:
+The homepage deliberately highlights three projects that show different dimensions of the stack:
+
+- **JournPad** — voice-first mobile journaling with preserved audio, transcription, AI-assisted titles/summaries/categories, playback, search, goals, reminders, account controls, and public mobile releases
+- **CliviQue HMIS** — a full-stack hospital information system spanning patient and facility workflows, Next.js, FastAPI, PostgreSQL, role/facility-scoped access, browser testing, and facility-bound M-Pesa patient invoice collection
+- **RentPayor** — rent invoicing, invoice-linked M-Pesa collection, automatic payment reconciliation, partial balances, carried-forward credits, receipts, leases, tenants, units, and internal CRM/outbound tooling
+
+The complete project index remains available at **`/work`**, including Macsim Cargo and AI Stylist. Individual project URLs remain public and indexable.
+
+## Additional projects
+
+- **Macsim Cargo** — logistics and cargo operations across mobile and back-office systems, including load/trip workflows and guarded Daraja collection-account funding plus B2C driver payouts
+- **AI Stylist** — mobile wardrobe management with AI-assisted clothing analysis, weather-aware outfit recommendations, OAuth, SQLite history, and a Python/PostgreSQL backend model
+
+## Public SEO architecture
+
+The public portfolio now has a deliberate crawlable information architecture:
+
+- **`/`** — primary profile and selected work
+- **`/full-stack-web-mobile-engineer`** — primary positioning/search-intent page
+- **`/work`** — complete engineering case-study index
+- **`/expertise`** — engineering expertise hub
+- **`/expertise/react-native-mobile-engineering`**
+- **`/expertise/nextjs-web-engineering`**
+- **`/expertise/fastapi-postgresql-backends`**
+- **`/expertise/ai-integrations-automation`**
+- **`/about`**
+- **`/contact`**
+- Individual project case-study URLs
+
+Public pages use canonical metadata, Open Graph/Twitter metadata, structured data, internal linking, and real content-update dates where available. `sitemap.xml` contains the public portfolio surface with meaningful priorities and modification dates. `robots.txt` permits the public site while excluding API routes, the internal CRM, the placeholder blog, and private website-requirements tooling.
+
+The repository also includes a generated Open Graph image, a web manifest, Vercel Analytics, and Speed Insights. The internal job-hunt CRM remains deliberately outside the search surface.
+
+## Portfolio stack
+
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Vercel Analytics and Speed Insights
+- Supabase for internal authentication features
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-
-#$ ./projects --list
-> python-tutor    # AI tutoring via CrewAI + Expo     → joelmbaka.site/python-tutor
-> ai-journal      # Voice→insights with VectorDB     → joelmbaka.site/ai-journal  
-> fitness-ai      # Smart workouts + Firebase        → joelmbaka.site/fitness
+- Website: [joelmbaka.com](https://joelmbaka.com)
+- GitHub: [github.com/joelmbaka](https://github.com/joelmbaka)
+- LinkedIn: [linkedin.com/in/joelmbaka](https://linkedin.com/in/joelmbaka)
