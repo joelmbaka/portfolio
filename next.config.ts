@@ -31,6 +31,14 @@ const nextConfig: NextConfig = {
         source: '/crm/:path*',
         headers: noIndexHeader,
       },
+      {
+        source: '/blog',
+        headers: noIndexHeader,
+      },
+      {
+        source: '/blog/:path*',
+        headers: noIndexHeader,
+      },
     ];
   },
 };
