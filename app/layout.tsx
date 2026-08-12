@@ -19,12 +19,17 @@ const geistMono = Geist_Mono({
 
 const siteTitle = 'Senior Full-Stack Engineer — Web & Mobile | Joel Mbaka';
 const siteDescription =
-  'Senior full-stack engineer building production web and mobile products end-to-end with React Native, Next.js, TypeScript, Python, FastAPI, PostgreSQL, and modern cloud and AI integrations.';
+  'Senior full-stack engineer building production web and mobile products end-to-end with React Native, Next.js, TypeScript, Python, FastAPI, PostgreSQL, payments, AI integrations, and modern cloud infrastructure.';
 
 export const metadata: Metadata = {
   metadataBase: new URL((process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '')),
   title: siteTitle,
   description: siteDescription,
+  applicationName: 'Joel Mbaka Portfolio',
+  authors: [{ name: 'Joel Mbaka', url: 'https://joelmbaka.com' }],
+  creator: 'Joel Mbaka',
+  publisher: 'Joel Mbaka',
+  category: 'technology',
   keywords: [
     'Joel Mbaka',
     'senior full-stack engineer',
@@ -39,7 +44,6 @@ export const metadata: Metadata = {
     'web application engineer',
     'product engineer',
   ],
-  applicationName: 'Joel Mbaka Portfolio',
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
@@ -47,13 +51,23 @@ export const metadata: Metadata = {
     siteName: 'Joel Mbaka',
     title: siteTitle,
     description: siteDescription,
-    images: ['/images/og-default.jpg'],
+    locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
     title: siteTitle,
     description: siteDescription,
-    images: ['/images/og-default.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
