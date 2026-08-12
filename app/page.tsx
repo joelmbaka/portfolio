@@ -15,6 +15,7 @@ const capabilityGroups = [
     description:
       'React Native and Expo applications with authentication, native device capabilities, API integrations, testing, and App Store / Play Store release work.',
     technologies: 'React Native · Expo · TypeScript · iOS · Android',
+    href: '/expertise/react-native-mobile-engineering',
     icon: MonitorSmartphone,
   },
   {
@@ -22,6 +23,7 @@ const capabilityGroups = [
     description:
       'Production web products and operational dashboards built around real workflows, responsive interfaces, data-heavy views, and maintainable component systems.',
     technologies: 'Next.js · React · TypeScript · TanStack · Tailwind',
+    href: '/expertise/nextjs-web-engineering',
     icon: Braces,
   },
   {
@@ -29,6 +31,7 @@ const capabilityGroups = [
     description:
       'APIs, business logic, background workflows, relational data models, authentication, and integrations designed to support complete products rather than isolated screens.',
     technologies: 'Python · FastAPI · PostgreSQL · SQLAlchemy · REST',
+    href: '/expertise/fastapi-postgresql-backends',
     icon: Database,
   },
   {
@@ -36,6 +39,7 @@ const capabilityGroups = [
     description:
       'I work across the full delivery path: architecture, implementation, third-party integrations, testing, deployment, observability, release, and iteration after launch.',
     technologies: 'Vercel · Docker · CI/testing · Cloud APIs · AI integrations',
+    href: '/expertise',
     icon: Rocket,
   },
 ];
@@ -46,39 +50,57 @@ export default function Home() {
     .filter((project): project is (typeof projects)[number] => Boolean(project));
 
   const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
-  const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: 'Joel Mbaka',
-      jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
-      description:
-        'Senior full-stack engineer building production web and mobile products across frontend, backend, data, integrations, and release.',
-      url: base,
-      knowsAbout: [
-        'React Native',
-        'Next.js',
-        'TypeScript',
-        'Python',
-        'FastAPI',
-        'PostgreSQL',
-        'Mobile application development',
-        'Web application development',
-        'AI integrations',
-      ],
-      sameAs: [
-        'https://github.com/joelmbaka',
-        'https://linkedin.com/in/joelmbaka',
-        'https://x.com/mbaka_joe',
-      ],
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'Joel Mbaka',
-      url: base,
-    },
-  ];
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ProfilePage',
+        '@id': `${base}/#webpage`,
+        url: `${base}/`,
+        name: 'Joel Mbaka — Senior Full-Stack Engineer, Web & Mobile',
+        dateModified: '2026-08-12',
+        mainEntity: { '@id': `${base}/#person` },
+      },
+      {
+        '@type': 'Person',
+        '@id': `${base}/#person`,
+        name: 'Joel Mbaka',
+        jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
+        description:
+          'Senior full-stack engineer building production web and mobile products across frontend, backend, data, payments, AI integrations, and release.',
+        url: base,
+        knowsAbout: [
+          'React Native',
+          'Expo',
+          'Next.js',
+          'React',
+          'TypeScript',
+          'Python',
+          'FastAPI',
+          'PostgreSQL',
+          'SQLAlchemy',
+          'Mobile application development',
+          'Web application development',
+          'M-Pesa integrations',
+          'AI integrations',
+        ],
+        sameAs: [
+          'https://github.com/joelmbaka',
+          'https://linkedin.com/in/joelmbaka',
+          'https://x.com/mbaka_joe',
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${base}/#website`,
+        name: 'Joel Mbaka',
+        url: base,
+        description:
+          'Engineering portfolio covering production mobile, web, backend, data, payment, and AI integration work.',
+        publisher: { '@id': `${base}/#person` },
+      },
+    ],
+  };
 
   return (
     <SlideIn>
@@ -105,7 +127,7 @@ export default function Home() {
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {capabilityGroups.map(({ title, description, technologies, icon: Icon }) => (
+            {capabilityGroups.map(({ title, description, technologies, href, icon: Icon }) => (
               <article
                 key={title}
                 className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900/70"
@@ -116,8 +138,17 @@ export default function Home() {
                 <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-white">{title}</h3>
                 <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">{description}</p>
                 <p className="mt-4 text-xs font-medium text-gray-500 dark:text-gray-400">{technologies}</p>
+                <Link href={href} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-palm-green hover:underline">
+                  Explore expertise <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
               </article>
             ))}
+          </div>
+
+          <div className="mt-7 flex justify-center">
+            <Link href="/expertise" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-palm-green dark:text-gray-400">
+              View all engineering expertise <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
           </div>
         </section>
 
