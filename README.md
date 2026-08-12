@@ -6,29 +6,47 @@ I build production software products end-to-end across mobile, web, backend, dat
 
 ## Core engineering scope
 
-- **Mobile:** React Native, Expo, TypeScript, iOS, Android, authentication, native capabilities, store releases
-- **Web:** Next.js, React, TypeScript, responsive product interfaces, operational dashboards
-- **Backend & data:** Python, FastAPI, PostgreSQL, SQLAlchemy, APIs, relational data models
-- **Production:** integrations, testing, deployment, observability, cloud services, AI APIs
+- **Mobile:** React Native, Expo, TypeScript, iOS, Android, authentication, native capabilities, local persistence, store releases
+- **Web:** Next.js, React, TypeScript, responsive product interfaces, operational dashboards, public product sites
+- **Backend & data:** Python, FastAPI, PostgreSQL, SQLAlchemy, Alembic, APIs, relational and transactional data models
+- **Production:** payment integrations, AI APIs, testing, deployment, observability, cloud services, automation
 
 ## Selected work
 
 The homepage deliberately highlights three projects that show different dimensions of the stack:
 
-- **JournPad** — mobile product engineering with voice capture, transcription, AI-assisted metadata, playback, goals, and production app releases
-- **CliviQue HMIS** — a full-stack hospital information system spanning Next.js, FastAPI, PostgreSQL, migrations, role-based workflows, and browser testing
-- **RentPayor** — mobile, backend, relational data, authentication, payment/rent workflows, and operational sales tooling
+- **JournPad** — voice-first mobile journaling with preserved audio, transcription, AI-assisted titles/summaries/categories, playback, search, goals, reminders, account controls, and public mobile releases
+- **CliviQue HMIS** — a full-stack hospital information system spanning patient and facility workflows, Next.js, FastAPI, PostgreSQL, role/facility-scoped access, browser testing, and facility-bound M-Pesa patient invoice collection
+- **RentPayor** — rent invoicing, invoice-linked M-Pesa collection, automatic payment reconciliation, partial balances, carried-forward credits, receipts, leases, tenants, units, and internal CRM/outbound tooling
 
-The complete project index remains available at **`/work`**, including additional case studies such as Macsim Cargo and AI Stylist. Individual project URLs remain public and indexable.
+The complete project index remains available at **`/work`**, including Macsim Cargo and AI Stylist. Individual project URLs remain public and indexable.
 
 ## Additional projects
 
-- **Macsim Cargo** — logistics and cargo operations across mobile, backend services, and operational tooling
-- **AI Stylist** — AI-assisted wardrobe product spanning React Native, backend APIs, data, subscriptions, and external context
+- **Macsim Cargo** — logistics and cargo operations across mobile and back-office systems, including load/trip workflows and guarded Daraja collection-account funding plus B2C driver payouts
+- **AI Stylist** — mobile wardrobe management with AI-assisted clothing analysis, weather-aware outfit recommendations, OAuth, SQLite history, and a Python/PostgreSQL backend model
 
-## Portfolio architecture
+## Public SEO architecture
 
-This repository uses:
+The public portfolio now has a deliberate crawlable information architecture:
+
+- **`/`** — primary profile and selected work
+- **`/full-stack-web-mobile-engineer`** — primary positioning/search-intent page
+- **`/work`** — complete engineering case-study index
+- **`/expertise`** — engineering expertise hub
+- **`/expertise/react-native-mobile-engineering`**
+- **`/expertise/nextjs-web-engineering`**
+- **`/expertise/fastapi-postgresql-backends`**
+- **`/expertise/ai-integrations-automation`**
+- **`/about`**
+- **`/contact`**
+- Individual project case-study URLs
+
+Public pages use canonical metadata, Open Graph/Twitter metadata, structured data, internal linking, and real content-update dates where available. `sitemap.xml` contains the public portfolio surface with meaningful priorities and modification dates. `robots.txt` permits the public site while excluding API routes, the internal CRM, the placeholder blog, and private website-requirements tooling.
+
+The repository also includes a generated Open Graph image, a web manifest, Vercel Analytics, and Speed Insights. The internal job-hunt CRM remains deliberately outside the search surface.
+
+## Portfolio stack
 
 - Next.js 15
 - React 19
@@ -37,8 +55,6 @@ This repository uses:
 - Framer Motion
 - Vercel Analytics and Speed Insights
 - Supabase for internal authentication features
-
-Public project routes include per-page metadata, canonical URLs, Open Graph data, and structured data. The internal job-hunt CRM is deliberately excluded from search indexing.
 
 ## Local development
 
