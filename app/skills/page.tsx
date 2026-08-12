@@ -39,23 +39,23 @@ const groups = [
   },
   {
     title: 'Databases & data modeling',
-    items: ['PostgreSQL', 'SQL', 'SQLAlchemy', 'Alembic', 'SQLite', 'Neo4j', 'Graph data', 'Relational modeling', 'Migrations', 'Local persistence', 'Caching patterns', 'Key-value storage patterns', 'Data synchronization'],
+    items: ['PostgreSQL', 'SQL', 'SQLAlchemy', 'Alembic', 'SQLite', 'Neo4j', 'Graph data', 'Relational modeling', 'Document-database patterns', 'Migrations', 'Local persistence', 'Key-value / caching patterns', 'Data synchronization'],
   },
   {
     title: 'AI, voice & automation',
-    items: ['LLM integration', 'LLM reasoning', 'Structured outputs', 'AI agents', 'Voice apps', 'Speech-to-text', 'Whisper', 'Audio workflows', 'Image understanding', 'Open-source models', 'NVIDIA-hosted inference', 'Modal', 'CrewAI', 'Human-reviewed automation', 'Prompt design'],
+    items: ['LLM integration', 'LLM reasoning', 'Structured outputs', 'AI agents', 'Voice apps', 'Telephony / voice APIs', 'Speech-to-text', 'Whisper', 'Audio workflows', 'Image understanding', 'Open-source models', 'NVIDIA-hosted open-source inference', 'Modal.com', 'CrewAI', 'Human-reviewed automation', 'Prompt design'],
   },
   {
     title: 'Payments, SaaS & financial workflows',
-    items: ['M-Pesa', 'Daraja', 'Payment APIs', 'STK Push', 'B2C payouts', 'Invoice reconciliation', 'Receipts', 'Ledgers', 'Partial payments', 'Credits', 'Subscriptions', 'RevenueCat', 'KYC/KYB', 'Payment callbacks', 'Financial verification flows'],
+    items: ['M-Pesa', 'Daraja', 'Stripe', 'Payment APIs', 'STK Push', 'B2C payouts', 'Invoice reconciliation', 'Receipts', 'Ledgers', 'Partial payments', 'Credits', 'Subscriptions', 'RevenueCat', 'KYC/KYB', 'Payment callbacks', 'Financial verification flows'],
   },
   {
     title: 'Authentication & application security',
-    items: ['Google Sign-In', 'Apple Sign-In', 'OAuth', 'JWT', 'Secure token storage', 'Access revocation', 'Biometrics', 'Password hashing', 'RBAC', 'Tenant/facility isolation', 'Backend identity truth', 'Sensitive vs non-sensitive local storage', 'Callback verification', 'Auditability'],
+    items: ['Google Sign-In', 'Apple Sign-In', 'OAuth', 'JWT', 'Secure token storage', 'Access revocation', 'Biometrics', 'Password hashing', 'RBAC', 'Tenant/facility isolation', 'Backend identity truth', 'Sensitive vs non-sensitive local storage', 'Callback verification', 'Auditability', 'AML-aware financial workflows'],
   },
   {
     title: 'Cloud, Git & CI/CD',
-    items: ['Git', 'GitHub', 'Branches', 'Pull requests', 'Merging', 'Vercel', 'Expo EAS', 'Build profiles', 'Production deployments', 'Preview deployments', 'Mobile signing', 'Store submission', 'OTA updates', 'Release iteration'],
+    items: ['Git', 'GitHub', 'Branches', 'Pull requests', 'Merging', 'Vercel', 'Expo EAS', 'Build profiles', 'Production deployments', 'Preview deployments', 'Mobile signing', 'Store submission', 'Closed testing', 'OTA updates', 'Release iteration'],
   },
   {
     title: 'Search, SEO & distribution',
@@ -77,7 +77,7 @@ export default function SkillsPage() {
       '@type': 'Person',
       '@id': `${base}/#person`,
       name: 'Joel Mbaka',
-      jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
+      jobTitle: 'Senior Full-Stack Product Engineer — Web & Mobile',
       knowsAbout: groups.flatMap((group) => group.items),
       url: base,
     },
