@@ -72,7 +72,7 @@ export default function Hero() {
             <a href="https://linkedin.com/in/joelmbaka" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-2 hover:text-gray-900 dark:hover:text-white">
               <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn
             </a>
-            <span className="basis-full sm:basis-auto">Remote only · Contract preferred · Open to full-time · UTC+3</span>
+            <span className="basis-full sm:basis-auto">Nairobi, Kenya · EAT (UTC+3) · Remote only · Contract preferred · Open to full-time</span>
           </div>
         </div>
 
