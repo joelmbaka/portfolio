@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 const siteTitle = 'Senior Full-Stack Product Engineer — Web & Mobile | Joel Mbaka';
 const siteDescription =
-  'Remote senior full-stack product engineer building production mobile and web software with React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST/GraphQL APIs, payments, voice/LLM integrations, CI/CD, app-store release, and technical SEO.';
+  'Remote senior full-stack product engineer building production mobile and web software with React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST/GraphQL APIs, Playwright/Maestro E2E testing, pytest/Jest, payments, voice/LLM integrations, CI/CD, app-store release, and technical SEO.';
 
 export const metadata: Metadata = {
   metadataBase: new URL((process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '')),
@@ -48,6 +48,14 @@ export const metadata: Metadata = {
     'REST API engineer',
     'GraphQL engineer',
     'API integration engineer',
+    'end to end testing engineer',
+    'Playwright testing',
+    'Maestro mobile testing',
+    'mobile E2E testing',
+    'web E2E testing',
+    'pytest',
+    'Jest testing',
+    'automated regression testing',
     'voice app developer',
     'voice AI engineer',
     'speech-to-text engineer',
