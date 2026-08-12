@@ -1,12 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import Hero from '@/components/Hero';
 import CTA from '@/components/CTA';
 import { projects } from '@/config/projects';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
 import Chatbot from '@/components/Chatbot';
 import SlideIn from '@/components/SlideIn';
-import { Braces, Database, MonitorSmartphone, Rocket } from 'lucide-react';
+import { ArrowRight, Braces, Database, MonitorSmartphone, Rocket } from 'lucide-react';
 
 const capabilityGroups = [
   {
@@ -43,10 +44,6 @@ export default function Home() {
   const selectedWork = ['journpad', 'clivique-hmis', 'rentpayor']
     .map((id) => projects.find((project) => project.id === id))
     .filter((project): project is (typeof projects)[number] => Boolean(project));
-
-  const additionalWork = projects.filter(
-    (project) => !selectedWork.some((selected) => selected.id === project.id),
-  );
 
   const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
   const jsonLd = [
@@ -135,20 +132,16 @@ export default function Home() {
             </p>
           </div>
           <ProjectsCarousel projects={selectedWork} />
+          <div className="mt-7 flex justify-center">
+            <Link
+              href="/work"
+              className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-palm-green dark:text-gray-400"
+            >
+              View all projects
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
         </section>
-
-        {additionalWork.length > 0 && (
-          <section className="container mx-auto mt-20 px-4 sm:px-6 md:px-8 lg:px-12">
-            <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-palm-green">More work</p>
-                <h2 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">Additional product builds</h2>
-              </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Mobile, operations, and AI-assisted products</p>
-            </div>
-            <ProjectsCarousel projects={additionalWork} />
-          </section>
-        )}
 
         <CTA />
         <Chatbot />
