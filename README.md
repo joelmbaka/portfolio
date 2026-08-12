@@ -1,33 +1,30 @@
 # Joel Mbaka — Senior Full-Stack Engineer, Web & Mobile
 
-Source for [joelmbaka.com](https://joelmbaka.com), my engineering portfolio and selected product case studies.
+Portfolio source for [joelmbaka.com](https://joelmbaka.com).
 
-The site is designed to show end-to-end product engineering across mobile applications, web platforms, backend services, relational data, third-party integrations, testing, and production release.
+I build production software products end-to-end across mobile, web, backend, data, integrations, and release. The portfolio is organized around engineering case studies rather than technology lists so the work shows what I owned, what systems were involved, and how the pieces fit together.
 
-## Engineering focus
+## Core engineering scope
 
-- **Mobile:** React Native, Expo, TypeScript, iOS, Android
-- **Web:** Next.js, React, TypeScript, Tailwind CSS, TanStack tooling
-- **Backend:** Python, FastAPI, REST APIs, background and integration workflows
-- **Data:** PostgreSQL, SQLAlchemy, Alembic, relational domain modeling
-- **Production:** Vercel, Docker, cloud APIs, authentication, testing, release workflows
-- **Applied AI:** transcription, LLM integrations, agents, recommendation and automation systems
+- **Mobile:** React Native, Expo, TypeScript, iOS, Android, authentication, native capabilities, store releases
+- **Web:** Next.js, React, TypeScript, responsive product interfaces, operational dashboards
+- **Backend & data:** Python, FastAPI, PostgreSQL, SQLAlchemy, APIs, relational data models
+- **Production:** integrations, testing, deployment, observability, cloud services, AI APIs
 
-## Featured case studies
+## Selected work
 
-### JournPad
+The homepage deliberately highlights three projects that show different dimensions of the stack:
 
-AI-assisted voice journaling product spanning a React Native mobile application, Python services, AI processing, cloud infrastructure, and an automated publishing pipeline.
+- **JournPad** — mobile product engineering with voice capture, transcription, AI-assisted metadata, playback, goals, and production app releases
+- **CliviQue HMIS** — a full-stack hospital information system spanning Next.js, FastAPI, PostgreSQL, migrations, role-based workflows, and browser testing
+- **RentPayor** — mobile, backend, relational data, authentication, payment/rent workflows, and operational sales tooling
 
-### CliviQue HMIS
+The complete project index remains available at **`/work`**, including additional case studies such as Macsim Cargo and AI Stylist. Individual project URLs remain public and indexable.
 
-Hospital operations platform built with Next.js, React, FastAPI, SQLAlchemy, Alembic, PostgreSQL, and Playwright across interconnected clinical and facility workflows.
+## Additional projects
 
-### RentPayor
-
-Rent collection and reconciliation product spanning React Native, FastAPI, PostgreSQL, authentication, internal CRM tooling, lead intelligence, and sales automation.
-
-Additional work includes Macsim Cargo and AI Stylist.
+- **Macsim Cargo** — logistics and cargo operations across mobile, backend services, and operational tooling
+- **AI Stylist** — AI-assisted wardrobe product spanning React Native, backend APIs, data, subscriptions, and external context
 
 ## Portfolio architecture
 
@@ -38,10 +35,10 @@ This repository uses:
 - TypeScript
 - Tailwind CSS
 - Framer Motion
-- Supabase for internal authenticated tooling
 - Vercel Analytics and Speed Insights
+- Supabase for internal authentication features
 
-Public portfolio routes are intentionally separated from internal tooling at the crawler level. Internal CRM and placeholder-content routes are marked `noindex` and excluded from the public search surface.
+Public project routes include per-page metadata, canonical URLs, Open Graph data, and structured data. The internal job-hunt CRM is deliberately excluded from search indexing.
 
 ## Local development
 
@@ -50,18 +47,10 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
-
-For a production build:
-
-```bash
-npm run build
-npm run start
-```
+Then open `http://localhost:3000`.
 
 ## Contact
 
 - Website: [joelmbaka.com](https://joelmbaka.com)
 - GitHub: [github.com/joelmbaka](https://github.com/joelmbaka)
 - LinkedIn: [linkedin.com/in/joelmbaka](https://linkedin.com/in/joelmbaka)
-- Email: mbakajoe26@gmail.com
