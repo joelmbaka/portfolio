@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const siteTitle = 'Senior Full-Stack Engineer — Web & Mobile | Joel Mbaka';
+const siteTitle = 'Senior Full-Stack Product Engineer — Web & Mobile | Joel Mbaka';
 const siteDescription =
-  'Senior full-stack engineer building production web and mobile products end-to-end with React Native, Next.js, TypeScript, Python, FastAPI, PostgreSQL, payments, AI integrations, and modern cloud infrastructure.';
+  'Remote senior full-stack product engineer building production mobile and web software with React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST/GraphQL APIs, payments, voice/LLM integrations, CI/CD, app-store release, and technical SEO.';
 
 export const metadata: Metadata = {
   metadataBase: new URL((process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '')),
@@ -33,16 +33,42 @@ export const metadata: Metadata = {
   keywords: [
     'Joel Mbaka',
     'senior full-stack engineer',
+    'senior product engineer',
     'full-stack web and mobile engineer',
-    'senior web and mobile engineer',
+    'remote contract software engineer',
+    'startup product engineer',
+    '0 to 1 product engineer',
     'React Native engineer',
+    'Expo engineer',
     'Next.js engineer',
     'TypeScript engineer',
-    'Python FastAPI engineer',
+    'Python engineer',
+    'FastAPI engineer',
     'PostgreSQL engineer',
-    'mobile application engineer',
-    'web application engineer',
-    'product engineer',
+    'REST API engineer',
+    'GraphQL engineer',
+    'API integration engineer',
+    'voice app developer',
+    'voice AI engineer',
+    'speech-to-text engineer',
+    'Whisper integration',
+    'LLM integration engineer',
+    'AI application engineer',
+    'AI agent engineer',
+    'FinTech software engineer',
+    'PropTech engineer',
+    'accounting software engineer',
+    'payment integration engineer',
+    'M-Pesa Daraja developer',
+    'healthcare software engineer',
+    'HMIS engineer',
+    'logistics software engineer',
+    'Expo EAS CI CD',
+    'App Store release engineer',
+    'Google Play release engineer',
+    'technical SEO engineer',
+    'Google Search Console',
+    'Google Ads search campaigns',
   ],
   alternates: { canonical: '/' },
   openGraph: {
