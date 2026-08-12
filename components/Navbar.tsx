@@ -12,9 +12,10 @@ export function Navbar() {
           Joel Mbaka
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm text-gray-600 dark:text-gray-300 md:flex" aria-label="Primary navigation">
-          <Link href="/#work" className="transition hover:text-palm-green">Work</Link>
-          <Link href="/#capabilities" className="transition hover:text-palm-green">Capabilities</Link>
+        <nav className="hidden items-center gap-5 text-sm text-gray-600 dark:text-gray-300 md:flex" aria-label="Primary navigation">
+          <Link href="/work" className="transition hover:text-palm-green">Work</Link>
+          <Link href="/expertise" className="transition hover:text-palm-green">Expertise</Link>
+          <Link href="/about" className="transition hover:text-palm-green">About</Link>
           <a
             href="https://github.com/joelmbaka"
             target="_blank"
@@ -34,12 +35,12 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="mailto:mbakajoe26@gmail.com"
+          <Link
+            href="/contact"
             className="hidden rounded-full bg-palm-green px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 sm:inline-flex"
           >
             Contact
-          </a>
+          </Link>
           <ThemeToggle />
         </div>
       </div>
