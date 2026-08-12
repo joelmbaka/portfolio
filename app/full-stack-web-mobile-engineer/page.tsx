@@ -9,20 +9,20 @@ const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').repla
 export const metadata: Metadata = {
   title: 'Senior Full-Stack Web & Mobile Engineer | Joel Mbaka',
   description:
-    'Senior full-stack web and mobile engineer building production React Native apps, Next.js web products, FastAPI/PostgreSQL backends, payment integrations, AI workflows, and operational tooling.',
+    'Nairobi, Kenya-based remote senior full-stack product engineer building production React Native apps, Next.js web products, FastAPI/PostgreSQL backends, payment integrations, AI workflows, automated tests, and operational tooling.',
   alternates: { canonical: '/full-stack-web-mobile-engineer' },
   openGraph: {
     type: 'profile',
     url: '/full-stack-web-mobile-engineer',
     title: 'Senior Full-Stack Web & Mobile Engineer | Joel Mbaka',
     description:
-      'Production product engineering across React Native, Next.js, FastAPI, PostgreSQL, payments, AI integrations, testing, and release.',
+      'Nairobi-based remote product engineering across React Native, Next.js, FastAPI, PostgreSQL, payments, AI integrations, testing, and release.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Senior Full-Stack Web & Mobile Engineer | Joel Mbaka',
     description:
-      'Production product engineering across React Native, Next.js, FastAPI, PostgreSQL, payments, AI integrations, testing, and release.',
+      'Nairobi-based remote product engineering across React Native, Next.js, FastAPI, PostgreSQL, payments, AI integrations, testing, and release.',
   },
   robots: { index: true, follow: true },
 };
@@ -44,9 +44,9 @@ const stackLayers = [
     href: '/expertise/fastapi-postgresql-backends',
   },
   {
-    title: 'Integrations & automation',
-    body: 'M-Pesa/Daraja payment flows, AI APIs, voice and image processing, lead automation, cloud services, testing, deployment, and production operations.',
-    href: '/expertise/ai-integrations-automation',
+    title: 'Voice, AI & integrations',
+    body: 'Speech-to-text, voice/audio intelligence, LLM reasoning, M-Pesa/Daraja payment flows, AI APIs, image processing, third-party integrations, testing, deployment, and production operations.',
+    href: '/expertise/voice-ai-llm-engineering',
   },
 ];
 
@@ -65,6 +65,11 @@ const faqs = [
     question: 'What web and backend technologies do you use?',
     answer:
       'My web work centers on Next.js, React, and TypeScript. On the backend I commonly use Python, FastAPI, PostgreSQL, SQLAlchemy, and Alembic for APIs, transactional workflows, and relational business data.',
+  },
+  {
+    question: 'Where are you based and what timezone do you work in?',
+    answer:
+      'I am based in Nairobi, Kenya and work on East Africa Time (EAT, UTC+3). I work remotely, prefer contract engagements, receive international contract payments in USD or EUR, and I am also open to strong full-time remote roles.',
   },
   {
     question: 'Which projects best demonstrate end-to-end ownership?',
@@ -95,8 +100,17 @@ export default function FullStackWebMobileEngineerPage() {
         '@type': 'Person',
         '@id': `${base}/#person`,
         name: 'Joel Mbaka',
-        jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
+        jobTitle: 'Senior Full-Stack Product Engineer — Web & Mobile',
         url: base,
+        homeLocation: {
+          '@type': 'Place',
+          name: 'Nairobi, Kenya',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Nairobi',
+            addressCountry: 'KE',
+          },
+        },
         knowsAbout: [
           'React Native',
           'Expo',
@@ -108,7 +122,9 @@ export default function FullStackWebMobileEngineerPage() {
           'PostgreSQL',
           'SQLAlchemy',
           'M-Pesa integrations',
-          'AI integrations',
+          'Voice AI',
+          'LLM integrations',
+          'Automated testing',
         ],
         sameAs: ['https://github.com/joelmbaka', 'https://linkedin.com/in/joelmbaka'],
       },
@@ -140,7 +156,7 @@ export default function FullStackWebMobileEngineerPage() {
           Senior Full-Stack Web &amp; Mobile Engineer
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-          I build and operate complete software products across the layers that users see and the systems they depend on: mobile apps, web applications, APIs, relational data, payments, AI integrations, testing, and production delivery.
+          I am based in Nairobi, Kenya and work remotely on East Africa Time (EAT, UTC+3). I build and operate complete software products across the layers that users see and the systems they depend on: mobile apps, web applications, APIs, relational data, payments, AI integrations, testing, and production delivery.
         </p>
       </header>
 
