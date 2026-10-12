@@ -1,17 +1,51 @@
 'use client';
 
-import Image from 'next/image';
+import { getImageProps } from 'next/image';
 import Link from 'next/link';
 import { ArrowDown, ArrowRight, Globe2, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { ContactModal } from './ContactModal';
 
+// Art-directed hero: each breakpoint uses its own composition instead of cropping the desktop image.
+// Next.js serves appropriately sized, optimized images from the original PNG assets.
+const heroAlt =
+  'From fragmented paper-based work to a connected web dashboard and mobile app that track business operations and confirm payments.';
+const heroSizes = '(max-width: 639px) 92vw, (max-width: 1023px) 85vw, (max-width: 1279px) 53vw, 620px';
+
+function getHeroImageSources() {
+  const common = { alt: heroAlt, sizes: heroSizes, quality: 80 };
+
+  const { props: { srcSet: mobileSrcSet } } = getImageProps({
+    ...common,
+    src: '/joeltech-hero-mobile.png',
+    width: 941,
+    height: 1672,
+  });
+
+  const { props: { srcSet: tabletSrcSet } } = getImageProps({
+    ...common,
+    src: '/joeltech-hero-tablet.png',
+    width: 1448,
+    height: 1086,
+  });
+
+  const { props: desktopProps } = getImageProps({
+    ...common,
+    src: '/joeltech-hero-desktop.png',
+    width: 1672,
+    height: 941,
+  });
+
+  return { mobileSrcSet, tabletSrcSet, desktopProps };
+}
+
 export default function Hero() {
+  const { mobileSrcSet, tabletSrcSet, desktopProps } = getHeroImageSources();
   const [isContactOpen, setContactOpen] = useState(false);
 
   return (
     <>
-      <section id="hero" className="relative grid items-center gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]">
+      <section id="hero" className="relative grid items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
         <div className="max-w-3xl">
           <p className="inline-flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-palm-green sm:text-sm">
             <Globe2 className="h-4 w-4" aria-hidden />
@@ -54,17 +88,26 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="mx-auto w-full max-w-sm lg:max-w-none">
-          <div className="overflow-hidden rounded-[2rem] border border-gray-200 bg-gray-100 p-3 shadow-xl shadow-gray-950/5 dark:border-gray-800 dark:bg-gray-900">
-            <div className="relative aspect-[4/4.2] overflow-hidden rounded-[1.5rem]">
-              <Image src="/images/joel.webp" alt="Joel Mbaka, founder and lead software engineer at Joeltech Geek Systems" fill priority sizes="(max-width: 1024px) 90vw, 370px" className="object-cover" />
-            </div>
-            <div className="px-2 pb-2 pt-4">
-              <p className="text-base font-bold text-gray-900 dark:text-white">Joel Mbaka</p>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Founder &amp; Senior Software Engineer</p>
-            </div>
+        <figure className="mx-auto w-full max-w-sm sm:max-w-3xl lg:max-w-none">
+          <div className="overflow-hidden rounded-[1.5rem] border border-gray-200 bg-gray-100 shadow-xl shadow-gray-950/10 dark:border-gray-800 dark:bg-gray-900">
+            <picture>
+              <source media="(max-width: 639px)" srcSet={mobileSrcSet} sizes={heroSizes} width={941} height={1672} />
+              <source media="(min-width: 640px) and (max-width: 1023px)" srcSet={tabletSrcSet} sizes={heroSizes} width={1448} height={1086} />
+              <img
+                {...desktopProps}
+                alt={heroAlt}
+                className="block h-auto w-full"
+                fetchPriority="high"
+              />
+            </picture>
           </div>
-        </div>
+          <figcaption className="mt-4 text-center text-sm font-medium leading-6 text-gray-600 dark:text-gray-300">
+            Web visibility. Mobile action. One connected system.
+            <span className="mt-1 block text-xs font-normal text-gray-500 dark:text-gray-400">
+              Illustrative software concept · Not a screenshot of a specific client product
+            </span>
+          </figcaption>
+        </figure>
       </section>
       <ContactModal isOpen={isContactOpen} onClose={() => setContactOpen(false)} />
     </>
