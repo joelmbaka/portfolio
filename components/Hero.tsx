@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable @next/next/no-img-element -- Art-directed <picture> uses getImageProps for Next.js image optimization. */
 import { getImageProps } from 'next/image';
 import Link from 'next/link';
 import { ArrowDown, ArrowRight, Globe2, Mail } from 'lucide-react';
