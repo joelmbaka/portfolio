@@ -5,7 +5,6 @@ import { ArrowLeft } from 'lucide-react';
 import { projects } from '@/config/projects';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
 import CTA from '@/components/CTA';
-import Chatbot from '@/components/Chatbot';
 import SlideIn from '@/components/SlideIn';
 
 const base = SITE_URL;
@@ -93,7 +92,6 @@ export default function WorkPage() {
         </section>
 
         <CTA />
-        <Chatbot />
       </main>
     </SlideIn>
   );

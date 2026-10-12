@@ -5,7 +5,6 @@ import Hero from '@/components/Hero';
 import CTA from '@/components/CTA';
 import { projects } from '@/config/projects';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
-import Chatbot from '@/components/Chatbot';
 import SlideIn from '@/components/SlideIn';
 import { ArrowRight, Braces, Database, GraduationCap, MonitorSmartphone, Rocket, ShieldCheck } from 'lucide-react';
 
@@ -152,7 +151,6 @@ export default function Home() {
 
         <div className="mt-10 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400"><ShieldCheck className="h-4 w-4 text-palm-green" aria-hidden /> Kenya-registered business · Founder-led · Remote collaboration worldwide</div>
         <CTA />
-        <Chatbot />
       </main>
     </SlideIn>
   );
