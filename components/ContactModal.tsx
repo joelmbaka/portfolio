@@ -9,7 +9,7 @@ interface ContactModalProps {
 }
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   useEffect(() => {
     if (!isOpen) {
@@ -31,17 +31,22 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     const formData = new FormData(e.currentTarget);
     const payload = Object.fromEntries(formData.entries());
 
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    if (!res.ok) {
-      console.error('Contact API error');
+      if (!res.ok) {
+        throw new Error('Contact API error');
+      }
+
+      setStatus('sent');
+    } catch (error) {
+      console.error('[CONTACT_SUBMISSION_ERROR]', error);
+      setStatus('error');
     }
-
-    setStatus('sent');
   }
 
   return (
@@ -113,6 +118,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   placeholder="Your message"
                   className="w-full resize-y rounded-xl bg-zinc-800 px-3 py-2.5 text-base placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
+
+                {status === 'error' && (
+                  <p role="alert" className="text-sm leading-6 text-red-300">
+                    Your message could not be sent. Please email{' '}
+                    <a href="mailto:mbakajoe26@gmail.com" className="font-semibold underline">
+                      mbakajoe26@gmail.com
+                    </a>{' '}
+                    directly, or try again later.
+                  </p>
+                )}
 
                 <button
                   type="submit"
