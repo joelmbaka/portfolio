@@ -28,6 +28,8 @@ export interface Project {
   updatedAt: string;
   tech: string[];
   type: ProjectType;
+  platforms?: string[];
+  engagement?: 'Product' | 'Client project' | 'Experiment';
   url?: string;
   icon?: string;
   iconBackground?: string;
@@ -45,6 +47,8 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'journpad',
+    platforms: ['iOS', 'Android'],
+    engagement: 'Product',
     title: 'JournPad: Voice Journal',
     description:
       'Voice-first journaling app that preserves the original recording, transcribes spoken entries, and uses AI to generate useful titles, summaries, and categories. Entries can be searched and revisited by date, linked to goals, supported by reminders and prompts, and protected with account, deletion, and optional biometric controls.',
@@ -105,9 +109,11 @@ export const projects: Project[] = [
   },
   {
     id: 'rentpayor',
+    platforms: ['iOS', 'Android', 'Web dashboard'],
+    engagement: 'Product',
     title: 'RentPayor',
     description:
-      'Rent collection and reconciliation software for landlords and property managers. RentPayor creates rent invoices, lets tenants pay KES rent through an invoice-linked M-Pesa flow, automatically reconciles confirmed payments, and keeps partial balances, carried-forward credits, receipts, leases, units, tenants, and manual payment records in one rent ledger.',
+      'Rent collection and reconciliation software for landlords and property managers. RentPayor connects iOS and Android apps with a web management dashboard for landlords and property managers. It handles properties, leases, rent invoicing, M-Pesa collections, partial payments, automatic reconciliation, receipts, credits and reporting.',
     updatedAt: '2026-08-12',
     tech: [
       'Expo',
@@ -138,6 +144,12 @@ export const projects: Project[] = [
       ],
     },
     enhancements: [
+      {
+        title: 'Property management web dashboard',
+        description: 'Web management experience for properties, tenants, leases, invoices, payments, reporting and operational administration. Complements the iOS and Android applications.',
+        tech: ['Next.js', 'React', 'TypeScript', 'FastAPI', 'PostgreSQL'],
+        note: 'Dashboard screenshots will be added once verified assets are available.',
+      },
       {
         title: 'CRM Dashboard',
         description:
@@ -197,7 +209,38 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'schoolpey',
+    title: 'SchoolPey',
+    description: 'School-fee billing and collection software with an Android parent experience and web administration dashboards for schools. Manages students, guardians, term invoicing, M-Pesa payments, receipts, balances and reconciliation.',
+    updatedAt: '2026-10-12',
+    tech: ['React Native', 'Expo', 'TypeScript', 'Next.js', 'React', 'Python', 'FastAPI', 'PostgreSQL', 'Tuma', 'M-Pesa', 'Playwright'],
+    type: 'SaaS',
+    platforms: ['Android', 'Web dashboard'],
+    engagement: 'Product',
+    url: 'https://schoolpey.com',
+    enhancements: [
+      {
+        title: 'School administration dashboard',
+        description: 'Web-based operations for school setup, academic terms, fee schedules, student records, billing, payments and financial oversight.',
+        tech: ['Next.js', 'React', 'FastAPI', 'PostgreSQL'],
+        note: 'Approved dashboard imagery to be added.',
+      },
+    ],
+  },
+  {
+    id: 'milliol',
+    title: 'Milliol Construction Manager',
+    description: 'Android construction-operations application for project progress, work items, procurement, inventory and stock, financial tracking and operational reporting.',
+    updatedAt: '2026-10-12',
+    tech: ['React Native', 'Expo', 'TypeScript', 'Android'],
+    type: 'Enterprise',
+    platforms: ['Android'],
+    engagement: 'Product',
+  },
+  {
     id: 'macsim',
+    platforms: ['Android', 'Web administration'],
+    engagement: 'Client project',
     title: 'Macsim Cargo',
     description:
       'Cargo and logistics operations platform spanning mobile field workflows and back-office administration. Macsim handles loads, reservations, driver assignments, trip tracking, documents, notifications, fleet operations and finance, with a guarded M-Pesa/Daraja flow for funding a collection-account ledger and paying drivers in full or partial load installments.',
@@ -257,6 +300,7 @@ export const projects: Project[] = [
   },
   {
     id: 'ai-stylist',
+    engagement: 'Experiment',
     title: 'AI Stylist',
     description:
       'Mobile wardrobe-management and outfit-recommendation product. Users create wardrobes, upload clothing photos for AI-assisted category, tag, and description analysis, and generate one-time, daily, or weekly outfit suggestions that can use precise local weather; recommendation history is stored locally in SQLite and designed to sync with the cloud.',
@@ -294,10 +338,12 @@ export const projects: Project[] = [
   },
   {
     id: 'clivique-hmis',
+    platforms: ['Web platform', 'Backend'],
+    engagement: 'Product',
     aliases: ['taifa-hmis'],
     title: 'CliviQue HMIS',
     description:
-      'Hospital management information system connecting patient registration, OPD, emergency, inpatient care, orders, referrals, theatre, billing, ambulance, mortuary, duty coverage, patient movement, documents, and facility operations. Its latest public draft also adds facility-bound M-Pesa patient invoice collection with encrypted merchant credentials, callback verification, idempotent receipt handling, and invoice reconciliation.',
+      'Hospital management information system connecting patient registration, OPD, emergency, inpatient care, orders, referrals, theatre, billing, ambulance, mortuary, duty coverage, patient movement, documents, and facility operations. It includes facility-bound Tuma M-Pesa patient billing and reconciliation, alongside SaaS subscription billing infrastructure.',
     updatedAt: '2026-08-02',
     tech: [
       'Next.js',
@@ -311,7 +357,7 @@ export const projects: Project[] = [
       'Alembic',
       'PostgreSQL',
       'Playwright',
-      'M-Pesa Daraja',
+      'Tuma',
     ],
     type: 'Enterprise',
     url: 'https://clivique.com',

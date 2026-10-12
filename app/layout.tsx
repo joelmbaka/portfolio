@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
@@ -17,20 +18,27 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const siteTitle = 'Senior Full-Stack Product Engineer — Web & Mobile | Joel Mbaka';
+const siteTitle = 'Joeltech Geek Systems | Software Development Company in Kenya';
 const siteDescription =
-  'Nairobi, Kenya-based remote senior full-stack product engineer building production mobile and web software with React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST/GraphQL APIs, Playwright/Maestro E2E testing, pytest/Jest, payments, voice/LLM integrations, CI/CD, app-store release, and technical SEO.';
+  'Kenya-based software development business serving clients globally. Founder-led mobile apps, web platforms, SaaS products, APIs, integrations and payment systems.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL((process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '')),
+  metadataBase: new URL(SITE_URL),
   title: siteTitle,
   description: siteDescription,
-  applicationName: 'Joel Mbaka Portfolio',
-  authors: [{ name: 'Joel Mbaka', url: 'https://joelmbaka.com' }],
+  applicationName: 'Joeltech Geek Systems',
+  authors: [{ name: 'Joel Mbaka', url: 'https://linkedin.com/in/joelmbaka' }],
   creator: 'Joel Mbaka',
-  publisher: 'Joel Mbaka',
+  publisher: 'Joeltech Geek Systems',
   category: 'technology',
   keywords: [
+    'Joeltech Geek Systems',
+    'Kenya software development company',
+    'Software developers in Kenya',
+    'Custom software development Nairobi',
+    'Mobile app development Kenya',
+    'Web application development Kenya',
+    'Global remote software development',
     'Joel Mbaka',
     'Nairobi software engineer',
     'Kenya software engineer',
@@ -86,7 +94,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: '/',
-    siteName: 'Joel Mbaka',
+    siteName: 'Joeltech Geek Systems',
     title: siteTitle,
     description: siteDescription,
     locale: 'en_US',

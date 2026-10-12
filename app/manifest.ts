@@ -2,10 +2,10 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Joel Mbaka — Senior Full-Stack Engineer',
-    short_name: 'Joel Mbaka',
+    name: 'Joeltech Geek Systems — Software Development',
+    short_name: 'Joeltech Geek',
     description:
-      'Engineering portfolio covering production mobile, web, backend, data, payment, and AI integration work.',
+      'Kenya-based software development for businesses worldwide: web, mobile, SaaS, payments and integrations.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

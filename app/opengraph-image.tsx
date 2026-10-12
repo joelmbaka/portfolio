@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og';
 
-export const alt = 'Joel Mbaka — Senior Full-Stack Engineer, Web & Mobile';
+export const alt = 'Joeltech Geek Systems — Software Development in Kenya for Global Clients';
 export const size = {
   width: 1200,
   height: 630,
@@ -24,23 +24,23 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', fontSize: 28, fontWeight: 700, color: '#34d399' }}>
-          JOEL MBAKA
+          JOELTECH GEEK SYSTEMS
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 1000 }}>
           <div style={{ fontSize: 68, lineHeight: 1.05, fontWeight: 800, letterSpacing: '-0.04em' }}>
-            Senior Full-Stack Engineer
+            Software that moves
           </div>
           <div style={{ marginTop: 16, fontSize: 42, lineHeight: 1.1, fontWeight: 600, color: '#cbd5e1' }}>
-            Web &amp; Mobile
+            businesses forward.
           </div>
           <div style={{ marginTop: 30, fontSize: 25, lineHeight: 1.45, color: '#94a3b8' }}>
-            React Native · Next.js · TypeScript · Python · FastAPI · PostgreSQL
+            Mobile apps · Web platforms · SaaS · APIs · Integrations
           </div>
         </div>
 
         <div style={{ display: 'flex', fontSize: 22, color: '#64748b' }}>
-          joelmbaka.com · Production products from interface to backend and data
+          joeltechgeek.vercel.app · Built in Kenya. Engineered for the world.
         </div>
       </div>
     ),

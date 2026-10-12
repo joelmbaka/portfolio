@@ -92,7 +92,7 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
               <div className="flex items-start justify-between gap-3 sm:gap-4">
                 <div className="min-w-0">
                   <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.1em] text-gray-500 dark:text-gray-400 sm:text-xs">
-                    <span>{project.type}</span>
+                    <span>{project.engagement ?? project.type}</span>
                     <span aria-hidden>·</span>
                     <span>Case study</span>
                   </div>
@@ -117,6 +117,9 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
               </div>
 
               <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">{project.description}</p>
+              {project.platforms && (
+                <p className="mt-3 text-xs font-semibold text-palm-green">{project.platforms.join(' · ')}</p>
+              )}
 
               <div className="mt-4 flex flex-wrap gap-2">
                 {project.tech.slice(0, 5).map((technology) => (

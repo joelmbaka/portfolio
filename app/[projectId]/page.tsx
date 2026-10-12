@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/site';
 import { projects } from '@/config/projects';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -38,8 +39,8 @@ const caseStudyDetails: Record<string, CaseStudyDetail> = {
     engineeringHighlights: [
       'Built a workflow-heavy Next.js/React application and FastAPI/PostgreSQL backend around patient context and hand-offs between clinical, operational, and financial teams.',
       'Designed public marketing routes and authenticated clinical workspaces as separate security surfaces, with role- and facility-scoped access to private hospital data.',
-      'Added facility-bound M-Pesa patient invoice collection with encrypted merchant credentials, request-bound payment state, callback validation, an independent Daraja status query, and idempotent receipt handling.',
-      'Used SQLAlchemy, Alembic, PostgreSQL, and Playwright-backed workflow verification to support complex state transitions across departments and billing.',
+      'Integrated facility-scoped Tuma M-Pesa invoice collection with encrypted payment credentials, callback validation, idempotent receipts and payment reconciliation.',
+      'Implemented provider-neutral SaaS subscription infrastructure and validated clinical and billing workflows using PostgreSQL and Playwright.',
     ],
   },
   rentpayor: {
@@ -62,6 +63,25 @@ const caseStudyDetails: Record<string, CaseStudyDetail> = {
       'Connected the mobile product to FastAPI/PostgreSQL services and a Next.js back-office workspace for load, fleet, driver, finance, staff, location, and consignee operations.',
       'Added a Daraja flow where STK Push funds a tracked collection-account ledger and B2C BusinessPayment sends full or partial load installments to a driver’s Safaricom number.',
       'Protected payout accounting with reservations, idempotency keys, callback-state guards, and an immutable ledger debit only after a successful B2C result is confirmed.',
+    ],
+  },
+  schoolpey: {
+    role: 'Founder-led end-to-end product engineering across Android, web dashboards, backend invoicing, payment collection, reconciliation and operational QA.',
+    scope: 'School fee management spanning schools, academic levels and terms, students, guardians, term invoices, account balances, payments and receipts.',
+    engineeringHighlights: [
+      'Developed the Android parent experience alongside web dashboards for school administrators.',
+      'Implemented fee structures, student and guardian records, term billing, payments, balances and digital receipts.',
+      'Integrated Tuma M-Pesa payments with backend reconciliation and financial-state handling.',
+      'Verified school and guardian flows through API and browser-based testing.',
+    ],
+  },
+  milliol: {
+    role: 'Android product engineering for construction operations and project administration.',
+    scope: 'A construction management application for organising projects, work items, procurement, stock movements, finance and reports.',
+    engineeringHighlights: [
+      'Developed the Android application for construction project oversight and field operations.',
+      'Organised project progress, tasks, materials procurement and stock records in operational workflows.',
+      'Implemented views for financial monitoring and project reporting.',
     ],
   },
   'ai-stylist': {
@@ -91,8 +111,7 @@ function findProjectById(projectId: string) {
 }
 
 function getOperatingSystem(project: (typeof projects)[number]) {
-  if (project.id === 'clivique-hmis') return 'Web';
-  return ['iOS', 'Android'];
+  return project.platforms?.join(', ') ?? 'Web';
 }
 
 export function generateStaticParams() {
@@ -106,11 +125,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { projectId } = await params;
   const project = findProjectById(projectId);
   if (!project) return { title: 'Project Not Found' };
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+  const base = SITE_URL;
   const canonical = `${base}/${project.id}`;
   const ogImage = getPrimaryProjectImage(project);
   return {
-    title: `${project.title} — Full-Stack Engineering Case Study | Joel Mbaka`,
+    title: `${project.title} | Joeltech Geek Systems Case Study`,
     description: project.description,
     alternates: { canonical },
     openGraph: {
@@ -137,7 +156,7 @@ export default async function ProjectPage({ params }: PageProps) {
   if (!project) return notFound();
 
   const detail = caseStudyDetails[project.id];
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+  const base = SITE_URL;
   const ogImage = getPrimaryProjectImage(project);
   const imageAbs = ogImage.startsWith('http') ? ogImage : `${base}${ogImage}`;
   const canonical = `${base}/${project.id}`;
@@ -168,14 +187,14 @@ export default async function ProjectPage({ params }: PageProps) {
         applicationCategory: project.type === 'Enterprise' ? 'BusinessApplication' : 'SoftwareApplication',
         operatingSystem: getOperatingSystem(project),
         image: imageAbs,
-        creator: { '@id': `${base}/#person` },
+        creator: { '@id': `${base}/#organization` },
         sameAs: externalReferences,
       },
       {
         '@type': 'Person',
         '@id': `${base}/#person`,
         name: 'Joel Mbaka',
-        jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
+        jobTitle: 'Founder and Senior Software Engineer',
         url: base,
         sameAs: [
           'https://github.com/joelmbaka',
@@ -222,7 +241,8 @@ export default async function ProjectPage({ params }: PageProps) {
 
         <header className="max-w-4xl">
           <div className="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-gray-500 dark:text-gray-400">
-            <span>{project.type}</span>
+            <span>{project.engagement ?? project.type}</span>
+            {project.platforms && <><span aria-hidden>·</span><span>{project.platforms.join(' · ')}</span></>}
             <span aria-hidden>·</span>
             <span>Engineering case study</span>
           </div>
@@ -233,7 +253,7 @@ export default async function ProjectPage({ params }: PageProps) {
         {detail && (
           <section className="mt-10 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
             <article className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900/70">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">My role</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Engineering contribution</p>
               <p className="mt-3 text-base leading-7 text-gray-700 dark:text-gray-300">{detail.role}</p>
 
               <p className="mt-7 text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product scope</p>

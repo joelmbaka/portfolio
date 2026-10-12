@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
@@ -7,17 +8,17 @@ import CTA from '@/components/CTA';
 import Chatbot from '@/components/Chatbot';
 import SlideIn from '@/components/SlideIn';
 
-const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+const base = SITE_URL;
 
 export const metadata: Metadata = {
-  title: 'Engineering Work — Web, Mobile & Full-Stack Projects | Joel Mbaka',
+  title: 'Software Products & Client Projects | Joeltech Geek Systems',
   description:
-    'Explore Joel Mbaka’s engineering work across React Native mobile apps, Next.js web platforms, FastAPI backends, PostgreSQL systems, payments, AI integrations, and production releases.',
+    'Explore software products and client engineering by Joeltech Geek Systems, including RentPayor, SchoolPey, Milliol, JournPad, CliviQue and Macsim Cargo.',
   alternates: {
     canonical: '/work',
   },
   openGraph: {
-    title: 'Engineering Work — Web, Mobile & Full-Stack Projects | Joel Mbaka',
+    title: 'Software Products & Client Projects | Joeltech Geek Systems',
     description:
       'Production software projects spanning mobile, web, backend, data, payments, integrations, and release.',
     url: `${base}/work`,
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Engineering Work — Web, Mobile & Full-Stack Projects | Joel Mbaka',
+    title: 'Software Products & Client Projects | Joeltech Geek Systems',
     description:
       'Production software projects spanning mobile, web, backend, data, payments, integrations, and release.',
   },
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 };
 
 export default function WorkPage() {
-  const flagshipIds = ['journpad', 'clivique-hmis', 'rentpayor'];
+  const flagshipIds = ['rentpayor', 'schoolpey', 'clivique-hmis', 'milliol', 'journpad', 'macsim'];
   const orderedProjects = [
     ...flagshipIds
       .map((id) => projects.find((project) => project.id === id))
@@ -45,7 +46,7 @@ export default function WorkPage() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     '@id': `${base}/work#collection`,
-    name: 'Engineering Work — Joel Mbaka',
+    name: 'Software Solutions — Joeltech Geek Systems',
     description:
       'Engineering case studies and product work across mobile, web, backend, data, payments, AI integrations, and production delivery.',
     url: `${base}/work`,
@@ -77,12 +78,12 @@ export default function WorkPage() {
           </Link>
 
           <div className="mt-8 max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-palm-green">Engineering work</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-palm-green">Solutions &amp; case studies</p>
             <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-              Products I’ve built across web, mobile, backend, and data.
+              Software products and client work, built for real operations.
             </h1>
             <p className="mt-5 text-base leading-7 text-gray-600 dark:text-gray-300 sm:text-lg">
-              The homepage highlights three projects that best demonstrate breadth. This page keeps the complete public set of engineering case studies available for deeper review and discovery.
+              Explore founder-led products and client projects across property, education, healthcare, construction, logistics and AI. Each case study explains the systems, platforms and engineering behind the solution.
             </p>
           </div>
         </div>
