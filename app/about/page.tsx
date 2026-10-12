@@ -61,7 +61,7 @@ export default function AboutPage() {
       <section className="mt-16 rounded-3xl bg-gray-50 p-7 dark:bg-gray-900/60 sm:p-9">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Business identity</p>
         <h2 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">Registered in Kenya. Working globally.</h2>
-        <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">Joeltech Geek Systems is registered under Kenya's Registration of Business Names Act (registration BN-P7SEWW57). The business is owned and led by Joel Mbaka and operates with a remote-first delivery approach.</p>
+        <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">Joeltech Geek Systems is registered under Kenya&apos;s Registration of Business Names Act (registration BN-P7SEWW57). The business is owned and led by Joel Mbaka and operates with a remote-first delivery approach.</p>
         <div className="mt-6 flex flex-wrap gap-5 text-sm font-semibold">
           <Link href="/work" className="inline-flex items-center gap-2 text-palm-green hover:underline">Explore our products <ArrowRight className="h-4 w-4" aria-hidden /></Link>
           <Link href="/careers" className="inline-flex items-center gap-2 text-palm-green hover:underline">Careers &amp; mentorship <ArrowRight className="h-4 w-4" aria-hidden /></Link>
