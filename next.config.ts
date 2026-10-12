@@ -4,6 +4,7 @@ const noIndexHeader = [{ key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchi
 
 const nextConfig: NextConfig = {
   images: {
+    qualities: [75, 80],
     formats: ['image/webp'],
     remotePatterns: [
       { protocol: 'https', hostname: 'i.pravatar.cc' },
