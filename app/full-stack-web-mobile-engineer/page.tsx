@@ -1,10 +1,11 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { projects } from '@/config/projects';
 import CTA from '@/components/CTA';
 
-const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+const base = SITE_URL;
 
 export const metadata: Metadata = {
   title: 'Senior Full-Stack Web & Mobile Engineer | Joel Mbaka',

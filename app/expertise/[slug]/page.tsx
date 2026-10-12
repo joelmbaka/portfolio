@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -10,7 +11,7 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+const base = SITE_URL;
 
 export function generateStaticParams() {
   return expertiseAreas.map((area) => ({ slug: area.slug }));
