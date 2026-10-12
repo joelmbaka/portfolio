@@ -8,7 +8,12 @@ export default function manifest(): MetadataRoute.Manifest {
       'Kenya-based software development for businesses worldwide: web, mobile, SaaS, payments and integrations.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
+    background_color: '#07111F',
     theme_color: '#059669',
+    icons: [
+      { src: '/brand/bridgeframe-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+      { src: '/brand/bridgeframe-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
+      { src: '/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+    ],
   };
 }

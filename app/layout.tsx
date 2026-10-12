@@ -27,6 +27,14 @@ export const metadata: Metadata = {
   title: siteTitle,
   description: siteDescription,
   applicationName: 'Joeltech Geek Systems',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any', type: 'image/x-icon' },
+      { url: '/icon.svg', sizes: 'any', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/brand/bridgeframe-180.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: '/favicon.ico',
+  },
   authors: [{ name: 'Joel Mbaka', url: 'https://linkedin.com/in/joelmbaka' }],
   creator: 'Joel Mbaka',
   publisher: 'Joeltech Geek Systems',

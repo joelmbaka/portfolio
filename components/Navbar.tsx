@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Github, Linkedin, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { ThemeToggle } from './ThemeToggle';
+import { BrandLogo } from './BrandLogo';
 
 const primaryLinks = [
   ['/work', 'Solutions'],
@@ -20,8 +21,8 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-200/70 bg-white/90 backdrop-blur-xl dark:border-gray-800/70 dark:bg-gray-950/90">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" onClick={closeMobile} className="text-sm font-bold tracking-tight text-gray-900 dark:text-white sm:text-base" aria-label="Joeltech Geek Systems home">
-          <span>Joeltech <span className="text-palm-green">Geek</span> Systems</span>
+        <Link href="/" onClick={closeMobile} className="inline-flex shrink-0 items-center" aria-label="Joeltech Geek Systems home">
+          <BrandLogo />
         </Link>
 
         <nav className="hidden items-center gap-4 text-sm text-gray-600 dark:text-gray-300 lg:flex" aria-label="Primary navigation">
