@@ -7,19 +7,20 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-7 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
           <div className="max-w-sm">
-            <p className="font-medium text-gray-900 dark:text-white">Joel Mbaka</p>
-            <p className="mt-1 text-sm">Senior Full-Stack Engineer · Web & Mobile</p>
-            <p className="mt-3 text-xs leading-5 text-gray-500 dark:text-gray-500">Remote product engineering across mobile, web, APIs, data, payments, AI/LLM integrations, release, technical SEO, and startup delivery.</p>
+            <p className="font-bold text-gray-900 dark:text-white">Joeltech Geek Systems</p>
+            <p className="mt-1 text-sm">Built in Kenya. Engineered for the world.</p>
+            <p className="mt-3 text-xs leading-5 text-gray-500 dark:text-gray-400">Founder-led software development for mobile, web, SaaS and business operations. Based in Kenya, delivering remotely worldwide.</p>
+            <p className="mt-2 text-xs leading-5 text-gray-500 dark:text-gray-400">Founded by Joel Mbaka · Business registration BN-P7SEWW57</p>
           </div>
 
           <nav className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm sm:grid-cols-3" aria-label="Footer navigation">
             {[
-              ['/work', 'Work'],
+              ['/work', 'Solutions'],
+              ['/services', 'Services'],
               ['/expertise', 'Expertise'],
-              ['/skills', 'Skills'],
               ['/industries', 'Industries'],
               ['/about', 'About'],
-              ['/work-with-me', 'Work with me'],
+              ['/careers', 'Careers'],
               ['/contact', 'Contact'],
             ].map(([href, label]) => (
               <Link key={href} href={href} className="flex min-h-10 items-center hover:text-palm-green">{label}</Link>

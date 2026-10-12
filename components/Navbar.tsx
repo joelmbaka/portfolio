@@ -6,11 +6,11 @@ import { useState } from 'react';
 import { ThemeToggle } from './ThemeToggle';
 
 const primaryLinks = [
-  ['/work', 'Work'],
+  ['/work', 'Solutions'],
+  ['/services', 'Services'],
   ['/expertise', 'Expertise'],
-  ['/skills', 'Skills'],
   ['/about', 'About'],
-  ['/work-with-me', 'Work with me'],
+  ['/careers', 'Careers'],
 ] as const;
 
 export function Navbar() {
@@ -20,8 +20,8 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-200/70 bg-white/90 backdrop-blur-xl dark:border-gray-800/70 dark:bg-gray-950/90">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" onClick={closeMobile} className="font-semibold tracking-tight text-gray-900 dark:text-white" aria-label="Joel Mbaka home">
-          Joel Mbaka
+        <Link href="/" onClick={closeMobile} className="text-sm font-bold tracking-tight text-gray-900 dark:text-white sm:text-base" aria-label="Joeltech Geek Systems home">
+          <span>Joeltech <span className="text-palm-green">Geek</span> Systems</span>
         </Link>
 
         <nav className="hidden items-center gap-4 text-sm text-gray-600 dark:text-gray-300 lg:flex" aria-label="Primary navigation">
@@ -38,7 +38,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-1.5 sm:gap-2">
           <Link href="/contact" className="hidden rounded-full bg-palm-green px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 sm:inline-flex">
-            Contact
+            Start a project
           </Link>
           <ThemeToggle />
           <button

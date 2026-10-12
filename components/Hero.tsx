@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowDown, ArrowRight, Globe2, Mail } from 'lucide-react';
 import { useState } from 'react';
-import { ArrowDown, ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { ContactModal } from './ContactModal';
 
 export default function Hero() {
@@ -11,83 +11,61 @@ export default function Hero() {
 
   return (
     <>
-      <section
-        id="hero"
-        className="container mx-auto grid items-center gap-9 px-0 sm:px-6 md:grid-cols-[1fr_auto] md:px-8 lg:gap-16 lg:px-12"
-      >
-        <div className="max-w-3xl text-center md:text-left">
-          <Link
-            href="/full-stack-web-mobile-engineer"
-            className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.16em] text-palm-green hover:underline sm:text-sm sm:tracking-[0.18em]"
-          >
-            Senior Full-Stack Product Engineer · Web & Mobile
-          </Link>
-
-          <h1 className="text-4xl font-bold leading-[1.08] text-black dark:text-sandy-beach sm:text-5xl lg:text-6xl">
-            I build production software across mobile, web, backend, and data.
-          </h1>
-
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-gray-600 dark:text-gray-300 sm:mt-6 sm:text-lg md:mx-0">
-            I take products from idea to production using React Native, Next.js, TypeScript, Python/FastAPI, and PostgreSQL—covering APIs, data models, authentication, payments, AI integrations, testing, CI/CD, and release. My strongest fit is 0→1 startup product development and end-to-end feature ownership.
+      <section id="hero" className="relative grid items-center gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,0.75fr)]">
+        <div className="max-w-3xl">
+          <p className="inline-flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-palm-green sm:text-sm">
+            <Globe2 className="h-4 w-4" aria-hidden />
+            Kenya-based software development · Global delivery
           </p>
 
-          <div className="mt-6 flex flex-wrap justify-center gap-2 md:justify-start">
-            {['React Native', 'Next.js', 'TypeScript', 'Python / FastAPI', 'PostgreSQL', 'REST APIs', 'LLM integrations'].map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 sm:text-sm"
-              >
-                {skill}
+          <h1 className="mt-6 text-4xl font-extrabold leading-[1.07] tracking-tight text-gray-950 dark:text-sandy-beach sm:text-5xl lg:text-6xl">
+            Software that moves businesses forward.
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-base leading-8 text-gray-600 dark:text-gray-300 sm:text-lg">
+            Joeltech Geek Systems designs, builds and supports web applications, mobile apps, SaaS platforms and backend systems. From Kenya, we partner remotely with clients around the world to turn complex business needs into reliable software.
+          </p>
+
+          <div className="mt-7 flex flex-wrap gap-2 text-xs font-medium sm:text-sm">
+            {['Business software', 'Mobile apps', 'SaaS platforms', 'Web dashboards', 'Payments & APIs'].map((item) => (
+              <span key={item} className="rounded-full border border-gray-200 bg-white px-3 py-1.5 text-gray-700 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                {item}
               </span>
             ))}
           </div>
 
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap md:justify-start">
-            <a
-              href="#work"
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-sunset-yellow px-5 py-2.5 font-medium text-black hover:bg-sunset-yellow-dark focus:outline-none focus:ring-2 focus:ring-sunset-yellow/70 sm:w-auto"
-            >
-              View selected work
-              <ArrowDown className="h-4 w-4" aria-hidden />
-            </a>
-            <Link
-              href="/work-with-me"
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-300 px-5 py-2.5 font-medium text-gray-900 transition hover:border-palm-green hover:text-palm-green dark:border-gray-700 dark:text-white sm:w-auto"
-            >
-              Work with me
-              <ArrowRight className="h-4 w-4" aria-hidden />
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <Link href="/work" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-sunset-yellow px-6 py-3 font-semibold text-black transition hover:bg-sunset-yellow-dark">
+              Explore our solutions <ArrowDown className="h-4 w-4" aria-hidden />
             </Link>
-            <button
-              onClick={() => setContactOpen(true)}
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-gray-300 px-5 py-2.5 font-medium text-gray-900 transition hover:border-palm-green hover:text-palm-green dark:border-gray-700 dark:text-white sm:w-auto"
-            >
-              <Mail className="h-4 w-4" aria-hidden /> Contact me
+            <button type="button" onClick={() => setContactOpen(true)} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-gray-300 px-6 py-3 font-semibold text-gray-900 transition hover:border-palm-green hover:text-palm-green dark:border-gray-700 dark:text-white">
+              <Mail className="h-4 w-4" aria-hidden /> Discuss your project
             </button>
+            <Link href="/services" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-5 py-3 font-medium text-palm-green hover:underline">
+              What we do <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-sm text-gray-500 dark:text-gray-400 md:justify-start">
-            <a href="https://github.com/joelmbaka" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-2 hover:text-gray-900 dark:hover:text-white">
-              <Github className="h-4 w-4" aria-hidden /> GitHub
-            </a>
-            <a href="https://linkedin.com/in/joelmbaka" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-2 hover:text-gray-900 dark:hover:text-white">
-              <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn
-            </a>
-            <span className="basis-full sm:basis-auto">Nairobi, Kenya · EAT (UTC+3) · Remote only · Contract preferred · Open to full-time</span>
+          <div className="mt-9 border-l-2 border-palm-green pl-4">
+            <p className="text-sm font-semibold text-gray-900 dark:text-white">Founder-led engineering, not an anonymous agency.</p>
+            <p className="mt-1 text-sm leading-6 text-gray-500 dark:text-gray-400">
+              Founded by Joel Mbaka — software engineer, technology entrepreneur and developer mentor. Built in Kenya. Engineered for the world.
+            </p>
           </div>
         </div>
 
-        <div className="relative mx-auto h-44 w-44 overflow-hidden rounded-3xl border border-gray-200 bg-gray-100 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:h-56 sm:w-56 lg:h-72 lg:w-72">
-          <Image
-            src="/images/joel.webp"
-            alt="Joel Mbaka, senior full-stack product engineer for web and mobile"
-            fill
-            priority
-            sizes="(max-width: 640px) 176px, (max-width: 768px) 224px, 288px"
-            className="object-cover"
-          />
+        <div className="mx-auto w-full max-w-sm lg:max-w-none">
+          <div className="overflow-hidden rounded-[2rem] border border-gray-200 bg-gray-100 p-3 shadow-xl shadow-gray-950/5 dark:border-gray-800 dark:bg-gray-900">
+            <div className="relative aspect-[4/4.2] overflow-hidden rounded-[1.5rem]">
+              <Image src="/images/joel.webp" alt="Joel Mbaka, founder and lead software engineer at Joeltech Geek Systems" fill priority sizes="(max-width: 1024px) 90vw, 370px" className="object-cover" />
+            </div>
+            <div className="px-2 pb-2 pt-4">
+              <p className="text-base font-bold text-gray-900 dark:text-white">Joel Mbaka</p>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Founder &amp; Senior Software Engineer</p>
+            </div>
+          </div>
         </div>
       </section>
-
       <ContactModal isOpen={isContactOpen} onClose={() => setContactOpen(false)} />
     </>
   );
