@@ -38,7 +38,7 @@ export default function ContactPage() {
 
       <section className="mt-14 rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/50 sm:p-9">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">What to include in your enquiry</h2>
-        <p className="mt-3 text-base leading-7 text-gray-600 dark:text-gray-300">A short description of your business, the problem you want to solve, the people who will use the software and any timing or budget constraints. It&apos;s fine if you don't have a complete specification yet.</p>
+        <p className="mt-3 text-base leading-7 text-gray-600 dark:text-gray-300">A short description of your business, the problem you want to solve, the people who will use the software and any timing or budget constraints. It&apos;s fine if you don&apos;t have a complete specification yet.</p>
         <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold">
           <Link href="/services" className="inline-flex items-center gap-2 text-palm-green hover:underline">Explore our services <ArrowRight className="h-4 w-4" aria-hidden /></Link>
           <Link href="/careers" className="inline-flex items-center gap-2 text-palm-green hover:underline">Looking for opportunities? Visit Careers <ArrowRight className="h-4 w-4" aria-hidden /></Link>

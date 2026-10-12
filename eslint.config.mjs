@@ -11,7 +11,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   // Generated Next.js output is not application source. Keep lint focused on the repository.
-  { ignores: [".next/**", "out/**", "build/**", "node_modules/**", "next-env.d.ts"] },
+  { ignores: [".next/**", "out/**", "build/**", "node_modules/**", "backend/.venv/**", "next-env.d.ts"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
