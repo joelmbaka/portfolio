@@ -23,7 +23,7 @@ export function createSocialBrandImage() {
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: 20, color: '#94A3B8' }}>
           <span>Built in Kenya. Engineered for the world.</span>
-          <span>joeltechgeek.vercel.app</span>
+          <span>joeltechgeek.com</span>
         </div>
       </div>
     ),
