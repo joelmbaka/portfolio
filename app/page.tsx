@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { SITE_URL } from '@/lib/site';
 import Hero from '@/components/Hero';
 import CTA from '@/components/CTA';
 import { projects } from '@/config/projects';
@@ -25,7 +26,7 @@ export default function Home() {
   const selectedWork = ['rentpayor', 'schoolpey', 'clivique-hmis', 'milliol']
     .map((id) => projects.find((project) => project.id === id))
     .filter((project): project is (typeof projects)[number] => Boolean(project));
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joeltechgeek.vercel.app').replace(/\/$/, '');
+  const base = SITE_URL;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
