@@ -2,7 +2,7 @@
 
 Official Next.js website for **Joeltech Geek Systems**, a Kenya-registered, founder-led software development business serving clients remotely worldwide.
 
-- Production address: https://joeltechgeek.vercel.app
+- Production address: https://joeltechgeek.com
 - Founder & lead engineer: Joel Mbaka
 - Business registration: BN-P7SEWW57 (Kenya)
 - Branch-based development: `brand/joeltechgeek` until review and manual merge.
@@ -35,7 +35,7 @@ The website is **deployed manually** after review with `vercel --prod`. Never au
 
 ## SEO and Search Console
 
-The canonical origin is https://joeltechgeek.vercel.app. Verify `/robots.txt` and `/sitemap.xml` after production deployment. Preserve the Google ownership verification file `public/google8bd8d4697948ac6c.html` — it exists on the local development branch and may need rebasing before deployment.
+The canonical origin is https://joeltechgeek.com and is defined in `lib/site.ts`. All metadata, structured data, sitemap and robots references should use that origin. After manually deploying to production, verify `https://joeltechgeek.com/robots.txt`, `https://joeltechgeek.com/sitemap.xml` and `https://joeltechgeek.com/google8bd8d4697948ac6c.html`. Preserve the Google Search Console ownership verification file at `public/google8bd8d4697948ac6c.html`. In Vercel, add `www.joeltechgeek.com` and configure a permanent redirect to `joeltechgeek.com`; add a Search Console domain property and submit the new sitemap.
 
 ## Contact
 
