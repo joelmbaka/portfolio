@@ -32,9 +32,9 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <a href="/contact" className="hidden min-h-11 items-center rounded-full bg-palm-green px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-palm-green sm:inline-flex">
+          <Link href="/contact" className="hidden min-h-11 items-center rounded-full bg-palm-green px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-palm-green sm:inline-flex">
             Start a project
-          </a>
+          </Link>
           <ThemeToggle />
           <button
             type="button"
