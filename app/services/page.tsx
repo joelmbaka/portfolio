@@ -1,48 +1,85 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Braces, Cloud, Database, Smartphone, Workflow } from 'lucide-react';
+import { ArrowRight, Globe2, MonitorSmartphone, Users } from 'lucide-react';
+import { services } from '@/config/services';
+import { SITE_URL } from '@/lib/site';
 import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
-  title: 'Software Development Services in Kenya | Joeltech Geek Systems',
-  description: 'Founder-led custom software development in Kenya for local and global clients: mobile applications, SaaS dashboards, backend APIs, M-Pesa payments and integrations.',
+  title: 'Custom Software Development Services in Kenya & Worldwide | Joeltech Geek Systems',
+  description: 'Custom software development from Kenya for global clients: React Native mobile apps, Next.js web dashboards, FastAPI backends, SaaS products, M-Pesa payments and applied AI APIs.',
   alternates: { canonical: '/services' },
+  openGraph: { title: 'Software Development Services | Joeltech Geek Systems', description: 'Engineering services for organisations that need working mobile, web and business software.', url: '/services' },
 };
 
-const services = [
-  { title: 'Mobile app development', icon: Smartphone, description: 'Android and iOS experiences for customers, field operations and business teams. From React Native architecture and native integrations through release and iteration.', deliverables: ['React Native & Expo', 'Authentication & offline-aware flows', 'Store releases & updates'] },
-  { title: 'Web platforms & SaaS dashboards', icon: Braces, description: 'Responsive web applications and management consoles that turn operational complexity into clear, actionable workflows.', deliverables: ['Next.js & React', 'Administrative dashboards', 'Role-based product experiences'] },
-  { title: 'APIs, backends & databases', icon: Database, description: 'The durable foundations behind great software: backend business logic, transactional records, permissions and integrations.', deliverables: ['Python & FastAPI', 'PostgreSQL data modeling', 'REST APIs & webhooks'] },
-  { title: 'Payments & business integrations', icon: Workflow, description: 'Connect software to the way businesses transact, reconcile and communicate, including local Kenyan payment workflows.', deliverables: ['M-Pesa & Tuma integrations', 'Invoices & reconciliation', 'Third-party API connections'] },
-  { title: 'Production engineering & support', icon: Cloud, description: 'Improve, test, launch and maintain software systems with careful deployment and practical quality checks.', deliverables: ['End-to-end testing', 'Deployment & release workflows', 'Product improvements'] },
-];
-
 export default function ServicesPage() {
+  const base = SITE_URL;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Software development services — Joeltech Geek Systems',
+    url: `${base}/services`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: services.map((service, index) => ({
+        '@type': 'ListItem', position: index + 1, name: service.title, url: `${base}/services/${service.slug}`,
+      })),
+    },
+  };
+
   return (
     <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="max-w-4xl">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Services</p>
-        <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Full-stack software development, from Kenya to the world.</h1>
-        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">A founder-led engineering partner for businesses that need more than screens: carefully modeled data, reliable workflows, clean interfaces, integrations and production-ready delivery.</p>
+        <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">What clients hire us to build</p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Custom software development services.</h1>
+        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+          Joeltech Geek Systems designs, develops and supports software for organisations in Kenya and internationally. We focus on practical business outcomes: applications people use, dependable transaction records, and systems that help teams make decisions.
+        </p>
+        <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
+          Our core mobile specialization is <strong>React Native with Expo and TypeScript</strong>. For web applications we use Next.js and React; for backend services, Python, FastAPI and PostgreSQL. We integrate existing AI APIs where useful—we do not offer Flutter development, standalone native Swift/Kotlin projects, machine-learning research or model training.
+        </p>
       </header>
 
       <section className="mt-14 grid gap-5 md:grid-cols-2" aria-label="Software development services">
-        {services.map(({title,icon:Icon,description,deliverables}) => (
-          <article key={title} className="rounded-3xl border border-gray-200 bg-white p-7 dark:border-gray-800 dark:bg-gray-900/60">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-palm-green dark:bg-emerald-950/30"><Icon className="h-6 w-6" aria-hidden /></div>
-            <h2 className="mt-5 text-2xl font-bold text-gray-900 dark:text-white">{title}</h2>
-            <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">{description}</p>
-            <ul className="mt-5 space-y-2 text-sm text-gray-600 dark:text-gray-300">
-              {deliverables.map((item)=><li key={item} className="flex gap-2"><span className="font-bold text-palm-green" aria-hidden>✓</span>{item}</li>)}
-            </ul>
+        {services.map((service) => (
+          <article key={service.slug} className="flex flex-col rounded-3xl border border-gray-200 bg-white p-7 dark:border-gray-800 dark:bg-gray-900/60">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-palm-green">{service.eyebrow}</p>
+            <h2 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">{service.title}</h2>
+            <p className="mt-4 text-sm leading-7 text-gray-600 dark:text-gray-300">{service.summary}</p>
+            <Link href={`/services/${service.slug}`} className="mt-auto inline-flex min-h-11 items-center gap-2 pt-5 text-sm font-semibold text-palm-green hover:underline">
+              How we deliver this service <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
           </article>
         ))}
       </section>
 
-      <section className="mt-16 rounded-3xl bg-gray-50 p-7 dark:bg-gray-900/60 sm:p-9">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Direct collaboration, accountable delivery.</h2>
-        <p className="mt-4 max-w-3xl text-base leading-8 text-gray-600 dark:text-gray-300">Work directly with Joel Mbaka, founder and lead engineer. We start by understanding the business problem, agree on a realistic scope and delivery plan, then build and validate the solution. Engagements can cover new products, selected features or improvements to an existing system.</p>
-        <Link href="/work" className="mt-5 inline-flex items-center gap-2 font-semibold text-palm-green hover:underline">See the products behind our expertise <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+      <section className="mt-16 grid gap-5 lg:grid-cols-3" aria-label="How we work">
+        <article className="rounded-2xl bg-gray-50 p-6 dark:bg-gray-900/60">
+          <MonitorSmartphone className="h-7 w-7 text-palm-green" aria-hidden />
+          <h2 className="mt-4 text-xl font-semibold">From requirement to release</h2>
+          <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">We can take on complete products or a defined module: discovery, design decisions, implementation, testing and production handover.</p>
+        </article>
+        <article className="rounded-2xl bg-gray-50 p-6 dark:bg-gray-900/60">
+          <Globe2 className="h-7 w-7 text-palm-green" aria-hidden />
+          <h2 className="mt-4 text-xl font-semibold">Kenya-based, globally available</h2>
+          <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">We collaborate remotely across time zones. Scope, communication, pricing and delivery arrangements are agreed for each engagement.</p>
+        </article>
+        <article className="rounded-2xl bg-gray-50 p-6 dark:bg-gray-900/60">
+          <Users className="h-7 w-7 text-palm-green" aria-hidden />
+          <h2 className="mt-4 text-xl font-semibold">Engineering collaboration</h2>
+          <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">Need technical leadership or extra engineering capacity? Discuss founder-led project delivery or remote developer collaboration, subject to skills, availability and agreement. No staffing or relocation placement is guaranteed.</p>
+        </article>
+      </section>
+
+      <section className="mt-16 rounded-3xl border border-gray-200 p-7 dark:border-gray-800 sm:p-9">
+        <h2 className="text-2xl font-bold">See actual software, not just a capabilities list.</h2>
+        <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">
+          Our portfolio distinguishes products we develop for our own business from work commissioned by clients. Explore the real workflows, platforms, stack and engineering responsibilities behind each system.
+        </p>
+        <Link href="/work" className="mt-5 inline-flex items-center gap-2 font-semibold text-palm-green hover:underline">
+          View products and client projects <ArrowRight className="h-4 w-4" aria-hidden />
+        </Link>
       </section>
       <CTA />
     </main>
