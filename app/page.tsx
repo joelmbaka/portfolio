@@ -110,7 +110,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="work" className="mt-24">
+        <section id="work" className="mt-24 scroll-mt-24">
           <div className="mb-8 max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Our portfolio</p>
             <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">We build products. We build for clients.</h2>
