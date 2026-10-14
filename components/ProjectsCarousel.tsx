@@ -92,7 +92,7 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
               <div className="flex items-start justify-between gap-3 sm:gap-4">
                 <div className="min-w-0">
                   <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.1em] text-gray-500 dark:text-gray-400 sm:text-xs">
-                    <span>{project.engagement ?? project.type}</span>
+                    <span>{project.engagement === 'Product' ? 'Company-developed product' : project.engagement === 'Client project' ? 'Client-commissioned work' : 'Engineering experiment'}</span>
                     <span aria-hidden>·</span>
                     <span>Case study</span>
                   </div>
