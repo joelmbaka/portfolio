@@ -59,9 +59,14 @@ export function NavigationLoader() {
   if (!visible) return null;
 
   return (
-    <div role="status" aria-live="polite" aria-label="Loading page" className="pointer-events-none fixed inset-x-0 top-16 z-[60] flex justify-center">
-      <div className="mt-4 flex items-center gap-3 rounded-full border border-gray-200 bg-white/95 px-5 py-3 text-sm font-medium text-gray-700 shadow-lg backdrop-blur-md dark:border-gray-700 dark:bg-gray-900/95 dark:text-gray-200">
-        <span className="h-5 w-5 animate-spin rounded-full border-2 border-palm-green/20 border-t-palm-green motion-reduce:animate-none" aria-hidden="true" />
+    <div
+      role="status"
+      aria-live="polite"
+      aria-label="Loading page"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-white/75 px-4 backdrop-blur-[3px] dark:bg-gray-950/80"
+    >
+      <div className="flex items-center gap-3 rounded-2xl border border-gray-200/80 bg-white px-6 py-4 text-sm font-medium text-gray-700 shadow-xl shadow-gray-900/10 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:shadow-black/30">
+        <span className="h-6 w-6 shrink-0 animate-spin rounded-full border-[3px] border-palm-green/20 border-t-palm-green motion-reduce:animate-none" aria-hidden="true" />
         Loading page…
       </div>
     </div>
