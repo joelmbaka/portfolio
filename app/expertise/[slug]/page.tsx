@@ -1,16 +1,17 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { expertiseAreas, findExpertiseArea } from '@/config/expertise';
-import { projects } from '@/config/projects';
+import { publicProjects } from '@/config/projects';
 import CTA from '@/components/CTA';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+const base = SITE_URL;
 
 export function generateStaticParams() {
   return expertiseAreas.map((area) => ({ slug: area.slug }));
@@ -49,8 +50,8 @@ export default async function ExpertiseDetailPage({ params }: PageProps) {
   if (!area) return notFound();
 
   const evidence = area.evidenceProjectIds
-    .map((id) => projects.find((project) => project.id === id))
-    .filter((project): project is (typeof projects)[number] => Boolean(project));
+    .map((id) => publicProjects.find((project) => project.id === id))
+    .filter((project): project is (typeof publicProjects)[number] => Boolean(project));
 
   const canonical = `${base}/expertise/${area.slug}`;
   const jsonLd = {

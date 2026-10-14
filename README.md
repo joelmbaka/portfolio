@@ -1,72 +1,46 @@
-# Joel Mbaka — Senior Full-Stack Engineer, Web & Mobile
+# Joeltech Geek Systems
 
-Portfolio source for [joelmbaka.com](https://joelmbaka.com).
+Official Next.js website for **Joeltech Geek Systems**, a Kenya-registered, founder-led software development business. The business develops its own commercial software products and delivers commissioned software engineering work for clients in Kenya and internationally.
 
-I build production software products end-to-end across mobile, web, backend, data, integrations, and release. The portfolio is organized around engineering case studies rather than technology lists so the work shows what I owned, what systems were involved, and how the pieces fit together.
+- Production: https://joeltechgeek.com
+- Founder & lead software engineer: Joel Mbaka
+- Business registration: BN-P7SEWW57 (Kenya)
+- Development branch: `brand/joeltechgeek`, reviewed and deployed manually (no automatic merge)
+- SEO, editorial/route policy: [docs/SEO_CONTENT_STRATEGY.md](docs/SEO_CONTENT_STRATEGY.md)
 
-## Core engineering scope
+## Public website
 
-- **Mobile:** React Native, Expo, TypeScript, iOS, Android, authentication, native capabilities, local persistence, store releases
-- **Web:** Next.js, React, TypeScript, responsive product interfaces, operational dashboards, public product sites
-- **Backend & data:** Python, FastAPI, PostgreSQL, SQLAlchemy, Alembic, APIs, relational and transactional data models
-- **Production:** payment integrations, AI APIs, testing, deployment, observability, cloud services, automation
+| Route | Visitor intent |
+| --- | --- |
+| `/` | Company and product/client proof |
+| `/services` | Client-facing services |
+| `/services/[slug]` | Six distinct service detail pages |
+| `/work` | Portfolio: in-house products, client work and experiments |
+| `/[projectId]` | Specific evidence-rich project case study |
+| `/about` | Company identity and operating model |
+| `/founder` | Joel Mbaka, senior engineer and founder |
+| `/mentorship` | Practical developer mentorship |
+| `/careers` | Paid engineering enquiries, internships and SaaS sales |
+| `/industries` | Actual industry experience supported by project evidence |
+| `/contact` | Enquiries |
 
-## Selected work
+Legacy overlapping SEO routes under `/expertise`, plus `/skills`, `/work-with-me` and `/full-stack-web-mobile-engineer`, have permanent redirects to appropriate service/founder URLs and are omitted from the sitemap. Do not delete or modify the Google verification file.
 
-The homepage deliberately highlights three projects that show different dimensions of the stack:
+Core technologies: React Native/Expo/TypeScript for mobile, Next.js/React for web, Python/FastAPI/PostgreSQL for APIs and transactional systems. AI work integrates existing models and APIs; it is not model training. Do not imply staff headcount, active vacancies, accredited schooling, placement guarantees, unproven clients or revenue, or released platforms without evidence.
 
-- **JournPad** — voice-first mobile journaling with preserved audio, transcription, AI-assisted titles/summaries/categories, playback, search, goals, reminders, account controls, and public mobile releases
-- **CliviQue HMIS** — a full-stack hospital information system spanning patient and facility workflows, Next.js, FastAPI, PostgreSQL, role/facility-scoped access, browser testing, and facility-bound M-Pesa patient invoice collection
-- **RentPayor** — rent invoicing, invoice-linked M-Pesa collection, automatic payment reconciliation, partial balances, carried-forward credits, receipts, leases, tenants, units, and internal CRM/outbound tooling
-
-The complete project index remains available at **`/work`**, including Macsim Cargo and AI Stylist. Individual project URLs remain public and indexable.
-
-## Additional projects
-
-- **Macsim Cargo** — logistics and cargo operations across mobile and back-office systems, including load/trip workflows and guarded Daraja collection-account funding plus B2C driver payouts
-- **AI Stylist** — mobile wardrobe management with AI-assisted clothing analysis, weather-aware outfit recommendations, OAuth, SQLite history, and a Python/PostgreSQL backend model
-
-## Public SEO architecture
-
-The public portfolio now has a deliberate crawlable information architecture:
-
-- **`/`** — primary profile and selected work
-- **`/full-stack-web-mobile-engineer`** — primary positioning/search-intent page
-- **`/work`** — complete engineering case-study index
-- **`/expertise`** — engineering expertise hub
-- **`/expertise/react-native-mobile-engineering`**
-- **`/expertise/nextjs-web-engineering`**
-- **`/expertise/fastapi-postgresql-backends`**
-- **`/expertise/ai-integrations-automation`**
-- **`/about`**
-- **`/contact`**
-- Individual project case-study URLs
-
-Public pages use canonical metadata, Open Graph/Twitter metadata, structured data, internal linking, and real content-update dates where available. `sitemap.xml` contains the public portfolio surface with meaningful priorities and modification dates. `robots.txt` permits the public site while excluding API routes, the internal CRM, the placeholder blog, and private website-requirements tooling.
-
-The repository also includes a generated Open Graph image, a web manifest, Vercel Analytics, and Speed Insights. The internal job-hunt CRM remains deliberately outside the search surface.
-
-## Portfolio stack
-
-- Next.js 15
-- React 19
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Vercel Analytics and Speed Insights
-- Supabase for internal authentication features
-
-## Local development
+## Development and verification
 
 ```bash
 npm install
-npm run dev
+npx tsc --noEmit
+npx eslint .
+npm run build
 ```
 
-Then open `http://localhost:3000`.
+After local validation, review navigation, responsive layouts at 375/768/1024/1440 px, accessibility, unique SEO metadata, all canonical sitemap URLs, preserved project links and permanent redirects. The website is **deployed manually** after review with `vercel --prod`. Never automatically deploy or merge into `main`.
+
+`/robots.txt` must advertise `https://joeltechgeek.com/sitemap.xml`. Search Console verification is maintained through the published verification file. Some project screenshots show previous UI versions; only attach a product walkthrough when genuine media and approved poster assets are available.
 
 ## Contact
 
-- Website: [joelmbaka.com](https://joelmbaka.com)
-- GitHub: [github.com/joelmbaka](https://github.com/joelmbaka)
-- LinkedIn: [linkedin.com/in/joelmbaka](https://linkedin.com/in/joelmbaka)
+Founder: Joel Mbaka · mbakajoe26@gmail.com · https://linkedin.com/in/joelmbaka

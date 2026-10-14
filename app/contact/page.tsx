@@ -1,133 +1,50 @@
 import type { Metadata } from 'next';
-import { Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
-
-const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+import Link from 'next/link';
+import { ArrowRight, Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
+import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
-  title: 'Contact Joel Mbaka — Senior Full-Stack Web & Mobile Engineer',
-  description:
-    'Contact Joel Mbaka, a Nairobi-based remote senior full-stack product engineer, about React Native, Next.js, FastAPI, web, mobile, backend, contract, and full-time opportunities.',
+  title: 'Contact Joeltech Geek Systems | Software Development Enquiries',
+  description: 'Discuss a mobile app, web platform, SaaS product or backend development project with Joeltech Geek Systems. Based in Kenya and working remotely worldwide.',
   alternates: { canonical: '/contact' },
-  openGraph: {
-    type: 'website',
-    url: '/contact',
-    title: 'Contact Joel Mbaka — Senior Full-Stack Web & Mobile Engineer',
-    description: 'Nairobi-based remote product engineer on EAT (UTC+3). Get in touch about contract or full-time work across web, mobile, backend, and integrations.',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Contact Joel Mbaka — Senior Full-Stack Web & Mobile Engineer',
-    description: 'Nairobi-based remote product engineer on EAT (UTC+3). Get in touch about contract or full-time product engineering work.',
-  },
 };
 
-const contactMethods = [
-  {
-    title: 'Email',
-    value: 'mbakajoe26@gmail.com',
-    href: 'mailto:mbakajoe26@gmail.com',
-    icon: Mail,
-  },
-  {
-    title: 'LinkedIn',
-    value: 'Joel Mbaka',
-    href: 'https://linkedin.com/in/joelmbaka',
-    icon: Linkedin,
-  },
-  {
-    title: 'GitHub',
-    value: '@joelmbaka',
-    href: 'https://github.com/joelmbaka',
-    icon: Github,
-  },
-  {
-    title: 'WhatsApp',
-    value: '+254 717 990 442',
-    href: 'https://wa.me/254717990442',
-    icon: MessageCircle,
-  },
+const methods = [
+  { title: 'Email the founder', value: 'mbakajoe26@gmail.com', href: 'mailto:mbakajoe26@gmail.com?subject=Software%20project%20enquiry%20-%20Joeltech%20Geek%20Systems', icon: Mail },
+  { title: 'WhatsApp', value: '+254 717 990 442', href: 'https://wa.me/254717990442?text=Hello%2C%20I%27d%20like%20to%20discuss%20a%20software%20project.', icon: MessageCircle },
+  { title: 'LinkedIn', value: 'Joel Mbaka', href: 'https://linkedin.com/in/joelmbaka', icon: Linkedin },
+  { title: 'GitHub', value: '@joelmbaka', href: 'https://github.com/joelmbaka', icon: Github },
 ];
 
 export default function ContactPage() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'ContactPage',
-        '@id': `${base}/contact#webpage`,
-        url: `${base}/contact`,
-        name: 'Contact Joel Mbaka',
-        description: metadata.description,
-        dateModified: '2026-08-12',
-        about: { '@id': `${base}/#person` },
-      },
-      {
-        '@type': 'Person',
-        '@id': `${base}/#person`,
-        name: 'Joel Mbaka',
-        url: base,
-        email: 'mailto:mbakajoe26@gmail.com',
-        jobTitle: 'Senior Full-Stack Product Engineer — Web & Mobile',
-        homeLocation: {
-          '@type': 'Place',
-          name: 'Nairobi, Kenya',
-          address: {
-            '@type': 'PostalAddress',
-            addressLocality: 'Nairobi',
-            addressCountry: 'KE',
-          },
-        },
-        sameAs: ['https://github.com/joelmbaka', 'https://linkedin.com/in/joelmbaka'],
-      },
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${base}/` },
-          { '@type': 'ListItem', position: 2, name: 'Contact', item: `${base}/contact` },
-        ],
-      },
-    ],
-  };
-
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-
+    <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
       <header className="max-w-4xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-palm-green">Contact</p>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
-          Let’s talk about the product you need to ship.
-        </h1>
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-          I’m based in Nairobi, Kenya and work remotely on East Africa Time (EAT, UTC+3). I’m interested in senior product engineering work where I can own meaningful parts of the system across mobile, web, backend, data, integrations, and production delivery. Contract work is preferred, I am open to full-time roles, and international contract payments can be made in USD or EUR.
-        </p>
+        <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Let&apos;s talk</p>
+        <h1 className="mt-4 text-4xl font-bold text-gray-900 dark:text-white sm:text-6xl">Tell us what you need to build.</h1>
+        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Whether you are improving an existing operation, launching a SaaS product or building a new mobile or web experience, Joeltech Geek Systems would be glad to hear about it. You&apos;ll be speaking directly with the founder and engineer.</p>
+        <p className="mt-4 text-base text-gray-500 dark:text-gray-400">Based in Kenya · Remote collaboration globally · EAT (UTC+3)</p>
       </header>
 
       <section className="mt-12 grid gap-5 sm:grid-cols-2" aria-label="Contact methods">
-        {contactMethods.map(({ title, value, href, icon: Icon }) => (
-          <a
-            key={title}
-            href={href}
-            target={href.startsWith('http') ? '_blank' : undefined}
-            rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="group rounded-3xl border border-gray-200 bg-white p-7 transition hover:-translate-y-0.5 hover:border-palm-green dark:border-gray-800 dark:bg-gray-900/70"
-          >
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-palm-green dark:bg-emerald-950/30">
-              <Icon className="h-5 w-5" aria-hidden />
-            </div>
-            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-gray-500 dark:text-gray-400">{title}</p>
-            <p className="mt-2 text-lg font-semibold text-gray-900 group-hover:text-palm-green dark:text-white">{value}</p>
+        {methods.map(({title,value,href,icon:Icon}) => (
+          <a key={title} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined} className="group rounded-3xl border border-gray-200 bg-white p-7 transition hover:-translate-y-1 hover:border-palm-green dark:border-gray-800 dark:bg-gray-900/60">
+            <Icon className="h-7 w-7 text-palm-green" aria-hidden />
+            <h2 className="mt-5 text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">{title}</h2>
+            <p className="mt-2 break-all text-lg font-semibold text-gray-900 group-hover:text-palm-green dark:text-white">{value}</p>
           </a>
         ))}
       </section>
 
       <section className="mt-14 rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/50 sm:p-9">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Good fit</p>
-        <h2 className="mt-3 text-2xl font-semibold text-gray-900 dark:text-white">Web, mobile, backend, and product ownership.</h2>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">
-          The strongest fit is work that benefits from an engineer who can move between React Native or Next.js interfaces, Python/FastAPI services, PostgreSQL data, third-party integrations, testing, and production delivery without treating each layer as a separate problem.
-        </p>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">What to include in your enquiry</h2>
+        <p className="mt-3 text-base leading-7 text-gray-600 dark:text-gray-300">A short description of your business, the problem you want to solve, the people who will use the software and any timing or budget constraints. It&apos;s fine if you don&apos;t have a complete specification yet.</p>
+        <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold">
+          <Link href="/services" className="inline-flex items-center gap-2 text-palm-green hover:underline">Explore our services <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+          <Link href="/careers" className="inline-flex items-center gap-2 text-palm-green hover:underline">Looking for opportunities? Visit Careers <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+        </div>
       </section>
+      <CTA />
     </main>
   );
 }

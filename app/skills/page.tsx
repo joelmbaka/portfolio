@@ -1,25 +1,26 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { expertiseAreas } from '@/config/expertise';
 import CTA from '@/components/CTA';
 
-const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+const base = SITE_URL;
 
 export const metadata: Metadata = {
-  title: 'Technical Skills — React Native, Next.js, FastAPI, Testing, AI & APIs | Joel Mbaka',
+  title: 'Technical Skills — React Native, Next.js, FastAPI, Testing, AI & APIs | Joeltech Geek Systems',
   description:
-    'Technical skills across React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST, GraphQL, Playwright, Maestro, pytest, Jest, E2E testing, AI/LLM integrations, voice and audio intelligence, payments, authentication, CI/CD, cloud deployment, app stores, technical SEO, and search growth.',
+    'The technologies behind Joeltech Geek Systems solutions: React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST, GraphQL, Playwright, Maestro, pytest, Jest, E2E testing, AI/LLM integrations, voice and audio intelligence, payments, authentication, CI/CD, cloud deployment, app stores, technical SEO, and search growth.',
   alternates: { canonical: '/skills' },
   openGraph: {
     type: 'website',
     url: '/skills',
-    title: 'Technical Skills | Joel Mbaka',
+    title: 'Technical Skills | Joeltech Geek Systems',
     description: 'A complete technical inventory backed by production mobile, web, backend, automated testing, payment, AI, voice/audio, and operational product work.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Technical Skills | Joel Mbaka',
+    title: 'Technical Skills | Joeltech Geek Systems',
     description: 'A complete technical inventory backed by production product work.',
   },
 };
@@ -132,7 +133,7 @@ export default function SkillsPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
-    name: 'Technical Skills — Joel Mbaka',
+    name: 'Technical Skills — Joeltech Geek Systems',
     url: `${base}/skills`,
     mainEntity: {
       '@type': 'Person',

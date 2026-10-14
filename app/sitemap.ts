@@ -1,37 +1,37 @@
+import { SITE_URL } from '@/lib/site';
 import type { MetadataRoute } from 'next';
-import { projects } from '@/config/projects';
-import { expertiseAreas } from '@/config/expertise';
+import { publicProjects } from '@/config/projects';
+import { services } from '@/config/services';
 
-const PORTFOLIO_UPDATED_AT = new Date('2026-08-12');
+const WEBSITE_UPDATED_AT = new Date('2026-10-14');
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
-
+  const base = SITE_URL;
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${base}/`, lastModified: PORTFOLIO_UPDATED_AT, changeFrequency: 'weekly', priority: 1 },
-    { url: `${base}/full-stack-web-mobile-engineer`, lastModified: PORTFOLIO_UPDATED_AT, changeFrequency: 'monthly', priority: 0.98 },
-    { url: `${base}/work`, lastModified: PORTFOLIO_UPDATED_AT, changeFrequency: 'monthly', priority: 0.95 },
-    { url: `${base}/skills`, lastModified: PORTFOLIO_UPDATED_AT, changeFrequency: 'monthly', priority: 0.94 },
-    { url: `${base}/expertise`, lastModified: PORTFOLIO_UPDATED_AT, changeFrequency: 'monthly', priority: 0.93 },
-    { url: `${base}/work-with-me`, lastModified: PORTFOLIO_UPDATED_AT, changeFrequency: 'monthly', priority: 0.92 },
-    { url: `${base}/industries`, lastModified: PORTFOLIO_UPDATED_AT, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${base}/about`, lastModified: PORTFOLIO_UPDATED_AT, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${base}/contact`, lastModified: PORTFOLIO_UPDATED_AT, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${base}/`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'weekly', priority: 1 },
+    { url: `${base}/services`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.98 },
+    { url: `${base}/work`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.96 },
+    { url: `${base}/about`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.86 },
+    { url: `${base}/founder`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.85 },
+    { url: `${base}/mentorship`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.78 },
+    { url: `${base}/careers`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${base}/industries`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.76 },
+    { url: `${base}/contact`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.88 },
   ];
 
-  const expertiseRoutes: MetadataRoute.Sitemap = expertiseAreas.map((area) => ({
-    url: `${base}/expertise/${area.slug}`,
-    lastModified: PORTFOLIO_UPDATED_AT,
+  const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
+    url: `${base}/services/${service.slug}`,
+    lastModified: WEBSITE_UPDATED_AT,
     changeFrequency: 'monthly',
-    priority: 0.88,
+    priority: service.slug === 'react-native-app-development' ? 0.95 : 0.88,
   }));
 
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
+  const projectRoutes: MetadataRoute.Sitemap = publicProjects.map((project) => ({
     url: `${base}/${project.id}`,
     lastModified: new Date(project.updatedAt),
     changeFrequency: 'monthly',
-    priority: ['journpad', 'clivique-hmis', 'rentpayor'].includes(project.id) ? 0.94 : 0.8,
+    priority: project.engagement === 'Experiment' ? 0.65 : 0.9,
   }));
 
-  return [...staticRoutes, ...expertiseRoutes, ...projectRoutes];
+  return [...staticRoutes, ...serviceRoutes, ...projectRoutes];
 }

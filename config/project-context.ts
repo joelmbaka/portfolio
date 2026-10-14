@@ -46,6 +46,14 @@ export const projectContext: Record<string, ProjectContext> = {
     ],
     roleLabel: 'Co-founder & Software Engineer',
   },
+  schoolpey: {
+    domains: ['Education', 'EdTech', 'School finance', 'Payments'],
+    expertiseSlugs: ['react-native-mobile-engineering', 'nextjs-web-engineering', 'fastapi-postgresql-backends', 'payments-fintech-saas', 'automated-testing-quality-engineering'],
+  },
+  milliol: {
+    domains: ['Construction', 'Project operations', 'Inventory management'],
+    expertiseSlugs: ['react-native-mobile-engineering', 'databases-data-modeling'],
+  },
   macsim: {
     domains: ['Logistics', 'Transport', 'Fleet operations', 'Operational finance'],
     expertiseSlugs: [

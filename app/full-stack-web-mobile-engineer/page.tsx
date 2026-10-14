@@ -1,10 +1,11 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { projects } from '@/config/projects';
+import { publicProjects } from '@/config/projects';
 import CTA from '@/components/CTA';
 
-const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+const base = SITE_URL;
 
 export const metadata: Metadata = {
   title: 'Senior Full-Stack Web & Mobile Engineer | Joel Mbaka',
@@ -80,8 +81,8 @@ const faqs = [
 
 export default function FullStackWebMobileEngineerPage() {
   const evidence = ['journpad', 'clivique-hmis', 'rentpayor']
-    .map((id) => projects.find((project) => project.id === id))
-    .filter((project): project is (typeof projects)[number] => Boolean(project));
+    .map((id) => publicProjects.find((project) => project.id === id))
+    .filter((project): project is (typeof publicProjects)[number] => Boolean(project));
 
   const canonical = `${base}/full-stack-web-mobile-engineer`;
   const jsonLd = {

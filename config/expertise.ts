@@ -15,13 +15,13 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'react-native-mobile-engineering',
     eyebrow: 'Mobile engineering',
     title: 'React Native & Expo mobile engineering',
-    searchTitle: 'React Native & Expo Engineer for Production Apps | Joel Mbaka',
+    searchTitle: 'React Native & Expo Engineer for Production Apps | Joeltech Geek Systems',
     description:
       'React Native and Expo engineering for production iOS and Android apps, including authentication, audio, payments, location, local persistence, testing, EAS builds, OTA updates, and App Store / Play Store release work.',
     intro:
       'I build mobile products as complete systems rather than isolated screens: app architecture, navigation, secure authentication, native device capabilities, API integration, local persistence, analytics, testing, release, and the backend workflows required to support the product.',
     technologies: ['React Native', 'Expo', 'TypeScript', 'Expo Router', 'EAS Build', 'Expo Updates', 'SQLite', 'SecureStore', 'AsyncStorage', 'iOS', 'Android'],
-    evidenceProjectIds: ['journpad', 'rentpayor', 'macsim', 'ai-stylist'],
+    evidenceProjectIds: ['journpad', 'rentpayor', 'schoolpey', 'milliol', 'macsim'],
     highlights: [
       'Voice recording, playback, reminders, goals, biometrics, secure token storage, and store release workflows in JournPad.',
       'Invoice-linked rent payment and reconciliation workflows in RentPayor.',
@@ -33,13 +33,13 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'nextjs-web-engineering',
     eyebrow: 'Web engineering',
     title: 'Next.js & React web application engineering',
-    searchTitle: 'Next.js Full-Stack Web Engineer | Joel Mbaka',
+    searchTitle: 'Next.js Full-Stack Web Engineer | Joeltech Geek Systems',
     description:
       'Next.js and React engineering for workflow-heavy applications, operational dashboards, public product websites, authenticated workspaces, responsive interfaces, and search-oriented product surfaces.',
     intro:
       'My web work covers public product websites and authenticated operational systems. I focus on workflows, information architecture, data loading, permissions, responsive UI, search visibility, and the backend contracts that make the interface reliable.',
     technologies: ['Next.js', 'React', 'TypeScript', 'TanStack Query', 'Tailwind CSS', 'shadcn/ui', 'Playwright', 'Vercel'],
-    evidenceProjectIds: ['clivique-hmis', 'rentpayor', 'macsim'],
+    evidenceProjectIds: ['clivique-hmis', 'rentpayor', 'schoolpey', 'macsim'],
     highlights: [
       'Multi-department hospital workflows and facility operations in CliviQue HMIS.',
       'Property-management lead intelligence and outbound operations in the RentPayor CRM.',
@@ -51,13 +51,13 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'fastapi-postgresql-backends',
     eyebrow: 'Backend & data',
     title: 'Python, FastAPI & PostgreSQL backend engineering',
-    searchTitle: 'Python FastAPI & PostgreSQL Backend Engineer | Joel Mbaka',
+    searchTitle: 'Python FastAPI & PostgreSQL Backend Engineer | Joeltech Geek Systems',
     description:
       'Python, FastAPI, SQLAlchemy, Alembic, PostgreSQL, REST API, authentication, callbacks, and transactional backend engineering for real product workflows.',
     intro:
       'I design backend systems around business state that must remain correct: invoices and balances, patient and facility scope, cargo and driver payments, journal entries, authentication, callbacks, and long-running operational workflows.',
     technologies: ['Python', 'FastAPI', 'PostgreSQL', 'SQL', 'SQLAlchemy', 'Alembic', 'REST APIs', 'Webhooks', 'JWT'],
-    evidenceProjectIds: ['rentpayor', 'clivique-hmis', 'macsim', 'journpad', 'ai-stylist'],
+    evidenceProjectIds: ['rentpayor', 'schoolpey', 'clivique-hmis', 'macsim', 'journpad'],
     highlights: [
       'Rent invoices, partial payments, carried-forward credits, receipts, and automatic reconciliation in RentPayor.',
       'Patient, facility, billing, clinical workflow, and M-Pesa payment state in CliviQue HMIS.',
@@ -69,13 +69,13 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'api-engineering-integrations',
     eyebrow: 'APIs & integrations',
     title: 'REST API, GraphQL & third-party integration engineering',
-    searchTitle: 'REST API, GraphQL & Integration Engineer | Joel Mbaka',
+    searchTitle: 'REST API, GraphQL & Integration Engineer | Joeltech Geek Systems',
     description:
       'API engineering across FastAPI REST services, GraphQL, webhooks, callbacks, payment providers, authentication, cloud services, and third-party product integrations.',
     intro:
       'For most non-trivial products, the API layer is where user-facing behavior becomes durable business logic. I design and integrate APIs around clear contracts, authentication, validation, idempotency, failure states, callbacks, observability, and the relational state behind them.',
     technologies: ['REST APIs', 'GraphQL', 'FastAPI', 'Apollo', 'Webhooks', 'OAuth', 'JWT', 'M-Pesa Daraja', 'Third-party APIs'],
-    evidenceProjectIds: ['rentpayor', 'clivique-hmis', 'macsim', 'journpad', 'ai-stylist'],
+    evidenceProjectIds: ['rentpayor', 'clivique-hmis', 'macsim', 'journpad'],
     highlights: [
       'Payment initiation, provider callbacks, verification, and reconciliation across RentPayor and CliviQue.',
       'Daraja STK Push and B2C payout integration with idempotent state transitions in Macsim Cargo.',
@@ -87,13 +87,13 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'databases-data-modeling',
     eyebrow: 'Databases & data modeling',
     title: 'SQL, PostgreSQL, graph & application data engineering',
-    searchTitle: 'PostgreSQL, SQL & Data Modeling Engineer | Joel Mbaka',
+    searchTitle: 'PostgreSQL, SQL & Data Modeling Engineer | Joeltech Geek Systems',
     description:
       'Relational and application data modeling with PostgreSQL, SQL, SQLAlchemy, Alembic, SQLite, graph databases, local persistence, caching patterns, migrations, and transactional business state.',
     intro:
       'I treat the data model as part of the product design. Invoices, tenant credit, patient context, payment ledgers, cargo assignments, journal entries, local mobile state, and recommendation history all become easier to reason about when the database expresses the real business relationships clearly.',
     technologies: ['PostgreSQL', 'SQL', 'SQLAlchemy', 'Alembic', 'SQLite', 'Neo4j', 'Graph data', 'AsyncStorage', 'Caching patterns'],
-    evidenceProjectIds: ['rentpayor', 'clivique-hmis', 'macsim', 'journpad', 'ai-stylist'],
+    evidenceProjectIds: ['rentpayor', 'clivique-hmis', 'macsim', 'journpad'],
     highlights: [
       'Accounting-oriented invoice, payment, credit, lease, property, unit, and tenant relationships in RentPayor.',
       'Patient, encounter, facility, billing, orders, movement, and receipt state in CliviQue HMIS.',
@@ -105,7 +105,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'voice-ai-llm-engineering',
     eyebrow: 'Voice AI & LLM products',
     title: 'Voice apps, speech intelligence & LLM integration engineering',
-    searchTitle: 'Voice AI, Speech Intelligence & LLM Integration Engineer | Joel Mbaka',
+    searchTitle: 'Voice AI, Speech Intelligence & LLM Integration Engineer | Joeltech Geek Systems',
     description:
       'Voice and audio application engineering across speech-to-text, Whisper, ElevenLabs Scribe v2, speaker diarization, word timestamps, acoustic emotion analysis, Gemini structured reasoning, emotion2vec, Modal model serving, audio diagnostics, LLM reasoning, and voice-product workflows.',
     intro:
@@ -136,7 +136,7 @@ export const expertiseAreas: ExpertiseArea[] = [
       'LLM reasoning',
       'Open-source models',
     ],
-    evidenceProjectIds: ['journpad', 'ai-stylist', 'rentpayor'],
+    evidenceProjectIds: ['journpad', 'rentpayor'],
     highlights: [
       'Built JournPad voice workflows around recording, speech-to-text, preserved audio, playback, and AI-assisted organization of spoken journal entries.',
       'Built the AutoAce voice-analysis pipeline using ElevenLabs Scribe v2 for transcripts, diarization, word timestamps and audio-event tags; customer-speaker inference then isolates customer-only speech segments.',
@@ -150,13 +150,13 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'authentication-application-security',
     eyebrow: 'Authentication & application security',
     title: 'Secure authentication, authorization & application security',
-    searchTitle: 'Authentication & Application Security Engineer | Joel Mbaka',
+    searchTitle: 'Authentication & Application Security Engineer | Joeltech Geek Systems',
     description:
       'Practical application security across OAuth, Google/Apple sign-in, access and refresh tokens, SecureStore, biometrics, password hashing, role-based access, tenant/facility isolation, KYC/KYB, and sensitive workflow controls.',
     intro:
       'I prefer the backend to remain the central source of identity and authorization truth. On mobile, sensitive tokens belong in secure storage while non-sensitive state can use ordinary local persistence. For higher-risk products, I design around permissions, isolation, verification, auditability, and explicit revocation rather than trusting the client.',
     technologies: ['OAuth', 'Google Sign-In', 'Apple Sign-In', 'JWT', 'Access tokens', 'Refresh tokens', 'Expo SecureStore', 'Biometrics', 'Password hashing', 'RBAC', 'KYC/KYB'],
-    evidenceProjectIds: ['journpad', 'rentpayor', 'clivique-hmis', 'ai-stylist'],
+    evidenceProjectIds: ['journpad', 'rentpayor', 'clivique-hmis'],
     highlights: [
       'Google/Apple authentication, secure token storage, biometrics, and account-lifecycle controls in mobile apps.',
       'Facility- and role-scoped clinical access in CliviQue HMIS.',
@@ -168,7 +168,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'payments-fintech-saas',
     eyebrow: 'Payments, FinTech & SaaS',
     title: 'Payment integration, subscription & reconciliation engineering',
-    searchTitle: 'FinTech, Payment Integration & SaaS Engineer | Joel Mbaka',
+    searchTitle: 'FinTech, Payment Integration & SaaS Engineer | Joeltech Geek Systems',
     description:
       'Payment and SaaS engineering across M-Pesa/Daraja, invoice reconciliation, ledgers, callbacks, receipts, subscriptions, RevenueCat, KYC/KYB, and financial workflow design.',
     intro:
@@ -186,7 +186,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'automated-testing-quality-engineering',
     eyebrow: 'Testing & quality engineering',
     title: 'Automated end-to-end, integration & regression testing',
-    searchTitle: 'Playwright, Maestro, Pytest & Jest Testing Engineer | Joel Mbaka',
+    searchTitle: 'Playwright, Maestro, Pytest & Jest Testing Engineer | Joeltech Geek Systems',
     description:
       'Automated testing across Playwright web E2E, Maestro mobile E2E, pytest backend/API suites, Jest and Node.js tests, React Native testing, integration tests, regression coverage, linting, type checks, and static analysis.',
     intro:
@@ -225,13 +225,13 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'mobile-app-release-ci-cd',
     eyebrow: 'CI/CD & app release',
     title: 'GitHub, Vercel, Expo EAS & mobile release engineering',
-    searchTitle: 'CI/CD, Expo EAS, App Store & Play Store Release Engineer | Joel Mbaka',
+    searchTitle: 'CI/CD, Expo EAS, App Store & Play Store Release Engineer | Joeltech Geek Systems',
     description:
       'Practical CI/CD and release work with Git/GitHub branches and merges, automated test gates, Vercel, Expo EAS Build, TestFlight, App Store Connect, Google Play Console, closed testing, production builds, and OTA updates.',
     intro:
       'Shipping is part of engineering. I work in branch-based GitHub workflows, use automated unit/integration/E2E and static checks where appropriate, deploy web and FastAPI services to managed cloud environments such as Vercel, and use Expo/EAS for mobile build, signing, submission, testing, and update workflows. I am comfortable with the operational work required to move an app through both Apple and Google release systems repeatedly.',
     technologies: ['Git', 'GitHub', 'Branches & PRs', 'Automated test gates', 'Vercel', 'Expo EAS', 'EAS Build', 'App Store Connect', 'TestFlight', 'Google Play Console', 'OTA updates'],
-    evidenceProjectIds: ['journpad', 'rentpayor', 'macsim', 'ai-stylist'],
+    evidenceProjectIds: ['journpad', 'rentpayor', 'macsim'],
     highlights: [
       'Production, preview, development, and internal EAS build profiles across iOS and Android.',
       'App Store Connect/TestFlight and Google Play testing/release workflows for published mobile products.',
@@ -243,7 +243,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     slug: 'technical-seo-search-growth',
     eyebrow: 'Technical SEO & search growth',
     title: 'Technical SEO, search discovery & Google Ads engineering',
-    searchTitle: 'Technical SEO, Search Console & Google Ads Specialist | Joel Mbaka',
+    searchTitle: 'Technical SEO, Search Console & Google Ads Specialist | Joeltech Geek Systems',
     description:
       'Technical SEO and intent marketing across Next.js metadata, canonical URLs, structured data, XML sitemaps, robots directives, internal linking, Google Search Console, Bing Webmaster Tools, Screaming Frog, and Google Ads search campaigns.',
     intro:

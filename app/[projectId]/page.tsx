@@ -1,4 +1,5 @@
-import { projects } from '@/config/projects';
+import { SITE_URL } from '@/lib/site';
+import { publicProjects } from '@/config/projects';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -38,8 +39,8 @@ const caseStudyDetails: Record<string, CaseStudyDetail> = {
     engineeringHighlights: [
       'Built a workflow-heavy Next.js/React application and FastAPI/PostgreSQL backend around patient context and hand-offs between clinical, operational, and financial teams.',
       'Designed public marketing routes and authenticated clinical workspaces as separate security surfaces, with role- and facility-scoped access to private hospital data.',
-      'Added facility-bound M-Pesa patient invoice collection with encrypted merchant credentials, request-bound payment state, callback validation, an independent Daraja status query, and idempotent receipt handling.',
-      'Used SQLAlchemy, Alembic, PostgreSQL, and Playwright-backed workflow verification to support complex state transitions across departments and billing.',
+      'Integrated facility-scoped Tuma M-Pesa invoice collection with encrypted payment credentials, callback validation, idempotent receipts and payment reconciliation.',
+      'Implemented provider-neutral SaaS subscription infrastructure and validated clinical and billing workflows using PostgreSQL and Playwright.',
     ],
   },
   rentpayor: {
@@ -64,6 +65,25 @@ const caseStudyDetails: Record<string, CaseStudyDetail> = {
       'Protected payout accounting with reservations, idempotency keys, callback-state guards, and an immutable ledger debit only after a successful B2C result is confirmed.',
     ],
   },
+  schoolpey: {
+    role: 'Founder-led end-to-end product engineering across Android, web dashboards, backend invoicing, payment collection, reconciliation and operational QA.',
+    scope: 'School fee management spanning schools, academic levels and terms, students, guardians, term invoices, account balances, payments and receipts.',
+    engineeringHighlights: [
+      'Developed the Android parent experience alongside web dashboards for school administrators.',
+      'Implemented fee structures, student and guardian records, term billing, payments, balances and digital receipts.',
+      'Integrated Tuma M-Pesa payments with backend reconciliation and financial-state handling.',
+      'Verified school and guardian flows through API and browser-based testing.',
+    ],
+  },
+  milliol: {
+    role: 'Android product engineering for construction operations and project administration.',
+    scope: 'A construction management application for organising projects, work items, procurement, stock movements, finance and reports.',
+    engineeringHighlights: [
+      'Developed the Android application for construction project oversight and field operations.',
+      'Organised project progress, tasks, materials procurement and stock records in operational workflows.',
+      'Implemented views for financial monitoring and project reporting.',
+    ],
+  },
   'ai-stylist': {
     role: 'Mobile and backend product engineering across wardrobe management, AI-assisted image understanding, recommendations, location, local persistence, and OAuth.',
     scope:
@@ -77,7 +97,7 @@ const caseStudyDetails: Record<string, CaseStudyDetail> = {
   },
 };
 
-function getPrimaryProjectImage(project: (typeof projects)[number]) {
+function getPrimaryProjectImage(project: (typeof publicProjects)[number]) {
   return (
     project.icon ||
     project.screenshots?.web?.[0] ||
@@ -87,16 +107,15 @@ function getPrimaryProjectImage(project: (typeof projects)[number]) {
 }
 
 function findProjectById(projectId: string) {
-  return projects.find((p) => p.id === projectId || p.aliases?.includes(projectId));
+  return publicProjects.find((p) => p.id === projectId || p.aliases?.includes(projectId));
 }
 
-function getOperatingSystem(project: (typeof projects)[number]) {
-  if (project.id === 'clivique-hmis') return 'Web';
-  return ['iOS', 'Android'];
+function getOperatingSystem(project: (typeof publicProjects)[number]) {
+  return project.platforms?.join(', ') ?? 'Web';
 }
 
 export function generateStaticParams() {
-  return projects.flatMap((p) => [
+  return publicProjects.flatMap((p) => [
     { projectId: p.id },
     ...(p.aliases ?? []).map((projectId) => ({ projectId })),
   ]);
@@ -106,11 +125,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { projectId } = await params;
   const project = findProjectById(projectId);
   if (!project) return { title: 'Project Not Found' };
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+  const base = SITE_URL;
   const canonical = `${base}/${project.id}`;
   const ogImage = getPrimaryProjectImage(project);
   return {
-    title: `${project.title} — Full-Stack Engineering Case Study | Joel Mbaka`,
+    title: `${project.title} | Joeltech Geek Systems Case Study`,
     description: project.description,
     alternates: { canonical },
     openGraph: {
@@ -137,7 +156,7 @@ export default async function ProjectPage({ params }: PageProps) {
   if (!project) return notFound();
 
   const detail = caseStudyDetails[project.id];
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+  const base = SITE_URL;
   const ogImage = getPrimaryProjectImage(project);
   const imageAbs = ogImage.startsWith('http') ? ogImage : `${base}${ogImage}`;
   const canonical = `${base}/${project.id}`;
@@ -168,14 +187,25 @@ export default async function ProjectPage({ params }: PageProps) {
         applicationCategory: project.type === 'Enterprise' ? 'BusinessApplication' : 'SoftwareApplication',
         operatingSystem: getOperatingSystem(project),
         image: imageAbs,
-        creator: { '@id': `${base}/#person` },
+        creator: { '@id': `${base}/#organization` },
         sameAs: externalReferences,
       },
+      ...(project.demoVideo?.publishedAt ? [{
+        '@type': 'VideoObject',
+        '@id': `${canonical}#demo-video`,
+        name: project.demoVideo.title,
+        description: project.demoVideo.description,
+        contentUrl: project.demoVideo.src,
+        thumbnailUrl: project.demoVideo.poster,
+        uploadDate: project.demoVideo.publishedAt,
+        ...(project.demoVideo.duration ? { duration: project.demoVideo.duration } : {}),
+        publisher: { '@id': `${base}/#organization` },
+      }] : []),
       {
         '@type': 'Person',
         '@id': `${base}/#person`,
         name: 'Joel Mbaka',
-        jobTitle: 'Senior Full-Stack Engineer — Web & Mobile',
+        jobTitle: 'Founder and Senior Software Engineer',
         url: base,
         sameAs: [
           'https://github.com/joelmbaka',
@@ -222,7 +252,8 @@ export default async function ProjectPage({ params }: PageProps) {
 
         <header className="max-w-4xl">
           <div className="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-gray-500 dark:text-gray-400">
-            <span>{project.type}</span>
+            <span>{project.engagement ?? project.type}</span>
+            {project.platforms && <><span aria-hidden>·</span><span>{project.platforms.join(' · ')}</span></>}
             <span aria-hidden>·</span>
             <span>Engineering case study</span>
           </div>
@@ -230,10 +261,48 @@ export default async function ProjectPage({ params }: PageProps) {
           <p className="mt-5 text-lg leading-8 text-gray-600 dark:text-gray-300">{project.description}</p>
         </header>
 
+        <section className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/50">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Engagement context</p>
+          <p className="mt-2 text-base font-semibold text-gray-900 dark:text-white">
+            {project.engagement === 'Client project'
+              ? 'Client-commissioned software development'
+              : project.engagement === 'Experiment'
+                ? 'Exploratory product engineering'
+                : project.id === 'clivique-hmis'
+                  ? 'Founder-led / co-founded software product'
+                  : 'In-house commercial software product'}
+          </p>
+          <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            {project.engagement === 'Client project'
+              ? 'This case study describes the engineering delivered for a client; it does not imply ownership of the client business or intellectual property.'
+              : project.engagement === 'Experiment'
+                ? 'This is experimental engineering evidence, not a claim of a commercially launched product.'
+                : project.id === 'clivique-hmis'
+                  ? 'CliviQue is a co-founded product initiative. This case study describes the founder\'s technical contribution without claiming sole ownership.'
+                  : 'Developed within the Joeltech Geek Systems product portfolio for commercial use and iteration.'}
+          </p>
+          <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">Platforms: {project.platforms?.join(' · ') ?? 'See technical implementation below'}</p>
+        </section>
+
+        {project.demoVideo && (
+          <section className="mt-12" aria-labelledby="project-demo-heading">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product walkthrough</p>
+            <h2 id="project-demo-heading" className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">{project.demoVideo.title}</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">{project.demoVideo.description}</p>
+            <div className="mt-5 overflow-hidden rounded-2xl bg-black">
+              <video controls playsInline preload="metadata" poster={project.demoVideo.poster} className="aspect-video w-full">
+                <source src={project.demoVideo.src} type={project.demoVideo.mimeType ?? "video/mp4"} />
+                {project.demoVideo.captions && <track kind="captions" src={project.demoVideo.captions} srcLang="en" label="English captions" default />}
+                Your browser does not support embedded video.
+              </video>
+            </div>
+          </section>
+        )}
+
         {detail && (
           <section className="mt-10 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
             <article className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900/70">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">My role</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Engineering contribution</p>
               <p className="mt-3 text-base leading-7 text-gray-700 dark:text-gray-300">{detail.role}</p>
 
               <p className="mt-7 text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product scope</p>
@@ -260,6 +329,7 @@ export default async function ProjectPage({ params }: PageProps) {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product evidence</p>
               <h2 className="mt-2 text-2xl font-semibold">Web application</h2>
             </div>
+            <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">Screenshots document product interfaces and may reflect an earlier release. Updated walkthrough media is added only when verified.</p>
             <ImageGallery images={project.screenshots.web} variant="web" />
           </section>
         )}
@@ -270,6 +340,7 @@ export default async function ProjectPage({ params }: PageProps) {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product evidence</p>
               <h2 className="mt-2 text-2xl font-semibold">Mobile application</h2>
             </div>
+            <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">Product screens may reflect an earlier release; the case study describes the implementation scope separately.</p>
             <ImageGallery images={project.screenshots.app.slice(0, 5)} />
           </section>
         )}

@@ -1,22 +1,23 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import CTA from '@/components/CTA';
 
-const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+const base = SITE_URL;
 
 export const metadata: Metadata = {
-  title: 'Industry Experience — FinTech, PropTech, Healthcare, Logistics & SaaS | Joel Mbaka',
+  title: 'Industry Experience — FinTech, PropTech, Healthcare, Logistics & SaaS | Joeltech Geek Systems',
   description:
     'Product engineering experience across FinTech, PropTech, accounting/reconciliation, healthcare/HMIS, logistics/transport, voice/AI SaaS, and other industries that need web, mobile, backend, cloud, and API systems.',
   alternates: { canonical: '/industries' },
   openGraph: {
     type: 'website',
     url: '/industries',
-    title: 'Industry Experience | Joel Mbaka',
+    title: 'Industry Experience | Joeltech Geek Systems',
     description: 'Domain experience backed by production case studies, plus an industry-agnostic approach to web and mobile product engineering.',
   },
-  twitter: { card: 'summary_large_image', title: 'Industry Experience | Joel Mbaka', description: 'FinTech, PropTech, healthcare, logistics, SaaS, and industry-agnostic product engineering.' },
+  twitter: { card: 'summary_large_image', title: 'Industry Experience | Joeltech Geek Systems', description: 'FinTech, PropTech, healthcare, logistics, SaaS, and industry-agnostic product engineering.' },
 };
 
 const proven = [
@@ -24,6 +25,16 @@ const proven = [
     title: 'FinTech, PropTech & accounting workflows',
     body: 'RentPayor combines property operations with financial and accounting state: rent invoices, M-Pesa collection, automatic invoice reconciliation, partial balances, tenant credits, receipts, leases, units, tenants, and payment history.',
     href: '/rentpayor',
+  },
+  {
+    title: 'Education & school-fee platforms',
+    body: 'SchoolPey combines Android parent access and web school administration with term fee schedules, student and guardian records, invoicing, M-Pesa collection, receipts and reconciliation.',
+    href: '/schoolpey',
+  },
+  {
+    title: 'Construction & project operations',
+    body: 'Milliol Construction Manager is an Android-only solution for site progress, work items, procurement, stock and financial reporting.',
+    href: '/milliol',
   },
   {
     title: 'Healthcare & HMIS',
@@ -48,9 +59,9 @@ export default function IndustriesPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Industry experience — Joel Mbaka',
+    name: 'Industry experience — Joeltech Geek Systems',
     url: `${base}/industries`,
-    about: { '@id': `${base}/#person` },
+    about: { '@id': `${base}/#organization` },
   };
 
   return (
@@ -58,9 +69,9 @@ export default function IndustriesPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="max-w-4xl">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-palm-green">Industry experience</p>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Domain-aware engineering without being limited to one industry.</h1>
+        <h1 className="mt-3 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Software built around how your industry actually works.</h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-          My strongest domain experience is backed by products in property/finance, healthcare, logistics, and consumer AI. I am still fundamentally industry-agnostic: if a business needs a mobile or web touchpoint, backend APIs, data, cloud services, payments, automation, or operational software, the underlying engineering problems are often transferable.
+          Our published work spans property and finance, education, construction, healthcare, logistics and consumer AI. We remain industry-agnostic: if your business needs mobile or web interfaces, APIs, databases, payments, automation or operations software, we can begin with your specific workflows.
         </p>
       </header>
 
@@ -76,8 +87,8 @@ export default function IndustriesPage() {
 
       <section className="mt-16 rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/50 sm:p-9">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Open industries</p>
-        <h2 className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">I am open to any industry where software is a meaningful part of the product or operation.</h2>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">Examples include the sectors below. They are not claims that I have already shipped a product in every one of them; they describe the markets I am open to working in.</p>
+        <h2 className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">We work across industries where software can make a meaningful difference.</h2>
+        <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">Examples include the sectors below. This list indicates sectors we can discuss, not claims of completed work in every industry. The case studies above document actual experience.</p>
         <div className="mt-6 flex flex-wrap gap-2">
           {openIndustries.map((industry) => <span key={industry} className="rounded-full bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm dark:bg-gray-800 dark:text-gray-300">{industry}</span>)}
         </div>

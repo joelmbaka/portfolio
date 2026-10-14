@@ -1,8 +1,10 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
 import { Navbar } from '../components/Navbar';
+import { NavigationLoader } from '../components/NavigationLoader';
 import { Footer } from '../components/Footer';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -17,76 +19,43 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const siteTitle = 'Senior Full-Stack Product Engineer — Web & Mobile | Joel Mbaka';
+const siteTitle = 'Joeltech Geek Systems | Custom Software Development in Kenya';
 const siteDescription =
-  'Nairobi, Kenya-based remote senior full-stack product engineer building production mobile and web software with React Native, Expo, Next.js, TypeScript, Python, FastAPI, PostgreSQL, REST/GraphQL APIs, Playwright/Maestro E2E testing, pytest/Jest, payments, voice/LLM integrations, CI/CD, app-store release, and technical SEO.';
+  'Founder-led software development in Kenya for clients worldwide: React Native apps, Next.js web platforms, FastAPI backends, SaaS products, payments and practical AI integrations.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL((process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '')),
+  metadataBase: new URL(SITE_URL),
   title: siteTitle,
   description: siteDescription,
-  applicationName: 'Joel Mbaka Portfolio',
-  authors: [{ name: 'Joel Mbaka', url: 'https://joelmbaka.com' }],
-  creator: 'Joel Mbaka',
-  publisher: 'Joel Mbaka',
+  applicationName: 'Joeltech Geek Systems',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any', type: 'image/x-icon' },
+      { url: '/icon.svg', sizes: 'any', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/brand/bridgeframe-180.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: '/favicon.ico',
+  },
+  authors: [{ name: 'Joel Mbaka', url: 'https://linkedin.com/in/joelmbaka' }],
+  creator: 'Joeltech Geek Systems',
+  publisher: 'Joeltech Geek Systems',
   category: 'technology',
   keywords: [
-    'Joel Mbaka',
-    'Nairobi software engineer',
-    'Kenya software engineer',
-    'Nairobi full-stack engineer',
-    'Kenya full-stack engineer',
-    'senior full-stack engineer',
-    'senior product engineer',
-    'full-stack web and mobile engineer',
-    'remote contract software engineer',
-    'startup product engineer',
-    '0 to 1 product engineer',
-    'React Native engineer',
-    'Expo engineer',
-    'Next.js engineer',
-    'TypeScript engineer',
-    'Python engineer',
-    'FastAPI engineer',
-    'PostgreSQL engineer',
-    'REST API engineer',
-    'GraphQL engineer',
-    'API integration engineer',
-    'end to end testing engineer',
-    'Playwright testing',
-    'Maestro mobile testing',
-    'mobile E2E testing',
-    'web E2E testing',
-    'pytest',
-    'Jest testing',
-    'automated regression testing',
-    'voice app developer',
-    'voice AI engineer',
-    'speech-to-text engineer',
-    'Whisper integration',
-    'LLM integration engineer',
-    'AI application engineer',
-    'AI agent engineer',
-    'FinTech software engineer',
-    'PropTech engineer',
-    'accounting software engineer',
-    'payment integration engineer',
-    'M-Pesa Daraja developer',
-    'healthcare software engineer',
-    'HMIS engineer',
-    'logistics software engineer',
-    'Expo EAS CI CD',
-    'App Store release engineer',
-    'Google Play release engineer',
-    'technical SEO engineer',
-    'Google Search Console',
-    'Google Ads search campaigns',
+    'Joeltech Geek Systems',
+    'software development company in Kenya',
+    'custom software development Nairobi',
+    'React Native development',
+    'Next.js web app development',
+    'FastAPI backend development',
+    'SaaS product engineering',
+    'M-Pesa payment integration',
+    'AI API integration',
   ],
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     url: '/',
-    siteName: 'Joel Mbaka',
+    siteName: 'Joeltech Geek Systems',
     title: siteTitle,
     description: siteDescription,
     locale: 'en_US',
@@ -124,6 +93,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="min-h-screen flex flex-col">
             <Navbar />
+            <NavigationLoader />
             <div className="flex-1">{children}</div>
             <Footer />
           </div>

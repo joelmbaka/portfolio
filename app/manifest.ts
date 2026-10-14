@@ -2,13 +2,18 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Joel Mbaka — Senior Full-Stack Engineer',
-    short_name: 'Joel Mbaka',
+    name: 'Joeltech Geek Systems — Software Development',
+    short_name: 'Joeltech Geek',
     description:
-      'Engineering portfolio covering production mobile, web, backend, data, payment, and AI integration work.',
+      'Kenya-based software development for businesses worldwide: web, mobile, SaaS, payments and integrations.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
+    background_color: '#07111F',
     theme_color: '#059669',
+    icons: [
+      { src: '/brand/bridgeframe-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+      { src: '/brand/bridgeframe-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+      { src: '/icon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
+    ],
   };
 }

@@ -1,25 +1,26 @@
+import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { expertiseAreas } from '@/config/expertise';
 import CTA from '@/components/CTA';
 
-const base = (process.env.NEXT_PUBLIC_SITE_URL || 'https://joelmbaka.com').replace(/\/$/, '');
+const base = SITE_URL;
 
 export const metadata: Metadata = {
-  title: 'Engineering Expertise — Mobile, Web, APIs, Data, AI, Payments & SEO | Joel Mbaka',
+  title: 'Engineering Expertise — Mobile, Web, APIs, Data, AI, Payments & SEO | Joeltech Geek Systems',
   description:
-    'Explore Joel Mbaka’s specialist engineering expertise across React Native, Next.js, FastAPI/PostgreSQL, REST/GraphQL APIs, databases, voice/LLM systems, authentication, payments, CI/CD, app release, and technical SEO.',
+    'Explore the founder-led software engineering expertise behind Joeltech Geek Systems across React Native, Next.js, FastAPI/PostgreSQL, REST/GraphQL APIs, databases, voice/LLM systems, authentication, payments, CI/CD, app release, and technical SEO.',
   alternates: { canonical: '/expertise' },
   openGraph: {
     type: 'website',
     url: '/expertise',
-    title: 'Engineering Expertise | Joel Mbaka',
+    title: 'Engineering Expertise | Joeltech Geek Systems',
     description: 'Mobile, web, backend, APIs, data, AI, payments, security, release, and search expertise supported by real product work.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Engineering Expertise | Joel Mbaka',
+    title: 'Engineering Expertise | Joeltech Geek Systems',
     description: 'Mobile, web, backend, APIs, data, AI, payments, security, release, and search expertise supported by real product work.',
   },
 };
@@ -28,7 +29,7 @@ export default function ExpertisePage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Engineering Expertise — Joel Mbaka',
+    name: 'Engineering Expertise — Joeltech Geek Systems',
     description: metadata.description,
     url: `${base}/expertise`,
     mainEntity: {
@@ -52,7 +53,7 @@ export default function ExpertisePage() {
           Full-stack product engineering across the systems that make software work in production.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-600 dark:text-gray-300">
-          These pages make the technical breadth behind my case studies explicit: mobile, web, APIs, databases, authentication, payments, voice and LLM integrations, cloud/release workflows, and search/distribution. Each area connects back to products that provide evidence instead of relying on a keyword list alone.
+          These pages explain the technical capabilities behind Joeltech Geek Systems solutions: mobile, web, APIs, databases, authentication, payments, voice and LLM integrations, cloud/release workflows, and search/distribution. Each area connects back to products that provide evidence instead of relying on a keyword list alone.
         </p>
         <div className="mt-7 flex flex-wrap gap-4 text-sm font-semibold">
           <Link href="/skills" className="inline-flex items-center gap-2 text-palm-green hover:underline">Complete technical skills inventory <ArrowRight className="h-4 w-4" aria-hidden /></Link>
