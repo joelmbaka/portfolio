@@ -93,7 +93,7 @@ export default function MentorshipPage() {
       <section className="mt-16 rounded-3xl border border-gray-200 p-7 dark:border-gray-800 sm:p-9">
         <h2 className="text-2xl font-bold">Interested in learning or collaborating?</h2>
         <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">
-          Tell us what you're building, your current experience and the kind of guidance you're seeking. Opportunities are considered individually; there is no promise of immediate intake, certification, staffing placement or relocation.
+          Tell us what you&apos;re building, your current experience and the kind of guidance you&apos;re seeking. Opportunities are considered individually; there is no promise of immediate intake, certification, staffing placement or relocation.
         </p>
         <div className="mt-6 flex flex-wrap gap-5 text-sm font-semibold">
           <Link href="/careers" className="inline-flex items-center gap-2 text-palm-green hover:underline">Internships & career opportunities <ArrowRight className="h-4 w-4" aria-hidden /></Link>
