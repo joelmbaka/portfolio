@@ -190,6 +190,17 @@ export default async function ProjectPage({ params }: PageProps) {
         creator: { '@id': `${base}/#organization` },
         sameAs: externalReferences,
       },
+      ...(project.demoVideo?.publishedAt ? [{
+        '@type': 'VideoObject',
+        '@id': `${canonical}#demo-video`,
+        name: project.demoVideo.title,
+        description: project.demoVideo.description,
+        contentUrl: project.demoVideo.src,
+        thumbnailUrl: project.demoVideo.poster,
+        uploadDate: project.demoVideo.publishedAt,
+        ...(project.demoVideo.duration ? { duration: project.demoVideo.duration } : {}),
+        publisher: { '@id': `${base}/#organization` },
+      }] : []),
       {
         '@type': 'Person',
         '@id': `${base}/#person`,
@@ -250,6 +261,44 @@ export default async function ProjectPage({ params }: PageProps) {
           <p className="mt-5 text-lg leading-8 text-gray-600 dark:text-gray-300">{project.description}</p>
         </header>
 
+        <section className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/50">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Engagement context</p>
+          <p className="mt-2 text-base font-semibold text-gray-900 dark:text-white">
+            {project.engagement === 'Client project'
+              ? 'Client-commissioned software development'
+              : project.engagement === 'Experiment'
+                ? 'Exploratory product engineering'
+                : project.id === 'clivique-hmis'
+                  ? 'Founder-led / co-founded software product'
+                  : 'In-house commercial software product'}
+          </p>
+          <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">
+            {project.engagement === 'Client project'
+              ? 'This case study describes the engineering delivered for a client; it does not imply ownership of the client business or intellectual property.'
+              : project.engagement === 'Experiment'
+                ? 'This is experimental engineering evidence, not a claim of a commercially launched product.'
+                : project.id === 'clivique-hmis'
+                  ? 'CliviQue is a co-founded product initiative. This case study describes the founder\'s technical contribution without claiming sole ownership.'
+                  : 'Developed within the Joeltech Geek Systems product portfolio for commercial use and iteration.'}
+          </p>
+          <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">Platforms: {project.platforms?.join(' · ') ?? 'See technical implementation below'}</p>
+        </section>
+
+        {project.demoVideo && (
+          <section className="mt-12" aria-labelledby="project-demo-heading">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product walkthrough</p>
+            <h2 id="project-demo-heading" className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">{project.demoVideo.title}</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">{project.demoVideo.description}</p>
+            <div className="mt-5 overflow-hidden rounded-2xl bg-black">
+              <video controls playsInline preload="metadata" poster={project.demoVideo.poster} className="aspect-video w-full">
+                <source src={project.demoVideo.src} type="video/mp4" />
+                {project.demoVideo.captions && <track kind="captions" src={project.demoVideo.captions} srcLang="en" label="English captions" default />}
+                Your browser does not support embedded video.
+              </video>
+            </div>
+          </section>
+        )}
+
         {detail && (
           <section className="mt-10 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
             <article className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900/70">
@@ -280,6 +329,7 @@ export default async function ProjectPage({ params }: PageProps) {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product evidence</p>
               <h2 className="mt-2 text-2xl font-semibold">Web application</h2>
             </div>
+            <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">Screenshots document product interfaces and may reflect an earlier release. Updated walkthrough media is added only when verified.</p>
             <ImageGallery images={project.screenshots.web} variant="web" />
           </section>
         )}
@@ -290,6 +340,7 @@ export default async function ProjectPage({ params }: PageProps) {
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product evidence</p>
               <h2 className="mt-2 text-2xl font-semibold">Mobile application</h2>
             </div>
+            <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">Product screens may reflect an earlier release; the case study describes the implementation scope separately.</p>
             <ImageGallery images={project.screenshots.app.slice(0, 5)} />
           </section>
         )}
