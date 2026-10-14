@@ -18,11 +18,12 @@ export function Footer() {
 
           <nav className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm sm:grid-cols-3" aria-label="Footer navigation">
             {[
-              ['/work', 'Solutions'],
               ['/services', 'Services'],
-              ['/expertise', 'Expertise'],
+              ['/work', 'Portfolio'],
               ['/industries', 'Industries'],
-              ['/about', 'About'],
+              ['/about', 'About company'],
+              ['/founder', 'Founder'],
+              ['/mentorship', 'Mentorship'],
               ['/careers', 'Careers'],
               ['/contact', 'Contact'],
             ].map(([href, label]) => (
