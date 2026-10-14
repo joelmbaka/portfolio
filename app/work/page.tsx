@@ -1,98 +1,101 @@
 import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { projects } from '@/config/projects';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
 import CTA from '@/components/CTA';
-import SlideIn from '@/components/SlideIn';
-
-const base = SITE_URL;
 
 export const metadata: Metadata = {
-  title: 'Software Products & Client Projects | Joeltech Geek Systems',
-  description:
-    'Explore software products and client engineering by Joeltech Geek Systems, including RentPayor, SchoolPey, Milliol, JournPad, CliviQue and Macsim Cargo.',
-  alternates: {
-    canonical: '/work',
-  },
+  title: 'Software Portfolio — Our SaaS Products & Client Projects | Joeltech Geek Systems',
+  description: 'Explore Joeltech Geek Systems software portfolio: in-house SaaS products, commissioned client projects and prototypes across property, education, healthcare, logistics, construction and applied AI.',
+  alternates: { canonical: '/work' },
   openGraph: {
+    type: 'website', url: '/work',
     title: 'Software Products & Client Projects | Joeltech Geek Systems',
-    description:
-      'Production software projects spanning mobile, web, backend, data, payments, integrations, and release.',
-    url: `${base}/work`,
-    type: 'website',
+    description: 'Company-developed commercial software, client delivery and research work—identified separately with technical case studies.',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Software Products & Client Projects | Joeltech Geek Systems',
-    description:
-      'Production software projects spanning mobile, web, backend, data, payments, integrations, and release.',
-  },
-  robots: { index: true, follow: true },
 };
 
 export default function WorkPage() {
-  const flagshipIds = ['rentpayor', 'schoolpey', 'clivique-hmis', 'milliol', 'journpad', 'macsim'];
-  const orderedProjects = [
-    ...flagshipIds
-      .map((id) => projects.find((project) => project.id === id))
-      .filter((project): project is (typeof projects)[number] => Boolean(project)),
-    ...projects.filter((project) => !flagshipIds.includes(project.id)),
-  ];
-
+  const owned = projects.filter((project) => project.engagement === 'Product');
+  const commissioned = projects.filter((project) => project.engagement === 'Client project');
+  const experiments = projects.filter((project) => project.engagement === 'Experiment');
+  const orderedProjects = [...owned, ...commissioned, ...experiments];
+  const base = SITE_URL;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     '@id': `${base}/work#collection`,
-    name: 'Software Solutions — Joeltech Geek Systems',
-    description:
-      'Engineering case studies and product work across mobile, web, backend, data, payments, AI integrations, and production delivery.',
+    name: 'Software portfolio — Joeltech Geek Systems',
     url: `${base}/work`,
-    dateModified: '2026-08-12',
-    author: { '@id': `${base}/#person` },
+    description: 'In-house software products, client projects and experiments with distinct delivery and ownership context.',
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: orderedProjects.map((project, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        name: project.title,
-        url: `${base}/${project.id}`,
+        '@type': 'ListItem', position: index + 1, name: project.title, url: `${base}/${project.id}`,
       })),
     },
   };
 
   return (
-    <SlideIn>
-      <main className="mx-auto max-w-6xl px-4 pb-10 pt-28 sm:px-6 md:pb-14 lg:px-8">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <header className="max-w-4xl">
+        <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Our portfolio</p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
+          Products we build. Software we deliver for clients.
+        </h1>
+        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+          Joeltech Geek Systems develops commercial software products and takes on commissioned engineering projects. We separate the two below so you can see exactly what is an in-house product, what was built for a client, and what remains exploratory.
+        </p>
+        <nav className="mt-7 flex flex-wrap gap-3 text-sm font-semibold" aria-label="Portfolio sections">
+          <a href="#our-products" className="rounded-full border border-gray-300 px-4 py-2 text-palm-green hover:underline dark:border-gray-700">Our products</a>
+          <a href="#client-projects" className="rounded-full border border-gray-300 px-4 py-2 text-palm-green hover:underline dark:border-gray-700">Client projects</a>
+          <a href="#experiments" className="rounded-full border border-gray-300 px-4 py-2 text-palm-green hover:underline dark:border-gray-700">Experiments</a>
+        </nav>
+      </header>
 
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-          <Link
-            href="/#work"
-            className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-palm-green dark:text-gray-400"
-          >
-            <ArrowLeft className="h-4 w-4" aria-hidden />
-            Back to selected work
-          </Link>
+      <section id="our-products" className="mt-16 scroll-mt-24" aria-labelledby="our-products-title">
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-palm-green">01 · Products developed by our business</p>
+        <h2 id="our-products-title" className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">Our software products</h2>
+        <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">
+          Applications and SaaS platforms developed for our own product roadmap and commercial activity. Some are founder-led or co-founded ventures; a listing here is not a claim of exclusive intellectual-property ownership.
+        </p>
+        <div className="mt-8"><ProjectsCarousel projects={owned} /></div>
+      </section>
 
-          <div className="mt-8 max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-palm-green">Solutions &amp; case studies</p>
-            <h1 className="mt-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-              Software products and client work, built for real operations.
-            </h1>
-            <p className="mt-5 text-base leading-7 text-gray-600 dark:text-gray-300 sm:text-lg">
-              Explore founder-led products and client projects across property, education, healthcare, construction, logistics and AI. Each case study explains the systems, platforms and engineering behind the solution.
-            </p>
-          </div>
-        </div>
+      <section id="client-projects" className="mt-20 scroll-mt-24" aria-labelledby="client-projects-title">
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-palm-green">02 · Commissioned engineering</p>
+        <h2 id="client-projects-title" className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">Software built for clients</h2>
+        <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">
+          Client-commissioned systems built to streamline operations and service delivery. These case studies show our technical contribution; client project attribution does not imply Joeltech Geek Systems owns the client's business or software.
+        </p>
+        <div className="mt-8"><ProjectsCarousel projects={commissioned} /></div>
+      </section>
 
-        <section className="container mx-auto mt-12 px-4 sm:px-6 md:px-8 lg:px-12" aria-label="All engineering projects">
-          <ProjectsCarousel projects={orderedProjects} />
+      {experiments.length > 0 && (
+        <section id="experiments" className="mt-20 scroll-mt-24" aria-labelledby="experiments-title">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-palm-green">03 · Research & experimentation</p>
+          <h2 id="experiments-title" className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">Exploratory applications</h2>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">
+            Engineering experiments that explore useful experiences or integrations, without implying commercial launch or active customer adoption.
+          </p>
+          <div className="mt-8"><ProjectsCarousel projects={experiments} /></div>
         </section>
+      )}
 
-        <CTA />
-      </main>
-    </SlideIn>
+      <section className="mt-16 rounded-3xl bg-gray-50 p-7 dark:bg-gray-900/60 sm:p-9">
+        <h2 className="text-2xl font-bold">Need similar software for your organisation?</h2>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">
+          We can discuss mobile apps, web dashboards, SaaS products, backend services, payments and integrations for your particular workflows.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-5 text-sm font-semibold">
+          <Link href="/services" className="inline-flex items-center gap-2 text-palm-green hover:underline">See development services <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+          <Link href="/contact" className="inline-flex items-center gap-2 text-palm-green hover:underline">Start a project <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+        </div>
+      </section>
+      <CTA />
+    </main>
   );
 }
