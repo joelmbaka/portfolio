@@ -21,7 +21,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     intro:
       'I build mobile products as complete systems rather than isolated screens: app architecture, navigation, secure authentication, native device capabilities, API integration, local persistence, analytics, testing, release, and the backend workflows required to support the product.',
     technologies: ['React Native', 'Expo', 'TypeScript', 'Expo Router', 'EAS Build', 'Expo Updates', 'SQLite', 'SecureStore', 'AsyncStorage', 'iOS', 'Android'],
-    evidenceProjectIds: ['journpad', 'rentpayor', 'schoolpey', 'milliol', 'macsim', 'ai-stylist'],
+    evidenceProjectIds: ['journpad', 'rentpayor', 'schoolpey', 'milliol', 'macsim'],
     highlights: [
       'Voice recording, playback, reminders, goals, biometrics, secure token storage, and store release workflows in JournPad.',
       'Invoice-linked rent payment and reconciliation workflows in RentPayor.',
@@ -57,7 +57,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     intro:
       'I design backend systems around business state that must remain correct: invoices and balances, patient and facility scope, cargo and driver payments, journal entries, authentication, callbacks, and long-running operational workflows.',
     technologies: ['Python', 'FastAPI', 'PostgreSQL', 'SQL', 'SQLAlchemy', 'Alembic', 'REST APIs', 'Webhooks', 'JWT'],
-    evidenceProjectIds: ['rentpayor', 'schoolpey', 'clivique-hmis', 'macsim', 'journpad', 'ai-stylist'],
+    evidenceProjectIds: ['rentpayor', 'schoolpey', 'clivique-hmis', 'macsim', 'journpad'],
     highlights: [
       'Rent invoices, partial payments, carried-forward credits, receipts, and automatic reconciliation in RentPayor.',
       'Patient, facility, billing, clinical workflow, and M-Pesa payment state in CliviQue HMIS.',
@@ -75,7 +75,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     intro:
       'For most non-trivial products, the API layer is where user-facing behavior becomes durable business logic. I design and integrate APIs around clear contracts, authentication, validation, idempotency, failure states, callbacks, observability, and the relational state behind them.',
     technologies: ['REST APIs', 'GraphQL', 'FastAPI', 'Apollo', 'Webhooks', 'OAuth', 'JWT', 'M-Pesa Daraja', 'Third-party APIs'],
-    evidenceProjectIds: ['rentpayor', 'clivique-hmis', 'macsim', 'journpad', 'ai-stylist'],
+    evidenceProjectIds: ['rentpayor', 'clivique-hmis', 'macsim', 'journpad'],
     highlights: [
       'Payment initiation, provider callbacks, verification, and reconciliation across RentPayor and CliviQue.',
       'Daraja STK Push and B2C payout integration with idempotent state transitions in Macsim Cargo.',
@@ -93,7 +93,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     intro:
       'I treat the data model as part of the product design. Invoices, tenant credit, patient context, payment ledgers, cargo assignments, journal entries, local mobile state, and recommendation history all become easier to reason about when the database expresses the real business relationships clearly.',
     technologies: ['PostgreSQL', 'SQL', 'SQLAlchemy', 'Alembic', 'SQLite', 'Neo4j', 'Graph data', 'AsyncStorage', 'Caching patterns'],
-    evidenceProjectIds: ['rentpayor', 'clivique-hmis', 'macsim', 'journpad', 'ai-stylist'],
+    evidenceProjectIds: ['rentpayor', 'clivique-hmis', 'macsim', 'journpad'],
     highlights: [
       'Accounting-oriented invoice, payment, credit, lease, property, unit, and tenant relationships in RentPayor.',
       'Patient, encounter, facility, billing, orders, movement, and receipt state in CliviQue HMIS.',
@@ -136,7 +136,7 @@ export const expertiseAreas: ExpertiseArea[] = [
       'LLM reasoning',
       'Open-source models',
     ],
-    evidenceProjectIds: ['journpad', 'ai-stylist', 'rentpayor'],
+    evidenceProjectIds: ['journpad', 'rentpayor'],
     highlights: [
       'Built JournPad voice workflows around recording, speech-to-text, preserved audio, playback, and AI-assisted organization of spoken journal entries.',
       'Built the AutoAce voice-analysis pipeline using ElevenLabs Scribe v2 for transcripts, diarization, word timestamps and audio-event tags; customer-speaker inference then isolates customer-only speech segments.',
@@ -156,7 +156,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     intro:
       'I prefer the backend to remain the central source of identity and authorization truth. On mobile, sensitive tokens belong in secure storage while non-sensitive state can use ordinary local persistence. For higher-risk products, I design around permissions, isolation, verification, auditability, and explicit revocation rather than trusting the client.',
     technologies: ['OAuth', 'Google Sign-In', 'Apple Sign-In', 'JWT', 'Access tokens', 'Refresh tokens', 'Expo SecureStore', 'Biometrics', 'Password hashing', 'RBAC', 'KYC/KYB'],
-    evidenceProjectIds: ['journpad', 'rentpayor', 'clivique-hmis', 'ai-stylist'],
+    evidenceProjectIds: ['journpad', 'rentpayor', 'clivique-hmis'],
     highlights: [
       'Google/Apple authentication, secure token storage, biometrics, and account-lifecycle controls in mobile apps.',
       'Facility- and role-scoped clinical access in CliviQue HMIS.',
@@ -231,7 +231,7 @@ export const expertiseAreas: ExpertiseArea[] = [
     intro:
       'Shipping is part of engineering. I work in branch-based GitHub workflows, use automated unit/integration/E2E and static checks where appropriate, deploy web and FastAPI services to managed cloud environments such as Vercel, and use Expo/EAS for mobile build, signing, submission, testing, and update workflows. I am comfortable with the operational work required to move an app through both Apple and Google release systems repeatedly.',
     technologies: ['Git', 'GitHub', 'Branches & PRs', 'Automated test gates', 'Vercel', 'Expo EAS', 'EAS Build', 'App Store Connect', 'TestFlight', 'Google Play Console', 'OTA updates'],
-    evidenceProjectIds: ['journpad', 'rentpayor', 'macsim', 'ai-stylist'],
+    evidenceProjectIds: ['journpad', 'rentpayor', 'macsim'],
     highlights: [
       'Production, preview, development, and internal EAS build profiles across iOS and Android.',
       'App Store Connect/TestFlight and Google Play testing/release workflows for published mobile products.',
