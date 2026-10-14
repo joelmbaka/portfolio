@@ -27,6 +27,7 @@ export interface ProjectDemoVideo {
   description: string;
   duration?: string;
   publishedAt?: string;
+  captions?: string;
 }
 
 export interface Project {
