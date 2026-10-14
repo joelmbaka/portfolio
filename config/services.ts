@@ -160,7 +160,7 @@ export const services: ServiceArea[] = [
       'Connect existing model APIs through clear, testable backend contracts.',
       'Keep sensitive data, failure modes and human review in scope.',
     ],
-    proofIds: ['journpad', 'ai-stylist'],
+    proofIds: ['journpad', 'rentpayor'],
   },
 ];
 
