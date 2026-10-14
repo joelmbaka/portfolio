@@ -32,9 +32,9 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <Link href="/contact" className="hidden rounded-full bg-palm-green px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 sm:inline-flex">
+          <a href="/contact" className="hidden min-h-11 items-center rounded-full bg-palm-green px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-palm-green sm:inline-flex">
             Start a project
-          </Link>
+          </a>
           <ThemeToggle />
           <button
             type="button"
@@ -52,7 +52,7 @@ export function Navbar() {
       {mobileOpen && (
         <nav id="mobile-navigation" className="border-t border-gray-200/70 bg-white px-4 pb-5 pt-3 shadow-lg dark:border-gray-800/70 dark:bg-gray-950 lg:hidden" aria-label="Mobile navigation">
           <div className="mx-auto grid max-w-6xl gap-1">
-            {[...primaryLinks, ['/industries', 'Industries'] as const, ['/contact', 'Contact'] as const].map(([href, label]) => (
+            {[...primaryLinks, ['/industries', 'Industries'] as const, ['/contact', 'Start a project'] as const].map(([href, label]) => (
               <Link key={href} href={href} onClick={closeMobile} className="flex min-h-11 items-center rounded-xl px-3 text-sm font-medium text-gray-800 transition hover:bg-gray-100 hover:text-palm-green dark:text-gray-200 dark:hover:bg-gray-900">
                 {label}
               </Link>
