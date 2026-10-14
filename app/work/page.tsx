@@ -8,12 +8,12 @@ import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
   title: 'Software Portfolio — Our SaaS Products & Client Projects | Joeltech Geek Systems',
-  description: 'Explore Joeltech Geek Systems software portfolio: in-house SaaS products, commissioned client projects and prototypes across property, education, healthcare, logistics, construction and applied AI.',
+  description: 'Explore Joeltech Geek Systems software portfolio: in-house SaaS products and commissioned client projects across property, education, healthcare, logistics, construction and applied AI.',
   alternates: { canonical: '/work' },
   openGraph: {
     type: 'website', url: '/work',
     title: 'Software Products & Client Projects | Joeltech Geek Systems',
-    description: 'Company-developed commercial software, client delivery and research work—identified separately with technical case studies.',
+    description: 'Company-developed commercial software and client delivery—clearly identified with technical case studies.',
   },
 };
 
@@ -29,7 +29,7 @@ export default function WorkPage() {
     '@id': `${base}/work#collection`,
     name: 'Software portfolio — Joeltech Geek Systems',
     url: `${base}/work`,
-    description: 'In-house software products, client projects and experiments with distinct delivery and ownership context.',
+    description: 'In-house software products and client projects with distinct delivery and ownership context.',
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: orderedProjects.map((project, index) => ({
@@ -47,12 +47,12 @@ export default function WorkPage() {
           Products we build. Software we deliver for clients.
         </h1>
         <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-          Joeltech Geek Systems develops commercial software products and takes on commissioned engineering projects. We separate the two below so you can see exactly what is an in-house product, what was built for a client, and what remains exploratory.
+          Joeltech Geek Systems develops commercial software products and takes on commissioned engineering projects. We separate the two below so you can see exactly what is an in-house product, what was built for a client, and any currently featured experiments.
         </p>
         <nav className="mt-7 flex flex-wrap gap-3 text-sm font-semibold" aria-label="Portfolio sections">
           <a href="#our-products" className="rounded-full border border-gray-300 px-4 py-2 text-palm-green hover:underline dark:border-gray-700">Our products</a>
           <a href="#client-projects" className="rounded-full border border-gray-300 px-4 py-2 text-palm-green hover:underline dark:border-gray-700">Client projects</a>
-          <a href="#experiments" className="rounded-full border border-gray-300 px-4 py-2 text-palm-green hover:underline dark:border-gray-700">Experiments</a>
+          {experiments.length > 0 && <a href="#experiments" className="rounded-full border border-gray-300 px-4 py-2 text-palm-green hover:underline dark:border-gray-700">Experiments</a>}
         </nav>
       </header>
 
