@@ -87,8 +87,8 @@ export default function IndustriesPage() {
 
       <section className="mt-16 rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/50 sm:p-9">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Open industries</p>
-        <h2 className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">I am open to any industry where software is a meaningful part of the product or operation.</h2>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">Examples include the sectors below. They are not claims that I have already shipped a product in every one of them; they describe the markets I am open to working in.</p>
+        <h2 className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">We work across industries where software can make a meaningful difference.</h2>
+        <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">Examples include the sectors below. This list indicates sectors we can discuss, not claims of completed work in every industry. The case studies above document actual experience.</p>
         <div className="mt-6 flex flex-wrap gap-2">
           {openIndustries.map((industry) => <span key={industry} className="rounded-full bg-white px-3 py-1.5 text-sm text-gray-700 shadow-sm dark:bg-gray-800 dark:text-gray-300">{industry}</span>)}
         </div>
