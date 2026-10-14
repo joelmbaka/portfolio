@@ -20,6 +20,15 @@ export interface ProjectEnhancement {
   note?: string;
 }
 
+export interface ProjectDemoVideo {
+  src: string;
+  poster: string;
+  title: string;
+  description: string;
+  duration?: string;
+  publishedAt?: string;
+}
+
 export interface Project {
   id: string;
   aliases?: string[];
@@ -35,6 +44,8 @@ export interface Project {
   iconBackground?: string;
   storePreview?: ProjectStorePreview;
   screenshots?: ProjectScreenshots;
+  /** Add verified, permission-safe walkthroughs as assets become available. No placeholder video URLs. */
+  demoVideo?: ProjectDemoVideo;
   enhancements?: ProjectEnhancement[];
   appStore?: {
     url: string;
@@ -235,7 +246,7 @@ export const projects: Project[] = [
     tech: ['React Native', 'Expo', 'TypeScript', 'Android'],
     type: 'Enterprise',
     platforms: ['Android'],
-    engagement: 'Product',
+    engagement: 'Client project',
   },
   {
     id: 'macsim',
