@@ -2,7 +2,7 @@ import { SITE_URL } from '@/lib/site';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { projects } from '@/config/projects';
+import { publicProjects } from '@/config/projects';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
 import CTA from '@/components/CTA';
 
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 };
 
 export default function WorkPage() {
-  const owned = projects.filter((project) => project.engagement === 'Product');
-  const commissioned = projects.filter((project) => project.engagement === 'Client project');
-  const experiments = projects.filter((project) => project.engagement === 'Experiment');
+  const owned = publicProjects.filter((project) => project.engagement === 'Product');
+  const commissioned = publicProjects.filter((project) => project.engagement === 'Client project');
+  const experiments = publicProjects.filter((project) => project.engagement === 'Experiment');
   const orderedProjects = [...owned, ...commissioned, ...experiments];
   const base = SITE_URL;
   const jsonLd = {
