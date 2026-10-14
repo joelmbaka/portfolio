@@ -3,15 +3,28 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, BriefcaseBusiness, GraduationCap, Mail, Sparkles } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Careers, Internships & SaaS Sales Opportunities | Joeltech Geek Systems',
-  description: 'Explore software development internships and SaaS sales representative opportunities with Joeltech Geek Systems, a founder-led software business based in Kenya.',
+  title: 'Software Engineering Careers, Internships & SaaS Sales | Joeltech Geek Systems',
+  description: 'Learn about software engineering collaborations, practical developer internships and SaaS sales opportunities with Joeltech Geek Systems, a Kenya-based software business serving clients globally.',
   alternates: { canonical: '/careers' },
 };
 
+const engineeringSubject = encodeURIComponent('Software Engineering Collaboration — Joeltech Geek Systems');
 const internshipSubject = encodeURIComponent('Software Development Internship Interest — Joeltech Geek Systems');
 const salesSubject = encodeURIComponent('SaaS Sales Representative Interest — Joeltech Geek Systems');
 
 const opportunities = [
+  {
+    id: 'engineering',
+    eyebrow: 'Professional software engineering',
+    title: 'Software Engineers & Technical Collaborators',
+    icon: BriefcaseBusiness,
+    intro: 'We welcome qualified engineers interested in paid, production-level collaborations when a suitable project or position is available. Remote collaboration can be considered internationally.',
+    details: ['React Native / Expo / TypeScript mobile application engineering', 'Next.js web applications, Python/FastAPI services and PostgreSQL', 'Architecture, code review, automated testing and production delivery'],
+    note: 'This is an expression-of-interest channel, not an advertised open vacancy. Paid work is governed by an agreed project contract or employment terms, including compensation, location and eligibility. We do not guarantee a placement, sponsorship or relocation.',
+    subject: engineeringSubject,
+    application: 'Share your engineering focus, links to shipped projects or code, preferred engagement model, timezone and availability.',
+    cta: 'Express engineering interest',
+  },
   {
     id: 'internships',
     eyebrow: 'Engineering & learning',
@@ -43,9 +56,9 @@ export default function CareersPage() {
     <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
       <header className="max-w-4xl">
         <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-palm-green"><Sparkles className="h-4 w-4" aria-hidden /> Opportunities</p>
-        <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Build software. Grow your craft. Help great products reach more people.</h1>
-        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Joeltech Geek Systems believes good technology businesses can also create learning and earning opportunities. We welcome expressions of interest from emerging developers and people passionate about helping businesses adopt useful SaaS software.</p>
-        <p className="mt-4 text-sm leading-7 text-gray-500 dark:text-gray-400">Kenya-based · Founder-led · Opportunity arrangements depend on the role and product</p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Work on real software. Grow your skills. Help products reach their users.</h1>
+        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Joeltech Geek Systems believes good technology businesses can also create learning and earning opportunities. We distinguish paid software engineering opportunities, learning-focused internships and SaaS sales roles. We welcome enquiries from qualified remote collaborators, emerging developers and people helping customers adopt useful software.</p>
+        <p className="mt-4 text-sm leading-7 text-gray-500 dark:text-gray-400">Kenya-based · Remote collaboration can be international · Positions and compensation depend on the actual opening</p>
       </header>
 
       <section className="mt-14 grid gap-6 lg:grid-cols-2" aria-label="Careers opportunities">
@@ -74,9 +87,9 @@ export default function CareersPage() {
       <section className="mt-16 grid gap-7 rounded-3xl bg-gray-50 p-8 dark:bg-gray-900/60 md:grid-cols-[auto_1fr] sm:p-10">
         <BookOpen className="h-10 w-10 text-palm-green" aria-hidden />
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Mentorship matters here.</h2>
-          <p className="mt-3 text-base leading-8 text-gray-600 dark:text-gray-300">Founder Joel Mbaka mentors upcoming software developers and values curiosity, initiative, constructive code review and the ability to learn from real product problems. Opportunity availability is assessed individually; submitting an enquiry does not guarantee selection.</p>
-          <Link href="/about" className="mt-5 inline-flex items-center gap-2 font-semibold text-palm-green hover:underline">Meet the founder <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Mentorship is a separate learning pathway.</h2>
+          <p className="mt-3 text-base leading-8 text-gray-600 dark:text-gray-300">Founder Joel Mbaka mentors emerging developers through practical projects, feedback and production engineering habits. Mentorship does not itself constitute employment, an accredited school course, certification or a guaranteed internship.</p>
+          <Link href="/mentorship" className="mt-5 inline-flex items-center gap-2 font-semibold text-palm-green hover:underline">Explore mentorship <ArrowRight className="h-4 w-4" aria-hidden /></Link>
         </div>
       </section>
 
