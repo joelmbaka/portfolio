@@ -291,7 +291,7 @@ export default async function ProjectPage({ params }: PageProps) {
             <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">{project.demoVideo.description}</p>
             <div className="mt-5 overflow-hidden rounded-2xl bg-black">
               <video controls playsInline preload="metadata" poster={project.demoVideo.poster} className="aspect-video w-full">
-                <source src={project.demoVideo.src} type="video/mp4" />
+                <source src={project.demoVideo.src} type={project.demoVideo.mimeType ?? "video/mp4"} />
                 {project.demoVideo.captions && <track kind="captions" src={project.demoVideo.captions} srcLang="en" label="English captions" default />}
                 Your browser does not support embedded video.
               </video>
