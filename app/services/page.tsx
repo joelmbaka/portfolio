@@ -37,7 +37,7 @@ export default function ServicesPage() {
           Joeltech Geek Systems designs, develops and supports software for organisations in Kenya and internationally. We focus on practical business outcomes: applications people use, dependable transaction records, and systems that help teams make decisions.
         </p>
         <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
-          Our core mobile specialization is <strong>React Native with Expo and TypeScript</strong>. For web applications we use Next.js and React; for backend services, Python, FastAPI and PostgreSQL. We integrate existing AI APIs where useful—we do not offer Flutter development, standalone native Swift/Kotlin projects, machine-learning research or model training.
+          Our core mobile specialization is <strong>React Native with Expo and TypeScript</strong>. For web applications we use Next.js and React; for backend services, Python, FastAPI and PostgreSQL. We integrate existing AI APIs where useful—we do not offer Flutter development, standalone native Swift/Kotlin projects, Java, C++, C#, PHP or Ruby development, machine-learning research or model training.
         </p>
       </header>
 
