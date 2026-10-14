@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { expertiseAreas, findExpertiseArea } from '@/config/expertise';
-import { projects } from '@/config/projects';
+import { publicProjects } from '@/config/projects';
 import CTA from '@/components/CTA';
 
 interface PageProps {
@@ -50,8 +50,8 @@ export default async function ExpertiseDetailPage({ params }: PageProps) {
   if (!area) return notFound();
 
   const evidence = area.evidenceProjectIds
-    .map((id) => projects.find((project) => project.id === id))
-    .filter((project): project is (typeof projects)[number] => Boolean(project));
+    .map((id) => publicProjects.find((project) => project.id === id))
+    .filter((project): project is (typeof publicProjects)[number] => Boolean(project));
 
   const canonical = `${base}/expertise/${area.slug}`;
   const jsonLd = {
