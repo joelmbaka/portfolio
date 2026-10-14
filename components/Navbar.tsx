@@ -29,12 +29,6 @@ export function Navbar() {
           {primaryLinks.map(([href, label]) => (
             <Link key={href} href={href} className="transition hover:text-palm-green">{label}</Link>
           ))}
-          <a href="https://github.com/joelmbaka" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 transition hover:text-palm-green">
-            <Github className="h-4 w-4" aria-hidden /> GitHub
-          </a>
-          <a href="https://linkedin.com/in/joelmbaka" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 transition hover:text-palm-green">
-            <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn
-          </a>
         </nav>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
