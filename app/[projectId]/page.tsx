@@ -1,5 +1,5 @@
 import { SITE_URL } from '@/lib/site';
-import { projects } from '@/config/projects';
+import { publicProjects } from '@/config/projects';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -97,7 +97,7 @@ const caseStudyDetails: Record<string, CaseStudyDetail> = {
   },
 };
 
-function getPrimaryProjectImage(project: (typeof projects)[number]) {
+function getPrimaryProjectImage(project: (typeof publicProjects)[number]) {
   return (
     project.icon ||
     project.screenshots?.web?.[0] ||
@@ -107,7 +107,7 @@ function getPrimaryProjectImage(project: (typeof projects)[number]) {
 }
 
 function findProjectById(projectId: string) {
-  return projects.find((p) => p.id === projectId || p.aliases?.includes(projectId));
+  return publicProjects.find((p) => p.id === projectId || p.aliases?.includes(projectId));
 }
 
 function getOperatingSystem(project: (typeof projects)[number]) {
@@ -115,7 +115,7 @@ function getOperatingSystem(project: (typeof projects)[number]) {
 }
 
 export function generateStaticParams() {
-  return projects.flatMap((p) => [
+  return publicProjects.flatMap((p) => [
     { projectId: p.id },
     ...(p.aliases ?? []).map((projectId) => ({ projectId })),
   ]);
