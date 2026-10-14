@@ -58,6 +58,7 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
             className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900/70"
           >
             <Link href={`/${project.id}`} className="block shrink-0" aria-label={`View ${project.title} case study`}>
+              {/* Project thumbnail: export at 1200×675 px (16:9); 1600×900 px is also suitable. Keep critical UI inside the crop-safe area. */}
               <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-100 dark:bg-gray-800" style={iconStyle}>
                 {cardImage.src ? (
                   <Image
