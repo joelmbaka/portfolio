@@ -10,10 +10,10 @@ import SlideIn from '@/components/SlideIn';
 import { ArrowRight, Braces, Database, GraduationCap, MonitorSmartphone, Rocket, ShieldCheck } from 'lucide-react';
 
 const serviceCards = [
-  { title: 'Mobile applications', description: 'Purpose-built Android and iOS apps for customers, staff and field teams, with robust APIs, payments and release workflows.', href: '/services', icon: MonitorSmartphone },
-  { title: 'Web platforms & dashboards', description: 'Business dashboards, SaaS workspaces and responsive web experiences built around real operations and reporting.', href: '/services', icon: Braces },
-  { title: 'Backend systems & integrations', description: 'Secure APIs, PostgreSQL data models, M-Pesa payment flows, authentication, billing and reliable third-party integrations.', href: '/services', icon: Database },
-  { title: 'End-to-end delivery', description: 'Technical discovery, architecture, implementation, quality engineering, deployment and ongoing iteration.', href: '/services', icon: Rocket },
+  { title: 'Mobile applications', description: 'Purpose-built Android and iOS apps for customers, staff and field teams, with robust APIs, payments and release workflows.', href: '/services/react-native-app-development', icon: MonitorSmartphone },
+  { title: 'Web platforms & dashboards', description: 'Business dashboards, SaaS workspaces and responsive web experiences built around real operations and reporting.', href: '/services/web-app-development', icon: Braces },
+  { title: 'Backend systems & integrations', description: 'Secure APIs, PostgreSQL data models, M-Pesa payment flows, authentication, billing and reliable third-party integrations.', href: '/services/fastapi-backend-development', icon: Database },
+  { title: 'End-to-end delivery', description: 'Technical discovery, architecture, implementation, quality engineering, deployment and ongoing iteration.', href: '/services/saas-product-development', icon: Rocket },
 ];
 
 const delivery = [
@@ -23,7 +23,10 @@ const delivery = [
 ];
 
 export default function Home() {
-  const selectedWork = ['rentpayor', 'schoolpey', 'clivique-hmis', 'milliol']
+  const ownProducts = ['rentpayor', 'schoolpey', 'clivique-hmis', 'journpad']
+    .map((id) => projects.find((project) => project.id === id))
+    .filter((project): project is (typeof projects)[number] => Boolean(project));
+  const clientProjects = ['macsim', 'milliol']
     .map((id) => projects.find((project) => project.id === id))
     .filter((project): project is (typeof projects)[number] => Boolean(project));
   const base = SITE_URL;
@@ -47,7 +50,8 @@ export default function Home() {
         '@type': 'Person',
         '@id': `${base}/#person`,
         name: 'Joel Mbaka',
-        jobTitle: 'Founder and Senior Software Engineer',
+        url: `${base}/founder`,
+        jobTitle: 'Founder and Senior Full-Stack Software Engineer',
         worksFor: { '@id': `${base}/#organization` },
         sameAs: ['https://github.com/joelmbaka', 'https://linkedin.com/in/joelmbaka'],
       },
@@ -108,14 +112,19 @@ export default function Home() {
 
         <section id="work" className="mt-24">
           <div className="mb-8 max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Solutions &amp; selected work</p>
-            <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">Products are our proof.</h2>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Our portfolio</p>
+            <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">We build products. We build for clients.</h2>
             <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
-              We build with the realities of finance, property, education, healthcare, construction and logistics in mind. Explore the products and client projects that demonstrate our capabilities.
+              Our company develops commercial software and also delivers commissioned projects. They are different types of work, and we make the distinction clear.
             </p>
           </div>
-          <ProjectsCarousel projects={selectedWork} />
-          <Link href="/work" className="mt-7 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-palm-green hover:underline">Explore all solutions and case studies <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+          <h3 className="mb-5 text-2xl font-bold">Our software products</h3>
+          <ProjectsCarousel projects={ownProducts} />
+          <h3 className="mb-5 mt-12 text-2xl font-bold">Client-commissioned work</h3>
+          <ProjectsCarousel projects={clientProjects} />
+          <Link href="/work" className="mt-7 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-palm-green hover:underline">
+            View full portfolio and case studies <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
         </section>
 
         <section className="mt-24">
@@ -140,13 +149,13 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">Leadership rooted in building.</h2>
             <p className="mt-5 text-base leading-8 text-gray-600 dark:text-gray-300">Joeltech Geek Systems is founded and led by Joel Mbaka, a software engineer and technology entrepreneur. He takes direct responsibility for product architecture, software delivery and turning challenging operational problems into useful systems.</p>
             <p className="mt-4 text-base leading-8 text-gray-600 dark:text-gray-300">Beyond building products, Joel mentors emerging software developers and believes the next generation of technical talent grows through practical experience and thoughtful guidance.</p>
-            <Link href="/about" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-palm-green hover:underline">Meet the founder <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+            <Link href="/founder" className="mt-6 inline-flex min-h-11 items-center gap-2 font-semibold text-palm-green hover:underline">Meet the founder <ArrowRight className="h-4 w-4" aria-hidden /></Link>
           </div>
           <div className="flex flex-col justify-between gap-5 rounded-2xl bg-white p-7 dark:bg-gray-950/70">
             <GraduationCap className="h-10 w-10 text-palm-green" aria-hidden />
             <div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Build your future with us.</h3>
-              <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">Explore software development internships and SaaS sales representative opportunities. Compensation and reimbursement arrangements depend on the opportunity and solution.</p>
+              <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">Explore paid engineering collaborations, software development internships, mentorship and SaaS sales opportunities. Terms depend on the actual role and agreement.</p>
               <Link href="/careers" className="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold text-palm-green hover:underline">Explore careers <ArrowRight className="h-4 w-4" aria-hidden /></Link>
             </div>
           </div>
