@@ -57,7 +57,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-gray-600 dark:text-gray-300 sm:text-lg">
-            Joeltech Geek Systems designs, builds and supports web applications, mobile apps, SaaS platforms and backend systems. From Kenya, we partner remotely with clients around the world to turn complex business needs into reliable software.
+            Joeltech Geek Systems develops software for clients and builds its own commercial products. From Kenya, we deliver React Native mobile apps, Next.js web platforms, Python/FastAPI backends and SaaS workflows through remote collaboration worldwide.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-2 text-xs font-medium sm:text-sm">
@@ -70,7 +70,7 @@ export default function Hero() {
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link href="/work" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-sunset-yellow px-6 py-3 font-semibold text-black transition hover:bg-sunset-yellow-dark">
-              Explore our solutions <ArrowDown className="h-4 w-4" aria-hidden />
+              Explore our portfolio <ArrowDown className="h-4 w-4" aria-hidden />
             </Link>
             <button type="button" onClick={() => setContactOpen(true)} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-gray-300 px-6 py-3 font-semibold text-gray-900 transition hover:border-palm-green hover:text-palm-green dark:border-gray-700 dark:text-white">
               <Mail className="h-4 w-4" aria-hidden /> Discuss your project
@@ -83,7 +83,7 @@ export default function Hero() {
           <div className="mt-9 border-l-2 border-palm-green pl-4">
             <p className="text-sm font-semibold text-gray-900 dark:text-white">Founder-led engineering, not an anonymous agency.</p>
             <p className="mt-1 text-sm leading-6 text-gray-500 dark:text-gray-400">
-              Founded by Joel Mbaka — software engineer, technology entrepreneur and developer mentor. Built in Kenya. Engineered for the world.
+              Founded by Joel Mbaka — senior full-stack software engineer, technical lead and developer mentor. See the founder profile and delivered work.
             </p>
           </div>
         </div>
