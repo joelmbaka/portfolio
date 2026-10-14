@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: '/expertise', destination: '/services', permanent: true },
+      { source: '/taifa-hmis', destination: '/clivique-hmis', permanent: true },
       { source: '/skills', destination: '/founder', permanent: true },
       { source: '/work-with-me', destination: '/founder', permanent: true },
       { source: '/full-stack-web-mobile-engineer', destination: '/founder', permanent: true },
