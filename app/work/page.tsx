@@ -69,7 +69,7 @@ export default function WorkPage() {
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-palm-green">02 · Commissioned engineering</p>
         <h2 id="client-projects-title" className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">Software built for clients</h2>
         <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">
-          Client-commissioned systems built to streamline operations and service delivery. These case studies show our technical contribution; client project attribution does not imply Joeltech Geek Systems owns the client's business or software.
+          Client-commissioned systems built to streamline operations and service delivery. These case studies show our technical contribution; client project attribution does not imply Joeltech Geek Systems owns the client&apos;s business or software.
         </p>
         <div className="mt-8"><ProjectsCarousel projects={commissioned} /></div>
       </section>
