@@ -41,6 +41,8 @@ export interface Project {
   type: ProjectType;
   platforms?: string[];
   engagement?: 'Product' | 'Client project' | 'Experiment';
+  /** Hidden items stay in the archive, but never appear in public pages, case-study routes, SEO or sitemaps. */
+  visibility?: 'public' | 'hidden';
   url?: string;
   icon?: string;
   iconBackground?: string;
@@ -313,6 +315,7 @@ export const projects: Project[] = [
   },
   {
     id: 'ai-stylist',
+    visibility: 'hidden', // Product development paused; retain data for a future relaunch.
     engagement: 'Experiment',
     title: 'AI Stylist',
     description:
@@ -384,3 +387,6 @@ export const projects: Project[] = [
     },
   },
 ];
+
+/** The canonical source for all publicly visible case studies and recommendations. */
+export const publicProjects = projects.filter((project) => project.visibility !== 'hidden');
