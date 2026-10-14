@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { SITE_URL } from '@/lib/site';
 import Hero from '@/components/Hero';
 import CTA from '@/components/CTA';
-import { projects } from '@/config/projects';
+import { publicProjects } from '@/config/projects';
 import ProjectsCarousel from '@/components/ProjectsCarousel';
 import SlideIn from '@/components/SlideIn';
 import { ArrowRight, Braces, Database, GraduationCap, MonitorSmartphone, Rocket, ShieldCheck } from 'lucide-react';
@@ -24,11 +24,11 @@ const delivery = [
 
 export default function Home() {
   const ownProducts = ['rentpayor', 'schoolpey', 'clivique-hmis', 'journpad']
-    .map((id) => projects.find((project) => project.id === id))
-    .filter((project): project is (typeof projects)[number] => Boolean(project));
+    .map((id) => publicProjects.find((project) => project.id === id))
+    .filter((project): project is (typeof publicProjects)[number] => Boolean(project));
   const clientProjects = ['macsim', 'milliol']
-    .map((id) => projects.find((project) => project.id === id))
-    .filter((project): project is (typeof projects)[number] => Boolean(project));
+    .map((id) => publicProjects.find((project) => project.id === id))
+    .filter((project): project is (typeof publicProjects)[number] => Boolean(project));
   const base = SITE_URL;
   const jsonLd = {
     '@context': 'https://schema.org',
