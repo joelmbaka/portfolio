@@ -6,7 +6,7 @@ import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
   title: 'About Joeltech Geek Systems | Founder-Led Software Company in Kenya',
-  description: 'Meet Joeltech Geek Systems, a Kenya-registered software development business led by founder and senior software engineer Joel Mbaka. Building products globally and mentoring developers.',
+  description: 'Meet Joeltech Geek Systems, a Kenya-registered software development business led by Joel Mbaka. In-house SaaS products, commissioned client work and practical developer mentorship.',
   alternates: { canonical: '/about' },
 };
 
@@ -23,8 +23,8 @@ export default function AboutPage() {
       <header className="max-w-4xl">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Our story</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">A software business built on engineering ownership.</h1>
-        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Joeltech Geek Systems is a Kenyan software development business building mobile applications, web platforms, SaaS solutions and backend systems for organisations working toward better ways of operating.</p>
-        <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">We work remotely with clients worldwide. Our approach is intentionally founder-led: direct communication, transparent scope, careful implementation and continued responsibility after launch.</p>
+        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Joeltech Geek Systems is a Kenya-registered software development business. We build our own commercial products and deliver custom mobile applications, web platforms, SaaS systems and backends for clients.</p>
+        <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">Based in Kenya, we collaborate remotely with clients internationally. Our core mobile framework is React Native/Expo; our web and backend specialization is Next.js, React, Python/FastAPI and PostgreSQL. Engineering work is founder-led, with collaboration scoped for each engagement.</p>
       </header>
 
       <section className="mt-16 grid items-center gap-10 rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/60 sm:p-10 lg:grid-cols-[280px_1fr]">
@@ -34,7 +34,7 @@ export default function AboutPage() {
           <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">Joel Mbaka</h2>
           <p className="mt-2 text-sm font-semibold text-gray-600 dark:text-gray-300">Founder · Senior Software Engineer · Technology Entrepreneur · Developer Mentor</p>
           <p className="mt-6 text-base leading-8 text-gray-600 dark:text-gray-300">Joel combines product leadership with hands-on engineering across React Native, Next.js, Python/FastAPI and PostgreSQL. His work includes rent and school-fee platforms, healthcare workflows, construction software, logistics systems and AI-powered mobile applications.</p>
-          <p className="mt-4 text-base leading-8 text-gray-600 dark:text-gray-300">A graduate in Information Technology from JKUAT, he leads architecture and delivery while helping upcoming software developers develop real-world engineering judgment.</p>
+          <p className="mt-4 text-base leading-8 text-gray-600 dark:text-gray-300">A graduate in Information Technology from JKUAT, he leads architecture and delivery, remains open to appropriate senior engineering roles, and supports upcoming developers through real-world engineering mentorship.</p>
           <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold">
             <a href="https://linkedin.com/in/joelmbaka" target="_blank" rel="noopener noreferrer" className="text-palm-green hover:underline">LinkedIn ↗</a>
             <a href="https://github.com/joelmbaka" target="_blank" rel="noopener noreferrer" className="text-palm-green hover:underline">GitHub ↗</a>
@@ -63,10 +63,15 @@ export default function AboutPage() {
         <h2 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">Registered in Kenya. Working globally.</h2>
         <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">Joeltech Geek Systems is registered under Kenya&apos;s Registration of Business Names Act (registration BN-P7SEWW57). The business is owned and led by Joel Mbaka and operates with a remote-first delivery approach.</p>
         <div className="mt-6 flex flex-wrap gap-5 text-sm font-semibold">
-          <Link href="/work" className="inline-flex items-center gap-2 text-palm-green hover:underline">Explore our products <ArrowRight className="h-4 w-4" aria-hidden /></Link>
-          <Link href="/careers" className="inline-flex items-center gap-2 text-palm-green hover:underline">Careers &amp; mentorship <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+          <Link href="/work" className="inline-flex items-center gap-2 text-palm-green hover:underline">Portfolio: products & client work <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+          <Link href="/founder" className="inline-flex items-center gap-2 text-palm-green hover:underline">Founder profile <ArrowRight className="h-4 w-4" aria-hidden /></Link>
         </div>
       </section>
+      <div className="mt-7 flex flex-wrap gap-5 text-sm font-semibold">
+        <Link href="/mentorship" className="text-palm-green hover:underline">Developer mentorship</Link>
+        <Link href="/careers" className="text-palm-green hover:underline">Careers and internships</Link>
+        <Link href="/services" className="text-palm-green hover:underline">Software development services</Link>
+      </div>
       <CTA />
     </main>
   );
