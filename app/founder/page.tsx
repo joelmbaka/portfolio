@@ -92,7 +92,7 @@ export default function FounderPage() {
       </section>
 
       <section className="mt-16">
-        <h2 className="text-3xl font-bold">Products and client systems I've helped build</h2>
+        <h2 className="text-3xl font-bold">Products and client systems I&apos;ve helped build</h2>
         <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">
           Technical evidence matters more than a job title. These case studies distinguish products developed within our business from commissioned client work and show the platforms actually built.
         </p>
