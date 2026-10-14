@@ -1,6 +1,6 @@
 import { SITE_URL } from '@/lib/site';
 import type { MetadataRoute } from 'next';
-import { projects } from '@/config/projects';
+import { publicProjects } from '@/config/projects';
 import { services } from '@/config/services';
 
 const WEBSITE_UPDATED_AT = new Date('2026-10-14');
@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: service.slug === 'react-native-app-development' ? 0.95 : 0.88,
   }));
 
-  const projectRoutes: MetadataRoute.Sitemap = projects.map((project) => ({
+  const projectRoutes: MetadataRoute.Sitemap = publicProjects.map((project) => ({
     url: `${base}/${project.id}`,
     lastModified: new Date(project.updatedAt),
     changeFrequency: 'monthly',
