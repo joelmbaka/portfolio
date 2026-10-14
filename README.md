@@ -1,41 +1,45 @@
 # Joeltech Geek Systems
 
-Official Next.js website for **Joeltech Geek Systems**, a Kenya-registered, founder-led software development business serving clients remotely worldwide.
+Official Next.js website for **Joeltech Geek Systems**, a Kenya-registered, founder-led software development business. The business develops its own commercial software products and delivers commissioned software engineering work for clients in Kenya and internationally.
 
-- Production address: https://joeltechgeek.com
-- Founder & lead engineer: Joel Mbaka
+- Production: https://joeltechgeek.com
+- Founder & lead software engineer: Joel Mbaka
 - Business registration: BN-P7SEWW57 (Kenya)
-- Branch-based development: `brand/joeltechgeek` until review and manual merge.
+- Development branch: `brand/joeltechgeek`, reviewed and deployed manually (no automatic merge)
+- SEO, editorial/route policy: [docs/SEO_CONTENT_STRATEGY.md](docs/SEO_CONTENT_STRATEGY.md)
 
-## Core pages
+## Public website
 
-- `/` — company identity and featured solutions
-- `/services` — mobile, web, SaaS, backend and payment integrations
-- `/work` — original products and client engineering case studies
-- `/expertise` — engineering capabilities
-- `/about` — company story and founder
-- `/careers` — internship and SaaS sales expressions of interest
-- `/contact` — direct business enquiries
+| Route | Visitor intent |
+| --- | --- |
+| `/` | Company and product/client proof |
+| `/services` | Client-facing services |
+| `/services/[slug]` | Six distinct service detail pages |
+| `/work` | Portfolio: in-house products, client work and experiments |
+| `/[projectId]` | Specific evidence-rich project case study |
+| `/about` | Company identity and operating model |
+| `/founder` | Joel Mbaka, senior engineer and founder |
+| `/mentorship` | Practical developer mentorship |
+| `/careers` | Paid engineering enquiries, internships and SaaS sales |
+| `/industries` | Actual industry experience supported by project evidence |
+| `/contact` | Enquiries |
 
-The business is sole-founder-led. Do not invent company headcount, team roles, customers, endorsements or compensation figures.
+Legacy overlapping SEO routes under `/expertise`, plus `/skills`, `/work-with-me` and `/full-stack-web-mobile-engineer`, have permanent redirects to appropriate service/founder URLs and are omitted from the sitemap. Do not delete or modify the Google verification file.
 
-## Software
+Core technologies: React Native/Expo/TypeScript for mobile, Next.js/React for web, Python/FastAPI/PostgreSQL for APIs and transactional systems. AI work integrates existing models and APIs; it is not model training. Do not imply staff headcount, active vacancies, accredited schooling, placement guarantees, unproven clients or revenue, or released platforms without evidence.
 
-Next.js 15, React 19, TypeScript, Tailwind CSS and Vercel. The legacy Python job-discovery directory is **not** part of the Vercel deployment. The internal CRM and demo routes must not be exposed or indexed.
-
-## Local development and validation
+## Development and verification
 
 ```bash
 npm install
+npx tsc --noEmit
+npx eslint .
 npm run build
-npm run dev
 ```
 
-The website is **deployed manually** after review with `vercel --prod`. Never automatically deploy or merge into `main`.
+After local validation, review navigation, responsive layouts at 375/768/1024/1440 px, accessibility, unique SEO metadata, all canonical sitemap URLs, preserved project links and permanent redirects. The website is **deployed manually** after review with `vercel --prod`. Never automatically deploy or merge into `main`.
 
-## SEO and Search Console
-
-The canonical origin is https://joeltechgeek.com and is defined in `lib/site.ts`. All metadata, structured data, sitemap and robots references should use that origin. After manually deploying to production, verify `https://joeltechgeek.com/robots.txt`, `https://joeltechgeek.com/sitemap.xml` and `https://joeltechgeek.com/google8bd8d4697948ac6c.html`. Preserve the Google Search Console ownership verification file at `public/google8bd8d4697948ac6c.html`. In Vercel, add `www.joeltechgeek.com` and configure a permanent redirect to `joeltechgeek.com`; add a Search Console domain property and submit the new sitemap.
+`/robots.txt` must advertise `https://joeltechgeek.com/sitemap.xml`. Search Console verification is maintained through the published verification file. Some project screenshots show previous UI versions; only attach a product walkthrough when genuine media and approved poster assets are available.
 
 ## Contact
 
