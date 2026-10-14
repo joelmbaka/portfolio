@@ -28,6 +28,7 @@ export interface ProjectDemoVideo {
   duration?: string;
   publishedAt?: string;
   captions?: string;
+  mimeType?: 'video/mp4' | 'video/webm';
 }
 
 export interface Project {
