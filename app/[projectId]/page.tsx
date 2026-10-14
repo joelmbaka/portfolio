@@ -110,7 +110,7 @@ function findProjectById(projectId: string) {
   return publicProjects.find((p) => p.id === projectId || p.aliases?.includes(projectId));
 }
 
-function getOperatingSystem(project: (typeof projects)[number]) {
+function getOperatingSystem(project: (typeof publicProjects)[number]) {
   return project.platforms?.join(', ') ?? 'Web';
 }
 
