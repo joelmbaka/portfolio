@@ -7,10 +7,10 @@ import { ThemeToggle } from './ThemeToggle';
 import { BrandLogo } from './BrandLogo';
 
 const primaryLinks = [
-  ['/work', 'Solutions'],
   ['/services', 'Services'],
-  ['/expertise', 'Expertise'],
+  ['/work', 'Portfolio'],
   ['/about', 'About'],
+  ['/mentorship', 'Mentorship'],
   ['/careers', 'Careers'],
 ] as const;
 
