@@ -44,7 +44,6 @@ export default function FounderPage() {
         image: `${base}/images/joel.webp`,
         jobTitle: 'Founder and Senior Full-Stack Software Engineer',
         worksFor: { '@id': `${base}/#organization` },
-        founder: { '@id': `${base}/#organization` },
         sameAs: ['https://github.com/joelmbaka', 'https://linkedin.com/in/joelmbaka'],
         knowsAbout: ['React Native', 'Expo', 'Next.js', 'TypeScript', 'Python', 'FastAPI', 'PostgreSQL', 'SaaS', 'M-Pesa integration', 'Applied AI APIs', 'Software architecture'],
       },
