@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Github, Linkedin } from 'lucide-react';
-import { projects } from '@/config/projects';
+import { publicProjects } from '@/config/projects';
 
 export const metadata: Metadata = {
   title: 'Joel Mbaka — Founder, Senior React Native & Full-Stack Engineer',
@@ -24,8 +24,8 @@ const specialties = [
 
 export default function FounderPage() {
   const proof = ['rentpayor', 'journpad', 'schoolpey', 'clivique-hmis', 'macsim', 'milliol']
-    .map((id) => projects.find((project) => project.id === id))
-    .filter((project): project is (typeof projects)[number] => Boolean(project));
+    .map((id) => publicProjects.find((project) => project.id === id))
+    .filter((project): project is (typeof publicProjects)[number] => Boolean(project));
   const base = SITE_URL;
   const jsonLd = {
     '@context': 'https://schema.org',
