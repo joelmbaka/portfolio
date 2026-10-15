@@ -251,6 +251,15 @@ export const projects: Project[] = [
     type: 'Enterprise',
     platforms: ['Android'],
     engagement: 'Client project',
+    demoVideo: {
+      src: '/videos/milliol-construction-manager-demo.mp4',
+      poster: '/videos/milliol-construction-manager-demo.webp',
+      title: 'See the construction workflow in action',
+      description: 'A narrated walkthrough of Milliol Construction Manager, from project oversight and site coordination through material movement, purchasing, invoices and financial visibility.',
+      duration: 'PT51S',
+      publishedAt: '2026-10-14',
+      mimeType: 'video/mp4',
+    },
   },
   {
     id: 'macsim',

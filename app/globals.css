@@ -50,3 +50,26 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.demo-ripple {
+  position: absolute;
+  width: 6.5rem;
+  height: 6.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 9999px;
+  animation: demo-ripple 2.4s ease-out infinite;
+}
+
+.demo-ripple-one { animation-delay: 0s; }
+.demo-ripple-two { animation-delay: 0.8s; }
+.demo-ripple-three { animation-delay: 1.6s; }
+
+@keyframes demo-ripple {
+  0% { transform: scale(0.9); opacity: 0; }
+  15% { opacity: 0.8; }
+  100% { transform: scale(2.15); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-ripple { animation: none; opacity: 0.35; }
+}
