@@ -147,7 +147,7 @@ export const projects: Project[] = [
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/icon.png',
     storePreview: {
       platform: 'android',
-      src: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/store/card-focused-v2.png',
+      src: '/store-previews/rentpayor-google-play.png',
     },
     screenshots: {
       app: [
@@ -233,7 +233,13 @@ export const projects: Project[] = [
     platforms: ['Android', 'Web dashboard'],
     engagement: 'Product',
     url: 'https://schoolpey.com',
-    playStore: { url: 'https://play.google.com/store/apps/details?id=com.joeltechgeeksystems.schoolpey' },
+    storePreview: {
+      platform: 'android',
+      src: '/store-previews/schoolpey-google-play.png',
+    },
+    playStore: {
+      url: 'https://play.google.com/store/apps/details?id=com.joeltechgeeksystems.schoolpey',
+    },
     enhancements: [
       {
         title: 'School administration dashboard',
@@ -252,7 +258,13 @@ export const projects: Project[] = [
     type: 'Enterprise',
     platforms: ['Android'],
     engagement: 'Client project',
-    playStore: { url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.milliol' },
+    storePreview: {
+      platform: 'android',
+      src: '/store-previews/milliol-google-play.png',
+    },
+    playStore: {
+      url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.milliol',
+    },
     demoVideo: {
       src: '/videos/milliol-construction-manager-demo.mp4',
       poster: '/videos/milliol-construction-manager-demo.webp',
@@ -287,7 +299,7 @@ export const projects: Project[] = [
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/icon.png',
     storePreview: {
       platform: 'android',
-      src: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/store/card-focused-v2.png',
+      src: '/store-previews/macsim-google-play.png',
     },
     screenshots: {
       app: [
