@@ -53,7 +53,7 @@ const opportunities = [
 
 export default function CareersPage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+    <main className="site-container pb-16 pt-28">
       <header className="max-w-4xl">
         <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-palm-green"><Sparkles className="h-4 w-4" aria-hidden /> Opportunities</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Work on real software. Grow your skills. Help products reach their users.</h1>

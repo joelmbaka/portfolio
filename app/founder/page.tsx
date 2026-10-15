@@ -51,7 +51,7 @@ export default function FounderPage() {
   };
 
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+    <main className="site-container pb-16 pt-28">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="grid items-center gap-10 lg:grid-cols-[1fr_280px]">
         <div>

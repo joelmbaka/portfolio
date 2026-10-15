@@ -19,7 +19,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+    <main className="site-container pb-16 pt-28">
       <header className="max-w-4xl">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Our story</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">A software business built on engineering ownership.</h1>

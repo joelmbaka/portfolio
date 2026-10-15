@@ -17,6 +17,7 @@ export interface ProjectEnhancement {
   tech: string[];
   screenshots?: string[];
   url?: string;
+  linkLabel?: string;
   note?: string;
 }
 
@@ -44,6 +45,7 @@ export interface Project {
   /** Hidden items stay in the archive, but never appear in public pages, case-study routes, SEO or sitemaps. */
   visibility?: 'public' | 'hidden';
   url?: string;
+  externalLinkLabel?: string;
   icon?: string;
   iconBackground?: string;
   storePreview?: ProjectStorePreview;
@@ -147,15 +149,15 @@ export const projects: Project[] = [
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/icon.png',
     storePreview: {
       platform: 'android',
-      src: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/store/card-focused-v2.png',
+      src: '/store-previews/rentpayor-google-play.png',
     },
     screenshots: {
       app: [
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/01_know_who_has_paid.png',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/02_match_rent_payments.png',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/03_manage_every_rental_property.png',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/04_track_leases_and_occupancy.png',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/05_tenant_payment_records.png',
+        '/project-screenshots/rentpayor/mobile/01-tenant-invoices.png',
+        '/project-screenshots/rentpayor/mobile/02-owner-payments-mpesa.png',
+        '/project-screenshots/rentpayor/mobile/03-owner-payment-detail-mpesa.png',
+        '/project-screenshots/rentpayor/mobile/04-owner-rent-overview.png',
+        '/project-screenshots/rentpayor/mobile/05-owner-properties.png',
       ],
     },
     enhancements: [
@@ -163,57 +165,9 @@ export const projects: Project[] = [
         title: 'Property management web dashboard',
         description: 'Web management experience for properties, tenants, leases, invoices, payments, reporting and operational administration. Complements the iOS and Android applications.',
         tech: ['Next.js', 'React', 'TypeScript', 'FastAPI', 'PostgreSQL'],
-        note: 'Dashboard screenshots will be added once verified assets are available.',
-      },
-      {
-        title: 'CRM Dashboard',
-        description:
-          'Web CRM for inspecting property-management leads, tracking calls, due follow-ups, contact status, outreach drafts, reply reviews, competitor leads, and lead intelligence from one sales workspace.',
-        tech: [
-          'Next.js',
-          'React',
-          'TypeScript',
-          'Tailwind CSS',
-          'shadcn/ui',
-          'TanStack Table',
-          'Recharts',
-          'Playwright',
-        ],
-        screenshots: [
-          'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/enhancements/crm/dashboard.png',
-        ],
-        note: 'Code available upon request.',
-      },
-      {
-        title: 'Lead Generation and Enrichment',
-        description:
-          'Agent-assisted pipeline that discovers property-management firms, reads public website/search evidence, classifies fit, extracts contacts, detects competitor-software risk, scores priority, and prepares reliable targets for review.',
-        tech: [
-          'Python',
-          'FastAPI',
-          'SQLAlchemy',
-          'PostgreSQL',
-          'httpx',
-          'Litellm',
-          'OpenAI',
-          'Serper',
-        ],
-        note: 'Code available upon request.',
-      },
-      {
-        title: 'Sales Automation',
-        description:
-          'Outbound workflow that generates personalized email drafts, queues daily outreach within limits, tracks delivery/open/click/reply events, reviews replies with AI, and schedules reminders for follow-up.',
-        tech: [
-          'Python',
-          'FastAPI',
-          'PostgreSQL',
-          'SQLAlchemy',
-          'Litellm',
-          'OpenAI',
-          'SMTP/Webhooks',
-        ],
-        note: 'Code available upon request.',
+        screenshots: ['/project-screenshots/rentpayor/web/homepage-dashboard-desktop.webp'],
+        url: 'https://app.rentpayor.com',
+        linkLabel: 'View live dashboard',
       },
     ],
     appStore: {
@@ -233,24 +187,64 @@ export const projects: Project[] = [
     platforms: ['Android', 'Web dashboard'],
     engagement: 'Product',
     url: 'https://schoolpey.com',
+    screenshots: {
+      app: [
+        '/project-screenshots/schoolpey/mobile/01-parent-dashboard.png',
+        '/project-screenshots/schoolpey/mobile/02-invoices-balances.png',
+        '/project-screenshots/schoolpey/mobile/03-mpesa-payment.png',
+        '/project-screenshots/schoolpey/mobile/04-paid-invoice-history.png',
+        '/project-screenshots/schoolpey/mobile/05-payment-receipt.png',
+      ],
+    },
+    storePreview: {
+      platform: 'android',
+      src: '/store-previews/schoolpey-google-play.png',
+    },
+    playStore: {
+      url: 'https://play.google.com/store/apps/details?id=com.joeltechgeeksystems.schoolpey',
+    },
     enhancements: [
       {
         title: 'School administration dashboard',
-        description: 'Web-based operations for school setup, academic terms, fee schedules, student records, billing, payments and financial oversight.',
-        tech: ['Next.js', 'React', 'FastAPI', 'PostgreSQL'],
-        note: 'Approved dashboard imagery to be added.',
+        description: 'Web-based school operations for fee structures, students, term billing, M-Pesa collection, payment reconciliation, student finance and reporting.',
+        tech: ['Next.js', 'React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Tuma', 'Playwright'],
+        screenshots: [
+          '/project-screenshots/schoolpey/web/01-financial-overview.png',
+          '/project-screenshots/schoolpey/web/02-student-finance.png',
+          '/project-screenshots/schoolpey/web/03-reconciliation.png',
+        ],
+        url: 'https://app.schoolpey.com',
+        linkLabel: 'View live dashboard',
       },
     ],
   },
   {
     id: 'milliol',
     title: 'Milliol Construction Manager',
+    url: 'https://milliolrealtors.com/',
+    externalLinkLabel: 'Visit Milliol Realtors website',
     description: 'Android construction-operations application for project progress, work items, procurement, inventory and stock, financial tracking and operational reporting.',
     updatedAt: '2026-10-12',
     tech: ['React Native', 'Expo', 'TypeScript', 'Android'],
     type: 'Enterprise',
     platforms: ['Android'],
     engagement: 'Client project',
+    storePreview: {
+      platform: 'android',
+      src: '/store-previews/milliol-google-play.png',
+    },
+    playStore: {
+      url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.milliol',
+    },
+    demoVideo: {
+      src: '/videos/milliol-construction-manager-demo.mp4',
+      poster: '/videos/milliol-construction-manager-demo.webp',
+      title: 'See the construction workflow in action',
+      description: 'A narrated walkthrough of Milliol Construction Manager, from project oversight and site coordination through material movement, purchasing, invoices and financial visibility.',
+      duration: 'PT51S',
+      publishedAt: '2026-10-14',
+      mimeType: 'video/mp4',
+    },
   },
   {
     id: 'macsim',
@@ -276,7 +270,7 @@ export const projects: Project[] = [
     icon: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/icon.png',
     storePreview: {
       platform: 'android',
-      src: 'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/macsim/store/card-focused-v2.png',
+      src: '/store-previews/macsim-google-play.png',
     },
     screenshots: {
       app: [

@@ -99,7 +99,7 @@ export default function ProjectsCarousel({ projects }: { projects: Project[] }) 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition hover:border-palm-green hover:text-palm-green dark:border-gray-700 dark:text-gray-400"
-                    aria-label={`Open ${project.title} live project`}
+                    aria-label={project.externalLinkLabel || `Open ${project.title} live project`}
                   >
                     <ArrowUpRight size={17} />
                   </a>

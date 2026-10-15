@@ -10,7 +10,7 @@ import { ContactModal } from './ContactModal';
 // Next.js serves appropriately sized, optimized images from the original PNG assets.
 const heroAlt =
   'From fragmented paper-based work to a connected web dashboard and mobile app that track business operations and confirm payments.';
-const heroSizes = '(max-width: 639px) 92vw, (max-width: 1023px) 85vw, (max-width: 1279px) 53vw, 620px';
+const heroSizes = '(max-width: 639px) 92vw, (max-width: 1199px) 88vw, (max-width: 1535px) 47vw, 720px';
 
 function getHeroImageSources() {
   const common = { alt: heroAlt, sizes: heroSizes, quality: 80 };
@@ -45,14 +45,14 @@ export default function Hero() {
 
   return (
     <>
-      <section id="hero" className="relative grid items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-        <div className="max-w-3xl">
+      <section id="hero" className="relative grid min-w-0 items-center gap-9 sm:gap-12 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] xl:gap-14">
+        <div className="min-w-0 max-w-3xl">
           <p className="inline-flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-palm-green sm:text-sm">
             <Globe2 className="h-4 w-4" aria-hidden />
             Kenya-based software development · Global delivery
           </p>
 
-          <h1 className="mt-6 text-4xl font-extrabold leading-[1.07] tracking-tight text-gray-950 dark:text-sandy-beach sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 text-4xl font-extrabold leading-[1.07] tracking-tight text-gray-950 dark:text-sandy-beach sm:text-5xl lg:text-6xl 2xl:text-7xl">
             Software that moves businesses forward.
           </h1>
 
@@ -88,7 +88,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <figure className="mx-auto w-full max-w-sm sm:max-w-3xl lg:max-w-none">
+        <figure className="mx-auto w-full min-w-0 max-w-sm sm:max-w-3xl xl:max-w-none">
           <div className="overflow-hidden rounded-[1.5rem] border border-gray-200 bg-gray-100 shadow-xl shadow-gray-950/10 dark:border-gray-800 dark:bg-gray-900">
             <picture>
               <source media="(max-width: 639px)" srcSet={mobileSrcSet} sizes={heroSizes} width={941} height={1672} />
@@ -101,12 +101,6 @@ export default function Hero() {
               />
             </picture>
           </div>
-          <figcaption className="mt-4 text-center text-sm font-medium leading-6 text-gray-600 dark:text-gray-300">
-            Web visibility. Mobile action. One connected system.
-            <span className="mt-1 block text-xs font-normal text-gray-500 dark:text-gray-400">
-              Illustrative software concept · Not a screenshot of a specific client product
-            </span>
-          </figcaption>
         </figure>
       </section>
       <ContactModal isOpen={isContactOpen} onClose={() => setContactOpen(false)} />

@@ -4,11 +4,12 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import ImageGallery from '@/components/ImageGallery';
 import StoreReviews from '@/components/StoreReviews';
 import CTA from '@/components/CTA';
 import SlideIn from '@/components/SlideIn';
+import DemoVideoPlayer from '@/components/DemoVideoPlayer';
 
 interface PageProps {
   params: Promise<{ projectId: string }>;
@@ -241,7 +242,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <SlideIn>
-      <main className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
+      <main className="site-container py-24">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         <div className="mb-8">
@@ -285,22 +286,45 @@ export default async function ProjectPage({ params }: PageProps) {
         </section>
 
         {project.demoVideo && (
-          <section className="mt-12" aria-labelledby="project-demo-heading">
+          <section id={project.id === 'milliol' ? 'demo' : undefined} className="mt-12 scroll-mt-24" aria-labelledby="project-demo-heading">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product walkthrough</p>
             <h2 id="project-demo-heading" className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">{project.demoVideo.title}</h2>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">{project.demoVideo.description}</p>
-            <div className="mt-5 overflow-hidden rounded-2xl bg-black">
-              <video controls playsInline preload="metadata" poster={project.demoVideo.poster} className="aspect-video w-full">
-                <source src={project.demoVideo.src} type={project.demoVideo.mimeType ?? "video/mp4"} />
-                {project.demoVideo.captions && <track kind="captions" src={project.demoVideo.captions} srcLang="en" label="English captions" default />}
-                Your browser does not support embedded video.
-              </video>
+            <div className="mt-5">
+              <DemoVideoPlayer {...project.demoVideo} />
             </div>
+
+            {project.id === 'milliol' && (
+              <>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  {[
+                    ['Manager', 'Project oversight, approvals, and financial visibility.'],
+                    ['Supervisor', 'Work coordination, progress tracking, and site reports.'],
+                    ['Stockkeeper', 'Material requests, inventory, and stock movement history.'],
+                    ['Accountant', 'Purchase orders, invoices, outstanding balances, and manual payment recording.'],
+                  ].map(([role, description]) => (
+                    <article key={role} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/70">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{role}</h3>
+                      <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">{description}</p>
+                    </article>
+                  ))}
+                </div>
+                <div className="mt-8 rounded-2xl bg-palm-green p-6 text-white sm:flex sm:items-center sm:justify-between sm:gap-6">
+                  <div>
+                    <h3 className="text-xl font-semibold">Need a construction workflow built around your teams?</h3>
+                    <p className="mt-2 text-sm leading-6 text-white/85">Let&apos;s discuss a custom construction app for your projects, approvals, materials and reporting.</p>
+                  </div>
+                  <Link href="/contact" className="mt-5 inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-palm-green transition hover:bg-gray-100 sm:mt-0">
+                    Discuss a Custom Construction App <ArrowRight className="h-4 w-4" aria-hidden />
+                  </Link>
+                </div>
+              </>
+            )}
           </section>
         )}
 
         {detail && (
-          <section className="mt-10 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <section className="mt-10 grid min-w-0 gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
             <article className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900/70">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Engineering contribution</p>
               <p className="mt-3 text-base leading-7 text-gray-700 dark:text-gray-300">{detail.role}</p>
@@ -373,7 +397,7 @@ export default async function ProjectPage({ params }: PageProps) {
                         rel="noopener noreferrer"
                         className="inline-flex shrink-0 items-center justify-center rounded-md border border-ocean-blue px-3 py-2 text-sm font-medium text-ocean-blue transition hover:bg-ocean-blue hover:text-white"
                       >
-                        View live
+                        {enhancement.linkLabel || 'View live'}
                       </a>
                     )}
                   </div>

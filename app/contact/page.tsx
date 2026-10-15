@@ -18,7 +18,7 @@ const methods = [
 
 export default function ContactPage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+    <main className="site-container pb-16 pt-28">
       <header className="max-w-4xl">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Let&apos;s talk</p>
         <h1 className="mt-4 text-4xl font-bold text-gray-900 dark:text-white sm:text-6xl">Tell us what you need to build.</h1>
