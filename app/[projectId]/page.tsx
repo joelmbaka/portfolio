@@ -308,6 +308,15 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {project.id === 'milliol' && (
               <>
+                <section className="mt-10" aria-labelledby="milliol-screenshots-heading">
+                  <div className="mb-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product evidence</p>
+                    <h2 id="milliol-screenshots-heading" className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">Milliol Construction Manager — Android App Screenshots</h2>
+                    <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">Explore the actual Android interfaces behind the construction workflows demonstrated above.</p>
+                  </div>
+                  {project.screenshots?.app && <ImageGallery images={project.screenshots.app} />}
+                </section>
+
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
                   {[
                     ['Manager', 'Project oversight, approvals, and financial visibility.'],
@@ -370,7 +379,7 @@ export default async function ProjectPage({ params }: PageProps) {
           </section>
         )}
 
-        {project.screenshots?.app && project.screenshots.app.length > 0 && (
+        {project.id !== 'milliol' && project.screenshots?.app && project.screenshots.app.length > 0 && (
           <section className="mt-14">
             <div className="mb-5">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product evidence</p>

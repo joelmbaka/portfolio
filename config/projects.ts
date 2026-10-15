@@ -245,6 +245,16 @@ export const projects: Project[] = [
       publishedAt: '2026-10-14',
       mimeType: 'video/mp4',
     },
+    screenshots: {
+      app: [
+        '/project-screenshots/milliol/mobile/01-manager-overview.png',
+        '/project-screenshots/milliol/mobile/02-supervisor-work-items.png',
+        '/project-screenshots/milliol/mobile/03-manager-review.png',
+        '/project-screenshots/milliol/mobile/04-stockkeeper-inventory.png',
+        '/project-screenshots/milliol/mobile/05-accountant-invoices.png',
+        '/project-screenshots/milliol/mobile/06-manager-notifications.png',
+      ],
+    },
   },
   {
     id: 'macsim',
