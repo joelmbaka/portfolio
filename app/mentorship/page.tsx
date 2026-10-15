@@ -44,7 +44,7 @@ export default function MentorshipPage() {
   };
 
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+    <main className="site-container pb-16 pt-28">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="max-w-4xl">
         <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-palm-green"><GraduationCap className="h-5 w-5" aria-hidden /> Mentorship & practical learning</p>

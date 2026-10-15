@@ -242,7 +242,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <SlideIn>
-      <main className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
+      <main className="site-container py-24">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
         <div className="mb-8">
@@ -324,7 +324,7 @@ export default async function ProjectPage({ params }: PageProps) {
         )}
 
         {detail && (
-          <section className="mt-10 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <section className="mt-10 grid min-w-0 gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
             <article className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900/70">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Engineering contribution</p>
               <p className="mt-3 text-base leading-7 text-gray-700 dark:text-gray-300">{detail.role}</p>

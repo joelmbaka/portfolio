@@ -63,7 +63,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   };
 
   return (
-    <main className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8">
+    <main className="site-container pb-16 pt-28">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Link href="/services" className="inline-flex items-center gap-2 text-sm font-medium text-palm-green hover:underline">
         <ArrowLeft className="h-4 w-4" aria-hidden /> All services

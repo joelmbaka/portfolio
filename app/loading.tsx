@@ -5,7 +5,7 @@ export default function Loading() {
       aria-live="polite"
       aria-busy="true"
       aria-label="Loading page content"
-      className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8"
+      className="site-container pb-16 pt-28"
     >
       <span className="sr-only">Loading page content…</span>
       <div aria-hidden="true" className="animate-pulse space-y-6 motion-reduce:animate-none">
