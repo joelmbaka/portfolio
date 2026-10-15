@@ -17,6 +17,7 @@ export interface ProjectEnhancement {
   tech: string[];
   screenshots?: string[];
   url?: string;
+  linkLabel?: string;
   note?: string;
 }
 
@@ -151,11 +152,11 @@ export const projects: Project[] = [
     },
     screenshots: {
       app: [
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/01_know_who_has_paid.png',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/02_match_rent_payments.png',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/03_manage_every_rental_property.png',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/04_track_leases_and_occupancy.png',
-        'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/app-screenshots/05_tenant_payment_records.png',
+        '/project-screenshots/rentpayor/mobile/01-tenant-invoices.png',
+        '/project-screenshots/rentpayor/mobile/02-owner-payments-mpesa.png',
+        '/project-screenshots/rentpayor/mobile/03-owner-payment-detail-mpesa.png',
+        '/project-screenshots/rentpayor/mobile/04-owner-rent-overview.png',
+        '/project-screenshots/rentpayor/mobile/05-owner-properties.png',
       ],
     },
     enhancements: [
@@ -163,57 +164,9 @@ export const projects: Project[] = [
         title: 'Property management web dashboard',
         description: 'Web management experience for properties, tenants, leases, invoices, payments, reporting and operational administration. Complements the iOS and Android applications.',
         tech: ['Next.js', 'React', 'TypeScript', 'FastAPI', 'PostgreSQL'],
-        note: 'Dashboard screenshots will be added once verified assets are available.',
-      },
-      {
-        title: 'CRM Dashboard',
-        description:
-          'Web CRM for inspecting property-management leads, tracking calls, due follow-ups, contact status, outreach drafts, reply reviews, competitor leads, and lead intelligence from one sales workspace.',
-        tech: [
-          'Next.js',
-          'React',
-          'TypeScript',
-          'Tailwind CSS',
-          'shadcn/ui',
-          'TanStack Table',
-          'Recharts',
-          'Playwright',
-        ],
-        screenshots: [
-          'https://cwfjswqaokrwlegr.public.blob.vercel-storage.com/rentpayor/enhancements/crm/dashboard.png',
-        ],
-        note: 'Code available upon request.',
-      },
-      {
-        title: 'Lead Generation and Enrichment',
-        description:
-          'Agent-assisted pipeline that discovers property-management firms, reads public website/search evidence, classifies fit, extracts contacts, detects competitor-software risk, scores priority, and prepares reliable targets for review.',
-        tech: [
-          'Python',
-          'FastAPI',
-          'SQLAlchemy',
-          'PostgreSQL',
-          'httpx',
-          'Litellm',
-          'OpenAI',
-          'Serper',
-        ],
-        note: 'Code available upon request.',
-      },
-      {
-        title: 'Sales Automation',
-        description:
-          'Outbound workflow that generates personalized email drafts, queues daily outreach within limits, tracks delivery/open/click/reply events, reviews replies with AI, and schedules reminders for follow-up.',
-        tech: [
-          'Python',
-          'FastAPI',
-          'PostgreSQL',
-          'SQLAlchemy',
-          'Litellm',
-          'OpenAI',
-          'SMTP/Webhooks',
-        ],
-        note: 'Code available upon request.',
+        screenshots: ['/project-screenshots/rentpayor/web/homepage-dashboard-desktop.webp'],
+        url: 'https://app.rentpayor.com',
+        linkLabel: 'View live dashboard',
       },
     ],
     appStore: {

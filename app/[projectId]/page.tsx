@@ -397,7 +397,7 @@ export default async function ProjectPage({ params }: PageProps) {
                         rel="noopener noreferrer"
                         className="inline-flex shrink-0 items-center justify-center rounded-md border border-ocean-blue px-3 py-2 text-sm font-medium text-ocean-blue transition hover:bg-ocean-blue hover:text-white"
                       >
-                        View live
+                        {enhancement.linkLabel || 'View live'}
                       </a>
                     )}
                   </div>
