@@ -7,7 +7,7 @@ import { publicProjects } from '@/config/projects';
 
 export const metadata: Metadata = {
   title: 'Joel Mbaka — Founder, Senior React Native & Full-Stack Engineer',
-  description: 'Joel Mbaka founded Joeltech Geek Systems and leads mobile and web product engineering. React Native, Expo, Next.js, FastAPI, PostgreSQL, technical leadership, remote delivery and production case studies.',
+  description: 'Meet Joel Mbaka, founder of Joeltech Geek Systems and senior React Native and full-stack engineer building mobile apps, SaaS platforms, and FastAPI backends.',
   alternates: { canonical: '/founder' },
   openGraph: {
     type: 'profile', url: '/founder', title: 'Joel Mbaka | Founder & Senior Software Engineer',

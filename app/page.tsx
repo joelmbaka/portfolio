@@ -112,6 +112,15 @@ export default function Home() {
               </Link>
             ))}
           </div>
+          <nav aria-label="Specialized software services" className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+            <span className="font-medium text-gray-600 dark:text-gray-300">Specialized services:</span>
+            <Link href="/services/payment-integrations" className="inline-flex min-h-11 items-center gap-2 font-semibold text-palm-green hover:underline">
+              M-Pesa payments &amp; reconciliation <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+            <Link href="/services/ai-api-integrations" className="inline-flex min-h-11 items-center gap-2 font-semibold text-palm-green hover:underline">
+              AI API integrations <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </nav>
           </div>
         </section>
 

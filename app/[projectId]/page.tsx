@@ -21,6 +21,14 @@ type CaseStudyDetail = {
   engineeringHighlights: string[];
 };
 
+const seoDescriptions: Record<string, string> = {
+  'journpad': 'JournPad is a voice-first journal for iOS and Android with audio notes, transcription, AI-organized entries, reminders, goals, and private reflections.',
+  'rentpayor': 'RentPayor connects rent invoicing, tenant balances, M-Pesa collections, receipts, and automatic reconciliation for landlords and property managers.',
+  'schoolpey': 'SchoolPey helps Kenyan schools manage student fees, term invoices, M-Pesa payments, balances, receipts, and reconciliation, with Android access for parents.',
+  'macsim': 'Macsim Cargo streamlines loads, driver assignments, trip tracking, fleet operations, and financial workflows through Android and web administration.',
+  'clivique-hmis': 'CliviQue HMIS connects patient care, facility operations, billing, and Tuma M-Pesa payments through secure hospital workflows and management dashboards.',
+};
+
 const caseStudyDetails: Record<string, CaseStudyDetail> = {
   journpad: {
     role: 'End-to-end product engineering across the React Native app, backend services, AI processing, account safety, analytics, and mobile-store release.',
@@ -45,14 +53,14 @@ const caseStudyDetails: Record<string, CaseStudyDetail> = {
     ],
   },
   rentpayor: {
-    role: 'Product engineering across mobile, backend, relational rent records, M-Pesa collection, automatic reconciliation, and internal go-to-market tooling.',
+    role: 'Product engineering across mobile, backend, relational rent records, M-Pesa collection, automatic reconciliation, and the web property-management dashboard.',
     scope:
       'Rent collection and reconciliation software that connects each payment to the correct tenant, property, unit, lease, invoice, and billing period while maintaining accurate balances, credits, receipts, and payment history.',
     engineeringHighlights: [
       'Built the React Native product and FastAPI/PostgreSQL backend around properties, units, tenants, leases, invoices, payments, balances, and receipts.',
       'Implemented an invoice-linked M-Pesa collection flow where a confirmed payment can be validated and reconciled automatically against the correct rent invoice.',
       'Modeled partial payments, outstanding balances, overpayments carried forward as tenant credit, and manual recording for rent received outside the integrated online-payment flow.',
-      'Built a Next.js CRM plus Python lead-enrichment and outbound automation systems for property-management prospecting, outreach, reply review, and follow-up operations.',
+      'Delivered a Next.js property-management dashboard for visibility into properties, leases, invoices, payments, occupancy, and portfolio operations.',
     ],
   },
   macsim: {
@@ -129,13 +137,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const base = SITE_URL;
   const canonical = `${base}/${project.id}`;
   const ogImage = getPrimaryProjectImage(project);
+  const seoDescription = seoDescriptions[project.id] || project.description;
   return {
     title: `${project.title} | Joeltech Geek Systems Case Study`,
-    description: project.description,
+    description: seoDescription,
     alternates: { canonical },
     openGraph: {
       title: `${project.title} — Engineering Case Study`,
-      description: project.description,
+      description: seoDescription,
       url: canonical,
       type: 'article',
       modifiedTime: new Date(project.updatedAt).toISOString(),
@@ -144,7 +153,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: 'summary_large_image',
       title: `${project.title} — Engineering Case Study`,
-      description: project.description,
+      description: seoDescription,
       images: [ogImage],
     },
     robots: { index: true, follow: true },
@@ -161,9 +170,11 @@ export default async function ProjectPage({ params }: PageProps) {
   const ogImage = getPrimaryProjectImage(project);
   const imageAbs = ogImage.startsWith('http') ? ogImage : `${base}${ogImage}`;
   const canonical = `${base}/${project.id}`;
-  const externalReferences = [project.url, project.appStore?.url, project.playStore?.url].filter(
-    (value): value is string => Boolean(value),
-  );
+  const externalReferences = [
+    ...(project.engagement === 'Client project' ? [] : [project.url]),
+    project.appStore?.url,
+    project.playStore?.url,
+  ].filter((value): value is string => Boolean(value));
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -184,20 +195,21 @@ export default async function ProjectPage({ params }: PageProps) {
         '@id': `${canonical}#software`,
         name: project.title,
         description: project.description,
-        url: project.url || canonical,
+        url: canonical,
         applicationCategory: project.type === 'Enterprise' ? 'BusinessApplication' : 'SoftwareApplication',
         operatingSystem: getOperatingSystem(project),
         image: imageAbs,
         creator: { '@id': `${base}/#organization` },
         sameAs: externalReferences,
+        ...(project.engagement === 'Client project' && project.url ? { relatedLink: project.url } : {}),
       },
       ...(project.demoVideo?.publishedAt ? [{
         '@type': 'VideoObject',
         '@id': `${canonical}#demo-video`,
         name: project.demoVideo.title,
         description: project.demoVideo.description,
-        contentUrl: project.demoVideo.src,
-        thumbnailUrl: project.demoVideo.poster,
+        contentUrl: new URL(project.demoVideo.src, base).toString(),
+        thumbnailUrl: new URL(project.demoVideo.poster, base).toString(),
         uploadDate: project.demoVideo.publishedAt,
         ...(project.demoVideo.duration ? { duration: project.demoVideo.duration } : {}),
         publisher: { '@id': `${base}/#organization` },
@@ -296,6 +308,15 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {project.id === 'milliol' && (
               <>
+                <section className="mt-10" aria-labelledby="milliol-screenshots-heading">
+                  <div className="mb-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product evidence</p>
+                    <h2 id="milliol-screenshots-heading" className="mt-2 text-2xl font-semibold text-gray-900 dark:text-white">Milliol Construction Manager — Android App Screenshots</h2>
+                    <p className="mt-3 max-w-3xl text-sm leading-7 text-gray-600 dark:text-gray-300">Explore the actual Android interfaces behind the construction workflows demonstrated above.</p>
+                  </div>
+                  {project.screenshots?.app && <ImageGallery images={project.screenshots.app} />}
+                </section>
+
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
                   {[
                     ['Manager', 'Project oversight, approvals, and financial visibility.'],
@@ -358,7 +379,7 @@ export default async function ProjectPage({ params }: PageProps) {
           </section>
         )}
 
-        {project.screenshots?.app && project.screenshots.app.length > 0 && (
+        {project.id !== 'milliol' && project.screenshots?.app && project.screenshots.app.length > 0 && (
           <section className="mt-14">
             <div className="mb-5">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-palm-green">Product evidence</p>

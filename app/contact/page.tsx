@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   title: 'Contact Joeltech Geek Systems | Software Development Enquiries',
   description: 'Discuss a mobile app, web platform, SaaS product or backend development project with Joeltech Geek Systems. Based in Kenya and working remotely worldwide.',
   alternates: { canonical: '/contact' },
+  openGraph: {
+    type: 'website',
+    url: '/contact',
+    title: 'Contact Joeltech Geek Systems',
+    description: 'Discuss a custom Android or iOS app, web dashboard, SaaS product, FastAPI backend or payment integration with our Kenya-based engineering team.',
+  },
 };
 
 const methods = [

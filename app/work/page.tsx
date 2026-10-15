@@ -7,7 +7,7 @@ import ProjectsCarousel from '@/components/ProjectsCarousel';
 import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
-  title: 'Software Portfolio — Our SaaS Products & Client Projects | Joeltech Geek Systems',
+  title: 'Software Portfolio & Client Projects | Joeltech Geek Systems',
   description: 'Explore Joeltech Geek Systems software portfolio: in-house SaaS products and commissioned client projects across property, education, healthcare, logistics, construction and applied AI.',
   alternates: { canonical: '/work' },
   openGraph: {

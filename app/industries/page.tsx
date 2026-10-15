@@ -7,9 +7,9 @@ import CTA from '@/components/CTA';
 const base = SITE_URL;
 
 export const metadata: Metadata = {
-  title: 'Industry Experience — FinTech, PropTech, Healthcare, Logistics & SaaS | Joeltech Geek Systems',
+  title: 'Industry Experience | Joeltech Geek Systems',
   description:
-    'Product engineering experience across FinTech, PropTech, accounting/reconciliation, healthcare/HMIS, logistics/transport, voice/AI SaaS, and other industries that need web, mobile, backend, cloud, and API systems.',
+    'Explore software case studies across property management, school finance, construction, healthcare, logistics and voice AI at Joeltech Geek Systems.',
   alternates: { canonical: '/industries' },
   openGraph: {
     type: 'website',

@@ -4,7 +4,7 @@ import { ArrowRight, BookOpen, Code2, GraduationCap, Users } from 'lucide-react'
 import { SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Software Development Mentorship & Practical Training | Joeltech Geek Systems',
+  title: 'Software Engineering Mentorship | Joeltech Geek Systems',
   description: 'Learn about practical software developer mentorship at Joeltech Geek Systems: React Native/Expo mobile apps, Next.js/TypeScript web apps, Python/FastAPI, PostgreSQL and applied AI integrations.',
   alternates: { canonical: '/mentorship' },
   openGraph: {

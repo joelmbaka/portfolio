@@ -3,9 +3,15 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, BriefcaseBusiness, GraduationCap, Mail, Sparkles } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Software Engineering Careers, Internships & SaaS Sales | Joeltech Geek Systems',
+  title: 'Software Careers & Internships | Joeltech Geek Systems',
   description: 'Learn about software engineering collaborations, practical developer internships and SaaS sales opportunities with Joeltech Geek Systems, a Kenya-based software business serving clients globally.',
   alternates: { canonical: '/careers' },
+  openGraph: {
+    type: 'website',
+    url: '/careers',
+    title: 'Software Careers & Internships | Joeltech Geek Systems',
+    description: 'Explore engineering collaborations, developer internships and SaaS sales opportunities with Joeltech Geek Systems in Kenya and worldwide.',
+  },
 };
 
 const engineeringSubject = encodeURIComponent('Software Engineering Collaboration — Joeltech Geek Systems');
