@@ -101,12 +101,6 @@ export default function Hero() {
               />
             </picture>
           </div>
-          <figcaption className="mt-4 text-center text-sm font-medium leading-6 text-gray-600 dark:text-gray-300">
-            Web visibility. Mobile action. One connected system.
-            <span className="mt-1 block text-xs font-normal text-gray-500 dark:text-gray-400">
-              Illustrative software concept · Not a screenshot of a specific client product
-            </span>
-          </figcaption>
         </figure>
       </section>
       <ContactModal isOpen={isContactOpen} onClose={() => setContactOpen(false)} />
