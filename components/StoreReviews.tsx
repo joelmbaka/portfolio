@@ -16,7 +16,7 @@ const expertiseToService: Record<string, string> = {
   'api-engineering-integrations': 'fastapi-backend-development',
   'databases-data-modeling': 'fastapi-backend-development',
   'authentication-application-security': 'fastapi-backend-development',
-  'automated-testing-quality-engineering': 'saas-product-development',
+  'automated-testing-quality-engineering': 'services',
   'payments-fintech-saas': 'payment-integrations',
   'voice-ai-llm-engineering': 'ai-api-integrations',
 };
@@ -30,9 +30,13 @@ export default function StoreReviews({ project }: { project: Project }) {
       .map((slug) => expertiseToService[slug])
       .filter((slug): slug is string => Boolean(slug)),
   )];
-  const relatedServices = serviceSlugs
-    .map((slug) => services.find((service) => service.slug === slug))
-    .filter((service): service is (typeof services)[number] => Boolean(service));
+  const relatedServices = serviceSlugs.flatMap((slug) => {
+    if (slug === 'services') {
+      return [{ slug, title: 'All software development services', href: '/services' }];
+    }
+    const service = services.find((service) => service.slug === slug);
+    return service ? [{ slug, title: service.title, href: `/services/${service.slug}` }] : [];
+  });
 
   return (
     <>
@@ -57,7 +61,7 @@ export default function StoreReviews({ project }: { project: Project }) {
             <p className="text-sm font-semibold text-gray-900 dark:text-white">Expertise demonstrated</p>
             <div className="mt-2 grid gap-2 sm:grid-cols-2">
               {relatedServices.map((service) => (
-                <Link key={service.slug} href={`/services/${service.slug}`} className="inline-flex min-h-11 items-center justify-between rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-700 transition hover:border-palm-green hover:text-palm-green dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                <Link key={service.slug} href={service.href} className="inline-flex min-h-11 items-center justify-between rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-700 transition hover:border-palm-green hover:text-palm-green dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
                   {service.title}
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
                 </Link>
