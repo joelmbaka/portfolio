@@ -6,7 +6,7 @@ import { SITE_URL } from '@/lib/site';
 import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
-  title: 'Custom Software Development Services in Kenya & Worldwide | Joeltech Geek Systems',
+  title: 'Custom Software Development in Kenya | Joeltech Geek Systems',
   description: 'Custom software development from Kenya for global clients: React Native mobile apps, Next.js web dashboards, FastAPI backends, SaaS products, M-Pesa payments and applied AI APIs.',
   alternates: { canonical: '/services' },
   openGraph: { title: 'Software Development Services | Joeltech Geek Systems', description: 'Engineering services for organisations that need working mobile, web and business software.', url: '/services' },

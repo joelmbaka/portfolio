@@ -5,9 +5,15 @@ import { ArrowRight, BookOpen, Building2, Code2, Globe2 } from 'lucide-react';
 import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
-  title: 'About Joeltech Geek Systems | Founder-Led Software Company in Kenya',
+  title: 'About Joeltech Geek Systems | Software Company in Kenya',
   description: 'Meet Joeltech Geek Systems, a Kenya-registered software development business led by Joel Mbaka. In-house SaaS products, commissioned client work and practical developer mentorship.',
   alternates: { canonical: '/about' },
+  openGraph: {
+    type: 'website',
+    url: '/about',
+    title: 'About Joeltech Geek Systems | Software Company in Kenya',
+    description: 'Meet Joeltech Geek Systems, a founder-led software development business in Kenya building SaaS products, commissioned applications and engineering talent.',
+  },
 };
 
 const values = [

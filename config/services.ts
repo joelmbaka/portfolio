@@ -16,7 +16,7 @@ export const services: ServiceArea[] = [
     slug: 'react-native-app-development',
     eyebrow: 'Mobile applications',
     title: 'React Native mobile app development',
-    searchTitle: 'React Native App Development in Kenya & Worldwide | Joeltech Geek Systems',
+    searchTitle: 'React Native App Development | Joeltech Geek Systems',
     description: 'Build Android and iOS mobile applications with React Native, Expo and TypeScript. Kenya-based, globally available engineering for SaaS, operations and customer-facing apps.',
     summary: 'We specialize in React Native rather than splitting our mobile engineering across unrelated frameworks. One product architecture supports Android and iOS, with platform-specific testing, native integrations and releases where needed.',
     problems: [
@@ -41,7 +41,7 @@ export const services: ServiceArea[] = [
     slug: 'web-app-development',
     eyebrow: 'Web platforms',
     title: 'Next.js web application and dashboard development',
-    searchTitle: 'Next.js Web App & Dashboard Development | Joeltech Geek Systems',
+    searchTitle: 'Next.js Web Apps & Dashboards | Joeltech Geek Systems',
     description: 'Custom web applications, SaaS dashboards and business portals built with Next.js, React and TypeScript, with responsive workflows and secure API-backed operations.',
     summary: 'We create operational web applications rather than treating every project as a brochure website. Teams get clear permissions, actionable records, responsive interfaces and reliable connections to the systems behind them.',
     problems: [
@@ -66,7 +66,7 @@ export const services: ServiceArea[] = [
     slug: 'fastapi-backend-development',
     eyebrow: 'Backend engineering',
     title: 'Python, FastAPI and PostgreSQL backend development',
-    searchTitle: 'FastAPI & PostgreSQL Backend Development | Joeltech Geek Systems',
+    searchTitle: 'FastAPI & PostgreSQL Development | Joeltech Geek Systems',
     description: 'Python FastAPI backend development, PostgreSQL data modeling, REST APIs, secure authorization, SQLAlchemy, Alembic migrations and production business workflows.',
     summary: 'Backend correctness matters when software manages invoices, patients, inventory or transactions. We build APIs and data models around enforceable business rules, clear authorization and reliable state changes.',
     problems: [
@@ -91,7 +91,7 @@ export const services: ServiceArea[] = [
     slug: 'saas-product-development',
     eyebrow: 'Product engineering',
     title: 'SaaS and end-to-end product development',
-    searchTitle: 'SaaS Product Development & MVP Engineering | Joeltech Geek Systems',
+    searchTitle: 'SaaS Product Development | Joeltech Geek Systems',
     description: 'From product requirements to production SaaS: mobile apps, web dashboards, backend APIs, tenancy, subscriptions, billing, testing and release.',
     summary: 'We develop complete products, including customer experiences and the internal operational systems that help teams run them. Our own products are practical evidence of this end-to-end approach.',
     problems: [
@@ -116,7 +116,7 @@ export const services: ServiceArea[] = [
     slug: 'payment-integrations',
     eyebrow: 'Financial workflows',
     title: 'M-Pesa payments, invoicing and reconciliation',
-    searchTitle: 'M-Pesa Payment Integration & Reconciliation | Joeltech Geek Systems',
+    searchTitle: 'M-Pesa Payments & Reconciliation | Joeltech Geek Systems',
     description: 'Integrate M-Pesa payment collection into apps with invoice matching, webhooks, idempotent callbacks, receipts, partial payments and reconciliation.',
     summary: 'A successful payment prompt is only the beginning. Good payment software confirms the provider result, links it to the correct obligation, updates balances safely and leaves a usable audit trail.',
     problems: [

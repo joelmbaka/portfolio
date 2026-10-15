@@ -1,17 +1,38 @@
 import { Project } from '@/config/projects';
 import { projectContext } from '@/config/project-context';
-import { expertiseAreas } from '@/config/expertise';
+import { services } from '@/config/services';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink } from 'lucide-react';
+
+// Legacy expertise topics point to the current canonical service routes.
+// Multiple topics may share one service; link it only once per case study.
+const expertiseToService: Record<string, string> = {
+  'react-native-mobile-engineering': 'react-native-app-development',
+  'mobile-app-release-ci-cd': 'react-native-app-development',
+  'nextjs-web-engineering': 'web-app-development',
+  'technical-seo-search-growth': 'web-app-development',
+  'fastapi-postgresql-backends': 'fastapi-backend-development',
+  'api-engineering-integrations': 'fastapi-backend-development',
+  'databases-data-modeling': 'fastapi-backend-development',
+  'authentication-application-security': 'fastapi-backend-development',
+  'automated-testing-quality-engineering': 'saas-product-development',
+  'payments-fintech-saas': 'payment-integrations',
+  'voice-ai-llm-engineering': 'ai-api-integrations',
+};
 
 export default function StoreReviews({ project }: { project: Project }) {
   const { url, appStore, playStore } = project;
   const context = projectContext[project.id];
   const linkCount = [url, appStore, playStore].filter(Boolean).length;
-  const relatedExpertise = (context?.expertiseSlugs ?? [])
-    .map((slug) => expertiseAreas.find((area) => area.slug === slug))
-    .filter((area): area is (typeof expertiseAreas)[number] => Boolean(area));
+  const serviceSlugs = [...new Set(
+    (context?.expertiseSlugs ?? [])
+      .map((slug) => expertiseToService[slug])
+      .filter((slug): slug is string => Boolean(slug)),
+  )];
+  const relatedServices = serviceSlugs
+    .map((slug) => services.find((service) => service.slug === slug))
+    .filter((service): service is (typeof services)[number] => Boolean(service));
 
   return (
     <>
@@ -35,9 +56,9 @@ export default function StoreReviews({ project }: { project: Project }) {
           <div className="mt-5">
             <p className="text-sm font-semibold text-gray-900 dark:text-white">Expertise demonstrated</p>
             <div className="mt-2 grid gap-2 sm:grid-cols-2">
-              {relatedExpertise.map((area) => (
-                <Link key={area.slug} href={`/expertise/${area.slug}`} className="inline-flex min-h-11 items-center justify-between rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-700 transition hover:border-palm-green hover:text-palm-green dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
-                  {area.title}
+              {relatedServices.map((service) => (
+                <Link key={service.slug} href={`/services/${service.slug}`} className="inline-flex min-h-11 items-center justify-between rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-700 transition hover:border-palm-green hover:text-palm-green dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                  {service.title}
                   <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
                 </Link>
               ))}
@@ -59,7 +80,7 @@ export default function StoreReviews({ project }: { project: Project }) {
           >
             {url && (
               <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-16 w-full items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white/60 px-5 py-4 text-center text-sm font-semibold text-gray-800 backdrop-blur transition-shadow hover:shadow-md dark:border-gray-800 dark:bg-gray-900/60 dark:text-gray-100">
-                Visit product website
+                {project.externalLinkLabel || (project.engagement === 'Client project' ? 'Visit client website' : 'Visit product website')}
                 <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
               </a>
             )}
