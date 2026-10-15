@@ -75,11 +75,13 @@ export default function Home() {
 
   return (
     <SlideIn>
-      <main className="mx-auto max-w-6xl px-4 pb-12 pt-28 sm:px-6 lg:px-8">
-        <Hero />
+      <main className="w-full min-w-0 pb-12 pt-16">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-
-        <section className="mt-20 grid gap-3 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/40 sm:grid-cols-3 sm:p-7">
+        <div className="relative isolate overflow-hidden bg-gradient-to-b from-emerald-50/70 via-white to-white dark:from-emerald-950/25 dark:via-gray-950 dark:to-gray-950">
+          <div className="pointer-events-none absolute -right-24 top-20 h-96 w-96 rounded-full bg-ocean-blue/5 blur-3xl dark:bg-ocean-blue/10" aria-hidden="true" />
+          <div className="site-container relative pb-12 pt-10 sm:pt-16 lg:pt-20">
+            <Hero />
+            <section className="mt-14 grid gap-3 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/40 sm:grid-cols-3 sm:p-7">
           {[
             { label: 'Based in', value: 'Kenya' },
             { label: 'Working with', value: 'Clients worldwide' },
@@ -90,17 +92,20 @@ export default function Home() {
               <p className="mt-2 text-lg font-bold text-gray-900 dark:text-white">{item.value}</p>
             </div>
           ))}
-        </section>
+            </section>
+          </div>
+        </div>
 
-        <section id="services" className="mt-24">
+        <section id="services" className="scroll-mt-24 bg-gray-50/80 py-16 dark:bg-gray-900/25 sm:py-20">
+          <div className="site-container">
           <div className="max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">How we help</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Your business challenge. Our engineering focus.</h2>
             <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">We create software people actually use—from the first idea and architecture through deployment and ongoing improvements.</p>
           </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {serviceCards.map(({ title, description, href, icon: Icon }) => (
-              <Link key={title} href={href} className="group rounded-3xl border border-gray-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-palm-green dark:border-gray-800 dark:bg-gray-900/60">
+              <Link key={title} href={href} className="group min-w-0 rounded-3xl border border-gray-200 bg-white p-6 lg:p-7 shadow-sm transition hover:-translate-y-1 hover:border-palm-green dark:border-gray-800 dark:bg-gray-900/60">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-palm-green dark:bg-emerald-950/30"><Icon className="h-5 w-5" aria-hidden /></div>
                 <h3 className="mt-5 text-xl font-semibold text-gray-900 dark:text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">{description}</p>
@@ -108,9 +113,11 @@ export default function Home() {
               </Link>
             ))}
           </div>
+          </div>
         </section>
 
-        <section id="work" className="mt-24 scroll-mt-24">
+        <section id="work" className="scroll-mt-24 bg-white py-16 dark:bg-gray-950 sm:py-20">
+          <div className="site-container">
           <div className="mb-8 max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Our portfolio</p>
             <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">We build products. We build for clients.</h2>
@@ -125,14 +132,16 @@ export default function Home() {
           <Link href="/work" className="mt-7 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-palm-green hover:underline">
             View full portfolio and case studies <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
+          </div>
         </section>
 
-        <section className="mt-24">
+        <section className="bg-gradient-to-b from-gray-50/70 to-white py-16 dark:from-gray-900/30 dark:to-gray-950 sm:py-20">
+          <div className="site-container">
           <div className="max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Our approach</p>
             <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">From challenge to shipped software.</h2>
           </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {delivery.map((step, index) => (
               <div key={step.title} className="rounded-3xl border border-gray-200 bg-white p-7 dark:border-gray-800 dark:bg-gray-900/60">
                 <span className="text-sm font-bold text-palm-green">0{index + 1}</span>
@@ -141,9 +150,12 @@ export default function Home() {
               </div>
             ))}
           </div>
+          </div>
         </section>
 
-        <section className="mt-24 grid gap-8 overflow-hidden rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/60 sm:p-10 lg:grid-cols-2">
+        <section className="bg-emerald-50/50 py-16 dark:bg-emerald-950/10 sm:py-20">
+          <div className="site-container">
+          <div className="grid gap-8 overflow-hidden rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/60 sm:p-10 lg:grid-cols-2">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">The founder</p>
             <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">Leadership rooted in building.</h2>
@@ -159,10 +171,14 @@ export default function Home() {
               <Link href="/careers" className="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold text-palm-green hover:underline">Explore careers <ArrowRight className="h-4 w-4" aria-hidden /></Link>
             </div>
           </div>
+          </div>
+          </div>
         </section>
 
-        <div className="mt-10 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400"><ShieldCheck className="h-4 w-4 text-palm-green" aria-hidden /> Kenya-registered business · Founder-led · Remote collaboration worldwide</div>
+        <div className="site-container">
+        <div className="mt-10 flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400"><ShieldCheck className="h-4 w-4 text-palm-green" aria-hidden /> Kenya-registered business · Founder-led · Remote collaboration worldwide</div>
         <CTA />
+        </div>
       </main>
     </SlideIn>
   );

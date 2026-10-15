@@ -73,3 +73,21 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .demo-ripple { animation: none; opacity: 0.35; }
 }
+
+/* Shared responsive page width with safe mobile/tablet gutters. */
+.site-container {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+@media (min-width: 640px) {
+  .site-container { padding-left: max(1.5rem, env(safe-area-inset-left)); padding-right: max(1.5rem, env(safe-area-inset-right)); }
+}
+@media (min-width: 1024px) {
+  .site-container { padding-left: max(2.5rem, env(safe-area-inset-left)); padding-right: max(2.5rem, env(safe-area-inset-right)); }
+}
+@media (min-width: 1536px) {
+  .site-container { padding-left: max(3rem, env(safe-area-inset-left)); padding-right: max(3rem, env(safe-area-inset-right)); }
+}
