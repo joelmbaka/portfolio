@@ -233,6 +233,7 @@ export const projects: Project[] = [
     platforms: ['Android', 'Web dashboard'],
     engagement: 'Product',
     url: 'https://schoolpey.com',
+    playStore: { url: 'https://play.google.com/store/apps/details?id=com.joeltechgeeksystems.schoolpey' },
     enhancements: [
       {
         title: 'School administration dashboard',
@@ -251,6 +252,7 @@ export const projects: Project[] = [
     type: 'Enterprise',
     platforms: ['Android'],
     engagement: 'Client project',
+    playStore: { url: 'https://play.google.com/store/apps/details?id=com.joelmbaka.milliol' },
     demoVideo: {
       src: '/videos/milliol-construction-manager-demo.mp4',
       poster: '/videos/milliol-construction-manager-demo.webp',
