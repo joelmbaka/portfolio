@@ -186,6 +186,15 @@ export const projects: Project[] = [
     platforms: ['Android', 'Web dashboard'],
     engagement: 'Product',
     url: 'https://schoolpey.com',
+    screenshots: {
+      app: [
+        '/project-screenshots/schoolpey/mobile/01-parent-dashboard.png',
+        '/project-screenshots/schoolpey/mobile/02-invoices-balances.png',
+        '/project-screenshots/schoolpey/mobile/03-mpesa-payment.png',
+        '/project-screenshots/schoolpey/mobile/04-paid-invoice-history.png',
+        '/project-screenshots/schoolpey/mobile/05-payment-receipt.png',
+      ],
+    },
     storePreview: {
       platform: 'android',
       src: '/store-previews/schoolpey-google-play.png',
@@ -196,9 +205,15 @@ export const projects: Project[] = [
     enhancements: [
       {
         title: 'School administration dashboard',
-        description: 'Web-based operations for school setup, academic terms, fee schedules, student records, billing, payments and financial oversight.',
-        tech: ['Next.js', 'React', 'FastAPI', 'PostgreSQL'],
-        note: 'Approved dashboard imagery to be added.',
+        description: 'Web-based school operations for fee structures, students, term billing, M-Pesa collection, payment reconciliation, student finance and reporting.',
+        tech: ['Next.js', 'React', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Tuma', 'Playwright'],
+        screenshots: [
+          '/project-screenshots/schoolpey/web/01-financial-overview.png',
+          '/project-screenshots/schoolpey/web/02-student-finance.png',
+          '/project-screenshots/schoolpey/web/03-reconciliation.png',
+        ],
+        url: 'https://app.schoolpey.com',
+        linkLabel: 'View live dashboard',
       },
     ],
   },
