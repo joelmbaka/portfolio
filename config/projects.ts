@@ -45,6 +45,7 @@ export interface Project {
   /** Hidden items stay in the archive, but never appear in public pages, case-study routes, SEO or sitemaps. */
   visibility?: 'public' | 'hidden';
   url?: string;
+  externalLinkLabel?: string;
   icon?: string;
   iconBackground?: string;
   storePreview?: ProjectStorePreview;
@@ -220,6 +221,8 @@ export const projects: Project[] = [
   {
     id: 'milliol',
     title: 'Milliol Construction Manager',
+    url: 'https://milliolrealtors.com/',
+    externalLinkLabel: 'Visit Milliol Realtors website',
     description: 'Android construction-operations application for project progress, work items, procurement, inventory and stock, financial tracking and operational reporting.',
     updatedAt: '2026-10-12',
     tech: ['React Native', 'Expo', 'TypeScript', 'Android'],
