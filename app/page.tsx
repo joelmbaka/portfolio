@@ -74,13 +74,12 @@ export default function Home() {
   };
 
   return (
-    <SlideIn>
       <main className="w-full min-w-0 pb-12 pt-16">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <div className="relative isolate overflow-hidden bg-gradient-to-b from-emerald-50/70 via-white to-white dark:from-emerald-950/25 dark:via-gray-950 dark:to-gray-950">
           <div className="pointer-events-none absolute -right-24 top-20 h-96 w-96 rounded-full bg-ocean-blue/5 blur-3xl dark:bg-ocean-blue/10" aria-hidden="true" />
           <div className="site-container relative pb-12 pt-10 sm:pt-16 lg:pt-20">
-            <Hero />
+            <SlideIn><Hero /></SlideIn>
             <section className="mt-14 grid gap-3 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/40 sm:grid-cols-3 sm:p-7">
           {[
             { label: 'Based in', value: 'Kenya' },
@@ -180,6 +179,5 @@ export default function Home() {
         <CTA />
         </div>
       </main>
-    </SlideIn>
   );
 }
