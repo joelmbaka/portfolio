@@ -18,8 +18,6 @@ export type CareerOpportunity = {
   examples?: { name: string; need: string }[];
   faqs: { question: string; answer: string }[];
   interestInstructions: string;
-  interestSubject: string;
-  interestTemplate: string;
 };
 
 export const careerOpportunities: CareerOpportunity[] = [
@@ -61,8 +59,6 @@ export const careerOpportunities: CareerOpportunity[] = [
       { question: 'What should I include?', answer: 'A short introduction, core engineering skills, links to projects or code, time zone and availability.' },
     ],
     interestInstructions: 'Share your engineering focus, a CV or portfolio, examples of shipped projects, your location or time zone, and availability.',
-    interestSubject: 'Software Engineering Interest — Joeltech Geek Systems',
-    interestTemplate: 'Name:\nLocation / time zone:\nEngineering focus:\nPortfolio / projects:\nPreferred engagement:\nAvailability:\n\nIntroduction:',
   },
   {
     slug: 'internships',
@@ -102,8 +98,6 @@ export const careerOpportunities: CareerOpportunity[] = [
       { question: 'Is this mentorship?', answer: 'No. General developer mentorship is separate; internships involve an agreed placement when one is available.' },
     ],
     interestInstructions: 'Tell us your current skill level, projects, learning goals, location and availability. A GitHub link is welcome.',
-    interestSubject: 'Software Development Internship Interest — Joeltech Geek Systems',
-    interestTemplate: 'Name:\nLocation:\nStudies / experience:\nProjects or GitHub:\nLearning goals:\nAvailability:\n\nIntroduction:',
   },
   {
     slug: 'saas',
@@ -143,8 +137,6 @@ export const careerOpportunities: CareerOpportunity[] = [
       { question: 'Do I need to be a developer?', answer: 'No. Understanding the product and the customer’s problem matters more than programming knowledge.' },
     ],
     interestInstructions: 'Share your town, sales or customer-facing experience, customer network and which existing product interests you.',
-    interestSubject: 'SaaS Sales Partnership Interest — Joeltech Geek Systems',
-    interestTemplate: 'Name:\nTown / county:\nPreferred product:\nPotential customer network:\nSales experience:\nAvailability:\n\nIntroduction:',
   },
   {
     slug: 'agents',
@@ -198,8 +190,6 @@ export const careerOpportunities: CareerOpportunity[] = [
       { question: 'What counts as a qualified referral?', answer: 'A new, accepted introduction to an authorised decision-maker with a specific software need and willingness to discuss it.' },
     ],
     interestInstructions: 'Introduce yourself, your town or county, industries you know, and how you would find relevant business customers. No technical CV is required.',
-    interestSubject: 'Custom Software Sales Agent Interest — Joeltech Geek Systems',
-    interestTemplate: 'Name:\nTown / county:\nIndustries and local business network:\nSales experience:\nHow I would find clients:\nAvailability:\n\nIntroduction:',
   },
 ];
 

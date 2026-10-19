@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, CheckCircle2, Mail, MoveUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, MoveUpRight } from 'lucide-react';
 import { careerOpportunities, findCareerOpportunity } from '@/config/career-opportunities';
 import { SITE_URL } from '@/lib/site';
 
@@ -31,7 +31,6 @@ export default async function CareerOpportunityPage({ params }: PageProps) {
   if (!item) return notFound();
 
   const canonical = SITE_URL + '/careers/' + item.slug;
-  const mailto = 'mailto:mbakajoe26@gmail.com?subject=' + encodeURIComponent(item.interestSubject) + '&body=' + encodeURIComponent(item.interestTemplate);
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -152,10 +151,12 @@ export default async function CareerOpportunityPage({ params }: PageProps) {
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-palm-green">Interested?</p>
         <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">Express your interest</h2>
         <p className="mt-4 max-w-3xl text-base leading-8 text-gray-700 dark:text-gray-300">{item.interestInstructions}</p>
-        <a href={mailto} className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-palm-green px-6 py-3 font-semibold text-white transition hover:opacity-90">
-          <Mail className="h-5 w-5" aria-hidden /> Express Interest
-        </a>
-        <p className="mt-3 text-xs leading-6 text-gray-600 dark:text-gray-400">Opens your email application with a prefilled subject and prompts to complete. An enquiry does not guarantee acceptance.</p>
+        <Link href="/contact" className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-palm-green px-6 py-3 font-semibold text-white transition hover:opacity-90">
+          Express Interest <ArrowRight className="h-5 w-5" aria-hidden />
+        </Link>
+        <p className="mt-3 text-xs leading-6 text-gray-600 dark:text-gray-400">
+          You&apos;ll reach the Contact page, where you can get in touch with the founder directly. Mention this opportunity so your enquiry has the right context. An enquiry does not guarantee acceptance.
+        </p>
       </section>
 
       <nav className="mt-14 border-t border-gray-200 pt-7 dark:border-gray-800" aria-label="Other opportunities">
