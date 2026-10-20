@@ -5,6 +5,7 @@ import { services } from '@/config/services';
 
 const WEBSITE_UPDATED_AT = new Date('2026-10-14');
 const CAREERS_UPDATED_AT = new Date('2026-10-19');
+const SALES_AGENTS_UPDATED_AT = new Date('2026-10-20');
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE_URL;
@@ -15,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/about`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.86 },
     { url: `${base}/founder`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.85 },
     { url: `${base}/mentorship`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.78 },
-    { url: `${base}/careers`, lastModified: CAREERS_UPDATED_AT, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${base}/careers`, lastModified: SALES_AGENTS_UPDATED_AT, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/industries`, lastModified: WEBSITE_UPDATED_AT, changeFrequency: 'monthly', priority: 0.76 },
     { url: `${base}/contact`, lastModified: CAREERS_UPDATED_AT, changeFrequency: 'monthly', priority: 0.88 },
   ];
@@ -36,7 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const careerRoutes: MetadataRoute.Sitemap = ['engineers', 'internships', 'saas', 'agents'].map((slug) => ({
     url: base + '/careers/' + slug,
-    lastModified: CAREERS_UPDATED_AT,
+    lastModified: slug === 'agents' ? SALES_AGENTS_UPDATED_AT : CAREERS_UPDATED_AT,
     changeFrequency: 'monthly',
     priority: 0.72,
   }));

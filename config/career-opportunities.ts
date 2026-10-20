@@ -15,6 +15,8 @@ export type CareerOpportunity = {
   steps: { title: string; description: string }[];
   termsHeading: string;
   terms: string[];
+  commissionTiers?: { rate: string; title: string; description: string }[];
+  commissionExamples?: { name: string; eligibleFee: number; rate: number }[];
   examples?: { name: string; need: string }[];
   faqs: { question: string; answer: string }[];
   interestInstructions: string;
@@ -147,7 +149,7 @@ export const careerOpportunities: CareerOpportunity[] = [
     description: 'Connect businesses in Kenya with custom mobile apps, web dashboards, portals, POS systems and operational software development projects.',
     summary: 'Identify businesses that need custom software built for them and earn commission on successful, eligible development projects.',
     introduction: 'Businesses often rely on disconnected systems, paper records or manual processes. You identify those needs and introduce interested decision-makers. Joeltech Geek Systems handles technical discovery, proposals, pricing, contracts and delivery.',
-    highlights: ['Web dashboards, mobile apps, POS and portals', 'Potential customers across Kenyan industries', 'Proposed 5%–10% success-based commission'],
+    highlights: ['Web dashboards, mobile apps, POS and portals', 'Potential customers across Kenyan industries', 'Earn 20%–30% on eligible successful projects'],
     responsibilities: [
       'Talk with business owners or managers to understand operational challenges.',
       'Secure permission for an introduction to a relevant decision-maker.',
@@ -164,12 +166,35 @@ export const careerOpportunities: CareerOpportunity[] = [
       { title: 'Contract and earn', description: 'We agree and deliver qualifying projects; commission follows collected payments under written terms.' },
     ],
     termsHeading: 'Commission and payment terms',
+    commissionTiers: [
+      {
+        rate: '20%',
+        title: 'Qualified referrals',
+        description: 'Introduce a new, accepted prospect with a genuine custom software need who becomes a paying client.',
+      },
+      {
+        rate: '25%',
+        title: 'Active sales agents',
+        description: 'Find and qualify customers, actively support the agreed sales process and help close suitable projects.',
+      },
+      {
+        rate: 'Up to 30%',
+        title: 'Top performers',
+        description: 'Higher rates for proven agents and approved projects where the agent’s contribution and delivery margins justify them.',
+      },
+    ],
+    commissionExamples: [
+      { name: 'Company website', eligibleFee: 80000, rate: 20 },
+      { name: 'Management dashboard', eligibleFee: 400000, rate: 25 },
+      { name: 'Mobile app + web dashboard', eligibleFee: 1200000, rate: 30 },
+    ],
     terms: [
-      'Proposed pilot rates: 5% for an accepted, qualified introduction or 10% for an agent who actively qualifies the customer and supports the agreed sales process. Rates are not guaranteed until confirmed in a written agreement.',
-      'Commission is calculated only on eligible software development fees actually collected, excluding VAT, hosting, hardware, third-party licences and other pass-through expenses.',
-      'When a client pays in milestones, eligible commissions follow the collected milestones subject to agreed terms. Leads, meetings and unsigned proposals alone do not earn commission.',
-      'Each introduction must be attributable, accepted and new to the business. Maintenance, renewals, expenses and unusually large contracts require separate written terms.',
-      'This is independent, performance-based work, not a salaried vacancy. Agents may not quote prices or promise features, dates or discounts.',
+      'Our commission tiers are 20% for qualified referrals, 25% for active agents and up to 30% for approved top performers. One tier applies to each eligible project and is confirmed in a written agreement.',
+      'The top-performer tier is not automatic. Project delivery costs, expected margins and the agent’s contribution are reviewed before a rate above 25% is approved.',
+      'Commission is calculated only on eligible custom software development fees actually collected, excluding VAT, hosting, hardware, third-party licences and other pass-through expenses.',
+      'When a client pays in milestones, eligible commissions follow those collected milestones under the written agreement. Leads, meetings and unsigned proposals alone do not earn commission.',
+      'Referrals must be new, accepted and attributable to the agent. Maintenance, renewals, expenses and unusually large contracts require separately agreed terms.',
+      'This is independent, success-based work, not a salaried vacancy. Agents cannot quote prices or promise features, dates or discounts on our behalf.',
     ],
     examples: [
       { name: 'Schools & academies', need: 'Fees, records, parent portals and school management' },
@@ -183,8 +208,9 @@ export const careerOpportunities: CareerOpportunity[] = [
     ],
     faqs: [
       { question: 'Do I need programming experience?', answer: 'No. You identify business challenges and introduce qualified customers. Our engineers scope and build the software.' },
-      { question: 'What commission is proposed?', answer: 'The proposed pilot is 5% for qualified introductions or 10% for active agents, based on qualifying development fees collected. The written agreement determines what applies.' },
+      { question: 'How much commission can I earn?', answer: '20% for an accepted qualified referral, 25% for active sales work, or up to 30% for an approved top performer. The agreed rate applies only to eligible development fees actually collected, under written terms.' },
       { question: 'When will I get paid?', answer: 'Following actual collection of eligible development fees and satisfaction of the referral agreement. For milestone projects, commission can follow collected milestones.' },
+      { question: 'Is the 30% rate guaranteed?', answer: 'No. The top-performer tier needs project-specific approval based on results, contribution and delivery margins. We confirm the rate in writing.' },
       { question: 'Can I work outside Nairobi?', answer: 'Yes. Relevant businesses may be anywhere in Kenya, and appropriate overseas introductions may also be considered.' },
       { question: 'Can I quote prices or sign clients?', answer: 'No. Joeltech Geek Systems is responsible for pricing, proposals, contracts, technical commitments and project delivery.' },
       { question: 'What counts as a qualified referral?', answer: 'A new, accepted introduction to an authorised decision-maker with a specific software need and willingness to discuss it.' },

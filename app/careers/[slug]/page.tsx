@@ -123,6 +123,49 @@ export default async function CareerOpportunityPage({ params }: PageProps) {
         </div>
       </section>
 
+
+      {item.commissionTiers && (
+        <section className="mt-16" aria-labelledby="sales-commission-heading">
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-palm-green">Your earning potential</p>
+          <h2 id="sales-commission-heading" className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">
+            Generous, percentage-based commissions
+          </h2>
+          <p className="mt-3 max-w-3xl text-base leading-8 text-gray-600 dark:text-gray-300">
+            Earn a percentage of eligible development fees collected from successful new client projects. Your agreed tier depends on your contribution.
+          </p>
+          <div className="mt-7 grid gap-4 md:grid-cols-3">
+            {item.commissionTiers.map((tier) => (
+              <article key={tier.title} className="min-w-0 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900/60">
+                <p className="text-4xl font-bold tracking-tight text-palm-green">{tier.rate}</p>
+                <h3 className="mt-4 text-lg font-bold text-gray-900 dark:text-white">{tier.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">{tier.description}</p>
+              </article>
+            ))}
+          </div>
+          {item.commissionExamples && (
+            <div className="mt-8 rounded-2xl bg-gray-50 p-6 dark:bg-gray-900/60">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">Example agent earnings</h3>
+              <div className="mt-5 grid gap-5 sm:grid-cols-3">
+                {item.commissionExamples.map((example) => (
+                  <div key={example.name} className="min-w-0">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{example.name}</p>
+                    <p className="mt-1 text-xs leading-6 text-gray-600 dark:text-gray-300">
+                      KES {example.eligibleFee.toLocaleString('en-KE')} development fee · {example.rate === 30 ? 'up to ' : ''}{example.rate}%
+                    </p>
+                    <p className="mt-2 text-lg font-bold text-palm-green">
+                      {example.rate === 30 ? 'Up to ' : ''}KES {(example.eligibleFee * example.rate / 100).toLocaleString('en-KE')}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-5 text-xs leading-6 text-gray-500 dark:text-gray-400">
+                Illustrations only, not guaranteed prices, earnings or tier approvals. Commission applies to eligible fees collected under the written agreement.
+              </p>
+            </div>
+          )}
+        </section>
+      )}
+
       <section className="mt-14 rounded-3xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900/60 sm:p-8">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{item.termsHeading}</h2>
         <ul className="mt-5 space-y-4">
