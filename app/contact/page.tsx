@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Linkedin, Mail, MessageCircle } from 'lucide-react';
+import { Clock3, Linkedin, Mail, MapPin, MessageCircle, Video } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Contact Joel Mbaka | Joeltech Geek Systems',
@@ -43,9 +43,6 @@ export default function ContactPage() {
         <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
           I&apos;m Joel Mbaka, founder of Joeltech Geek Systems. If there&apos;s something you&apos;d like to discuss, feel free to reach out using whichever channel works best for you. I&apos;ll read your message personally.
         </p>
-        <p className="mt-4 text-sm leading-7 text-gray-500 dark:text-gray-400">
-          Based in Kenya · East Africa Time (UTC+3)
-        </p>
       </header>
 
       <section className="mt-12" aria-labelledby="contact-methods-heading">
@@ -70,11 +67,25 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="mt-14 rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/50 sm:p-9">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">A quick introduction is enough.</h2>
-        <p className="mt-3 max-w-3xl text-base leading-8 text-gray-600 dark:text-gray-300">
-          Just tell me a little about yourself and what you&apos;d like to discuss. You can include any helpful context or links, but there&apos;s no need to prepare a formal proposal.
-        </p>
+      <section className="mt-14 rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/50 sm:p-9" aria-labelledby="availability-heading">
+        <h2 id="availability-heading" className="text-2xl font-bold text-gray-900 dark:text-white">Location &amp; Availability</h2>
+        <div className="mt-7 grid gap-6 md:grid-cols-3">
+          <div className="min-w-0">
+            <MapPin className="h-6 w-6 text-palm-green" aria-hidden />
+            <h3 className="mt-3 text-base font-semibold text-gray-900 dark:text-white">Based in Kenya</h3>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">Open to conversations locally and internationally.</p>
+          </div>
+          <div className="min-w-0">
+            <Clock3 className="h-6 w-6 text-palm-green" aria-hidden />
+            <h3 className="mt-3 text-base font-semibold text-gray-900 dark:text-white">East Africa Time (UTC+3)</h3>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">My local time zone when arranging a conversation.</p>
+          </div>
+          <div className="min-w-0">
+            <Video className="h-6 w-6 text-palm-green" aria-hidden />
+            <h3 className="mt-3 text-base font-semibold text-gray-900 dark:text-white">Calls &amp; meetings by arrangement</h3>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">Google Meet is preferred. We can agree on a convenient time and share a meeting link.</p>
+          </div>
+        </div>
       </section>
     </main>
   );
