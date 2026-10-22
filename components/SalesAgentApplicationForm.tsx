@@ -13,10 +13,20 @@ const inputClass =
 
 export function SalesAgentApplicationForm() {
   const [state, setState] = useState<FormState>({ status: 'idle' });
+  const [isFormReady, setIsFormReady] = useState(false);
+
+  function updateFormReadiness(event: FormEvent<HTMLFormElement>) {
+    const form = event.currentTarget;
+    const phone = (form.elements.namedItem('phone') as HTMLInputElement | null)?.value ?? '';
+    const digits = phone.replace(/\D/g, '');
+
+    // Mirror API phone requirements; don't enable the CTA for invalid contact details.
+    setIsFormReady(form.checkValidity() && digits.length >= 9 && digits.length <= 15);
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (state.status === 'submitting') return;
+    if (!isFormReady || state.status === 'submitting') return;
 
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
@@ -44,6 +54,7 @@ export function SalesAgentApplicationForm() {
         throw new Error(payload?.error || 'We could not submit your application. Please try again.');
       }
       form.reset();
+      setIsFormReady(false);
       setState({ status: 'success' });
     } catch (error) {
       setState({
@@ -65,7 +76,12 @@ export function SalesAgentApplicationForm() {
   }
 
   return (
-    <form onSubmit={submit} className="relative rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:p-8">
+    <form
+      onSubmit={submit}
+      onInput={updateFormReadiness}
+      onChange={updateFormReadiness}
+      className="relative rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 sm:p-8"
+    >
       <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Apply to become a sales partner</h3>
       <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
         About a minute to apply. No CV or coding experience required.
@@ -83,7 +99,7 @@ export function SalesAgentApplicationForm() {
         </label>
         <label className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
           WhatsApp number <span aria-hidden="true">*</span>
-          <input className={inputClass} type="tel" name="phone" placeholder="e.g. 0712 345 678" autoComplete="tel" minLength={9} maxLength={32} required />
+          <input className={inputClass} type="tel" name="phone" placeholder="e.g. 0712 345 678" autoComplete="tel" minLength={9} maxLength={32} pattern="[+0-9() .-]+" required />
         </label>
         <label className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
           Email address <span aria-hidden="true">*</span>
@@ -130,8 +146,12 @@ export function SalesAgentApplicationForm() {
 
       <button
         type="submit"
-        disabled={state.status === 'submitting'}
-        className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-palm-green px-6 py-3 font-semibold text-white transition hover:opacity-90 disabled:cursor-wait disabled:opacity-60 sm:w-auto"
+        disabled={!isFormReady || state.status === 'submitting'}
+        className={`mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full px-6 py-3 font-semibold transition sm:w-auto ${
+          isFormReady && state.status !== 'submitting'
+            ? 'bg-palm-green text-white hover:opacity-90'
+            : 'cursor-not-allowed bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-300'
+        }`}
       >
         {state.status === 'submitting' ? 'Submitting...' : 'Submit application'}
       </button>
