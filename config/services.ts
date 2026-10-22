@@ -17,7 +17,7 @@ export const services: ServiceArea[] = [
     eyebrow: 'Mobile applications',
     title: 'React Native mobile app development',
     searchTitle: 'React Native App Development | Joeltech Geek Systems',
-    description: 'Build Android and iOS mobile applications with React Native, Expo and TypeScript. Kenya-based, globally available engineering for SaaS, operations and customer-facing apps.',
+    description: 'Build Android and iOS mobile applications with React Native, Expo and TypeScript. Remote engineering available for US, Kenyan and international teams building SaaS, operations and customer-facing apps.',
     summary: 'We specialize in React Native rather than splitting our mobile engineering across unrelated frameworks. One product architecture supports Android and iOS, with platform-specific testing, native integrations and releases where needed.',
     problems: [
       'Customers or field teams need a dependable mobile workflow instead of spreadsheets and disconnected messages.',

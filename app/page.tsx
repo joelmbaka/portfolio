@@ -40,9 +40,9 @@ export default function Home() {
         url: base,
         logo: `${base}/brand/bridgeframe-512.png`,
         image: `${base}/brand/bridgeframe-512.png`,
-        description: 'Kenya-based, founder-led software development business serving clients globally through remote delivery.',
+        description: 'Kenya-registered, founder-led software development business available for US, Kenyan and international projects through remote delivery.',
         founder: { '@id': `${base}/#person` },
-        areaServed: 'Worldwide',
+        areaServed: ['United States', 'Kenya', 'Worldwide'],
         address: { '@type': 'PostalAddress', addressCountry: 'KE' },
         knowsAbout: ['Custom software development', 'Mobile applications', 'SaaS', 'Web dashboards', 'FastAPI', 'PostgreSQL', 'Payment integrations'],
       },
@@ -66,7 +66,7 @@ export default function Home() {
         '@type': 'WebPage',
         '@id': `${base}/#webpage`,
         url: `${base}/`,
-        name: 'Joeltech Geek Systems | Software Development in Kenya',
+        name: 'Joeltech Geek Systems | Custom Software Development',
         isPartOf: { '@id': `${base}/#website` },
         about: { '@id': `${base}/#organization` },
       },
@@ -82,8 +82,8 @@ export default function Home() {
             <SlideIn><Hero /></SlideIn>
             <section className="mt-14 grid gap-3 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/40 sm:grid-cols-3 sm:p-7">
           {[
-            { label: 'Based in', value: 'Kenya' },
-            { label: 'Working with', value: 'Clients worldwide' },
+            { label: 'Serving', value: 'US · Kenya · Worldwide' },
+            { label: 'Delivery', value: 'Remote across time zones' },
             { label: 'Focused on', value: 'Real business outcomes' },
           ].map((item) => (
             <div key={item.label} className="rounded-xl px-3 py-3 sm:border-l sm:border-palm-green sm:pl-5">
@@ -184,7 +184,7 @@ export default function Home() {
         </section>
 
         <div className="site-container">
-        <div className="mt-10 flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400"><ShieldCheck className="h-4 w-4 text-palm-green" aria-hidden /> Kenya-registered business · Founder-led · Remote collaboration worldwide</div>
+        <div className="mt-10 flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-400"><ShieldCheck className="h-4 w-4 text-palm-green" aria-hidden /> Kenya-registered business · US &amp; Kenya enquiries · Remote collaboration worldwide</div>
         <CTA />
         </div>
       </main>

@@ -19,9 +19,9 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const siteTitle = 'Joeltech Geek Systems | Custom Software Development in Kenya';
+const siteTitle = 'Joeltech Geek Systems | Custom Software Development';
 const siteDescription =
-  'Founder-led software development in Kenya for clients worldwide: React Native apps, Next.js web platforms, FastAPI backends, SaaS products, payments and practical AI integrations.';
+  'Founder-led mobile apps, web platforms and SaaS engineering for businesses in the US, Kenya and beyond. React Native, Next.js, FastAPI and PostgreSQL.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -44,6 +44,8 @@ export const metadata: Metadata = {
     'Joeltech Geek Systems',
     'software development company in Kenya',
     'custom software development Nairobi',
+    'remote software development for US startups',
+    'US and Kenya software development services',
     'React Native development',
     'Next.js web app development',
     'FastAPI backend development',

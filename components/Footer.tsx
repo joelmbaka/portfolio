@@ -11,8 +11,8 @@ export function Footer() {
             <Link href="/" aria-label="Joeltech Geek Systems home" className="inline-flex items-center">
               <BrandLogo />
             </Link>
-            <p className="mt-1 text-sm">Built in Kenya. Engineered for the world.</p>
-            <p className="mt-3 text-xs leading-5 text-gray-500 dark:text-gray-400">Founder-led software development for mobile, web, SaaS and business operations. Based in Kenya, delivering remotely worldwide.</p>
+            <p className="mt-1 text-sm">Software for the US, Kenya & beyond.</p>
+            <p className="mt-3 text-xs leading-5 text-gray-500 dark:text-gray-400">Founder-led engineering for mobile, web, SaaS and business operations. We welcome projects across markets and deliver through remote collaboration.</p>
             <p className="mt-2 text-xs leading-5 text-gray-500 dark:text-gray-400">Founded by Joel Mbaka · Business registration BN-P7SEWW57</p>
           </div>
 

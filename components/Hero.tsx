@@ -49,7 +49,7 @@ export default function Hero() {
         <div className="min-w-0 max-w-3xl">
           <p className="inline-flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-palm-green sm:text-sm">
             <Globe2 className="h-4 w-4" aria-hidden />
-            Kenya-based software development · Global delivery
+            Software development for the US, Kenya & beyond
           </p>
 
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.07] tracking-tight text-gray-950 dark:text-sandy-beach sm:text-5xl lg:text-6xl 2xl:text-7xl">
@@ -57,7 +57,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-gray-600 dark:text-gray-300 sm:text-lg">
-            Joeltech Geek Systems develops software for clients and builds its own commercial products. From Kenya, we deliver React Native mobile apps, Next.js web platforms, Python/FastAPI backends and SaaS workflows through remote collaboration worldwide.
+            Joeltech Geek Systems builds mobile apps, web platforms, APIs and SaaS products using React Native, Next.js and Python/FastAPI. We welcome projects from the US, Kenya and beyond, collaborating remotely across time zones.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-2 text-xs font-medium sm:text-sm">

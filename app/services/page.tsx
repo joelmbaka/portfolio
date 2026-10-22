@@ -6,8 +6,8 @@ import { SITE_URL } from '@/lib/site';
 import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
-  title: 'Custom Software Development in Kenya | Joeltech Geek Systems',
-  description: 'Custom software development from Kenya for global clients: React Native mobile apps, Next.js web dashboards, FastAPI backends, SaaS products, M-Pesa payments and applied AI APIs.',
+  title: 'Custom Software Development | Joeltech Geek Systems',
+  description: 'Remote software development for US, Kenyan and international businesses: React Native apps, Next.js dashboards, FastAPI backends, SaaS and payment integrations.',
   alternates: { canonical: '/services' },
   openGraph: { title: 'Software Development Services | Joeltech Geek Systems', description: 'Engineering services for organisations that need working mobile, web and business software.', url: '/services' },
 };
@@ -34,7 +34,7 @@ export default function ServicesPage() {
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">What clients hire us to build</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Custom software development services.</h1>
         <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-          Joeltech Geek Systems designs, develops and supports software for organisations in Kenya and internationally. We focus on practical business outcomes: applications people use, dependable transaction records, and systems that help teams make decisions.
+          Joeltech Geek Systems designs, develops and supports software for businesses in the US, Kenya and beyond. We work remotely across time zones and focus on practical outcomes: applications people use, dependable transaction records, and systems that help teams make decisions.
         </p>
         <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">
           Our core mobile specialization is <strong>React Native with Expo and TypeScript</strong>. For web applications we use Next.js and React; for backend services, Python, FastAPI and PostgreSQL. We integrate existing AI APIs where useful—we do not offer Flutter development, standalone native Swift/Kotlin projects, Java, C++, C#, PHP or Ruby development, machine-learning research or model training.
@@ -62,7 +62,7 @@ export default function ServicesPage() {
         </article>
         <article className="rounded-2xl bg-gray-50 p-6 dark:bg-gray-900/60">
           <Globe2 className="h-7 w-7 text-palm-green" aria-hidden />
-          <h2 className="mt-4 text-xl font-semibold">Kenya-based, globally available</h2>
+          <h2 className="mt-4 text-xl font-semibold">Serving US &amp; Kenyan teams remotely</h2>
           <p className="mt-3 text-sm leading-7 text-gray-600 dark:text-gray-300">We collaborate remotely across time zones. Scope, communication, pricing and delivery arrangements are agreed for each engagement.</p>
         </article>
         <article className="rounded-2xl bg-gray-50 p-6 dark:bg-gray-900/60">

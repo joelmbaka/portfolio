@@ -5,14 +5,14 @@ import { ArrowRight, BookOpen, Building2, Code2, Globe2 } from 'lucide-react';
 import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
-  title: 'About Joeltech Geek Systems | Software Company in Kenya',
-  description: 'Meet Joeltech Geek Systems, a Kenya-registered software development business led by Joel Mbaka. In-house SaaS products, commissioned client work and practical developer mentorship.',
+  title: 'About Joeltech Geek Systems | Founder-led Engineering',
+  description: 'Meet Joeltech Geek Systems, a Kenya-registered software development business led by Joel Mbaka. Open to projects from the US, Kenya and beyond.',
   alternates: { canonical: '/about' },
   openGraph: {
     type: 'website',
     url: '/about',
-    title: 'About Joeltech Geek Systems | Software Company in Kenya',
-    description: 'Meet Joeltech Geek Systems, a founder-led software development business in Kenya building SaaS products, commissioned applications and engineering talent.',
+    title: 'About Joeltech Geek Systems | Founder-led Engineering',
+    description: 'Meet Joeltech Geek Systems, a Kenya-registered software business building SaaS products and custom applications for businesses across markets.',
   },
 };
 
@@ -20,7 +20,7 @@ const values = [
   { title: 'Ownership over handoffs', description: 'One accountable engineering lead connecting business goals, product decisions and working software.', icon: Code2 },
   { title: 'Engineering with purpose', description: 'Systems designed for the actual people, transactions and decisions behind business operations.', icon: Building2 },
   { title: 'Talent through mentorship', description: 'Sharing practical software engineering knowledge and making room for emerging developers to grow.', icon: BookOpen },
-  { title: 'Kenyan roots, global collaboration', description: 'Based in Kenya and structured for focused, transparent remote engagements across borders.', icon: Globe2 },
+  { title: 'Local roots, international reach', description: 'Registered in Kenya and open to engagements with US, Kenyan and international teams through remote collaboration.', icon: Globe2 },
 ];
 
 export default function AboutPage() {
@@ -30,7 +30,7 @@ export default function AboutPage() {
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Our story</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">A software business built on engineering ownership.</h1>
         <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Joeltech Geek Systems is a Kenya-registered software development business. We build our own commercial products and deliver custom mobile applications, web platforms, SaaS systems and backends for clients.</p>
-        <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">Based in Kenya, we collaborate remotely with clients internationally. Our core mobile framework is React Native/Expo; our web and backend specialization is Next.js, React, Python/FastAPI and PostgreSQL. Engineering work is founder-led, with collaboration scoped for each engagement.</p>
+        <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">We welcome project enquiries from businesses in the US, Kenya and other markets and collaborate remotely across time zones. Our core mobile framework is React Native/Expo; our web and backend specialization is Next.js, React, Python/FastAPI and PostgreSQL. Engineering work is founder-led, with collaboration scoped for each engagement.</p>
       </header>
 
       <section className="mt-16 grid items-center gap-10 rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/60 sm:p-10 lg:grid-cols-[280px_1fr]">
@@ -51,7 +51,7 @@ export default function AboutPage() {
       <section className="mt-20">
         <div className="max-w-3xl">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">What guides us</p>
-          <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">Built in Kenya. Engineered for the world.</h2>
+          <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">Locally rooted. Built for global teams.</h2>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {values.map(({title,description,icon:Icon}) => (
@@ -66,7 +66,7 @@ export default function AboutPage() {
 
       <section className="mt-16 rounded-3xl bg-gray-50 p-7 dark:bg-gray-900/60 sm:p-9">
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">Business identity</p>
-        <h2 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">Registered in Kenya. Working globally.</h2>
+        <h2 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">Registered in Kenya. Available internationally.</h2>
         <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-300">Joeltech Geek Systems is registered under Kenya&apos;s Registration of Business Names Act (registration BN-P7SEWW57). The business is owned and led by Joel Mbaka and operates with a remote-first delivery approach.</p>
         <div className="mt-6 flex flex-wrap gap-5 text-sm font-semibold">
           <Link href="/work" className="inline-flex items-center gap-2 text-palm-green hover:underline">Portfolio: products & client work <ArrowRight className="h-4 w-4" aria-hidden /></Link>

@@ -2,32 +2,32 @@ import type { Metadata } from 'next';
 import { Clock3, Linkedin, Mail, MapPin, MessageCircle, Video } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Contact Joel Mbaka | Joeltech Geek Systems',
-  description: 'Get in touch directly with Joel Mbaka, founder of Joeltech Geek Systems in Kenya. Reach out with a question, an idea, or anything you would like to discuss.',
+  title: 'Contact Joeltech Geek Systems | Project Enquiries',
+  description: 'Discuss a software project with Joel Mbaka, founder of Joeltech Geek Systems. Project enquiries welcome from the US, Kenya and beyond.',
   alternates: { canonical: '/contact' },
   openGraph: {
     type: 'website',
     url: '/contact',
-    title: 'Contact Joel Mbaka | Joeltech Geek Systems',
-    description: 'A direct way to get in touch with Joel Mbaka, founder of Joeltech Geek Systems. Start a conversation.',
+    title: 'Contact Joeltech Geek Systems | Project Enquiries',
+    description: 'Discuss your software project directly with Joel Mbaka. Remote collaboration for US, Kenyan and international teams.',
   },
 };
 
 const methods = [
   {
-    title: 'Email me',
+    title: 'Email Joel',
     value: 'mbakajoe26@gmail.com',
     href: 'mailto:mbakajoe26@gmail.com?subject=Hello%20Joel',
     icon: Mail,
   },
   {
-    title: 'WhatsApp me',
-    value: '+254 717 990 442',
+    title: 'Chat on WhatsApp',
+    value: 'Start a WhatsApp conversation',
     href: 'https://wa.me/254717990442?text=Hi%20Joel%2C%20I%27d%20like%20to%20get%20in%20touch.',
     icon: MessageCircle,
   },
   {
-    title: 'Connect on LinkedIn',
+    title: 'View LinkedIn profile',
     value: 'Joel Mbaka',
     href: 'https://linkedin.com/in/joelmbaka',
     icon: Linkedin,
@@ -41,7 +41,7 @@ export default function ContactPage() {
         <p className="text-xs font-bold uppercase tracking-[0.16em] text-palm-green">A direct conversation</p>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">Let&apos;s talk.</h1>
         <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-          I&apos;m Joel Mbaka, founder of Joeltech Geek Systems. If there&apos;s something you&apos;d like to discuss, feel free to reach out using whichever channel works best for you. I&apos;ll read your message personally.
+          I&apos;m Joel Mbaka, founder of Joeltech Geek Systems. Whether your business is in the US, Kenya or elsewhere, tell me what you&apos;re working on. I&apos;ll read your message personally.
         </p>
       </header>
 
@@ -68,17 +68,17 @@ export default function ContactPage() {
       </section>
 
       <section className="mt-14 rounded-3xl border border-gray-200 bg-gray-50 p-7 dark:border-gray-800 dark:bg-gray-900/50 sm:p-9" aria-labelledby="availability-heading">
-        <h2 id="availability-heading" className="text-2xl font-bold text-gray-900 dark:text-white">Location &amp; Availability</h2>
+        <h2 id="availability-heading" className="text-2xl font-bold text-gray-900 dark:text-white">Working Across Time Zones</h2>
         <div className="mt-7 grid gap-6 md:grid-cols-3">
           <div className="min-w-0">
             <MapPin className="h-6 w-6 text-palm-green" aria-hidden />
-            <h3 className="mt-3 text-base font-semibold text-gray-900 dark:text-white">Based in Kenya</h3>
-            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">Open to conversations locally and internationally.</p>
+            <h3 className="mt-3 text-base font-semibold text-gray-900 dark:text-white">US, Kenya &amp; international enquiries</h3>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">We discuss software projects remotely, wherever your team operates.</p>
           </div>
           <div className="min-w-0">
             <Clock3 className="h-6 w-6 text-palm-green" aria-hidden />
-            <h3 className="mt-3 text-base font-semibold text-gray-900 dark:text-white">East Africa Time (UTC+3)</h3>
-            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">My local time zone when arranging a conversation.</p>
+            <h3 className="mt-3 text-base font-semibold text-gray-900 dark:text-white">Flexible meeting times</h3>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-300">We can find a suitable time for US, Kenyan and international teams.</p>
           </div>
           <div className="min-w-0">
             <Video className="h-6 w-6 text-palm-green" aria-hidden />
