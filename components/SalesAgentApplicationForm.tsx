@@ -69,7 +69,7 @@ export function SalesAgentApplicationForm() {
       <div className="rounded-3xl border border-emerald-300 bg-emerald-50 p-7 dark:border-emerald-800 dark:bg-emerald-950/40 sm:p-8" role="status">
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Application received</h3>
         <p className="mt-3 text-sm leading-7 text-gray-700 dark:text-gray-200">
-          Thanks for your interest. We&apos;ll review your details and contact you on WhatsApp or email if there&apos;s a suitable fit. Submitting does not automatically enrol you or guarantee work.
+          Thanks for your interest. Your application is saved. Look out for a confirmation email (check spam too). We&apos;ll review your details and reach out if there&apos;s a suitable fit. If no email arrives, there&apos;s no need to resubmit.
         </p>
       </div>
     );

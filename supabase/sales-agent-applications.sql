@@ -17,6 +17,10 @@ create table if not exists public.sales_agent_applications (
     check (notification_status in ('pending', 'sent', 'failed')),
   notification_provider_id varchar(255),
   notification_error text,
+  applicant_notification_status varchar(24) not null default 'not_sent'
+    check (applicant_notification_status in ('not_sent', 'pending', 'sent', 'failed')),
+  applicant_notification_provider_id varchar(255),
+  applicant_notification_error text,
   created_at timestamptz not null default now()
 );
 
@@ -26,6 +30,9 @@ create index if not exists idx_sales_agent_applications_status
   on public.sales_agent_applications (status, created_at desc);
 create index if not exists idx_sales_agent_applications_notification
   on public.sales_agent_applications (notification_status, created_at desc);
+
+create index if not exists idx_sales_agent_applications_applicant_notification
+  on public.sales_agent_applications (applicant_notification_status, created_at desc);
 
 create table if not exists public.sales_agent_application_rate_limits (
   ip_fingerprint text primary key,

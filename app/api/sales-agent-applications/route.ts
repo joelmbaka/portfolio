@@ -1,11 +1,10 @@
 import { createHmac } from 'node:crypto';
 import { NextResponse } from 'next/server';
 import { Pool } from 'pg';
-import { Resend } from 'resend';
+import { sendSalesAgentApplicationEmails } from '@/lib/sales-agent-email';
 
 export const runtime = 'nodejs';
 
-const recipient = process.env.AGENT_APPLICATION_NOTIFY_TO?.trim() || 'mbakajoe26@gmail.com';
 const allowedBackgrounds = new Set([
   '',
   'Student or recent graduate',
@@ -36,22 +35,6 @@ function clean(value: unknown, max: number): string | null {
   if (typeof value !== 'string') return null;
   const text = value.trim();
   return text.length <= max ? text : null;
-}
-
-function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g, (char) => {
-    const entities: Record<string, string> = {
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
-    };
-    return entities[char] || char;
-  });
-}
-
-function whatsAppLink(phone: string): string | null {
-  let digits = phone.replace(/\D/g, '');
-  if (digits.startsWith('0') && digits.length === 10) digits = '254' + digits.slice(1);
-  if (digits.startsWith('7') && digits.length === 9) digits = '254' + digits;
-  return digits.length >= 9 && digits.length <= 15 ? 'https://wa.me/' + digits : null;
 }
 
 export async function POST(request: Request) {
@@ -132,61 +115,38 @@ export async function POST(request: Request) {
     const id = insert.rows[0]?.id;
     if (!id) return NextResponse.json({ ok: true });
 
-    let notificationStatus = 'failed';
-    let providerId: string | null = null;
-    let deliveryError: string | null = null;
-    try {
-      const apiKey = process.env.RESEND_API_KEY?.trim();
-      const from = process.env.RESEND_FROM?.trim();
-      if (!apiKey || !from) throw new Error('Resend is not configured');
+    const delivery = await sendSalesAgentApplicationEmails({
+      id,
+      name,
+      email,
+      phone,
+      location,
+      background: background || '',
+      note: note || '',
+      source: sourceSafe,
+    });
 
-      const whatsapp = whatsAppLink(phone);
-      const fields = [
-        ['Name', name],
-        ['WhatsApp', phone],
-        ['Email', email],
-        ['Town / County', location],
-        ['Background', background || 'Not provided'],
-        ['Finding clients', note || 'Not provided'],
-        ['Source', sourceSafe],
-        ['Application ID', id],
-      ];
-      const rows = fields.map(([label, value]) =>
-        '<tr><td style="padding:8px;color:#475569">' + escapeHtml(label) +
-        '</td><td style="padding:8px;font-weight:600">' + escapeHtml(value) + '</td></tr>'
-      ).join('');
-      const html =
-        '<div style="font-family:Arial,sans-serif;color:#0f172a;max-width:680px">' +
-        '<h2>New Joeltech Sales Agent Application</h2><table>' + rows + '</table>' +
-        (whatsapp ? '<p><a href="' + whatsapp + '">Message on WhatsApp</a></p>' : '') +
-        '<p>Review this application before confirming any partnership.</p></div>';
-      const text = fields.map(([label, value]) => label + ': ' + value).join('\n') +
-        (whatsapp ? '\nWhatsApp: ' + whatsapp : '');
-      const resend = new Resend(apiKey);
-      const { data: emailData, error } = await resend.emails.send({
-        from,
-        to: [recipient],
-        replyTo: email,
-        subject: 'New Joeltech Sales Agent Application - ' + name + ' - ' + location,
-        html,
-        text,
-      });
-      if (error) throw new Error(error.message || 'Resend delivery failed');
-      notificationStatus = 'sent';
-      providerId = emailData?.id || null;
-    } catch (error) {
-      deliveryError = error instanceof Error ? error.message.slice(0, 500) : 'Notification failed';
-      console.error('[SALES_AGENT_NOTIFICATION_FAILED]', id, deliveryError);
-    }
-
+    // Distinguish owner notifications from applicant acknowledgements.
     try {
       await db.query(
-        'update sales_agent_applications set notification_status = $2, notification_provider_id = $3, notification_error = $4 where id = $1',
-        [id, notificationStatus, providerId, deliveryError],
+        'update sales_agent_applications set ' +
+          'notification_status = $2, notification_provider_id = $3, notification_error = $4, ' +
+          'applicant_notification_status = $5, applicant_notification_provider_id = $6, applicant_notification_error = $7 ' +
+          'where id = $1',
+        [
+          id,
+          delivery.internal.status,
+          delivery.internal.providerId,
+          delivery.internal.errorMessage,
+          delivery.applicant.status,
+          delivery.applicant.providerId,
+          delivery.applicant.errorMessage,
+        ],
       );
     } catch (error) {
       console.error('[SALES_AGENT_NOTIFICATION_STATUS_UPDATE_FAILED]', id, error);
     }
+
     // The record is saved even when email delivery fails; retry/review via database.
     return NextResponse.json({ ok: true }, { status: 201 });
   } catch (error) {
