@@ -48,7 +48,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         name: service.title,
         description: service.description,
         provider: { '@id': `${base}/#organization` },
-        areaServed: ['Kenya', 'Worldwide'],
+        areaServed: ['United States', 'Kenya', 'Worldwide'],
         serviceType: service.title,
       },
       {
