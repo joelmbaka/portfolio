@@ -85,11 +85,11 @@ export async function POST(request: Request) {
 
     if (
       data.consent !== true ||
-      !name || name.length < 2 ||
+      !name || name.length < 2 || /[\r\n]/.test(name) ||
       !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
       !phone || !/^[+0-9() .-]+$/.test(phone) ||
       phone.replace(/\D/g, '').length < 9 || phone.replace(/\D/g, '').length > 15 ||
-      !location || location.length < 2 ||
+      !location || location.length < 2 || /[\r\n]/.test(location) ||
       background === null || !allowedBackgrounds.has(background) ||
       note === null
     ) {
@@ -116,7 +116,7 @@ export async function POST(request: Request) {
         'returning attempts',
         [fingerprint],
       );
-      if (result.rows[0]?.attempts > 8) {
+      if (result.rows[0]?.attempts > 30) {
         return NextResponse.json({ ok: false, error: 'Too many requests. Please try again later.' }, { status: 429 });
       }
     }

@@ -119,7 +119,7 @@ export function SalesAgentApplicationForm() {
 
       <label className="mt-5 flex items-start gap-3 text-sm leading-6 text-gray-600 dark:text-gray-300">
         <input className="mt-1 h-4 w-4 shrink-0 accent-emerald-600" name="consent" type="checkbox" required />
-        <span>I agree that Joeltech Geek Systems may store these details and contact me about this sales partnership application. I can request their removal by email.</span>
+        <span>I agree that Joeltech Geek Systems may store these details and contact me about this sales partnership application. I can request removal at mbakajoe26@gmail.com.</span>
       </label>
 
       {state.status === 'error' && (

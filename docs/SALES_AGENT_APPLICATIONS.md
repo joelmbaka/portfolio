@@ -25,7 +25,7 @@ where notification_status = 'failed'
 order by created_at desc;
 ```
 
-Check 400 invalid/unchecked consent, honeypot no-write, duplicate email no-repeat, >8 attempts per hour from one address (429), missing DATABASE_URL (503), and email failure saved as `failed`. Do not send unsolicited follow-up from inside the API.
+Check 400 invalid/unchecked consent, honeypot no-write, duplicate email no-repeat, >30 attempts per hour from one address (429), missing DATABASE_URL (503), and email failure saved as `failed`. Do not send unsolicited follow-up from inside the API.
 
 ## Outreach attribution
 
