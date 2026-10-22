@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, CheckCircle2, MoveUpRight } from 'lucide-react';
 import { careerOpportunities, findCareerOpportunity } from '@/config/career-opportunities';
 import { SITE_URL } from '@/lib/site';
+import { SalesAgentApplicationForm } from '@/components/SalesAgentApplicationForm';
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -57,7 +58,30 @@ export default async function CareerOpportunityPage({ params }: PageProps) {
             <span key={highlight} className="rounded-full bg-emerald-50 px-4 py-2 text-xs font-semibold text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200">{highlight}</span>
           ))}
         </div>
+        {item.slug === 'agents' && (
+          <Link href="#apply" className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-palm-green px-6 py-3 font-semibold text-white transition hover:opacity-90">
+            Apply as a sales agent <ArrowRight className="h-5 w-5" aria-hidden />
+          </Link>
+        )}
       </header>
+
+      {item.slug === 'agents' && (
+        <section id="apply" className="mt-10 scroll-mt-28 grid gap-7 rounded-3xl bg-emerald-50/70 p-5 dark:bg-emerald-950/20 sm:p-7 lg:grid-cols-[0.85fr_1.15fr] lg:p-10" aria-labelledby="sales-agent-apply-heading">
+          <div className="self-start lg:sticky lg:top-28">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-palm-green">Independent sales partnership</p>
+            <h2 id="sales-agent-apply-heading" className="mt-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+              Know businesses that could use better software?
+            </h2>
+            <p className="mt-4 text-base leading-8 text-gray-700 dark:text-gray-300">
+              Introduce business owners who need a custom app, website or management system. We handle technical discovery, proposals and development. You can earn 20%–30% commission on qualifying client projects under agreed terms.
+            </p>
+            <p className="mt-5 text-sm leading-7 text-gray-600 dark:text-gray-300">
+              Students, IT professionals and independent business developers are welcome. You don&apos;t need to code or have a current client to express interest.
+            </p>
+          </div>
+          <SalesAgentApplicationForm />
+        </section>
+      )}
 
       <div className="mt-14 grid min-w-0 gap-5 lg:grid-cols-2">
         {[
@@ -194,11 +218,13 @@ export default async function CareerOpportunityPage({ params }: PageProps) {
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-palm-green">Interested?</p>
         <h2 className="mt-3 text-3xl font-bold text-gray-900 dark:text-white">Express your interest</h2>
         <p className="mt-4 max-w-3xl text-base leading-8 text-gray-700 dark:text-gray-300">{item.interestInstructions}</p>
-        <Link href="/contact" className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-palm-green px-6 py-3 font-semibold text-white transition hover:opacity-90">
-          Express Interest <ArrowRight className="h-5 w-5" aria-hidden />
+        <Link href={item.slug === 'agents' ? '#apply' : '/contact'} className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-palm-green px-6 py-3 font-semibold text-white transition hover:opacity-90">
+          {item.slug === 'agents' ? 'Apply as a sales agent' : 'Express Interest'} <ArrowRight className="h-5 w-5" aria-hidden />
         </Link>
         <p className="mt-3 text-xs leading-6 text-gray-600 dark:text-gray-400">
-          You&apos;ll reach the Contact page, where you can get in touch with the founder directly. Mention this opportunity so your enquiry has the right context. An enquiry does not guarantee acceptance.
+          {item.slug === 'agents'
+            ? 'Applications are reviewed individually. We will contact suitable applicants; submitting does not guarantee acceptance.'
+            : 'You\'ll reach the Contact page, where you can get in touch with the founder directly. Mention this opportunity so your enquiry has the right context. An enquiry does not guarantee acceptance.'}
         </p>
       </section>
 
