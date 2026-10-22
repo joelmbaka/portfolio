@@ -21,7 +21,7 @@ export function SalesAgentApplicationForm() {
     const digits = phone.replace(/\D/g, '');
 
     // Mirror API phone requirements; don't enable the CTA for invalid contact details.
-    setIsFormReady(form.checkValidity() && digits.length >= 9 && digits.length <= 15);
+    setIsFormReady(form.checkValidity() && /^[+0-9() .-]+$/.test(phone) && digits.length >= 9 && digits.length <= 15);
   }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -99,7 +99,7 @@ export function SalesAgentApplicationForm() {
         </label>
         <label className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
           WhatsApp number <span aria-hidden="true">*</span>
-          <input className={inputClass} type="tel" name="phone" placeholder="e.g. 0712 345 678" autoComplete="tel" minLength={9} maxLength={32} pattern="[+0-9() .-]+" required />
+          <input className={inputClass} type="tel" name="phone" placeholder="e.g. 0712 345 678" autoComplete="tel" minLength={9} maxLength={32} required />
         </label>
         <label className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
           Email address <span aria-hidden="true">*</span>
